@@ -1,6 +1,9 @@
 /* Pour laisser de la place au header */
-.container {
+body {
     padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
 }
 
 /* Les contours des informations sur le profil de l'utilisateur sont verts */
@@ -12,17 +15,20 @@
 .main {
     padding: 10px;
     border: solid 1px #96E9D5;
-    border-radius: 25px;
 }
 
 /* Modifie les boutons verts */
 .button {
-    width: 260px;
+    width: 200px;
     height: 54px;
     border-radius: 25px;
     background-color: #96E9D5;
     border: none;
 
+}
+
+.col-sm .button {
+    background: red;
 }
 
 .button:hover {
