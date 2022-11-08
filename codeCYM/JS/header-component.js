@@ -5,7 +5,7 @@ class headerComponent extends HTMLElement {
         <link rel="stylesheet" href="../CSS/header-component.css">
         <link rel="stylesheet" href="../third-party/fontawesome-free-6.2.0-web/css/all.css">
         <header>
-            <div class="burger-menu"><i class="fa-solid fa-bars"></i></div>
+            <div class="burger-menu" onclick="add(this)"><i class="fa-solid fa-bars"></i></div>
             <a class="link" href="#"><div class="logo">Check Your Mood</div></a>
             <a class="link hovered space" href="#"><div>Stats</div></a>
             <a class="link hovered" href="#"><div>Humeurs</div></a>

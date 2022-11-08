@@ -2,38 +2,6 @@ body{
     margin: 0 auto;
     height: 100vh;
 }
-header {
-    background-color: #95E9D5;
-    display: flex;
-    justify-content: space-between;
-    font-size: 25px;
-}
-.logo {
-    height: 70px;
-    margin-left: 1%;
-}
-.Header-Right .LOGOR {
-    display: none;
-}
-.Header-Right {
-    width: 25%;
-    height: 70px;
-    display: flex;
-    align-items: center;
-}
-.Header-Right div{
-    width: 100%;
-    height: 70px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.Header-Right .icon-account {
-    width: 40%;
-}
-.Header-Right .stats:hover,.Header-Right .humeur:hover, .Header-Right .icon-account:hover {
-    background-color: #147760;
-}
 .Main {
     width: 100%;
     height: 90vh;
@@ -136,47 +104,5 @@ header {
     .input-button {
         width: 50%;
         font-size: 20px;
-    }
-}
-
-header div {
-    display: flex;
-    align-items: center;
-}
-.hovered:hover {
-    background-color: #147760;
-}
-.space {
-    margin-left: auto;
-}
-.hovered {
-    padding: 0px 20px;
-}
-.burger-menu {
-    display: none;
-}
-@media (min-width:750px) and (max-width:970px){
-    body .space {
-        margin-left: 0px;
-    }
-    body header div {
-        width: 25%;
-        justify-content: center;
-    }
-    body .logo {
-        margin-left: 0%;
-    }
-}
-@media (max-width:750px) {
-    body .burger-menu {
-        display: inline-flex;
-        padding: 0px 25px;
-    }
-    body .hovered {
-        display: none;
-    }
-    body .logo {
-        margin-left: 0%;
-        margin: auto;
     }
 }
