@@ -7,7 +7,7 @@ class headerComponent extends HTMLElement {
             <div class="me-auto p-2 LOGO">Check your mood</div>
             <div class="p-2 header-hover">Stats</div>
             <div class="p-2 header-hover">Humeurs</div>
-            <div class="p-2 header-hover">H</div>
+            <div class="p-2 header-hover"><i class="fa-regular fa-user"></i></div>
         </div>`
     }
 }
