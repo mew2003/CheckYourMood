@@ -3,12 +3,14 @@ class headerComponent extends HTMLElement {
         super()
         this.innerHTML = `
         <link rel="stylesheet" href="../CSS/Register.css">
-        <div class="d-flex mb-4 header-bar align-items-center">
-            <div class="me-auto p-2 LOGO">Check your mood</div>
-            <div class="p-2 header-hover">Stats</div>
-            <div class="p-2 header-hover">Humeurs</div>
-            <div class="p-2 header-hover"><i class="fa-regular fa-user"></i></div>
-        </div>`
+        <link rel="stylesheet" href="../third-party/fontawesome-free-6.2.0-web/css/all.css">
+        <header>
+            <div class="burger-menu"><i class="fa-solid fa-bars"></i></div>
+            <div class="logo">Check Your Mood</div>
+            <div class="space hovered">Stats</div>
+            <div class="hovered">Humeurs</div>
+            <div class="icon-account hovered"><i class="fa-regular fa-user"></i></div>
+        </header>`
     }
 }
 
