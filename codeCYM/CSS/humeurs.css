@@ -1,0 +1,15 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+p {
+    margin-bottom: 0%;
+}
+
+.contain {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

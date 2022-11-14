@@ -8,7 +8,7 @@ class headerComponent extends HTMLElement {
             <div class="burger-menu" onclick="add(this)"><i class="fa-solid fa-bars"></i></div>
             <a class="link" href="#"><div class="logo">Check Your Mood</div></a>
             <a class="link hovered space" href="#"><div>Stats</div></a>
-            <a class="link hovered" href="#"><div>Humeurs</div></a>
+            <a class="link hovered" href="Humeurs.html"><div>Humeurs</div></a>
             <a class="link hovered" href="#"><div class="icon-account"><i class="fa-regular fa-user"></i></div></a>
         </header>`
     }

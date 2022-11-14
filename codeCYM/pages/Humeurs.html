@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Humeurs</title>
+    <link rel="stylesheet" href="../third-party/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../CSS/humeurs.css">
+    <script src="../JS/header-component.js" defer></script>
+</head>
+<body>
+    <header-component></header-component>
+    <div class="contain">
+        <span id="time"></span>
+    </div>
+</body>
+<script>
+    function refreshTime() {
+  const timeDisplay = document.getElementById("time");
+  const dateString = new Date().toLocaleTimeString();
+  timeDisplay.textContent = dateString;
+}
+setInterval(refreshTime, 1000);
+</script>
+</html>
