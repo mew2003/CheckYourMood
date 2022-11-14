@@ -1,9 +1,9 @@
 /* Pour laisser de la place au header */
-body {
-    padding-top: 100px;
+.main-container {
+    padding-top: 15vh;
     display: flex;
     flex-direction: column;
-    gap: 100px;
+    gap: 5vh;
 }
 
 /* Les contours des informations sur le profil de l'utilisateur sont verts */
@@ -25,7 +25,6 @@ body {
     border-radius: 25px;
     background-color: #96E9D5;
     border: none;
-
 }
 
 .col-sm .button {
