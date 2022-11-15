@@ -52,8 +52,8 @@
             </div>
         </div>
         <div class="bot">
-            <div class="left">S'enregistrer</div>
-            <div class="right">Se connecter</div>
+            <div class="left-bot selection">S'enregistrer</div>
+            <div class="right-bot">Se connecter</div>
         </div>
     </div>
 </body>
