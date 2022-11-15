@@ -12,41 +12,51 @@
 </head>
 <body>
     <header-component></header-component>
-    <div class="contain">
-        <span id="time"></span>
+    <div class="container">
+        <div class="d-flex d-row justify-content-center">
+            <span id="time"></span>
+        </div>
         <form class="humeurs-container">
-            <input class="humeurs-liste" list="humeurs-liste" name="humeurs-liste" onchange="test(this)">
-            <datalist id="humeurs-liste" >
-                <option value="Admiration"></option>
-                <option value="Adoration"></option>
-                <option value="Appréciation esthétique"></option>
-                <option value="Amusement"></option>
-                <option value="Colère"></option>
-                <option value="Anxiété"></option>
-                <option value="Émerveillement"></option>
-                <option value="Malaise (embarrassement)"></option>
-                <option value="Ennui"></option>
-                <option value="Calme (sérénité)"></option>
-                <option value="Confusion"></option>
-                <option value="Envie (craving)"></option>
-                <option value="Dégoût"></option>
-                <option value="Douleur empathique"></option>
-                <option value="Intérêt étonné, intrigué"></option>
-                <option value="Excitation (montée d’adrénaline)"></option>
-                <option value="Peur"></option>
-                <option value="Horreur"></option>
-                <option value="Intérêt"></option>
-                <option value="Joie"></option>
-                <option value="Nostalgie"></option>
-                <option value="Soulagement"></option>
-                <option value="Romance"></option>
-                <option value="Tristesse"></option>
-                <option value="Satisfaction"></option>
-                <option value="Désir sexuel"></option>
-                <option value="Surprise"></option>
-            </datalist>
-            <p name="smiley" id="smiley"></p>
-            <button class="bouton-envoyer"><i class="fa-solid fa-location-arrow"></i></button>
+            <div class="row border-form">
+                <div class="col col-sm-8">
+                    <input class="humeurs-liste" list="humeurs-liste" name="humeurs-liste" onchange="test(this)">
+                    <datalist id="humeurs-liste" >
+                        <option value="Admiration"></option>
+                        <option value="Adoration"></option>
+                        <option value="Appréciation esthétique"></option>
+                        <option value="Amusement"></option>
+                        <option value="Colère"></option>
+                        <option value="Anxiété"></option>
+                        <option value="Émerveillement"></option>
+                        <option value="Malaise (embarrassement)"></option>
+                        <option value="Ennui"></option>
+                        <option value="Calme (sérénité)"></option>
+                        <option value="Confusion"></option>
+                        <option value="Envie (craving)"></option>
+                        <option value="Dégoût"></option>
+                        <option value="Douleur empathique"></option>
+                        <option value="Intérêt étonné, intrigué"></option>
+                        <option value="Excitation (montée d’adrénaline)"></option>
+                        <option value="Peur"></option>
+                        <option value="Horreur"></option>
+                        <option value="Intérêt"></option>
+                        <option value="Joie"></option>
+                        <option value="Nostalgie"></option>
+                        <option value="Soulagement"></option>
+                        <option value="Romance"></option>
+                        <option value="Tristesse"></option>
+                        <option value="Satisfaction"></option>
+                        <option value="Désir sexuel"></option>
+                        <option value="Surprise"></option>
+                    </datalist>
+                </div>
+                <div class="col col-sm-2 smiley-zone">
+                    <p name="smiley" id="smiley"></p>
+                </div>
+                <div class="col col-sm-2 envoyer-zone">
+                    <button class="bouton-envoyer"><i class="fa-solid fa-location-arrow"></i></button>
+                </div>
+            </div>
         </form>
     </div>
 </body>
@@ -60,36 +70,36 @@
 
     function test(a) {
         var x = (a.value || a.options[a.selectedIndex].value);  //crossbrowser solution =)
-        switch (x) {
-            case 'Admiration': smiley = "😊"; break;
-            case 'Adoration': smiley = "🤤"; break;
-            case 'Appréciation esthétique': smiley = "🖼️"; break;
-            case 'Amusement': smiley = "🥳"; break;
-            case 'Colère': smiley = "😠"; break;
-            case 'Anxiété': smiley = "😰"; break;
-            case 'Émerveillement': smiley = "🤩"; break;
-            case 'Malaise (embarrassement)': smiley = "😖"; break;
-            case 'Ennui': smiley = "🥱"; break;
-            case 'Calme (sérénité)': smiley = "😐"; break;
-            case 'Confusion': smiley = "😕"; break;
-            case 'Envie (craving)': smiley = "🥵"; break;
-            case 'Dégoût': smiley = "🤢"; break;
-            case 'Douleur empathique': smiley = "💔"; break;
-            case 'Intérêt étonné, intrigué': smiley = "🤔"; break;
-            case 'Excitation (montée d’adrénaline)': smiley = "🤪"; break;
-            case 'Peur': smiley = "😨"; break;
-            case 'Horreur': smiley = "😱"; break;
-            case 'Intérêt': smiley = "🧐"; break;
-            case 'Joie': smiley = "😄"; break;
-            case 'Nostalgie': smiley = "🎆"; break;
-            case 'Soulagement': smiley = "😌"; break;
-            case 'Romance': smiley = "🌹"; break;
-            case 'Tristesse': smiley = "😥"; break;
-            case 'Satisfaction': smiley = "👍"; break;
-            case 'Désir sexuel': smiley = "😏"; break;
-            case 'Surprise': smiley = "🙀"; break;
+        switch ((""+x).toLowerCase()) {
+            case 'admiration': smiley = "😊"; break;
+            case 'adoration': smiley = "🤤"; break;
+            case 'appréciation esthétique': smiley = "🖼️"; break;
+            case 'amusement': smiley = "🥳"; break;
+            case 'colère': smiley = "😠"; break;
+            case 'anxiété': smiley = "😰"; break;
+            case 'emerveillement': smiley = "🤩"; break;
+            case 'malaise (embarrassement)': smiley = "😖"; break;
+            case 'ennui': smiley = "🥱"; break;
+            case 'calme (sérénité)': smiley = "😐"; break;
+            case 'confusion': smiley = "😕"; break;
+            case 'envie (craving)': smiley = "🥵"; break;
+            case 'dégoût': smiley = "🤢"; break;
+            case 'douleur empathique': smiley = "💔"; break;
+            case 'intérêt étonné, intrigué': smiley = "🤔"; break;
+            case 'excitation (montée d’adrénaline)': smiley = "🤪"; break;
+            case 'peur': smiley = "😨"; break;
+            case 'horreur': smiley = "😱"; break;
+            case 'intérêt': smiley = "🧐"; break;
+            case 'joie': smiley = "😄"; break;
+            case 'nostalgie': smiley = "🎆"; break;
+            case 'soulagement': smiley = "😌"; break;
+            case 'romance': smiley = "🌹"; break;
+            case 'tristesse': smiley = "😥"; break;
+            case 'satisfaction': smiley = "👍"; break;
+            case 'désir sexuel': smiley = "😏"; break;
+            case 'surprise': smiley = "🙀"; break;
             default:
-                console.log(`:(`);
+                smiley = "🚫";
         }
         document.getElementById('smiley').innerText = smiley;
     }
