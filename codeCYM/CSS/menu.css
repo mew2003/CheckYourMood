@@ -5,6 +5,7 @@ h1 {
 
 body {
     background-image: url("../images/background.png");
+    margin: 0 auto;
 }
 
 .texteInscription {
