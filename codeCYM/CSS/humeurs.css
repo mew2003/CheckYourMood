@@ -19,37 +19,38 @@ p {
 
 #time {
     font-size: 128px;
-}
-
-.humeurs-container {
-    border: solid #95E9D5;
-    border-radius: 25px;
-    padding-left: 15px;
-    display: flex;
-    width: 70%;
-    
+    padding: 120px 0px;
 }
 
 .humeurs-liste {
     font-size: 25px;
     margin: 5px;
-    border: 0;
     outline: 0;
-    width: 80%;
+    border: 0;
+    width: 100%;
 }
 
 #smiley {
     border: 0;
-    border-left: solid #95E9D5;
-    border-right: solid #95E9D5;
     font-size: 25px;
     outline: 0;
     -webkit-appearance: none;
     -moz-appearance: none;
     text-indent: 1px;
     text-overflow: '';
-    width: 10%;
+    width: 100%;
     text-align: center;
+}
+
+.smiley-zone {
+    border-left: solid #95E9D5;
+    border-right: solid #95E9D5;
+}
+
+.border-form {
+    border: solid #95E9D5;
+    border-radius: 25px;
+    padding-left: 15px;
 }
 
 .bouton-envoyer {
@@ -57,5 +58,10 @@ p {
     border: 0;
     border-top-right-radius: 25px;
     border-bottom-right-radius: 25px;
-    width: 10%;
+    width: 100%;
+    height: 100%;
+}
+
+.row > * {
+    padding: 0px;
 }
