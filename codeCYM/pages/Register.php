@@ -37,14 +37,36 @@
     <header-component></header-component>
     <?php
         if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['confirm-password'])
-            && $_POST['username'].trim() != "" && $_POST['email'].trim() != "" && $_POST['password'].trim() != ""
-            && $_POST['confirm-password'].trim() != "") {
+            && trim($_POST['username']) != "" && trim($_POST['email']) != "" && trim($_POST['password']) != ""
+            && trim($_POST['confirm-password']) != "") {
             
             $username = htmlspecialchars($_POST['username']);
             $email = htmlspecialchars($_POST['email']);
             $password = htmlspecialchars($_POST['password']);
             $confirm_password = htmlspecialchars($_POST['confirm-password']);
+
+            $verifUserName = ($pdo->query('SELECT User_Name FROM user'));
+            $verifUserEmail = ($pdo->query('SELECT User_Email FROM user'));
+            $ok = true;
+            while($row = $verifUserName->fetch()) {
+                if ($username == $row['User_Name']) {
+                    echo 'UserName déja utilisé';
+                    $ok = false;
+                }
+            }
+            while($row = $verifUserEmail->fetch()) {
+                if ($email == $row['User_Email']) {
+                    echo 'Email déja utilisé';
+                    $ok = false;
+                }
+            }
+            if ($password == $confirm_password && $ok == true) {
+                $stmt = $pdo->prepare('INSERT INTO user (User_Name,User_Email,User_Password) VALUES (:username,:email,:pswd)');
+                $stmt->execute(array('username'=>$username,'email'=>$email,'pswd'=>$password));
+                echo "ça tue";
+            }
         }
+        
     ?>
     <div class="container">
         <div class="Main">
