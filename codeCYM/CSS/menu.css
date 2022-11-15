@@ -12,3 +12,11 @@ body {
     text-align: center;
     font-size: 1.3em;
 }
+
+a:link {
+    color:#95e9d5;
+}
+
+a:visited {
+    color: #95e9d5;
+}
