@@ -35,6 +35,17 @@
         }
     ?>
     <header-component></header-component>
+    <?php
+        if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['confirm-password'])
+            && $_POST['username'].trim() != "" && $_POST['email'].trim() != "" && $_POST['password'].trim() != ""
+            && $_POST['confirm-password'].trim() != "") {
+            
+            $username = htmlspecialchars($_POST['username']);
+            $email = htmlspecialchars($_POST['email']);
+            $password = htmlspecialchars($_POST['password']);
+            $confirm_password = htmlspecialchars($_POST['confirm-password']);
+        }
+    ?>
     <div class="container">
         <div class="Main">
             <div class="Register-block">
