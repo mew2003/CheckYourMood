@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../CSS/menu.css">
-        <link rel="stylesheet" href="../bootstrap/css/bootstrap.css">
+        <link rel="stylesheet" href="../third-party/bootstrap/css/bootstrap.css">
         <script src="../JS/header-component.js" defer></script>
         <title>Menu</title>
     </head>

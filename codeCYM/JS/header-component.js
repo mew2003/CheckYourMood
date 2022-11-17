@@ -6,6 +6,8 @@ class headerComponent extends HTMLElement {
         <link rel="stylesheet" href="../third-party/fontawesome-free-6.2.0-web/css/all.css">
         <header>
             <div class="burger-menu" onclick="add(this)"><i class="fa-solid fa-bars"></i></div>
+            <img src="../resources/images/logoCYM.png" height="70px">
+            &nbsp; &nbsp;
             <a class="link" href="#"><div class="logo">Check Your Mood</div></a>
             <a class="link hovered space" href="#"><div>Stats</div></a>
             <a class="link hovered" href="../pages/Humeurs.php"><div>Humeurs</div></a>
