@@ -11,43 +11,64 @@
     <script src="../JS/header-component.js" defer></script>
 </head>
 <body>
+    <?php 
+    
+    $host='localhost';	// Serveur de BD
+	$db='cym';		// Nom de la BD
+	$user='root';		// User 
+	$pass='root';		// Mot de passe
+	$charset='utf8mb4';	// charset utilisé
+
+    // Constitution variable DSN
+    $dsn="mysql:host=$host;dbname=$db;charset=$charset";
+    
+    // Réglage des options
+    $options=[																				 
+        PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE=>PDO::FETCH_OBJ,
+        PDO::ATTR_EMULATE_PREPARES=>false];
+
+    try {
+        // Connexion à la BDD
+        $pdo=new PDO($dsn,$user,$pass,$options);
+        // à modifier : CODE_User, Humeur_Description
+        if (isset($_POST["humeurs-liste"])) {
+            $libele = htmlspecialchars($_POST['humeurs-liste']);
+            $smiley = "";
+            $stmt = $pdo->prepare("INSERT INTO `humeur`(`CODE_User`, `Humeur_Libelle`, `Humeur_Emoji`, `Humeur_Time`, `Humeur_Description`) 
+                                      VALUES (1,:libele,:smiley,CURRENT_TIMESTAMP,'')");
+            $stmt->bindParam("libele", $libele);
+			$stmt->bindParam("smiley", $smiley);
+            $stmt->execute();
+        }
+    } catch (PDOException $e) {
+        // Toute exception est renvoyé ici
+        echo "<h1>Erreur BD ".$e->getMessage();
+    }
+
+    try{
+        $nomficTypes="./humeurs.csv" ;
+        if ( !file_exists($nomficTypes) ) {
+            throw new Exception('Fichier '.$nomficTypes.' non trouvé.');
+        }
+        $listeHumeurs = file($nomficTypes, FILE_IGNORE_NEW_LINES);
+    } catch ( Exception $e ) {}
+    ?>
     <header-component></header-component>
     <div class="container">
         <div class="d-flex d-row justify-content-center">
             <span id="time"></span>
         </div>
-        <form class="humeurs-container">
+        <form class="humeurs-container" action="#" method="post">
             <div class="row border-form">
                 <div class="col col-md-8 col-9">
-                    <input class="humeurs-liste" list="humeurs-liste" name="humeurs-liste" onchange="test(this)">
+                    <input class="humeurs-liste" list="humeurs-liste" name="humeurs-liste" onchange="getSmiley(this)">
                     <datalist id="humeurs-liste" >
-                        <option value="Admiration"></option>
-                        <option value="Adoration"></option>
-                        <option value="Appréciation esthétique"></option>
-                        <option value="Amusement"></option>
-                        <option value="Colère"></option>
-                        <option value="Anxiété"></option>
-                        <option value="Émerveillement"></option>
-                        <option value="Malaise (embarrassement)"></option>
-                        <option value="Ennui"></option>
-                        <option value="Calme (sérénité)"></option>
-                        <option value="Confusion"></option>
-                        <option value="Envie (craving)"></option>
-                        <option value="Dégoût"></option>
-                        <option value="Douleur empathique"></option>
-                        <option value="Intérêt étonné, intrigué"></option>
-                        <option value="Excitation (montée d’adrénaline)"></option>
-                        <option value="Peur"></option>
-                        <option value="Horreur"></option>
-                        <option value="Intérêt"></option>
-                        <option value="Joie"></option>
-                        <option value="Nostalgie"></option>
-                        <option value="Soulagement"></option>
-                        <option value="Romance"></option>
-                        <option value="Tristesse"></option>
-                        <option value="Satisfaction"></option>
-                        <option value="Désir sexuel"></option>
-                        <option value="Surprise"></option>
+                        <?php
+                            foreach ($listeHumeurs as $i) {
+								echo "<option value='".$i."'></option>";
+							}
+                        ?>
                     </datalist>
                 </div>
                 <div class="col col-md-2 col-3 smiley-zone">
@@ -68,9 +89,9 @@
     }
     setInterval(refreshTime, 1000);
 
-    function test(a) {
-        var x = (a.value || a.options[a.selectedIndex].value);  //crossbrowser solution =)
-        switch ((""+x).toLowerCase()) {
+    function getSmiley(element) {
+        var saisie = (element.value || element.options[element.selectedIndex].value); 
+        switch ((""+saisie).toLowerCase()) {
             case 'admiration': smiley = "😊"; break;
             case 'adoration': smiley = "🤤"; break;
             case 'appréciation esthétique': smiley = "🖼️"; break;

@@ -5,6 +5,18 @@
         border-bottom-right-radius: 20px;
         height: 47.5px;
     }
+
+    body #time {
+        font-size: 50px;
+    }
+
+    body .container {
+        padding-top: 150px;
+    }
+
+    body .border-form {
+        margin-top: 150px;
+    }
 }
 
 * {
@@ -17,7 +29,7 @@ p {
 }
 
 #time {
-    font-size: 8vw;
+    font-size: 150px;
 }
 
 .humeurs-liste {
@@ -48,6 +60,7 @@ p {
 .border-form {
     border: solid #95E9D5;
     border-radius: 25px;
+    margin-top: 100px;
 }
 
 .bouton-envoyer {
@@ -61,4 +74,8 @@ p {
 
 .row > * {
     padding: 0px;
+}
+
+.container {
+    padding-top: 100px;
 }
