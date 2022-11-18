@@ -31,6 +31,8 @@
 .link {
     text-decoration: none;
     color: black;
+    display: flex;
+    align-items: center;
 }
 .link:hover {
     color: black;
@@ -45,10 +47,6 @@ header {
     display: flex;
     align-items: center;
     height: 70px;
-}
-.link {
-    display: flex;
-    align-items: center;
 }
 .hovered:hover {
     background-color: #147760;

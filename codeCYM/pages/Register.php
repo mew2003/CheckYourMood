@@ -15,7 +15,7 @@
         $host='localhost';	    // Serveur de BD
         $db='CYM';		        // Nom de la BD
         $user='root';		    // User 
-        $pass='root';		    // Mot de passe
+        $pass='evaxel87';		    // Mot de passe
         $charset='utf8mb4';	    // charset utilisé
         
         // Constitution variable DSN
@@ -78,8 +78,11 @@
                 <form action="#" method="post" class="main-mid">
                     <input type="text" placeholder="Nom d'utilisateur" class="input-text" name="username">
                     <input type="text" placeholder="Email" class="input-text shifter-mail" name="email">
-                    <input type="text" placeholder="Mot de passe" class="input-text" name="password">
-                    <input type="text" placeholder="Confirmer le mot de passe" class="input-text shifter-confirm" name="confirm-password">
+                    <input type="password" placeholder="Mot de passe" class="input-text" name="password">
+                    <input type="password" placeholder="Confirmer le mot de passe" class="input-text shifter-confirm" name="confirm-password">
+                    <div class="checkbox">
+                        <input type="checkbox" name="check"> Afficher le Mot de passe
+                    </div>
                     <input type="submit" class="input-button" name="send">
                 </form>
             </div>
@@ -91,3 +94,4 @@
     </div>
 </body>
 </html>
+
