@@ -46,11 +46,14 @@
                 if ($humeur == $_POST["humeur"]) {
                     $libele = htmlspecialchars($_POST['humeur']);
                     $smiley = $_POST["smiley"];
-                    // /!\ NE PAS OUBLIER DE CHANGER CODE_USER PAR LE CODE SESSION / AJOUTER LA DESCRIPTION !!!!
+                    if (isset($_POST["description"])) $description = htmlspecialchars($_POST['description']);
+                    else $description = "";
+                    // /!\ NE PAS OUBLIER DE CHANGER CODE_USER PAR LE CODE SESSION
                     $requete = $pdo->prepare("INSERT INTO `humeur`(`CODE_User`, `Humeur_Libelle`, `Humeur_Emoji`, `Humeur_Time`, `Humeur_Description`) 
-                                              VALUES (1,:libele,:smiley,CURRENT_TIMESTAMP,'')");
+                                              VALUES (1,:libele,:smiley,CURRENT_TIMESTAMP,:description)");
                     $requete->bindParam("libele", $libele);
                     $requete->bindParam("smiley", $smiley);
+                    $requete->bindParam("description", $description);
                     $requete->execute();
                 }
             }
@@ -67,8 +70,11 @@
         </div>
         <form class="humeurs-container" action="#" method="post">
             <div class="row border-form">
+                <div class="col col-12 description-zone">
+                    <textarea name="description" placeholder="Décrivez un contexte actuel (ex. Je viens de remporter l'euro million !)"></textarea>
+                </div>
                 <div class="col col-md-8 col-9">
-                    <input class="humeurs-liste" list="humeurs-liste" name="humeur" onchange="getSmiley(this)">
+                    <input class="humeurs-liste" list="humeurs-liste" name="humeur" oninput="getSmiley(this)" placeholder="Saisissez votre humeur (ex. Joie)">
                     <datalist id="humeurs-liste" >
                         <?php
                             foreach ($listeHumeurs as $i) {
@@ -78,7 +84,7 @@
                     </datalist>
                 </div>
                 <div class="col col-md-2 col-3 smiley-zone">
-                    <input name="smiley" id="smiley" readonly>
+                    <input name="smiley" id="smiley" readonly placeholder="❔">
                 </div>
                 <div class="col col-md-2 col-12 envoyer-zone">
                     <button class="bouton-envoyer"><i class="fa-solid fa-location-arrow"></i></button>
