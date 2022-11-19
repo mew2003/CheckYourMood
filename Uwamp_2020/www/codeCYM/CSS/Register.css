@@ -54,6 +54,7 @@ body{
     justify-content: space-around;
 }
 .input-text {
+    background-color: white;
     border: solid #95E9D5;
     border-radius: 25px;
     width: 60%;

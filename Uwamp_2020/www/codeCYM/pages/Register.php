@@ -69,17 +69,26 @@
         
     ?>
     <div class="container">
-        <div class="Main">
+    <div class="Main">
             <div class="Register-block">
                 <div class="main-top">
-                    <button class="left selection" id="register">S'enregistrer</button>
+                    <button class="left selection" id="register">S'inscrire</button>
                     <button class="right" id="connect">Se connecter</button>
                 </div>
                 <form action="#" method="post" class="main-mid">
                     <input type="text" placeholder="Nom d'utilisateur" class="input-text" name="username">
-                    <input type="text" placeholder="Email" class="input-text shifter-mail" name="email">
-                    <input type="password" placeholder="Mot de passe" class="input-text" name="password">
-                    <input type="password" placeholder="Confirmer le mot de passe" class="input-text shifter-confirm" name="confirm-password">
+                    <input type="text" placeholder="Email" class="input-text shifter" name="email">
+                    <input type="text" placeholder="Date de naissance (JJ/MM/AAAA)" class="input-text shifter" name="birth-date">
+                    <select class="input-text shifter" name="gender">
+                        <option hidden>Choisissez votre genre</option>
+                        <option>Homme</option>
+                        <option>Femme</option>
+                        <option>Chaise</option>
+                        <option>hélicoptère</option>
+                        <option>caillou</option>
+                    </select>
+                    <input type="text" placeholder="Mot de passe" class="input-text" name="password">
+                    <input type="text" placeholder="Confirmer le mot de passe" class="input-text shifter" name="confirm-password">
                     <div class="checkbox">
                         <input type="checkbox" name="check"> Afficher le Mot de passe
                     </div>
