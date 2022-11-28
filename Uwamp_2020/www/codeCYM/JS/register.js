@@ -3,6 +3,7 @@ let connection = document.querySelector('.right');
 let shifterElements = document.querySelectorAll('.shifter');
 let register_phone = document.querySelector('.left-bot')
 let connection_phone = document.querySelector('.right-bot')
+
 // SE correspond à la variable shifterElements
 let valuesSE = [];
 
@@ -44,4 +45,15 @@ connection_phone.addEventListener('click', function() {
         element.value = '';
         element.classList.add('display-none');
     });
+})
+
+let checkbox = document.getElementById('check');
+checkbox.addEventListener('click', function() {
+    if (checkbox.checked) {
+        document.getElementById('pass').type='text';
+        document.getElementById('pass1').type='text';
+    } else {
+        document.getElementById('pass').type='password';
+        document.getElementById('pass1').type='password';
+    }
 })
