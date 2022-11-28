@@ -1,51 +1,51 @@
-let register = document.querySelector('.left');
-let connection = document.querySelector('.right');
+let register = document.querySelectorAll('.left');
+let connection = document.querySelectorAll('.right');
 let shifterElements = document.querySelectorAll('.shifter');
-let register_phone = document.querySelector('.left-bot')
-let connection_phone = document.querySelector('.right-bot')
-
-// SE correspond à la variable shifterElements
 let valuesSE = [];
+let registerTab = [];
+let connectionTab = [];
 
-register.addEventListener('click', function() {
-    register.classList.add('selection');
-    connection.classList.remove('selection');
-    shifterElements.forEach((element) => {
-        element.value = valuesSE[0];
-        valuesSE.shift();
-        element.classList.remove('display-none');
-    });
-})
 
-connection.addEventListener('click', function() {
-    register.classList.remove('selection');
-    connection.classList.add('selection');
-    shifterElements.forEach((element) => {
-        valuesSE.push(element.value);
-        element.value = '';
-        element.classList.add('display-none');
-    });
-})
+register.forEach((element) => {
+    registerTab.push(element);
+});
 
-register_phone.addEventListener('click', function() {
-    register_phone.classList.add('selection');
-    connection_phone.classList.remove('selection');
-    shifterElements.forEach((element) => {
-        element.value = valuesSE[0];
-        valuesSE.shift();
-        element.classList.remove('display-none');
-    });
-})
+connection.forEach((element) => {
+    connectionTab.push(element);
+});
 
-connection_phone.addEventListener('click', function() {
-    register_phone.classList.remove('selection');
-    connection_phone.classList.add('selection');
-    shifterElements.forEach((element) => {
-        valuesSE.push(element.value);
-        element.value = '';
-        element.classList.add('display-none');
+registerTab.forEach((elementRegister) => {
+    connectionTab.forEach((elementConnection) => {
+        elementRegister.addEventListener('click', function() {
+            if (!(elementRegister.className.match('selection'))) {
+                registerTab[0].classList.add('selection');
+                registerTab[1].classList.add('selection');
+                connectionTab[0].classList.remove('selection');
+                connectionTab[1].classList.remove('selection');
+                shifterElements.forEach((element) => {
+                    element.value = valuesSE[0];
+                    valuesSE.shift();
+                    element.classList.remove('display-none');
+                });
+            }
+        });
+
+        elementConnection.addEventListener('click', function() {
+            if (!(elementConnection.className.match('selection'))) {
+                registerTab[0].classList.remove('selection');
+                registerTab[1].classList.remove('selection');
+                connectionTab[0].classList.add('selection');
+                connectionTab[1].classList.add('selection');
+                shifterElements.forEach((element) => {
+                    valuesSE.push(element.value);
+                    element.value = '';
+                    element.classList.add('display-none');
+                });
+            }
+        });
     });
-})
+});
+
 
 let checkbox = document.getElementById('check');
 checkbox.addEventListener('click', function() {

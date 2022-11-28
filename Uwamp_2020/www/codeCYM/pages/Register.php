@@ -71,15 +71,15 @@
     <div class="container">
     <div class="Main">
             <div class="Register-block">
-                <div class="main-top">
-                    <button class="left selection" id="register">S'inscrire</button>
-                    <button class="right" id="connect">Se connecter</button>
+            <div class="main-top">
+                    <div class="left selection">S'inscrire</div>
+                    <div class="right">Se connecter</div>
                 </div>
                 <form action="#" method="post" class="main-mid">
                     <input type="text" placeholder="Nom d'utilisateur" class="input-text" name="username">
                     <input type="text" placeholder="Email" class="input-text shifter" name="email">
                     <input type="text" placeholder="Date de naissance (JJ/MM/AAAA)" class="input-text shifter" name="birth-date">
-                    <select class="input-text shifter" name="gender">
+                    <select class="select-size input-text shifter" name="gender">
                         <option hidden>Choisissez votre genre</option>
                         <option>Homme</option>
                         <option>Femme</option>
@@ -97,8 +97,8 @@
             </div>
         </div>
         <div class="bot">
-            <div class="left-bot selection">S'enregistrer</div>
-            <div class="right-bot">Se connecter</div>
+            <div class="left selection">S'enregistrer</div>
+            <div class="right">Se connecter</div>
         </div>
     </div>
 </body>
