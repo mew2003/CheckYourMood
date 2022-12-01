@@ -5,7 +5,6 @@
     flex-direction: column;
     gap: 5vh;
 }
-
 /* Les contours des informations sur le profil de l'utilisateur sont verts */
 .form-control {
     border: solid 1px #96E9D5;    
