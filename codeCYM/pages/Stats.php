@@ -22,7 +22,7 @@
         // Réglage des options
         $options=[
             PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE=>PDO::FETCH_ASSOC,
+            PDO::ATTR_DEFAULT_FETCH_MODE=>PDO::FETCH_OBJ,
             PDO::ATTR_EMULATE_PREPARES=>false];
         
         echo "<header-component></header-component>";
@@ -55,17 +55,16 @@
     <?php
         try{	
             $pdo=new PDO($dsn,$user,$pass,$options);		
-            $requete = "SELECT CODE_User, Humeur_Libelle, Humeur_Emoji, Humeur_Time, Humeur_Description FROM Humeur";
+            $requete = "SELECT * FROM Humeur";
             $resultats=$pdo->query($requete);  												
-            $resultats->setFetchMode(PDO::FETCH_OBJ);
+            $resultats->fetch();
             
             echo "<h1>Historique des humeurs</h1>";
             echo "<div class='container'>";
                 echo "<table class='table table-striped'>";															
-                    echo "<tr><td>CODE_User</td><td>Humeur_Libelle</td><td>Humeur_Emoji</td><td>Humeur_Time</td><td>Humeur_Description</td><tr>";		
+                    echo "<tr><td>Humeur_Libelle</td><td>Humeur_Emoji</td><td>Humeur_Time</td><td>Humeur_Description</td><tr>";		
                     while( $ligne = $resultats->fetch() ) { 	
                         echo "<tr>";												
-                        echo "<td>".$ligne->CODE_User."</td>";	
                         echo "<td>".$ligne->Humeur_Libelle."</td>";
                         echo "<td>".$ligne->Humeur_Emoji."</td>";
                         echo "<td>".$ligne->Humeur_Time."</td>";
