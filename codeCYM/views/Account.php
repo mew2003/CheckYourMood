@@ -28,23 +28,23 @@
                     echo "<h1>Profil</h1>";
                     echo '<div class="form-control d-flex flex-row align-items-center gap-2 centrer">';
                             echo "<h2>Email :</h2>";
-                            echo "<h4>".$mail."</h4>";
+                            echo "<h2>".$mail."</h2>";
                     echo "</div>";
                     echo '<div class="form-control d-flex flex-row align-items-center gap-2">';
                         echo "<h2>Nom d'utilisateur :</h2>";
-                        echo "<h4>".$username."</h4>";
+                        echo "<h2>".$username."</h2>";
                     echo "</div>";
                     echo '<div class="form-control d-flex flex-row align-items-center gap-2">';
                         echo "<h2>Mot de passe : </h2>";
-                        echo "<h4>***********</h4>";
+                        echo "<h2>***********</h2>";
                     echo "</div>";
                     echo '<div class="form-control d-flex flex-row align-items-center gap-2">';
                         echo "<h2>Date de naissance :</h2>";
-                        echo "<h4>$dateOfBirth</h4>";
+                        echo "<h2>$dateOfBirth</h2>";
                     echo "</div>";
                     echo '<div class="form-control d-flex flex-row align-items-center gap-2">';
                     echo "<h2>Genre :</h2>";
-                    echo "<h4>$gender</h4>";
+                    echo "<h2>$gender</h2>";
                 echo "</div>";
                 echo "</div>"; 
             ?>
@@ -55,7 +55,7 @@
                     </div>
                 </div>
             </div>
-            <input class="buttonD" type="button" value="Désinscription"/>
+            <input class="buttonD" type="button" value="Supprimer le compte"/>
         </div>
     </body>
     </html>
