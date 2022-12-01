@@ -1,0 +1,50 @@
+/* Pour laisser de la place au header */
+.main-container {
+    padding-top: 15vh;
+    display: flex;
+    flex-direction: column;
+    gap: 5vh;
+}
+
+/* Les contours des informations sur le profil de l'utilisateur sont verts */
+.form-control {
+    border: solid 1px #96E9D5;    
+}
+
+/* Ajoute un padding sur l'ensemble du contenu du profil et le contour est verts */
+.main {
+    padding: 10px;
+    border: solid 1px #96E9D5;
+}
+
+/* Modifie les boutons verts */
+.button {
+    margin: 10px;
+    width: 200px;
+    height: 54px;
+    border-radius: 25px;
+    background-color: #96E9D5;
+    border: none;
+}
+
+.col-sm .button {
+    background: red;
+}
+
+.button:hover {
+    background-color: #147760;
+}
+
+/* Modifie le bouton pour se désinscrire */
+.buttonD {
+    border-radius: 25px;
+    background-color: #E84855;
+    border: none;
+    width: 260px;
+    height: 54px;
+}
+
+.buttonD:hover {
+    background-color:#B3001B;
+}
+
