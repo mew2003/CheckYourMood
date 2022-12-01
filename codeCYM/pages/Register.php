@@ -88,7 +88,7 @@
                         <option>caillou</option>
                     </select>
                     <input type="password" id="pass" placeholder="Mot de passe" class="input-text" name="password">
-                    <input type="password" id="pass1" placeholder="Confirmer le mot de passe" class="input-text shifter-confirm" name="confirm-password">
+                    <input type="password" id="pass1" placeholder="Confirmer le mot de passe" class="input-text shifter" name="confirm-password">
                     <div class="checkbox">
                         <input id="check" type="checkbox" name="check"> Afficher le Mot de passe
                     </div>
