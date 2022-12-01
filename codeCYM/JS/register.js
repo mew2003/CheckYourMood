@@ -46,6 +46,12 @@ registerTab.forEach((elementRegister) => {
     });
 });
 
+// if (registerTab[0].classList.match('Selection')) {
+//     document.cookie() = 'selection=register';
+// } else {
+//     document.cookie() = 'selection=test';
+// }
+
 
 let checkbox = document.getElementById('check');
 checkbox.addEventListener('click', function() {
@@ -56,4 +62,10 @@ checkbox.addEventListener('click', function() {
         document.getElementById('pass').type='password';
         document.getElementById('pass1').type='password';
     }
-})
+});
+
+
+
+
+
+
