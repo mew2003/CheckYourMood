@@ -6,6 +6,7 @@
         <link href="/CheckYourMood/codeCYM/CSS/stats.css" rel="stylesheet"/>
         <title>test php et database</title>
         <script src="/CheckYourMood/codeCYM/JS/header-component.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     </head>
     <body>
     <?php
@@ -14,6 +15,57 @@
     ?>
     <?php 
         echo "<header-component></header-component>";
+        
+    ?>
+    <canvas id="myChart"></canvas>
+        </div>
+        <script>
+            const ctx = document.getElementById('myChart');
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                labels: <?php 
+                $i = 0;
+                    while ($row = $MaxHumeur->fetchColumn()) {
+                        if($i == 0) {
+                            echo "[";
+                        }
+                        echo "\"$row\",";
+                        if ($i == 3) {
+                            echo "]";
+                        }
+                        $i++;
+                    }
+                ?>,
+                datasets: [{
+                    label: 'Les 4 Humeurs les plus prédominante chez vous',
+                    data: <?php 
+                        $i = 0;
+                        while ($row = $MaxValHum->fetchColumn()) {
+                            if($i == 0) {
+                                echo "[";
+                            }
+                            echo "\"$row\",";
+                            if ($i == 3) {
+                                echo "]";
+                            }
+                            $i++;
+                        }
+                    ?>,
+                    borderWidth: 1
+                }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        </script>
+    <?php
         echo "<h1>Historique des humeurs</h1>";
         echo "<div class='container'>";
             echo "<table class='table table-striped'>";															
