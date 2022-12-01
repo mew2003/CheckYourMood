@@ -1,6 +1,6 @@
 /* Pour laisser de la place au header */
 .main-container {
-    padding-top: 15vh;
+    padding-top: 5vh;
     display: flex;
     flex-direction: column;
     gap: 5vh;

@@ -20,13 +20,15 @@
                     $mail = $row->User_Email;
                     $username = $row->User_Name;
                     $password = $row->User_Password;
+                    $dateOfBirth = $row->User_BirthDate;
+                    $gender = $row->User_Gender;
 
                 }
                 echo '<div class="col-md-6 col-sm-8 col-xs-12 d-grid gap-3">';
                     echo "<h1>Profil</h1>";
-                    echo '<div class="form-control d-flex flex-row align-items-center gap-2">';
-                        echo "<h2>Email :</h2>";
-                        echo "<h4>".$mail."</h4>";
+                    echo '<div class="form-control d-flex flex-row align-items-center gap-2 centrer">';
+                            echo "<h2>Email :</h2>";
+                            echo "<h4>".$mail."</h4>";
                     echo "</div>";
                     echo '<div class="form-control d-flex flex-row align-items-center gap-2">';
                         echo "<h2>Nom d'utilisateur :</h2>";
@@ -36,6 +38,14 @@
                         echo "<h2>Mot de passe : </h2>";
                         echo "<h4>***********</h4>";
                     echo "</div>";
+                    echo '<div class="form-control d-flex flex-row align-items-center gap-2">';
+                        echo "<h2>Date de naissance :</h2>";
+                        echo "<h4>$dateOfBirth</h4>";
+                    echo "</div>";
+                    echo '<div class="form-control d-flex flex-row align-items-center gap-2">';
+                    echo "<h2>Genre :</h2>";
+                    echo "<h4>$gender</h4>";
+                echo "</div>";
                 echo "</div>"; 
             ?>
                 <div class="col-md-6 col-sm-4 d-flex justify-content-md-end justify-content-sm-end justify-content-center align-items-start">
