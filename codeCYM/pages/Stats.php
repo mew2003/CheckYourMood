@@ -6,6 +6,7 @@
         <link href="..\CSS\stats.css" rel="stylesheet"/>
         <title>test php et database</title>
         <script src="../JS/header-component.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     </head>
     <body>
     <?php 
@@ -23,13 +24,41 @@
             PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE=>PDO::FETCH_OBJ,
             PDO::ATTR_EMULATE_PREPARES=>false];
+        
+        echo "<header-component></header-component>";
+    ?>
+    <div>
+        <canvas id="myChart"></canvas>
+        </div>
+        <script>
+            const ctx = document.getElementById('myChart');
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                labels: ['Humeur_Libelle', 'Humeur_Emoji', 'Humeur_Time', 'Humeur_Description'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5,],
+                    borderWidth: 1
+                }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        </script>
+    <?php
         try{	
             $pdo=new PDO($dsn,$user,$pass,$options);		
             $requete = "SELECT * FROM Humeur";
             $resultats=$pdo->query($requete);  												
             $resultats->fetch();
             
-            echo "<header-component></header-component>";
             echo "<h1>Historique des humeurs</h1>";
             echo "<div class='container'>";
                 echo "<table class='table table-striped'>";															
@@ -47,6 +76,6 @@
         } catch(PDOException $e){
             echo "<h1>Erreur BD ".$e->getMessage();
         }
-    ?>
+    ?> 
     </body>
     </html>
