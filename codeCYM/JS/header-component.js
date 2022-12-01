@@ -9,25 +9,25 @@ class headerComponent extends HTMLElement {
             <div class="burger-menu" onclick="add(this)"><i class="fa-solid fa-bars"></i></div>
             <img src="/CheckYourMood/codeCYM/assets/images/logoCYM.png" height="70px">
             &nbsp; &nbsp;
-            <form action="#" method="get">
+            <form action="#" method="get" class="space">
                 <input hidden name="action" value="index">
                 <input hidden name="controller" value="home">
-                <input type="submit" class="link" value="Check Your Mood"></input>
+                <button type="submit" class="link">Check Your Mood</button>
             </form>
-            <form action="" method="get">
+            <form action="" method="get" class="h">
                 <input hidden name="action" value="index">
                 <input hidden name="controller" value="stats">
-                <input type="submit" class="link" value="Stats"></input>
+                <button type="submit" class="link mobile">Stats</button>
             </form>
-            <form action="#" method="get">
+            <form action="#" method="get" class="h">
                 <input hidden name="action" value="index">
-                <input hidden name="controller" value="home">
-                <input type="submit" class="link" value="Humeurs"></input>
+                <input hidden name="controller" value="humeurs">
+                <button type="submit" class="link mobile">Humeurs</button>
             </form>
-            <form action="#" method="get">
+            <form action="#" method="get" class="h">
                 <input hidden name="action" value="index">
-                <input hidden name="controller" value="home">
-                <input type="submit" class="link" value="Account"></input>
+                <input hidden name="controller" value="accounts">
+                <button type="submit" class="link mobile"><span class='fa-regular fa-user'></button>
             </form>
         </header>`
     }

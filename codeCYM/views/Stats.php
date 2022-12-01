@@ -69,10 +69,9 @@
         echo "<h1>Historique des humeurs</h1>";
         echo "<div class='container'>";
             echo "<table class='table table-striped'>";															
-                echo "<tr><td>CODE_User</td><td>Humeur_Libelle</td><td>Humeur_Emoji</td><td>Humeur_Time</td><td>Humeur_Description</td><tr>";		
+                echo "<tr><td>Humeur_Libelle</td><td>Humeur_Emoji</td><td>Humeur_Time</td><td>Humeur_Description</td><tr>";		
                 while( $ligne = $resultats->fetch() ) { 
                     echo "<tr>";												
-                    echo "<td>".$ligne->CODE_User."</td>";	
                     echo "<td>".$ligne->Humeur_Libelle."</td>";
                     echo "<td>".$ligne->Humeur_Emoji."</td>";
                     echo "<td>".$ligne->Humeur_Time."</td>";
