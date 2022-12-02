@@ -5,7 +5,7 @@
     gap: 10px;
     margin-top: 20vh;
     padding: 20px;
-    border: solid 1px #96E9D5;
+    border: solid 1px red;
     border-radius: 10px;
     align-items: center;
 }
@@ -13,7 +13,7 @@
 /* Modifie les boutons verts */
 .button {
     margin: 10px;
-    width: 200px;
+    width: 405px;
     height: 54px;
     border-radius: 25px;
     background-color: #96E9D5;
@@ -27,10 +27,23 @@
 }
 
 .enRouge {
-    border: 1px solid red;
     color: red;
 }
 
 .enVert {
     color: #96E9D5;
+}
+
+/* Modifie le bouton pour se désinscrire */
+.buttonD {
+    margin-left : 10px;
+    border-radius: 25px;
+    background-color: #E84855;
+    border: none;
+    width: 405px;
+    height: 54px;
+}
+
+.buttonD:hover {
+    background-color:#B3001B;
 }

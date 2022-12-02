@@ -63,7 +63,11 @@
                     </div>
                 </div>
             </div>
-            <input class="buttonD" type="button" value="Supprimer le compte"/>
+            <form method="get" action="#">
+                <input hidden name="action" value="index">
+                <input hidden name="controller" value="deleteaccounts">
+                <input class="buttonD" type="submit" value="Supprimer le compte"/>
+            </form>
         </div>
     </body>
     </html>
