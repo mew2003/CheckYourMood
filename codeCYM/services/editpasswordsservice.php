@@ -16,6 +16,11 @@ class EditpasswordsService
         return $resultats;
     }
 
+    public function editPassword($pdo, $newPassword) {
+        $stmt = $pdo->prepare("UPDATE user SET User_Password = '".$newPassword."' WHERE User_ID = 2");
+        $stmt->execute();
+    }
+
     private static $defaulteditpasswordsService ;
     public static function getDefaultEditpasswordsService()
     {
