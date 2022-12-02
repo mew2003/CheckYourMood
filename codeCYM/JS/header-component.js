@@ -26,7 +26,7 @@ class headerComponent extends HTMLElement {
             </form>
             <form action="#" method="get" class="h">
                 <input hidden name="action" value="index">
-                <input hidden name="controller" value="accounts">
+                <input hidden name="controller" value="register">
                 <button type="submit" class="link mobile"><span class='fa-regular fa-user'></button>
             </form>
         </header>`

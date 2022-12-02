@@ -93,9 +93,14 @@
                     <div class="left selection">S'inscrire</div>
                     <div class="right">Se connecter</div>
                 </div>
-                <form action="#" method="get" class="main-mid">
-                    <input hidden name="action" value="insertUserValuesController">
-                    <input hidden name="controller" value="register">
+                <form action="#" method="post" class="main-mid">
+                    <?php 
+                        if ($allSet && $ok) {
+                            echo '<input hidden name="action" value="insertUserValuesController">
+                                  <input hidden name="controller" value="register">';
+                            echo 'ça marche';
+                        } 
+                    ?>
                     <input type="text" placeholder="Nom d'utilisateur" class="input-text" name="username" value=<?php echo '"'.$username.'"'?>>
                     <input type="text" placeholder="Email" class="input-text shifter" name="email" value=<?php echo '"'.$email.'"'?>>
                     <input type="date" placeholder="Date de naissance (JJ/MM/AAAA)" class="input-text shifter" name="birth-date" value=<?php echo '"'.$birthDate.'"'?>>
