@@ -57,7 +57,7 @@
                     </form>
                     <form method="get" action="#">
                         <input hidden name="action" value="index">
-                        <input hidden name="controller" value="accounts">
+                        <input hidden name="controller" value="editprofiles">
                         <input class="form-control button" type="submit" value="Modifier le profil"/>
                     </form>
                     </div>

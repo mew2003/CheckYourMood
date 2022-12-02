@@ -61,6 +61,13 @@
                 ?>
             </form>
         </div>
+        <div clas="row">
+            <form method="get" action="#">
+                <input type="submit" class="button" value="Retour">
+                <input hidden name="action" value="index">
+                <input hidden name='controller' value='accounts'>
+            </form>
+        </div>
     </div>
 </body>
 </html>

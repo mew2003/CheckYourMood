@@ -17,7 +17,8 @@ class EditpasswordsService
     }
 
     public function editPassword($pdo, $newPassword) {
-        $stmt = $pdo->prepare("UPDATE user SET User_Password = '".$newPassword."' WHERE User_ID = 2");
+        $stmt = $pdo->prepare("UPDATE user SET User_Password = :lemdp WHERE User_ID = 2");
+        $stmt->bindParam('lemdp', $newPassword);
         $stmt->execute();
     }
 
