@@ -14,7 +14,7 @@
         spl_autoload_extensions(".php");
         spl_autoload_register();
         ?>
-        <header-component></header-component>
+        <header-component></header-component>  
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12">
