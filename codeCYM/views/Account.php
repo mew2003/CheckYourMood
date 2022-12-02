@@ -14,7 +14,7 @@
         ?>
         <header-component></header-component>
         <div class="main-container">
-            <div class="row main">
+            <div class="row main">  
             <?php
                 while($row = $resultats->fetch()) {
                     $mail = $row->User_Email;
@@ -50,8 +50,16 @@
             ?>
                 <div class="col-md-6 col-sm-4 d-flex justify-content-md-end justify-content-sm-end justify-content-center align-items-start">
                     <div class="row col-xs-hidden flex-md-row flex-sm-column justify-content-between justify-content-sm-center justify-content-between" style="padding: 10px;">
-                        <input class="button col-md-6 col-sm-12" type="button" value="Modifier le mot de passe"/>
-                        <input class="button col-md-6 col-sm-12" type="button" value="Modifier le profil"/>
+                    <form method="get" action="#">
+                        <input hidden name="action" value="index">
+                        <input hidden name="controller" value="editpasswords">
+                        <input class="form-control button" type="submit" value="Modifier le mot de passe"/></input>
+                    </form>
+                    <form method="get" action="#">
+                        <input hidden name="action" value="index">
+                        <input hidden name="controller" value="accounts">
+                        <input class="form-control button" type="submit" value="Modifier le profil"/>
+                    </form>
                     </div>
                 </div>
             </div>

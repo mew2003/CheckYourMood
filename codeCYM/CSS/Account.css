@@ -19,11 +19,12 @@
 /* Modifie les boutons verts */
 .button {
     margin: 10px;
-    width: 200px;
     height: 54px;
     border-radius: 25px;
     background-color: #96E9D5;
     border: none;
+    align-items: center;
+    text-align: center;
 }
 
 .col-sm .button {
@@ -36,14 +37,14 @@
 
 /* Modifie le bouton pour se désinscrire */
 .buttonD {
+    margin-left : 10px;
     border-radius: 25px;
     background-color: #E84855;
     border: none;
-    width: 260px;
+    width: 405px;
     height: 54px;
 }
 
 .buttonD:hover {
     background-color:#B3001B;
 }
-
