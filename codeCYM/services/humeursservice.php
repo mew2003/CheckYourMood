@@ -19,7 +19,7 @@ class HumeursService
 
     public function getListeHumeurs() {
         try {
-            $nomficTypes="Z:/Uwamp/www/CheckYourMood/codeCYM/views/humeurs.csv" ;
+            $nomficTypes= $_SERVER['DOCUMENT_ROOT']."/CheckYourMood/codeCYM/views/humeurs.csv";
             if ( !file_exists($nomficTypes) ) {
                 throw new Exception('Fichier '.$nomficTypes.' non trouvé.');
             }
