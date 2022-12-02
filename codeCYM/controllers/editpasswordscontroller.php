@@ -19,17 +19,21 @@ class EditpasswordsController {
     public function index($pdo) {
         $view = new View("CheckYourMood/codeCYM/views/editpassword");
         $resultats = $this->editpasswordsService->getPasswords($pdo);
-        $view->setVar('resultats',$resultats);
+        $newPassword = HttpHelper::getParam("newPassword");
+        $confirmPassword = HttpHelper::getParam("confirmPassword");
+        $oldPassword = HttpHelper::getParam("oldPassword");
+        while ($ligne = $resultats->fetch()) {
+            $password = $ligne->User_Password;
+        }
+        $testOldPasswords = !empty($oldPassword) && strcmp($password, $oldPassword) == 0;
+        $testNewPasswords = !empty($newPassword) && !empty($confirmPassword) && strcmp($newPassword, $confirmPassword) == 0;
+        $view->setVar('password',$password);
+        if($testOldPasswords && $testNewPasswords) {
+            $this->editpasswordsService->editPassword($pdo, $newPassword);
+            $view->setVar('test', "Mot de passe modifié");
+        } else {
+            $view->setVar('test', "Mot de passe non modifié");
+        }
         return $view;
     }
-
-    public function setPassword($pdo) {
-        $view = new View("CheckYourMood/codeCYM/views/editpassword");
-        $newPassword = HttpHelper::getParam("newPassword") ? : "mouais";
-        $resultats = $this->editpasswordsService->getPasswords($pdo);
-        $this->passwordsService->editPassword($pdo, $newPassword);
-        $view->setVar('resultats',$resultats);
-        return $view;
-    }
-
 }

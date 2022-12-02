@@ -11,14 +11,11 @@
     <?php
         spl_autoload_extensions(".php");
         spl_autoload_register();
-        while($row = $resultats->fetch()) {
-            $trueOldPassword = $row->User_Password;
-        }
     ?>
     <header-component></header-component>
     <div class="container">
         <div class="row">
-            <form class="main" method="get">
+            <form class="main" method="post">
                 <?php
                     if(isset($_POST['envoyer'])) {
                         $envoyer = $_POST['envoyer'];
@@ -40,7 +37,7 @@
                     } else {
                         $confirmPassword = "";
                     }
-                    $testOldPasswords = !empty($oldPassword) && strcmp($trueOldPassword, $oldPassword) == 0;
+                    $testOldPasswords = !empty($oldPassword) && strcmp($password, $oldPassword) == 0;
                     $testNewPasswords = !empty($newPassword) && !empty($confirmPassword) && strcmp($newPassword, $confirmPassword) == 0;
                     if(!empty($envoyer) && empty($oldPassword) || !empty($envoyer) && $testOldPasswords == false) {
                         echo '<input class="form-control enRouge" type="text" name="oldPassword" placeholder="Veuillez mettre votre ancien mot de passe" value='.$oldPassword.'></input>';
@@ -48,7 +45,7 @@
                         echo '<input class="form-control" type="text" name="oldPassword" placeholder="Ancien mot de passe"></input>';
                     }
                     if(!empty($envoyer) && empty($newPassword)) {
-                        echo '<input class="form-control enRouge" type="text" placeholder="Votre nouveau mot de passe ne peut pas être vide"></input>';
+                        echo '<input class="form-control enRouge" type="text" name="newPassword" placeholder="Votre nouveau mot de passe ne peut pas être vide"></input>';
                     } else {
                         echo '<input class="form-control" type="text" name="newPassword" placeholder="Nouveau mot de passe"></input>';
                     }
@@ -57,17 +54,10 @@
                     } else {
                         echo '<input class="form-control" type="text" name="confirmPassword" placeholder="Confirmez votre mot de passe"></input>';
                     }
-                        $test = !empty($envoyer) && $envoyer = "Confirmer" && $testOldPasswords && $testNewPasswords;
-                        echo var_dump($envoyer);
-                        echo var_dump($testOldPasswords);
-                        echo var_dump($testNewPasswords);
-                        echo var_dump($test);
-                        if(!empty($envoyer) && $envoyer = "Confirmer" && $testOldPasswords && $testNewPasswords) {
-                            echo '<input hidden name="action" value="setPassword">';
-                            echo '<input hidden name="controller" value="editpasswords">';
-                            echo "ça devrait marcher";
-                        }
-                        echo '<input class="button" name="envoyer" type="submit" value="Confirmer"></input>';
+                    echo '<input class="button" name="envoyer" type="submit" value="Confirmer"></input>';
+                    if(!empty($envoyer) && $envoyer = "Confirmer" && $testOldPasswords && $testNewPasswords) {
+                        echo '<p class="enVert">Votre mot de passe a bien été modifié</p>';
+                    }
                 ?>
             </form>
         </div>
