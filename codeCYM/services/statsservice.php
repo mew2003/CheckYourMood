@@ -28,6 +28,24 @@ class StatsService
         return $result;
     }
 
+    public function getAllHumeur($pdo) {
+        $req = "SELECT Humeur_Libelle FROM humeur join user On user.User_ID = humeur.CODE_User WHERE User_ID = 2 GROUP BY Humeur_Libelle";
+        $result=$pdo->query($req);
+        return $result;
+    }
+    
+    public function getAllHumeurDate($pdo) {
+        $req = "SELECT COUNT(Humeur_Libelle) FROM humeur join user On user.User_ID = humeur.CODE_User WHERE User_ID = 2 GROUP BY Humeur_Libelle";
+        $result=$pdo->query($req);
+        return $result;
+    }
+
+    public function getNumberOfHumeurInTotal($pdo) {
+        $req = "SELECT COUNT(DISTINCT Humeur_Libelle) FROM humeur join user on user.User_ID = humeur.CODE_User WHERE User_ID = 2";
+        $result=$pdo->query($req);
+        return $result;
+    }
+
     private static $defaultStatsService ;
     public static function getDefaultStatsService()
     {
