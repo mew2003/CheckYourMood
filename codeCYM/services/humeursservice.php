@@ -35,7 +35,7 @@ class HumeursService
                 if ($i == $humeur) {
                     $libele = htmlspecialchars($humeur);
                     $requete = $pdo->prepare("INSERT INTO `humeur`(`CODE_User`, `Humeur_Libelle`, `Humeur_Emoji`, `Humeur_Time`, `Humeur_Description`) 
-                                                VALUES (1,:libele,:smiley,CURRENT_TIMESTAMP,:description)");
+                                                VALUES (2,:libele,:smiley,CURRENT_TIMESTAMP,:description)");
                     $requete->bindParam("libele", $libele);
                     $requete->bindParam("smiley", $smiley);
                     $requete->bindParam("description", $description);
