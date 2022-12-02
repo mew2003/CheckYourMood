@@ -18,9 +18,15 @@ class StatsController {
         $resultats = $this->statsService->getHistorique($pdo);
         $MaxHum = $this->statsService->getMaxHumeur($pdo);
         $MaxValHum = $this->statsService->getNumberOfHumForMaxHumeur($pdo);
+        $AllHumeur = $this->statsService->getAllHumeur($pdo);
+        $AllHumeurTotal = $this->statsService->getNumberOfHumeurInTotal($pdo);
+        $AllHumeurData = $this->statsService->getAllHumeurDate($pdo);
         $view->setVar('resultats',$resultats);
         $view->setVar('MaxHumeur', $MaxHum);
         $view->setVar('MaxValHum', $MaxValHum);
+        $view->setVar('AllHumeur', $AllHumeur);
+        $view->setVar('TotalOfHumeur', $AllHumeurTotal);
+        $view->setVar('AllHumeurData', $AllHumeurData);
         return $view;
     }
 
