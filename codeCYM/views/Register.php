@@ -77,9 +77,7 @@
                 $ok = false;
             }
         }
-
         
-
         if ($allSet && $ok) {
             echo "données inserées";
             
@@ -95,7 +93,7 @@
                     <div class="left selection">S'inscrire</div>
                     <div class="right">Se connecter</div>
                 </div>
-                <form action="#" method="post" class="main-mid">
+                <form action="#" method="get" class="main-mid">
                     <input hidden name="action" value="insertUserValuesController">
                     <input hidden name="controller" value="register">
                     <input type="text" placeholder="Nom d'utilisateur" class="input-text" name="username" value=<?php echo '"'.$username.'"'?>>
