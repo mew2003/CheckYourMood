@@ -24,6 +24,8 @@
     border-radius: 25px;
     background-color: #96E9D5;
     border: none;
+    align-items: center;
+    text-align: center;
 }
 
 .col-sm .button {
