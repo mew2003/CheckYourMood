@@ -53,19 +53,27 @@ registerTab.forEach((elementRegister) => {
 // }
 
 
-let checkbox = document.getElementById('check');
-checkbox.addEventListener('click', function() {
-    if (checkbox.checked) {
-        document.getElementById('pass').type='text';
-        document.getElementById('pass1').type='text';
-    } else {
-        document.getElementById('pass').type='password';
-        document.getElementById('pass1').type='password';
-    }
-});
+// let checkbox = document.getElementById('check');
+// checkbox.addEventListener('click', function() {
+//     if (checkbox.checked) {
+//         document.getElementById('pass').type='text';
+//         document.getElementById('pass1').type='text';
+//     } else {
+//         document.getElementById('pass').type='password';
+//         document.getElementById('pass1').type='password';
+//     }
+// });
 
 
-
-
-
+// var xhttp = new XMLHttpRequest();
+// xhttp.open("POST", "/CheckYourMood/codeCYM/views/register.php", true); 
+// xhttp.setRequestHeader("Content-Type", "application/json");
+// xhttp.onreadystatechange = function() {
+//    if (this.readyState == 4 && this.status == 200) {
+//      // Response
+//      var response = this.responseText;
+//    }
+// };
+// var data = {name:'yogesh',salary: 35000,email: 'yogesh@makitweb.com'};
+// xhttp.send(JSON.stringify(data));
 
