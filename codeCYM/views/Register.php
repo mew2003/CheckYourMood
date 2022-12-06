@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/CheckYourMood/codeCYM/CSS/Register.css">
-    <script src="/CheckYourMood/codeCYM/JS/header-component.js" defer></script>
     <script src="/CheckYourMood/codeCYM/JS/burger-menu.js" defer></script>
     <script src="/CheckYourMood/codeCYM/JS/register.js" defer></script>
+    <script src="/CheckYourMood/codeCYM/JS/header-component.js" defer></script>
     <title>Enregistrement</title>
 </head>
 <body>

@@ -71,10 +71,6 @@ body{
     display: none;
 }
 
-button:hover {
-    background-color:#95e9d58d;
-}
-
 .input-button {
     border-radius: 25px;
     background-color: #95E9D5;
