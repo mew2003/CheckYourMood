@@ -23,6 +23,8 @@
         $allSet = true;
         $connectionSet = true;
 
+        // if HttpHelper::getParam('username') {}
+
         if (isset($_POST['username']) && $_POST['username'] != "") {
             $username = htmlspecialchars($_POST['username']);
         } else {
