@@ -125,4 +125,8 @@ body{
         width: 50%;
         font-size: 20px;
     }
+    .show-nav .container {
+        display: none;
+        position: absolute;
+    }
 }

@@ -2,7 +2,7 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <link href="/CheckYourMood/codeCYM/third-party/bootstrap\css\bootstrap.css" rel="stylesheet"/>
+        <link href="/CheckYourMood/codeCYM/third-party/bootstrap/css/bootstrap.css" rel="stylesheet"/>
         <link href="/CheckYourMood/codeCYM/CSS/stats.css" rel="stylesheet"/>
         <title>test php et database</title>
         <script src="/CheckYourMood/codeCYM/JS/header-component.js" defer></script>
@@ -13,10 +13,7 @@
         spl_autoload_extensions(".php");
         spl_autoload_register();
     ?>
-    <?php 
-        echo "<header-component></header-component>";
-        
-    ?>
+    <header-component></header-component>
     <canvas id="myChart"></canvas>
     <canvas id="myDonuts"></canvas>
         </div>

@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../CSS/Register.css">
+    <link rel="stylesheet" href="../third-party/bootstrap/css/bootstrap.css">
     <script src="../JS/header-component.js" defer></script>
     <script src="../JS/burger-menu.js" defer></script>
     <script src="../JS/register.js" defer></script>

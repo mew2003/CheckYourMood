@@ -11,10 +11,72 @@
         display: inline-flex;
         align-items: center;
         padding: 0px 25px;
+        font-size: 30px;
     }
     body .mobile {
         display: none;
     }
+    .nav-menu {
+        display: flex;
+        list-style: none;
+        flex-direction: column;
+        align-items: center;
+        border-left: solid #95E9D5 10px;
+        border-right: solid #95E9D5 10px;
+        border-bottom: solid #95E9D5 10px;
+        font-size: 20px;
+        height: 93vh;
+        translate: -100%;
+    }
+    
+    .show-nav .nav-menu {
+        display: flex;
+        list-style: none;
+        flex-direction: column;
+        align-items: center;
+        border-left: solid #95E9D5 10px;
+        border-right: solid #95E9D5 10px;
+        border-bottom: solid #95E9D5 10px;
+        font-size: 20px;
+        height: 93vh;
+        transform: translate(100%);
+        transition: all .5s ease-in-out; /*bug de transition dans le header-component */
+    }
+    .burger {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: right;
+        font-size: 30px;
+        padding-right: 3%;
+        height: 7vh;
+        border-left: solid #95E9D5 10px;
+        border-right: solid #95E9D5 10px;
+        border-top: solid #95E9D5 5px;
+        translate: -100%;
+    }
+    .show-nav .burger {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: right;
+        font-size: 30px;
+        padding-right: 3%;
+        height: 7vh;
+        border-left: solid #95E9D5 10px;
+        border-right: solid #95E9D5 10px;
+        border-top: solid #95E9D5 5px;
+        transform: translate(100%);
+        transition: all .5s ease-in-out; /* bug de transition dans le header-component */
+    }
+    
+    .show-nav .burger-menu, .show-nav header {
+        display: none;
+    }
+    
+}
+body {
+    margin: 0 auto;
 }
 header {
     background-color: #95E9D5;
@@ -26,7 +88,7 @@ header {
 .h:hover {
     background-color: #147760;
 }
-.burger-menu {
+.burger-menu, .nav-menu, .burger {
     display: none;
 }
 button {
@@ -37,3 +99,4 @@ button {
 .space {
     margin-right: auto;
 }
+

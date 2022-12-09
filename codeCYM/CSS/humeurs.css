@@ -17,6 +17,10 @@
     body .border-form {
         margin-top: 150px;
     }
+    .show-nav .container {
+        display: none;
+        position: absolute;
+    }
 }
 
 * {

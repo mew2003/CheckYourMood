@@ -2,7 +2,7 @@
     <html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <link href="../third-party/bootstrap\css\bootstrap.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="../third-party/bootstrap/css/bootstrap.css">
         <link href="..\CSS\stats.css" rel="stylesheet"/>
         <title>test php et database</title>
         <script src="../JS/header-component.js" defer></script>
@@ -25,8 +25,8 @@
             PDO::ATTR_DEFAULT_FETCH_MODE=>PDO::FETCH_OBJ,
             PDO::ATTR_EMULATE_PREPARES=>false];
         
-        echo "<header-component></header-component>";
     ?>
+    <header-component></header-component>
     <div>
         <canvas id="myChart"></canvas>
         </div>

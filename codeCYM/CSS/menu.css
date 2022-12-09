@@ -16,3 +16,7 @@ body {
 .liensTravaux {
     color:#95e9d5;
 }
+.show-nav .container-fluid {
+    display: none;
+    position: absolute;
+}
