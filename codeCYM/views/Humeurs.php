@@ -25,9 +25,6 @@
             <input hidden name="action" value="setHumeur">
             <input hidden name="controller" value="humeurs">
             <div class="row border-form">
-                <div class="col col-12 description-zone">
-                    <textarea name="description" placeholder="Décrivez un contexte actuel (ex. Je viens de remporter l'euro million !)"></textarea>
-                </div>
                 <div class="col col-md-8 col-9">
                     <input class="humeurs-liste" list="humeurs-liste" name="humeur" oninput="getSmiley(this)" placeholder="Saisissez votre humeur (ex. Joie)">
                     <datalist id="humeurs-liste" >
@@ -43,6 +40,9 @@
                 </div>
                 <div class="col col-md-2 col-12 envoyer-zone">
                     <button class="bouton-envoyer"><i class="fa-solid fa-location-arrow"></i></button>
+                </div>
+                <div class="col col-12 description-zone">
+                    <textarea name="description" placeholder="Décrivez un contexte actuel (ex. Je viens de remporter l'euro million !)"></textarea>
                 </div>
             </div>
         </form>
