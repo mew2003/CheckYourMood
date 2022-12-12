@@ -19,6 +19,7 @@
     <header-component></header-component>
     <?php
         $genderList = array("Homme", "Femme", "Autre");
+        echo $_SESSION['UserID'];
     ?>
     <div class="container">
         <div class="Main">

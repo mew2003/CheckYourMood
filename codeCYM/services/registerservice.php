@@ -29,7 +29,14 @@ class RegisterService
         $insert->execute(array('username'=>$username,'email'=>$email,'birthDate'=>$birthDate,'gender'=>$gender,'pswd'=>$password));
     }
 
-
-
+    public static function getUserId($pdo, $username) {
+        $sql = "SELECT `User_ID` FROM `user` WHERE User_Name = :name";
+        $searchStmt = $pdo->prepare($sql);
+        $searchStmt->execute(['name'=>$username]);
+        while ($row = $searchStmt->fetch()) {
+            $id = $row->User_ID;
+        }
+        return $id;
+    }
     
 }
