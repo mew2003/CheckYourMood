@@ -15,6 +15,7 @@ class HumeursController {
     }
 
     public function index($pdo) {
+        session_start();
         $view = new View("CheckYourMood/codeCYM/views/Humeurs");
         $listeHumeurs = $this->humeursService->getListeHumeurs();
         $view->setVar('listeHumeurs',$listeHumeurs);

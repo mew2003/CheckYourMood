@@ -15,6 +15,7 @@ class AccountsController {
     }
 
     public function index($pdo) {
+        session_start();
         $view = new View("CheckYourMood/codeCYM/views/Account");
         $resultats = $this->accountsService->getProfile($pdo);
         $view->setVar('resultats',$resultats);

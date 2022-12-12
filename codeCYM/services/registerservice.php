@@ -33,6 +33,7 @@ class RegisterService
         $sql = "SELECT `User_ID` FROM `user` WHERE User_Name = :name";
         $searchStmt = $pdo->prepare($sql);
         $searchStmt->execute(['name'=>$username]);
+        $id = null;
         while ($row = $searchStmt->fetch()) {
             $id = $row->User_ID;
         }

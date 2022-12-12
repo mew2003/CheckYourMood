@@ -14,6 +14,7 @@ class StatsController {
     }
 
     public function index($pdo) {
+        session_start();
         $view = new View("CheckYourMood/codeCYM/views/Stats");
         $resultats = $this->statsService->getHistorique($pdo);
         $MaxHum = $this->statsService->getMaxHumeur($pdo);
