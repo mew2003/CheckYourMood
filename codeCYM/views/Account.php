@@ -51,21 +51,21 @@
                 <div class="col-md-6 col-sm-4 d-flex justify-content-md-end justify-content-sm-end justify-content-center align-items-start">
                     <div class="row col-xs-hidden flex-md-row flex-sm-column justify-content-between justify-content-sm-center justify-content-between" style="padding: 10px;">
                     <form method="get" action="#">
-                        <input hidden name="action" value="index">
-                        <input hidden name="controller" value="editpasswords">
+                        <input hidden name="action" value="editPassword">
+                        <input hidden name="controller" value="accounts">
                         <input class="form-control button" type="submit" value="Modifier le mot de passe"/></input>
                     </form>
                     <form method="get" action="#">
-                        <input hidden name="action" value="index">
-                        <input hidden name="controller" value="editprofiles">
+                        <input hidden name="action" value="editProfile">
+                        <input hidden name="controller" value="accounts">
                         <input class="form-control button" type="submit" value="Modifier le profil"/>
                     </form>
                     </div>
                 </div>
             </div>
             <form method="get" action="#">
-                <input hidden name="action" value="index">
-                <input hidden name="controller" value="deleteaccounts">
+                <input hidden name="action" value="deleteAccount">
+                <input hidden name="controller" value="accounts">
                 <input class="buttonD" type="submit" value="Supprimer le compte"/>
             </form>
         </div>
