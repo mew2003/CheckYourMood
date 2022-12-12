@@ -5,6 +5,7 @@
         <link href="/CheckYourMood/codeCYM/third-party/bootstrap/css/bootstrap.css" rel="stylesheet"/>
         <link href="/CheckYourMood/codeCYM/CSS/Account.css" rel="stylesheet"/>
         <script src="/CheckYourMood/codeCYM/JS/header-component.js" defer></script>
+        <script src="/CheckYourMood/codeCYM/JS/accounts.js" defer></script>
         <title>Account</title>
     </head>
     <body>
@@ -55,11 +56,18 @@
                     </div>
                 </div>
             </div>
-            <form method="get" action="#">
-                <input hidden name="action" value="deleteAccount">
-                <input hidden name="controller" value="accounts">
-                <input class="buttonD" type="submit" value="Supprimer le compte"/>
+            <div class="d-flex d-row justify-content-between">
+                <form method="get" action="#">
+                    <input hidden name="action" value="deleteAccount">
+                    <input hidden name="controller" value="accounts">
+                    <input class="buttonD" type="submit" value="Supprimer le compte"/>
+                </form>
+                <form method="get" action="#">
+                    <input hidden name="action" value="disconnect">
+                    <input hidden name="controller" value="accounts">
+                    <input class="buttonD" type="submit" value="Déconnexion"/>
             </form>
+            </div>
         </div>
     </body>
     </html>

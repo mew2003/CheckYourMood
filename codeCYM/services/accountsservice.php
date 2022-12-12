@@ -11,8 +11,9 @@ class AccountsService
      * @param $pdo \PDO the pdo object
      * @return \PDOStatement the statement referencing the result set
      */
-    public function getProfile($pdo, $UserId) {
-        $requete = "SELECT * FROM User WHERE User_ID = $UserId";
+    public function getProfile($pdo) {
+        $id = $_SESSION['UserID'];
+        $requete = "SELECT * FROM User WHERE User_ID = $id";
         $resultats=$pdo->query($requete);
         return $resultats;
     }
@@ -23,7 +24,8 @@ class AccountsService
      * @return \PDOStatement the statement referencing the result set
      */
     public function getPasswords($pdo) {
-        $requete = "SELECT User_Password FROM User";
+        $id = $_SESSION['UserID'];
+        $requete = "SELECT User_Password FROM User WHERE User_ID = $id";
         $resultats=$pdo->query($requete);
         return $resultats;
     }
@@ -34,7 +36,8 @@ class AccountsService
      * @return \PDOStatement the statement referencing the result set
      */
     public function editPassword($pdo, $newPassword) {
-        $stmt = $pdo->prepare("UPDATE user SET User_Password = :lemdp WHERE User_ID = 2");
+        $id = $_SESSION['UserID'];
+        $stmt = $pdo->prepare("UPDATE user SET User_Password = :lemdp WHERE User_ID = $id");
         $stmt->bindParam('lemdp', $newPassword);
         $stmt->execute();
     }
@@ -45,7 +48,8 @@ class AccountsService
      * @return \PDOStatement the statement referencing the result set
      */
     public function editMail($pdo, $newEmail) {
-        $stmt = $pdo->prepare("UPDATE user SET User_Email = :email WHERE User_ID = 2");
+        $id = $_SESSION['UserID'];
+        $stmt = $pdo->prepare("UPDATE user SET User_Email = :email WHERE User_ID = $id");
         $stmt->bindParam('email', $newEmail);
         $stmt->execute();
     }
@@ -56,7 +60,8 @@ class AccountsService
      * @return \PDOStatement the statement referencing the result set
      */
     public function editUsername($pdo, $newUsername) {
-        $stmt = $pdo->prepare("UPDATE user SET User_Name = :username WHERE User_ID = 2");
+        $id = $_SESSION['UserID'];
+        $stmt = $pdo->prepare("UPDATE user SET User_Name = :username WHERE User_ID = $id");
         $stmt->bindParam('username', $newUsername);
         $stmt->execute();
     }
@@ -67,9 +72,10 @@ class AccountsService
      * @return \PDOStatement the statement referencing the result set
      */
     public function deleteProfile($pdo) {
-        $stmt = $pdo->prepare("DELETE FROM humeur WHERE CODE_USER = 2");
+        $id = $_SESSION['UserID'];
+        $stmt = $pdo->prepare("DELETE FROM humeur WHERE CODE_USER = $id");
         $stmt->execute();
-        $stmt = $pdo->prepare("DELETE FROM user WHERE User_ID = 2");
+        $stmt = $pdo->prepare("DELETE FROM user WHERE User_ID = $id");
         $stmt->execute();
     }
 
