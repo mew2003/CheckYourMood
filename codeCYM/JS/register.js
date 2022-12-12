@@ -1,6 +1,7 @@
 let register = document.querySelectorAll('.left');
 let connection = document.querySelectorAll('.right');
 let shifterElements = document.querySelectorAll('.shifter');
+let login = document.getElementById('login');
 let valuesSE = [];
 let registerTab = [];
 let connectionTab = [];
@@ -22,9 +23,12 @@ registerTab.forEach((elementRegister) => {
                 registerTab[1].classList.add('selection');
                 connectionTab[0].classList.remove('selection');
                 connectionTab[1].classList.remove('selection');
+                login.value = 0;
                 shifterElements.forEach((element) => {
-                    element.value = valuesSE[0];
-                    valuesSE.shift();
+                    if (valuesSE[0] != null) {
+                        element.value = valuesSE[0];
+                        valuesSE.shift();
+                    }
                     element.classList.remove('display-none');
                 });
             }
@@ -36,6 +40,7 @@ registerTab.forEach((elementRegister) => {
                 registerTab[1].classList.remove('selection');
                 connectionTab[0].classList.add('selection');
                 connectionTab[1].classList.add('selection');
+                login.value = 1;
                 shifterElements.forEach((element) => {
                     valuesSE.push(element.value);
                     element.value = '';
@@ -45,12 +50,6 @@ registerTab.forEach((elementRegister) => {
         });
     });
 });
-
-// if (registerTab[0].classList.match('Selection')) {
-//     document.cookie() = 'selection=register';
-// } else {
-//     document.cookie() = 'selection=test';
-// }
 
 
 let checkbox = document.getElementById('check');
@@ -64,16 +63,4 @@ checkbox.addEventListener('click', function() {
     }
 });
 
-
-// var xhttp = new XMLHttpRequest();
-// xhttp.open("POST", "/CheckYourMood/codeCYM/views/register.php", true); 
-// xhttp.setRequestHeader("Content-Type", "application/json");
-// xhttp.onreadystatechange = function() {
-//    if (this.readyState == 4 && this.status == 200) {
-//      // Response
-//      var response = this.responseText;
-//    }
-// };
-// var data = {name:'yogesh',salary: 35000,email: 'yogesh@makitweb.com'};
-// xhttp.send(JSON.stringify(data));
 
