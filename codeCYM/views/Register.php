@@ -18,76 +18,7 @@
     ?>
     <header-component></header-component>
     <?php
-
         $genderList = array("Homme", "Femme", "Autre");
-
-        $allSet = true;
-        $connectionSet = true;
-
-        // if HttpHelper::getParam('username') {}
-
-        if (isset($_POST['username']) && $_POST['username'] != "") {
-            $username = htmlspecialchars($_POST['username']);
-        } else {
-            $username = "";
-            $allSet = false;
-            $connectionSet = false;
-        }
-        if (isset($_POST['email']) && $_POST['email'] != "") {
-            $email = htmlspecialchars($_POST['email']);
-            $connectionSet = false;
-        } else {
-            $email = "";
-            $allSet = false;
-        }
-        if (isset($_POST['birth-date']) && $_POST['birth-date'] != "") {
-            $birthDate = htmlspecialchars($_POST['birth-date']);
-            $connectionSet = false;
-        } else {
-            $birthDate = "";
-            $allSet = false;
-        }
-        if (isset($_POST['gender']) && $_POST['gender'] != "Choisissez votre genre") {
-            $gender = htmlspecialchars($_POST['gender']);
-            $connectionSet = false;
-        } else {
-            $gender = "Choisissez votre genre";
-            $allSet = false;
-        }
-        if (isset($_POST['password']) && $_POST['password'] != "") {
-            $password = htmlspecialchars($_POST['password']);
-        } else {
-            $password = "";
-            $allSet = false;
-            $connectionSet = false;
-        }
-        if (isset($_POST['confirm-password']) && $_POST['confirm-password'] != "") {
-            $confirmPassword = htmlspecialchars($_POST['confirm-password']);
-            $connectionSet = false;
-        } else {
-            $confirmPassword = "";
-            $allSet = false;
-        }
-
-        
-        $ok = true;
-        while($row = $verifList->fetch()) {
-            if ($username == $row->User_Name) {
-                echo 'UserName déja utilisé';
-                $ok = false;
-            } else if ($email == $row->User_Email) {
-                echo 'Email déja utilisé';
-                $ok = false;
-            }
-        }
-        
-        if ($allSet && $ok) {
-            echo "données inserées";
-            
-        } else if ($connectionSet) {
-            echo "connection réussie";
-        }
-
     ?>
     <div class="container">
         <div class="Main">
@@ -117,6 +48,7 @@
                     <div class="checkbox">
                         <input id="check" type="checkbox" name="check"> Afficher le Mot de passe
                     </div>
+                    <input type="text" id="login" name="login" value="0" hidden>
                     <input type="submit" class="input-button" name="send">
                 </form>
             </div>
