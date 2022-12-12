@@ -25,8 +25,10 @@ registerTab.forEach((elementRegister) => {
                 connectionTab[1].classList.remove('selection');
                 login.value = 0;
                 shifterElements.forEach((element) => {
-                    element.value = valuesSE[0];
-                    valuesSE.shift();
+                    if (valuesSE[0] != null) {
+                        element.value = valuesSE[0];
+                        valuesSE.shift();
+                    }
                     element.classList.remove('display-none');
                 });
             }

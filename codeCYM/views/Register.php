@@ -24,14 +24,14 @@
         <div class="Main">
             <div class="Register-block">
                 <div class="main-top">
-                    <div class="left selection">S'inscrire</div>
-                    <div class="right">Se connecter</div>
+                    <div class="left">S'inscrire</div>
+                    <div class="right selection">Se connecter</div>
                 </div>
                 <form action="#" method="post" class="main-mid">
                     <input type="text" placeholder="Nom d'utilisateur" class="input-text" name="username" value=<?php echo '"'.$username.'"'?>>
-                    <input type="text" placeholder="Email" class="input-text shifter" name="email" value=<?php echo '"'.$email.'"'?>>
-                    <input type="date" placeholder="Date de naissance (JJ/MM/AAAA)" class="input-text shifter" name="birth-date" value=<?php echo '"'.$birthDate.'"'?>>
-                    <select class="select-size input-text shifter" name="gender">
+                    <input type="text" placeholder="Email" class="input-text shifter  display-none" name="email" value=<?php echo '"'.$email.'"'?>>
+                    <input type="date" placeholder="Date de naissance (JJ/MM/AAAA)" class="input-text shifter display-none" name="birth-date" value=<?php echo '"'.$birthDate.'"'?>>
+                    <select class="select-size input-text shifter display-none" name="gender">
                         <option hidden>Choisissez votre genre</option>
                         <?php 
                             foreach($genderList as $i) {
@@ -44,7 +44,7 @@
 					    ?>
                     </select>
                     <input type="password" id="pass" placeholder="Mot de passe" class="input-text" name="password" value=<?php echo '"'.$password.'"'?>>
-                    <input type="password" id="pass1" placeholder="Confirmer le mot de passe" class="input-text shifter" name="confirm-password" value=<?php echo '"'.$confirmPassword.'"'?>>
+                    <input type="password" id="pass1" placeholder="Confirmer le mot de passe" class="input-text shifter display-none" name="confirm-password" value=<?php echo '"'.$confirmPassword.'"'?>>
                     <div class="checkbox">
                         <input id="check" type="checkbox" name="check"> Afficher le Mot de passe
                     </div>
@@ -54,8 +54,8 @@
             </div>
         </div>
         <div class="bot">
-            <div class="left selection">S'inscrire</div>
-            <div class="right">Se connecter</div>
+            <div class="left">S'inscrire</div>
+            <div class="right selection">Se connecter</div>
         </div>
     </div>
 </body>
