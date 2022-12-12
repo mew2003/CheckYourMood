@@ -19,10 +19,18 @@ class AccountsController {
         $view = new View("CheckYourMood/codeCYM/views/Account");
         $resultats = $this->accountsService->getProfile($pdo);
         $view->setVar('resultats',$resultats);
+        while($row = $resultats->fetch()) {
+            $view->setVar('mail', $row->User_Email);
+            $view->setVar('username', $row->User_Name);
+            $view->setVar('password', $row->User_Password);
+            $view->setVar('dateOfBirth', $row->User_BirthDate);
+            $view->setVar('gender', $row->User_Gender);
+        }
         return $view;
     }
 
     public function editProfile($pdo) {
+        session_start();
         $view = new View("CheckYourMood/codeCYM/views/editprofile");
         $email = HttpHelper::getParam("email");
         $username = HttpHelper::getParam("pseudo");	
@@ -37,6 +45,7 @@ class AccountsController {
     }
 
     public function editPassword($pdo) {
+        session_start();
         $view = new View("CheckYourMood/codeCYM/views/editpassword");
         $envoyer = HttpHelper::getParam("envoyer");
         $newPassword = HttpHelper::getParam("newPassword");
@@ -62,12 +71,25 @@ class AccountsController {
     }
 
     public function deleteAccount($pdo) {
+        session_start();
         $view = new View("CheckYourMood/codeCYM/views/deleteaccount");
         $delete = HttpHelper::getParam("delete");
         if(!empty($delete)) {
             $this->accountsService->deleteProfile($pdo);
             $view = new View("CheckYourMood/codeCYM/views/accountdeleted");
         } 
+        return $view;
+    }
+
+    /**
+     * Déconnecte l'utilisateur courant
+     * @param $pdo \PDO the pdo object
+     * @return \PDOStatement the statement referencing the result set
+     */
+    public function disconnect($pdo) {
+        session_start();
+        session_destroy();
+        $view = new View("CheckYourMood/codeCYM/views/index");
         return $view;
     }
 
