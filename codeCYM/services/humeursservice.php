@@ -34,8 +34,10 @@ class HumeursService
             foreach ((array) $liste as $i) {
                 if ($i == $humeur) {
                     $libele = htmlspecialchars($humeur);
+                    $id = $_SESSION['UserID'];
                     $requete = $pdo->prepare("INSERT INTO `humeur`(`CODE_User`, `Humeur_Libelle`, `Humeur_Emoji`, `Humeur_Time`, `Humeur_Description`) 
-                                                VALUES (2,:libele,:smiley,CURRENT_TIMESTAMP,:description)");
+                                                VALUES (:id,:libele,:smiley,CURRENT_TIMESTAMP,:description)");
+                    $requete->bindParam("id", $id);
                     $requete->bindParam("libele", $libele);
                     $requete->bindParam("smiley", $smiley);
                     $requete->bindParam("description", $description);

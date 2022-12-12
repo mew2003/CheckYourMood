@@ -19,10 +19,14 @@ class HumeursController {
         $view = new View("CheckYourMood/codeCYM/views/Humeurs");
         $listeHumeurs = $this->humeursService->getListeHumeurs();
         $view->setVar('listeHumeurs',$listeHumeurs);
+        if (!isset($_SESSION['UserID'])) {
+            $view = new View("CheckYourMood/codeCYM/views/Register");
+        }
         return $view;
     }
 
     public function setHumeur($pdo) {
+        session_start();
         $view = new View("CheckYourMood/codeCYM/views/Humeurs");
         $description = HttpHelper::getParam("description");
         $humeur = HttpHelper::getParam("humeur");
