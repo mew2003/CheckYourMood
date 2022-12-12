@@ -55,7 +55,7 @@ class AccountsController {
         $view->setVar('newPassword',$newPassword);
         $view->setVar('confirmPassword',$confirmPassword);
         if($testOldPasswords && $testNewPasswords) {
-            $this->accountsService->editPassword($pdo, $newPassword);         
+            $this->accountsService->editPassword($pdo, $newPassword);       
         } 
         return $view;
     }

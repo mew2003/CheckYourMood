@@ -18,7 +18,7 @@
             <form class="main" method="post">
                 <?php
                     if(!empty($envoyer) && empty($oldPassword) || !empty($envoyer) && $testOldPasswords == false) {
-                        echo '<input class="form-control enRouge" type="text" type=password name="oldPassword" placeholder="Veuillez mettre votre ancien mot de passe" value='.$oldPassword.'></input>';
+                        echo '<input class="form-control enRouge" type="text" type=password name="oldPassword" placeholder="Veuillez mettre votre ancien mot de passe"></input>';
                     } else {
                         echo '<input class="form-control" type="text" type=password name="oldPassword" placeholder="Ancien mot de passe"></input>';
                     }

@@ -11,8 +11,8 @@ class AccountsService
      * @param $pdo \PDO the pdo object
      * @return \PDOStatement the statement referencing the result set
      */
-    public function getProfile($pdo) {
-        $requete = "SELECT * FROM User";
+    public function getProfile($pdo, $UserId) {
+        $requete = "SELECT * FROM User WHERE User_ID = $UserId";
         $resultats=$pdo->query($requete);
         return $resultats;
     }

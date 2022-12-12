@@ -16,14 +16,6 @@
         <div class="main-container">
             <div class="row main">  
             <?php
-                while($row = $resultats->fetch()) {
-                    $mail = $row->User_Email;
-                    $username = $row->User_Name;
-                    $password = $row->User_Password;
-                    $dateOfBirth = $row->User_BirthDate;
-                    $gender = $row->User_Gender;
-
-                }
                 echo '<div class="col-md-6 col-sm-8 col-xs-12 d-grid gap-3">';
                     echo "<h1>Profil</h1>";
                     echo '<div class="form-control d-flex flex-row align-items-center gap-2 centrer">';
