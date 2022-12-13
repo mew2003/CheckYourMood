@@ -16,6 +16,7 @@
     <header-component></header-component>
     <canvas id="myChart"></canvas>
     <canvas id="myDonuts"></canvas>
+    <canvas id="bar-chart" width="1200" height="800"></canvas>
         <script>
 // ###################################################################################################
 // ##  Mon Graphe à Bar  #############################################################################
@@ -131,6 +132,33 @@
             var myDonuts = new Chart(ctxDonuts, {
                 type: 'doughnut',
                 data: data,
+            });
+
+
+            
+        </script>
+        <script>
+            // Bar chart
+            new Chart(document.getElementById("bar-chart"), {
+                type: 'bar',
+                data: {
+                labels: ["dégoût", "joie", "suicide", "a", "b", "c", "d", "e"],
+                datasets: [
+                    {
+                    label: "Population (millions)",
+                    backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+                    data: [12, 4, 25, 1, 2, 3, 4, 5]
+                    }
+                ]
+                },
+                options: {
+                responsive: false,
+                legend: { display: true },
+                title: {
+                    display: true,
+                    text: 'Predicted world population (millions) in 2050'
+                }
+                }
             });
         </script>
     </body>
