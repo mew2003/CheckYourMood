@@ -20,10 +20,10 @@ class AccountsController {
         $resultats = $this->accountsService->getProfile($pdo);
         $view->setVar('resultats',$resultats);
         while($row = $resultats->fetch()) {
-            $view->setVar('email', $row->User_Email);
+            $view->setVar('mail', $row->User_Email);
             $view->setVar('username', $row->User_Name);
             $view->setVar('password', $row->User_Password);
-            $view->setVar('birthDate', $row->User_BirthDate);
+            $view->setVar('dateOfBirth', $row->User_BirthDate);
             $view->setVar('gender', $row->User_Gender);
         }
         return $view;
@@ -146,8 +146,6 @@ class AccountsController {
     public function disconnect($pdo) {
         session_start();
         session_destroy();
-        echo "<input type='hidden' name='action' value='index'>";
-        echo "<input type='hidden' name='controller' value='home'";
         $view = new View("CheckYourMood/codeCYM/views/index");
         return $view;
     }
