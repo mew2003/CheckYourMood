@@ -57,6 +57,13 @@ class headerComponent extends HTMLElement {
                     <button type="submit" class="link Phone">Stats</button>
                 </form>
             </li>
+            <li>
+                <form action="" method="get" class="hBurger">
+                    <input hidden name="action" value="historyVal">
+                    <input hidden name="controller" value="stats">
+                    <button type="submit" class="link Phone">Historique</button>
+                </form>
+            </li>
         </nav>`
         
     }
