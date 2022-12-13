@@ -44,6 +44,7 @@ class AccountsController {
         $username = HttpHelper::getParam("pseudo");
         $dateOfBirth = HttpHelper::getParam("dateOfBirth");
         $gender = HttpHelper::getParam("genderList");
+        $update = HttpHelper::getParam("envoyer");
         $view->setVar('message', null);
         $view->setVar('mailChanged', false);
         $view->setVar('usernameChanged', false);
@@ -58,15 +59,33 @@ class AccountsController {
         $view->setVar('defaultPseudo', $verifUsername);
         $view->setVar('defaultDateOfBirth', $verifDateOfBirth);
         $view->setVar('defaultGender', $verifGender);
-        if(!empty($email) && $email != $verifEmail) {
-            $this->accountsService->editMail($pdo, $email);
-            $view->setVar('mailChanged', true);
-            $view->setVar('message', "Vos informations ont bien été changées !");
+        $sameUsername = false;
+        $sameEmail = false;
+        $verifSameEmail = $this->accountsService->getEmails($pdo);
+        $verifSameUsername = $this->accountsService->getUsernames($pdo);
+        while($row = $verifSameEmail->fetch() && !$sameEmail) {
+            if($row == $email) {
+                $sameEmail = true;
+            }
         }
-        if(!empty($username) && $username != $verifUsername) {
+        while($row = $verifSameUsername->fetch() && !$sameUsername) {
+            if($row == $email) {
+                $sameUsername = true;
+            }
+        }
+        if(!empty($update) && !empty($email) && $email != $verifEmail && !$sameEmail) {
+            $this->accountsService->editMail($pdo, $email);
+            $view->setVar('mailChanged', true);              
+            $view->setVar('message', "Vos informations ont bien été changées !");
+        } else {
+            $view->setVar('message', "Email déjà existante !");
+        }
+        if(!empty($update) && !empty($username) && $username != $verifUsername && !$sameUsername) {
             $this->accountsService->editUsername($pdo, $username);
             $view->setVar('usernameChanged', true);
             $view->setVar('message', "Vos informations ont bien été changées !");
+        } else {
+            $view->setVar('message', "Pseudonyme déjà existant !");
         }
         if(!empty($dateOfBirth) && $dateOfBirth != $verifDateOfBirth) {
             $this->accountsService->editDateOfBirth($pdo, $dateOfBirth);
