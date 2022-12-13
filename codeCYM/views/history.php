@@ -71,14 +71,14 @@
                             <?php 
                         }
                     } 
-                    if ($compteur - 1 != $currentPage) {
+                    if ($compteur - 1 != $currentPage && $pages > 1) {
                         echo "<li class='page-item'>"; 
                             ?>
                             <a class="page-button" href="./?action=historyVal&controller=stats&page=<?php echo $currentPage + 1?>"><i class="fa-solid fa-chevron-right"></i></a>
                             <?php
                         echo "</li>";
                     }
-                    if ($compteur - 1 != $currentPage) {
+                    if ($compteur - 1 != $currentPage && $pages > 1) {
                         echo "<li class='page-item'>"; 
                             ?>
                             <a class="page-button" href="./?action=historyVal&controller=stats&page=<?php echo $pages ?>"><i class="fa-solid fa-angles-right"></i></a>
