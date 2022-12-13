@@ -49,9 +49,9 @@ class RegisterController {
                 User::$gender = null;
                 User::$confirmPassword = null;
             }
-            $view->setVar('error', $error);
+            $view->setVar('registerError', $error);
         } else {
-            $view->setVar('error', "Manque des valeurs");
+            $view->setVar('registerError', "Manque des valeurs");
         }
         return User::sendValues($view);
     }
@@ -71,9 +71,9 @@ class RegisterController {
                 $view = new View("CheckYourMood/codeCYM/views/index");
                 return $view;
             }
-            $view->setVar('error', $result);
+            $view->setVar('loginError', $result);
         } else {
-            $view->setVar('error', "Manque des valeurs");
+            $view->setVar('loginError', "Manque des valeurs");
         }
         return User::sendValues($view);
     }

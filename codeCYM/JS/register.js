@@ -22,11 +22,11 @@ $(".left").on('click', function() { (registerSelected()) });
 $(".right").on('click', function() { (loginSelected()) });
 
 
-// if (loginError.className.match('error')) {
-//     loginSelected();
-// } else if (registerError.className.match('error')) {
-//     registerSelected();
-// }
+if (loginError.className.match('error')) {
+    loginSelected();
+} else if (registerError.className.match('error')) {
+    registerSelected();
+}
 
 let checkbox = document.getElementById('check');
 checkbox.addEventListener('click', function() {
