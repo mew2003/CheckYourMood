@@ -10,11 +10,11 @@ class StatsController {
 
     public function __construct()
     {
+        session_start();
         $this->statsService = StatsService::getDefaultStatsService();
     }
 
     public function index($pdo) {
-        session_start();
         $view = new View("CheckYourMood/codeCYM/views/Stats");
         if (!isset($_SESSION['UserID'])) {
             $view = new View("CheckYourMood/codeCYM/views/Register");
@@ -34,7 +34,6 @@ class StatsController {
     }
 
     public function historyVal($pdo) {
-        session_start();
         $view = new View("CheckYourMood/codeCYM/views/history");
         if (!isset($_SESSION['UserID'])) {
             $view = new View("CheckYourMood/codeCYM/views/Register");
