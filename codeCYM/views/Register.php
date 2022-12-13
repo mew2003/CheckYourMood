@@ -20,7 +20,7 @@
     <?php
         $genderList = array("Homme", "Femme", "Autre");
     ?>
-    <div class='error'><?php echo $error ?></div>
+    <div class='error'><?php if (isset($error)) echo $error ?></div>
     <div class="container">
         <div class="Main">
             <div class="Register-block">
@@ -28,24 +28,30 @@
                     <div class="left">S'inscrire</div>
                     <div class="right selection">Se connecter</div>
                 </div>
-                <form action="#" method="post" class="main-mid">
-                    <input type="text" placeholder="Nom d'utilisateur" class="input-text" name="username" value=<?php echo '"'.$username.'"'?>>
-                    <input type="text" placeholder="Email" class="input-text shifter  display-none" name="email" value=<?php echo '"'.$email.'"'?>>
-                    <input type="date" placeholder="Date de naissance (JJ/MM/AAAA)" class="input-text shifter display-none" name="birth-date" value=<?php echo '"'.$birthDate.'"'?>>
+                <form action="#" method="get" class="main-mid">
+                    <input hidden name="action" value="registerAndLogin">
+                    <input hidden name="controller" value="register">
+                    <input type="text" placeholder="Nom d'utilisateur" class="input-text" name="username" value=<?php if (isset($username)) echo '"'.$username.'"'?>>
+                    <input type="text" placeholder="Email" class="input-text shifter  display-none" name="email" value=<?php if (isset($email)) echo '"'.$email.'"'?>>
+                    <input type="date" placeholder="Date de naissance (JJ/MM/AAAA)" class="input-text shifter display-none" name="birth-date" value=<?php if (isset($birthDate)) echo '"'.$birthDate.'"'?>>
                     <select class="select-size input-text shifter display-none" name="gender">
                         <option hidden>Choisissez votre genre</option>
                         <?php 
                             foreach($genderList as $i) {
-                                if ($gender == $i) {
-                                    echo '<option selected>'.$i.'</option>';
+                                if (isset($gender)) {
+                                    if ($gender == $i) {
+                                        echo '<option selected>'.$i.'</option>';
+                                    } else {
+                                        echo '<option>'.$i.'</option>';
+                                    }
                                 } else {
                                     echo '<option>'.$i.'</option>';
                                 }
                             }
 					    ?>
                     </select>
-                    <input type="password" id="pass" placeholder="Mot de passe" class="input-text" name="password" value=<?php echo '"'.$password.'"'?>>
-                    <input type="password" id="pass1" placeholder="Confirmer le mot de passe" class="input-text shifter display-none" name="confirm-password" value=<?php echo '"'.$confirmPassword.'"'?>>
+                    <input type="password" id="pass" placeholder="Mot de passe" class="input-text" name="password" value=<?php if (isset($password)) echo '"'.$password.'"'?>>
+                    <input type="password" id="pass1" placeholder="Confirmer le mot de passe" class="input-text shifter display-none" name="confirm-password" value=<?php if (isset($confirmPassword)) echo '"'.$confirmPassword.'"'?>>
                     <div class="checkbox">
                         <input id="check" type="checkbox" name="check"> Afficher le Mot de passe
                     </div>
