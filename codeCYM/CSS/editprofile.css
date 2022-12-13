@@ -28,6 +28,9 @@
 
 .enRouge {
     border: 1px solid red;
+}
+
+.enRouge::placeholder {
     color: red;
 }
 

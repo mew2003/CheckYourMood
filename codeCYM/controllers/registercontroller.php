@@ -26,7 +26,7 @@ class RegisterController {
                 $view->setVar('mail', $row->User_Email);
                 $view->setVar('username', $row->User_Name);
                 $view->setVar('password', $row->User_Password);
-                $view->setVar('dateOfBirth', $row->User_BirthDate);
+                $view->setVar('birthDate', $row->User_BirthDate);
                 $view->setVar('gender', $row->User_Gender);
             }
         } else {
@@ -37,47 +37,61 @@ class RegisterController {
 
     public function registerAndLogin($pdo) {
         session_start();
-        $username = HttpHelper::getParam("username");
-        $email = HttpHelper::getParam("email");
-        $birthDate = HttpHelper::getParam("birth-date");
-        $gender = HttpHelper::getParam("gender");
-        $password = HttpHelper::getParam("password");
-        $confirmPassword = HttpHelper::getParam("confirm-password");
-        $login = HttpHelper::getParam("login");
+        new User();
 
         $view = new View("CheckYourMood/codeCYM/views/Register");
         if (isset($_SESSION['UserID'])) {
             $view = new View("CheckYourMood/codeCYM/views/Account");
-        } else if ($username != null && $email != null && $birthDate != null && $gender != "Choisissez votre genre" && $password != null && $confirmPassword != null) {
+        } else if (User::$username != null && User::$email != null && User::$birthDate != null && User::$gender != "Choisissez votre genre" && User::$password != null && User::$confirmPassword != null) {
             // Register
-            $error = $this->registerService->insertUserValues($pdo, $username, $email, $birthDate, $gender, $password, $confirmPassword);
+            $error = $this->registerService->insertUserValues($pdo, User::$username, User::$email, User::$birthDate, User::$gender, User::$password, User::$confirmPassword);
             if ($error == "") {
-                $email = null;
-                $birthDate = null;
-                $gender = null;
-                $confirmPassword = null;
-            } else {
-                $view->setVar('error', $error);
+                User::$email = null;
+                User::$birthDate = null;
+                User::$gender = null;
+                User::$confirmPassword = null;
             }
-        } else if ($username != null && $password != null && $login == 1) {
+            $view->setVar('error', $error);
+        } else if (User::$username != null && User::$password != null && User::$login == 1) {
             // Login
-            $result = $this->registerService->getLoginIn($pdo, $username, $password);
+            $result = $this->registerService->getLoginIn($pdo, User::$username, User::$password);
             if (is_integer($result)) {
                 $_SESSION['UserID'] = $result;
                 $view = new View("CheckYourMood/codeCYM/views/index");
                 return $view;
-            } else {
-                $view->setVar('error', $result);
             }
+            $view->setVar('error', $result);
         } else {
             $view->setVar('error', "Manque des valeurs");
         }
-        $view->setVar('username', $username);
-        $view->setVar('email', $email);
-        $view->setVar('birthDate', $birthDate);
-        $view->setVar('gender', $gender);
-        $view->setVar('password', $password);
-        $view->setVar('confirmPassword', $confirmPassword);
+        $view->setVar('username', User::$username);
+        $view->setVar('email', User::$email);
+        $view->setVar('birthDate', User::$birthDate);
+        $view->setVar('gender', User::$gender);
+        $view->setVar('password', User::$password);
+        $view->setVar('confirmPassword', User::$confirmPassword);
         return $view;
     }
+}
+
+class User {
+    public static $username;
+    public static $email;
+    public static $birthDate;
+    public static $gender;
+    public static $password;
+    public static $confirmPassword;
+    public static $login;
+
+    public function __construct()
+    {
+        User::$username = HttpHelper::getParam("username");
+        User::$email = HttpHelper::getParam("email");
+        User::$birthDate = HttpHelper::getParam("birth-date");
+        User::$gender = HttpHelper::getParam("gender");
+        User::$password = HttpHelper::getParam("password");
+        User::$confirmPassword = HttpHelper::getParam("confirm-password");
+        User::$login = HttpHelper::getParam("login"); 
+    }
+
 }

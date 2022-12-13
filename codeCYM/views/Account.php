@@ -33,7 +33,7 @@
                     echo "</div>";
                     echo '<div class="form-control d-flex flex-row align-items-center gap-2">';
                         echo "<h2>Date de naissance :</h2>";
-                        echo "<h2>$dateOfBirth</h2>";
+                        echo "<h2>".$birthDate."</h2>";
                     echo "</div>";
                     echo '<div class="form-control d-flex flex-row align-items-center gap-2">';
                     echo "<h2>Genre :</h2>";
