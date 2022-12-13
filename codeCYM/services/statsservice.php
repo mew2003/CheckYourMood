@@ -10,9 +10,9 @@ class StatsService
      * @param $pdo \PDO the pdo object
      * @return \PDOStatement the statement referencing the result set
      */
-    public function getHistorique($pdo) {
-        $requete = "SELECT CODE_User, Humeur_Libelle, Humeur_Emoji, Humeur_Time, Humeur_Description FROM Humeur";
-        $resultats=$pdo->query($requete);
+    public function getHistorique($pdo, $id) {
+        $resultats = $pdo->prepare('SELECT CODE_User, Humeur_Libelle, Humeur_Emoji, Humeur_Time, Humeur_Description FROM Humeur WHERE CODE_User = :id');
+        $resultats->execute(['id'=>$id]);
         return $resultats;
     }
 

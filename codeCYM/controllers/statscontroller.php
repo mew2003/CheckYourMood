@@ -35,8 +35,12 @@ class StatsController {
     public function historyVal($pdo) {
         session_start();
         $view = new View("CheckYourMood/codeCYM/views/history");
-        $resultats = $this->statsService->getHistorique($pdo);
-        $view->setVar('resultats',$resultats);
+        if (!isset($_SESSION['UserID'])) {
+            $view = new View("CheckYourMood/codeCYM/views/Register");
+        } else {
+            $resultats = $this->statsService->getHistorique($pdo, $_SESSION['UserID']);
+            $view->setVar('resultats',$resultats);
+        }
         return $view;
     }
 
