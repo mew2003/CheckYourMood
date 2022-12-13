@@ -78,7 +78,9 @@ class RegisterController {
         $login = HttpHelper::getParam("login");
 
         $view = new View("CheckYourMood/codeCYM/views/Register");
-        if ($username != null && $email != null && $birthDate != null && $gender != "Choisissez votre genre" && $password != null && $confirmPassword != null) {
+        if (isset($_SESSION['UserID'])) {
+            $view = new View("CheckYourMood/codeCYM/views/Account");
+        } else if ($username != null && $email != null && $birthDate != null && $gender != "Choisissez votre genre" && $password != null && $confirmPassword != null) {
             // Register
             $error = $this->registerService->insertUserValues($pdo, $username, $email, $birthDate, $gender, $password);
             if ($error == "") {
@@ -94,7 +96,7 @@ class RegisterController {
             $result = $this->registerService->getLoginIn($pdo, $username, $password);
             if (is_integer($result)) {
                 $_SESSION['UserID'] = $result;
-                $view = new View("CheckYourMood/codeCYM/views/Account");
+                $view = new View("CheckYourMood/codeCYM/views/index");
                 return $view;
             } else {
                 $view->setVar('error', $result);
