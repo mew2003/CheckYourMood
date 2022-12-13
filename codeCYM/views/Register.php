@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/CheckYourMood/codeCYM/CSS/Register.css">
     <link href="/CheckYourMood/codeCYM/third-party/bootstrap/css/bootstrap.css" rel="stylesheet"/>
+    <script src="/CheckYourMood/codeCYM/third-party/JQuery/jquery-3.6.1.js"></script>
     <script src="/CheckYourMood/codeCYM/JS/burger-menu.js" defer></script>
     <script src="/CheckYourMood/codeCYM/JS/register.js" defer></script>
     <script src="/CheckYourMood/codeCYM/JS/header-component.js" defer></script>
@@ -19,17 +20,29 @@
     <header-component></header-component>
     <?php
         $genderList = array("Homme", "Femme", "Autre");
+
+        if (isset($loginError) && $loginError != "") {
+            echo "<div id='loginError' class='error'>".$loginError."</div>";
+        } else {
+            echo "<div id='loginError'></div>";
+        }
+        if (isset($registerError) && $registerError != "") {
+            echo "<div id='registerError' class='error'>".$registerError."</div>";
+        } else {
+            echo "<div id='registerError'></div>";
+        }
+
     ?>
-    <div class='error'><?php if (isset($error)) echo $error ?></div>
+    
     <div class="container">
         <div class="Main">
             <div class="Register-block">
                 <div class="main-top">
-                    <div class="left">S'inscrire</div>
+                    <div class="left" id="test">S'inscrire</div>
                     <div class="right selection">Se connecter</div>
                 </div>
                 <form action="#" method="get" class="main-mid">
-                    <input hidden name="action" value="registerAndLogin">
+                    <input hidden id="action" name="action" value="login">
                     <input hidden name="controller" value="register">
                     <input type="text" placeholder="Nom d'utilisateur" class="input-text" name="username" value=<?php if (isset($username)) echo '"'.$username.'"'?>>
                     <input type="text" placeholder="Email" class="input-text shifter  display-none" name="email" value=<?php if (isset($email)) echo '"'.$email.'"'?>>
