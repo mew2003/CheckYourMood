@@ -51,7 +51,7 @@ class RegisterController {
             }
             $view->setVar('registerError', $error);
         } else {
-            $view->setVar('registerError', "Manque des valeurs");
+            $view->setVar('registerError', "Au moins un des champs n'est pas rempli");
         }
         return User::sendValues($view);
     }
@@ -73,7 +73,7 @@ class RegisterController {
             }
             $view->setVar('loginError', $result);
         } else {
-            $view->setVar('loginError', "Manque des valeurs");
+            $view->setVar('loginError', "Au moins un des champs n'est pas rempli");
         }
         return User::sendValues($view);
     }
