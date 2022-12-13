@@ -21,7 +21,7 @@
                     // Erreur si le mail est vide 
                     if(!empty($envoyer) && empty($email)) {
                         echo '<input class="form-control enRouge" type="text" name="email" placeholder="Votre email ne peut pas être vide"></input>';
-                    } else if ($mailChanged) {
+                    } else if($mailChanged) {
                         echo '<input class="form-control" type="text" name="email" placeholder="Email" value='.$email.'></input>';
                     } else {
                         echo '<input class="form-control" type="text" name="email" placeholder="Email" value='.$defaultEmail.'></input>';
@@ -58,6 +58,7 @@
                     }
                     echo "</select>";
                     echo '<input class="button" name="envoyer" type="submit" value="Confirmer"></input>';
+                    echo $message;
                 ?>
             </form>
         </div>

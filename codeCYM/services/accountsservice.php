@@ -19,6 +19,28 @@ class AccountsService
     }
 
     /**
+     * Retourne les emails de tous les utilisateurs inscrits
+     * @param $pdo \PDO the pdo object
+     * @return \PDOStatement the statement referencing the result set
+     */
+    public function getEmails($pdo) {
+        $requete = "SELECT User_Email FROM User";
+        $resultats=$pdo->query($requete);
+        return $resultats;
+    }
+
+    /**
+     * Retourne les pseudo de tous les utilisateurs inscrits
+     * @param $pdo \PDO the pdo object
+     * @return \PDOStatement the statement referencing the result set
+     */
+    public function getUsernames($pdo) {
+        $requete = "SELECT User_Name FROM User";
+        $resultats=$pdo->query($requete);
+        return $resultats;
+    }
+
+    /**
      * Retourne le mot de passe actuel de l'utilisateur courant
      * @param $pdo \PDO the pdo object
      * @return \PDOStatement the statement referencing the result set
