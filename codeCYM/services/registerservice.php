@@ -24,9 +24,14 @@ class RegisterService
     }
 
     public static function insertUserValues($pdo, $username, $email, $birthDate, $gender, $password) {
-        $insert = $pdo->prepare('INSERT INTO user (User_Name,User_Email,User_BirthDate,User_Gender,User_Password) 
-                                 VALUES (:username,:email,:birthDate,:gender,:pswd)');
-        $insert->execute(array('username'=>$username,'email'=>$email,'birthDate'=>$birthDate,'gender'=>$gender,'pswd'=>$password));
+        try {
+            $insert = $pdo->prepare('INSERT INTO user (User_Name,User_Email,User_BirthDate,User_Gender,User_Password) 
+                                    VALUES (:username,:email,:birthDate,:gender,:pswd)');
+            $insert->execute(array('username'=>$username,'email'=>$email,'birthDate'=>$birthDate,'gender'=>$gender,'pswd'=>$password));
+        } catch (PDOException $e) {
+            $errorMessage = "Ce nom d'utilisateur ou cette adresse mail est déjà utilisé";
+            return $errorMessage;
+        }
     }
 
     public static function getUserId($pdo, $username) {

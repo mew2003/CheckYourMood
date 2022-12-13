@@ -29,14 +29,15 @@ class RegisterController {
         $password = HttpHelper::getParam("password");
         $confirmPassword = HttpHelper::getParam("confirm-password");
         $login = HttpHelper::getParam("login");
+        $error = "";
         $view->setVar('username', $username);
         $view->setVar('email', $email);
         $view->setVar('birthDate', $birthDate);
         $view->setVar('gender', $gender);
         $view->setVar('password', $password);
         $view->setVar('confirmPassword', $confirmPassword);
-        if ($username != "" && $email != "" && $birthDate != "" && $gender != "Choisissez votre genre" && $password != "") {
-            $this->testService->insertUserValues($pdo, $username, $email, $birthDate, $gender, $password);
+        if ($username != null && $email != null && $birthDate != null && $gender != "Choisissez votre genre" && $password != null) {
+            $error = $this->registerService->insertUserValues($pdo, $username, $email, $birthDate, $gender, $password);
         } else if ($username != null && $password != null && $login == 1) {
             $result = $this->registerService->getUserId($pdo, $username);
             $_SESSION['UserID'] = $result; // ATTENTION VERIFIER QUE LE MOT DE PASSE SOIT LE BON, POUR LE MOMENT AUCUNE VERIF CONNECTE DIRECTEMENT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -52,6 +53,7 @@ class RegisterController {
                 $view->setVar('gender', $row->User_Gender);
             }
         }
+        $view->setVar('error', $error);
         return $view;
     }
 }

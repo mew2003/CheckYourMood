@@ -20,6 +20,7 @@
     <?php
         $genderList = array("Homme", "Femme", "Autre");
     ?>
+    <div class='error'><?php echo $error ?></div>
     <div class="container">
         <div class="Main">
             <div class="Register-block">
