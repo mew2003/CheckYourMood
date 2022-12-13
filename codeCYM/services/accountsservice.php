@@ -67,6 +67,30 @@ class AccountsService
     }
 
     /**
+     * Modifie la date de naissance de l'utilisateur courant
+     * @param $pdo \PDO the pdo object
+     * @return \PDOStatement the statement referencing the result set
+     */
+    public function editDateOfBirth($pdo, $newDateOfBirth) {
+        $id = $_SESSION['UserID'];
+        $stmt = $pdo->prepare("UPDATE user SET User_BirthDate = :dateOfBirth WHERE User_ID = $id");
+        $stmt->bindParam('dateOfBirth', $newDateOfBirth);
+        $stmt->execute();
+    }
+
+    /**
+     * Modifie le nom d'utilisateur de l'utilisateur courant
+     * @param $pdo \PDO the pdo object
+     * @return \PDOStatement the statement referencing the result set
+     */
+    public function editGender($pdo, $newGender) {
+        $id = $_SESSION['UserID'];
+        $stmt = $pdo->prepare("UPDATE user SET User_Gender = :gender WHERE User_ID = $id");
+        $stmt->bindParam('gender', $newGender);
+        $stmt->execute();
+    }
+
+    /**
      * Supprime le profil de l'utilisateur courant
      * @param $pdo \PDO the pdo object
      * @return \PDOStatement the statement referencing the result set
@@ -79,6 +103,7 @@ class AccountsService
         $stmt->execute();
     }
 
+    // Singleton qui permet d'instancier le service
     private static $defaultAccountsService ;
     public static function getDefaultAccountsService()
     {

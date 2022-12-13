@@ -31,15 +31,52 @@ class AccountsController {
 
     public function editProfile($pdo) {
         session_start();
+        $verif = $this->accountsService->getProfile($pdo);
+        $envoyer = HttpHelper::getParam("envoyer");
+        while($row = $verif->fetch()) {
+            $verifEmail = $row->User_Email;
+            $verifUsername = $row->User_Name;
+            $verifDateOfBirth = $row->User_BirthDate;
+            $verifGender = $row->User_Gender;
+        }
         $view = new View("CheckYourMood/codeCYM/views/editprofile");
         $email = HttpHelper::getParam("email");
-        $username = HttpHelper::getParam("pseudo");	
-        if(!empty($email) && !empty($username)) {
+        $username = HttpHelper::getParam("pseudo");
+        $dateOfBirth = HttpHelper::getParam("dateOfBirth");
+        $gender = HttpHelper::getParam("genderList");
+        $view->setVar('message', null);
+        $view->setVar('mailChanged', false);
+        $view->setVar('usernameChanged', false);
+        $view->setVar('birthDateChanged', false);
+        $view->setVar('genderChanged', false);
+        $view->setVar('envoyer', $envoyer);
+        $view->setVar('email', $email);
+        $view->setVar('pseudo', $username);
+        $view->setVar('dateOfBirth', $dateOfBirth);
+        $view->setVar('gender', $gender);
+        $view->setVar('defaultEmail', $verifEmail);
+        $view->setVar('defaultPseudo', $verifUsername);
+        $view->setVar('defaultDateOfBirth', $verifDateOfBirth);
+        $view->setVar('defaultGender', $verifGender);
+        if(!empty($email) && $email != $verifEmail) {
             $this->accountsService->editMail($pdo, $email);
+            $view->setVar('mailChanged', true);
+            $view->setVar('message', "Vos informations ont bien été changées !");
+        }
+        if(!empty($username) && $username != $verifUsername) {
             $this->accountsService->editUsername($pdo, $username);
-            $view->setVar('test', "Profil modifié");
-        } else {
-            $view->setVar('test', "Profil non modifié");
+            $view->setVar('usernameChanged', true);
+            $view->setVar('message', "Vos informations ont bien été changées !");
+        }
+        if(!empty($dateOfBirth) && $dateOfBirth != $verifDateOfBirth) {
+            $this->accountsService->editDateOfBirth($pdo, $dateOfBirth);
+            $view->setVar('birthDateChanged', true);
+            $view->setVar('message', "Vos informations ont bien été changées !");
+        }
+        if(!empty($gender) && $gender != $verifGender) {
+            $this->accountsService->editGender($pdo, $gender);
+            $view->setVar('genderChanged', true);
+            $view->setVar('message', "Vos informations ont bien été changées !");
         }
         return $view;
     }
@@ -77,6 +114,7 @@ class AccountsController {
         if(!empty($delete)) {
             $this->accountsService->deleteProfile($pdo);
             $view = new View("CheckYourMood/codeCYM/views/accountdeleted");
+            session_destroy();
         } 
         return $view;
     }
@@ -89,6 +127,8 @@ class AccountsController {
     public function disconnect($pdo) {
         session_start();
         session_destroy();
+        echo "<input type='hidden' name='action' value='index'>";
+        echo "<input type='hidden' name='controller' value='home'";
         $view = new View("CheckYourMood/codeCYM/views/index");
         return $view;
     }
