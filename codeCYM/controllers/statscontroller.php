@@ -38,7 +38,7 @@ class StatsController {
         if (!isset($_SESSION['UserID'])) {
             $view = new View("CheckYourMood/codeCYM/views/Register");
         } else {
-            $resultats = $this->statsService->getHistorique($pdo, $_SESSION['UserID']);
+            $resultats = $this->statsService->getHistorique($pdo);
             $view->setVar('resultats',$resultats);
         }
         return $view;
