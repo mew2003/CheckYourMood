@@ -36,7 +36,9 @@ class StatsController {
         session_start();
         $view = new View("CheckYourMood/codeCYM/views/history");
         $resultats = $this->statsService->getHistorique($pdo);
+        $allRow = $this->statsService->getAllRow($pdo);
         $view->setVar('resultats',$resultats);
+        $view->setVar('allRow',$allRow);
         return $view;
     }
 

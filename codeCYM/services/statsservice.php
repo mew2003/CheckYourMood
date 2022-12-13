@@ -46,6 +46,14 @@ class StatsService
         return $result;
     }
 
+    public function getAllRow($pdo) {
+        $req = "SELECT COUNT(*) AS allRow FROM humeur";
+        $result=$pdo->query($req);
+        $splitResult = $result->fetchColumn();
+        $allRow = (int) $splitResult;
+        return $allRow;
+    }
+
     private static $defaultStatsService ;
     public static function getDefaultStatsService()
     {
