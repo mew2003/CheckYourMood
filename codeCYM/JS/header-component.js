@@ -19,6 +19,11 @@ class headerComponent extends HTMLElement {
                 <input hidden name="controller" value="stats">
                 <button type="submit" class="link mobile">Stats</button>
             </form>
+            <form action="" method="get" class="h">
+                <input hidden name="action" value="historyVal">
+                <input hidden name="controller" value="stats">
+                <button type="submit" class="link mobile">Historique</button>
+            </form>
             <form action="#" method="get" class="h">
                 <input hidden name="action" value="index">
                 <input hidden name="controller" value="humeurs">
