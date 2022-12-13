@@ -43,7 +43,7 @@ class HumeursService
         if ($humeur != "") {
             $liste = self::getListeHumeurs();
             foreach ((array) $liste as $i) {
-                if ($i == $humeur) {
+                if (strcasecmp($i, $humeur) == 0) {
                     $libele = htmlspecialchars($humeur);
                     $id = $_SESSION['UserID'];
                     $requete = $pdo->prepare("INSERT INTO `humeur`(`CODE_User`, `Humeur_Libelle`, `Humeur_Emoji`, `Humeur_Time`, `Humeur_Description`) 
