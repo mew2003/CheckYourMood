@@ -26,6 +26,9 @@ class StatsController {
         $view->setVar('AllHumeur', $AllHumeur);
         $view->setVar('TotalOfHumeur', $AllHumeurTotal);
         $view->setVar('AllHumeurData', $AllHumeurData);
+        if (!isset($_SESSION['UserID'])) {
+            $view = new View("CheckYourMood/codeCYM/views/Register");
+        }
         return $view;
     }
 

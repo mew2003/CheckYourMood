@@ -38,6 +38,7 @@
 /* Modifie le bouton pour se désinscrire */
 .buttonD {
     margin-left : 10px;
+    margin-right : 10px;
     border-radius: 25px;
     background-color: #E84855;
     border: none;

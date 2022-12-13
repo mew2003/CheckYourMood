@@ -2,6 +2,7 @@ let register = document.querySelectorAll('.left');
 let connection = document.querySelectorAll('.right');
 let shifterElements = document.querySelectorAll('.shifter');
 let login = document.getElementById('login');
+let error = document.querySelector('error');
 let valuesSE = [];
 let registerTab = [];
 let connectionTab = [];

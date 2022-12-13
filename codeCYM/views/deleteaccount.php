@@ -24,8 +24,8 @@
                 </form>
                 <form method="get" action="#">
                     <input type="submit" class="buttonD" name="delete" value="Confirmer">
-                    <input hidden name="action" value="index">
-                    <input hidden name='controller' value='deleteaccounts'>
+                    <input hidden name="action" value="deleteAccount">
+                    <input hidden name='controller' value='accounts'>
                 </form>
             </div>
         </div>
