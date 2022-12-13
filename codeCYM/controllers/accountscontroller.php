@@ -20,10 +20,10 @@ class AccountsController {
         $resultats = $this->accountsService->getProfile($pdo);
         $view->setVar('resultats',$resultats);
         while($row = $resultats->fetch()) {
-            $view->setVar('mail', $row->User_Email);
+            $view->setVar('email', $row->User_Email);
             $view->setVar('username', $row->User_Name);
             $view->setVar('password', $row->User_Password);
-            $view->setVar('dateOfBirth', $row->User_BirthDate);
+            $view->setVar('birthDate', $row->User_BirthDate);
             $view->setVar('gender', $row->User_Gender);
         }
         return $view;
