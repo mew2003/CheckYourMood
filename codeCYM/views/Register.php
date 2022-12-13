@@ -21,17 +21,11 @@
     <?php
         $genderList = array("Homme", "Femme", "Autre");
 
-        if (isset($loginError) && $loginError != "") {
-            echo "<div id='loginError' class='error'>".$loginError."</div>";
-        } else {
-            echo "<div id='loginError'></div>";
-        }
-        if (isset($registerError) && $registerError != "") {
-            echo "<div id='registerError' class='error'>".$registerError."</div>";
-        } else {
-            echo "<div id='registerError'></div>";
-        }
-
+        if (isset($loginError) && $loginError != "") echo "<div id='loginError' class='error'>".$loginError."</div>";
+        else echo "<div id='loginError'></div>";
+        if (isset($registerError) && $registerError != "") echo "<div id='registerError' class='error'>".$registerError."</div>";
+        else echo "<div id='registerError'></div>";
+        
     ?>
     
     <div class="container">
