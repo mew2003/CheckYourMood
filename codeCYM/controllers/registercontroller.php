@@ -69,6 +69,8 @@ class RegisterController {
             } else {
                 $view->setVar('error', $result);
             }
+        } else {
+            $view->setVar('error', "Manque des valeurs");
         }
         $view->setVar('username', $username);
         $view->setVar('email', $email);
