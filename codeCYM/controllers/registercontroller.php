@@ -35,38 +35,6 @@ class RegisterController {
         return $view;
     }
 
-    // public function registerAndLogin($pdo) {
-    //     session_start();
-    //     $view = new View("CheckYourMood/codeCYM/views/Register");
-    //     $username = HttpHelper::getParam("username");
-    //     $email = HttpHelper::getParam("email");
-    //     $birthDate = HttpHelper::getParam("birth-date");
-    //     $gender = HttpHelper::getParam("gender");
-    //     $password = HttpHelper::getParam("password");
-    //     $confirmPassword = HttpHelper::getParam("confirm-password");
-    //     $login = HttpHelper::getParam("login");
-    //     $error = "";
-    //     if ($username != null && $email != null && $birthDate != null && $gender != "Choisissez votre genre" && $password != null && $confirmPassword != null) {
-    //         echo "register";
-    //         $error = $this->registerService->insertUserValues($pdo, $username, $email, $birthDate, $gender, $password);
-    //         echo $error;
-    //     } else if ($username != null && $password != null && $login == 1) {
-    //         echo "login";
-    //         $result = $this->registerService->getUserId($pdo, $username);
-    //         $_SESSION['UserID'] = $result; // ATTENTION VERIFIER QUE LE MOT DE PASSE SOIT LE BON, POUR LE MOMENT AUCUNE VERIF CONNECTE DIRECTEMENT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    //     } else {
-    //         echo "pas good";
-    //         $view->setVar('username', $username);
-    //         $view->setVar('email', $email);
-    //         $view->setVar('birthDate', $birthDate);
-    //         $view->setVar('gender', $gender);
-    //         $view->setVar('password', $password);
-    //         $view->setVar('confirmPassword', $confirmPassword);
-    //         $view->setVar('error', $error);
-    //     }
-    //     return $view;
-    // }
-
     public function registerAndLogin($pdo) {
         session_start();
         $username = HttpHelper::getParam("username");
