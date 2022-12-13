@@ -13,7 +13,6 @@
         <?php
         spl_autoload_extensions(".php");
         spl_autoload_register();
-        echo $_SESSION['UserID'];
         ?>
         <header-component></header-component>  
         <div class="container-fluid">

@@ -7,15 +7,16 @@ use PDOException;
 class StatsService
 {
     /**
+     * Renvoie l'historique de toutes les humeurs de l'utilisateur
      * @param $pdo \PDO the pdo object
      * @return \PDOStatement the statement referencing the result set
      */
-    public function getHistorique($pdo) {
-        $requete = "SELECT CODE_User, Humeur_Libelle, Humeur_Emoji, Humeur_Time, Humeur_Description FROM Humeur";
-        $resultats=$pdo->query($requete);
+    public function getHistorique($pdo, $id) {
+        $resultats = $pdo->prepare('SELECT CODE_User, Humeur_Libelle, Humeur_Emoji, Humeur_Time, Humeur_Description FROM Humeur WHERE CODE_User = :id');
+        $resultats->execute(['id'=>$id]);
         return $resultats;
     }
-
+    
     public function getMaxHumeur($pdo) {
         $req = "SELECT MAX(Humeur_Libelle) FROM humeur join user ON user.User_ID = humeur.CODE_USER WHERE User_ID = 2 GROUP BY Humeur_Libelle LIMIT 4";
         $result=$pdo->query($req);
