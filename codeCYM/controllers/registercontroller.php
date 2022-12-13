@@ -13,12 +13,12 @@ class RegisterController {
 
     public function __construct()
     {
+        session_start();
         $this->registerService = RegisterService::getDefaultRegisterService();
         $this->accountService = AccountsService::getDefaultAccountsService();
     }
 
     public function index($pdo) {
-        session_start();
         if (isset($_SESSION['UserID'])) {
             $view = new View("CheckYourMood/codeCYM/views/Account");
             $resultats = $this->accountService->getProfile($pdo, $_SESSION['UserID']);
@@ -36,12 +36,9 @@ class RegisterController {
     }
 
     public function register($pdo) {
-        session_start();
         new User();
-
         $view = new View("CheckYourMood/codeCYM/views/Register");
         if (User::$username != null && User::$email != null && User::$birthDate != null && User::$gender != "Choisissez votre genre" && User::$password != null && User::$confirmPassword != null) {
-            // Register
             $error = $this->registerService->insertUserValues($pdo, User::$username, User::$email, User::$birthDate, User::$gender, User::$password, User::$confirmPassword);
             if ($error == "") {
                 User::$email = null;
@@ -57,14 +54,11 @@ class RegisterController {
     }
 
     public function login($pdo) {
-        session_start();
         new User();
-
         $view = new View("CheckYourMood/codeCYM/views/Register");
         if (isset($_SESSION['UserID'])) {
             $view = new View("CheckYourMood/codeCYM/views/Account");
         } else if (User::$username != null && User::$password != null && User::$login == 1) {
-            // Login
             $result = $this->registerService->getLoginIn($pdo, User::$username, User::$password);
             if (is_integer($result)) {
                 $_SESSION['UserID'] = $result;
@@ -108,5 +102,4 @@ class User {
         $view->setVar('confirmPassword', User::$confirmPassword);
         return $view;
     }
-
 }

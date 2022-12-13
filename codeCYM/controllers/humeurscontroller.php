@@ -8,14 +8,15 @@ use yasmf\View;
 class HumeursController {
 
     private $humeursService;
+    
 
     public function __construct()
     {
+        session_start();
         $this->humeursService = HumeursService::getDefaultHumeursService();
     }
 
     public function index($pdo) {
-        session_start();
         $view = new View("CheckYourMood/codeCYM/views/Humeurs");
         $listeHumeurs = $this->humeursService->getListeHumeurs();
         $view->setVar('listeHumeurs',$listeHumeurs);
@@ -26,7 +27,6 @@ class HumeursController {
     }
 
     public function setHumeur($pdo) {
-        session_start();
         $view = new View("CheckYourMood/codeCYM/views/Humeurs");
         $description = HttpHelper::getParam("description");
         $humeur = HttpHelper::getParam("humeur");

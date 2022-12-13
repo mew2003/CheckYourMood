@@ -11,6 +11,7 @@ class AccountsController {
 
     public function __construct()
     {
+        session_start();
         $this->accountsService = AccountsService::getDefaultAccountsService();
     }
 
@@ -20,7 +21,6 @@ class AccountsController {
      * @return \PDOStatement the statement referencing the result set
      */
     public function index($pdo) {
-        session_start();
         $view = new View("CheckYourMood/codeCYM/views/Account");
         $resultats = $this->accountsService->getProfile($pdo);
         $view->setVar('resultats',$resultats);
@@ -40,8 +40,6 @@ class AccountsController {
      * @return \PDOStatement the statement referencing the result set
      */
     public function editProfile($pdo) {
-        // lancement de la session
-        session_start();
         // création de la vue pour modifié son profil
         $view = new View("CheckYourMood/codeCYM/views/editprofile");
         // récupération de toutes les données du formulaire
@@ -122,7 +120,6 @@ class AccountsController {
      * @return \PDOStatement the statement referencing the result set
      */
     public function editPassword($pdo) {
-        session_start();
         $view = new View("CheckYourMood/codeCYM/views/editpassword");
         $envoyer = HttpHelper::getParam("envoyer");
         $newPassword = HttpHelper::getParam("newPassword");
@@ -153,7 +150,6 @@ class AccountsController {
      * @return \PDOStatement the statement referencing the result set
      */
     public function deleteAccount($pdo) {
-        session_start();
         $view = new View("CheckYourMood/codeCYM/views/deleteaccount");
         $delete = HttpHelper::getParam("delete");
         if(!empty($delete)) {
@@ -170,7 +166,6 @@ class AccountsController {
      * @return \PDOStatement the statement referencing the result set
      */
     public function disconnect($pdo) {
-        session_start();
         session_destroy();
         $view = new View("CheckYourMood/codeCYM/views/index");
         return $view;
