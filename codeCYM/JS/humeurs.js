@@ -3,7 +3,7 @@ function refreshTime() {
     const dateString = new Date().toLocaleTimeString();
     timeDisplay.textContent = dateString;
 }
-setInterval(refreshTime, 1000);
+setInterval(refreshTime, 100);
 
 function getSmiley(element) {
     var saisie = (element.value || element.options[element.selectedIndex].value); 
