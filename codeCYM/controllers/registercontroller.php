@@ -35,14 +35,12 @@ class RegisterController {
         return $view;
     }
 
-    public function registerAndLogin($pdo) {
+    public function register($pdo) {
         session_start();
         new User();
 
         $view = new View("CheckYourMood/codeCYM/views/Register");
-        if (isset($_SESSION['UserID'])) {
-            $view = new View("CheckYourMood/codeCYM/views/Account");
-        } else if (User::$username != null && User::$email != null && User::$birthDate != null && User::$gender != "Choisissez votre genre" && User::$password != null && User::$confirmPassword != null) {
+        if (User::$username != null && User::$email != null && User::$birthDate != null && User::$gender != "Choisissez votre genre" && User::$password != null && User::$confirmPassword != null) {
             // Register
             $error = $this->registerService->insertUserValues($pdo, User::$username, User::$email, User::$birthDate, User::$gender, User::$password, User::$confirmPassword);
             if ($error == "") {
@@ -52,6 +50,19 @@ class RegisterController {
                 User::$confirmPassword = null;
             }
             $view->setVar('error', $error);
+        } else {
+            $view->setVar('error', "Manque des valeurs");
+        }
+        return User::sendValues($view);
+    }
+
+    public function login($pdo) {
+        session_start();
+        new User();
+
+        $view = new View("CheckYourMood/codeCYM/views/Register");
+        if (isset($_SESSION['UserID'])) {
+            $view = new View("CheckYourMood/codeCYM/views/Account");
         } else if (User::$username != null && User::$password != null && User::$login == 1) {
             // Login
             $result = $this->registerService->getLoginIn($pdo, User::$username, User::$password);
@@ -64,13 +75,7 @@ class RegisterController {
         } else {
             $view->setVar('error', "Manque des valeurs");
         }
-        $view->setVar('username', User::$username);
-        $view->setVar('email', User::$email);
-        $view->setVar('birthDate', User::$birthDate);
-        $view->setVar('gender', User::$gender);
-        $view->setVar('password', User::$password);
-        $view->setVar('confirmPassword', User::$confirmPassword);
-        return $view;
+        return User::sendValues($view);
     }
 }
 
@@ -92,6 +97,16 @@ class User {
         User::$password = HttpHelper::getParam("password");
         User::$confirmPassword = HttpHelper::getParam("confirm-password");
         User::$login = HttpHelper::getParam("login"); 
+    }
+
+    public static function sendValues($view) {
+        $view->setVar('username', User::$username);
+        $view->setVar('email', User::$email);
+        $view->setVar('birthDate', User::$birthDate);
+        $view->setVar('gender', User::$gender);
+        $view->setVar('password', User::$password);
+        $view->setVar('confirmPassword', User::$confirmPassword);
+        return $view;
     }
 
 }
