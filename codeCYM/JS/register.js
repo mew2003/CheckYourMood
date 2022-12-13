@@ -5,7 +5,9 @@ let login = document.getElementById('login');
 let valuesSE = [];
 let registerTab = [];
 let connectionTab = [];
-let errorMessages = ["Les deux mots de passe ne sont pas identique", "Ce nom d'utilisateur ou cette adresse mail est déjà utilisé"];
+let loginError = document.getElementById('loginError');
+let registerError = document.getElementById('registerError');
+let action = document.getElementById('action');
 
 
 register.forEach((element) => {
@@ -19,11 +21,12 @@ connection.forEach((element) => {
 $(".left").on('click', function() { (registerSelected()) });
 $(".right").on('click', function() { (loginSelected()) });
 
-errorMessages.forEach((element) => {
-    if (element == $(".error").attr('id')) {
-        $(".left").on('click', function() { (registerSelected()) });
-    }
-});
+
+// if (loginError.className.match('error')) {
+//     loginSelected();
+// } else if (registerError.className.match('error')) {
+//     registerSelected();
+// }
 
 let checkbox = document.getElementById('check');
 checkbox.addEventListener('click', function() {
@@ -43,7 +46,9 @@ function registerSelected() {
         if (!(elementRegister.className.match('selection'))) {
             $(".left").addClass('selection');
             $(".right").removeClass('selection');
+            action.value = "register";
             login.value = 0;
+            console.log(registerTab[0].className.match('selection'));
             shifterElements.forEach((element) => {
                 if (valuesSE[0] != null) {
                     element.value = valuesSE[0];
@@ -61,7 +66,9 @@ function loginSelected() {
         if (!(elementConnection.className.match('selection'))) {
             $(".left").removeClass('selection');
             $(".right").addClass('selection');
+            action.value = "login";
             login.value = 1;
+            console.log(registerTab[0].className.match('selection'));
             shifterElements.forEach((element) => {
                 valuesSE.push(element.value);
                 element.value = '';

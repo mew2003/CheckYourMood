@@ -20,8 +20,20 @@
     <header-component></header-component>
     <?php
         $genderList = array("Homme", "Femme", "Autre");
+
+        if (isset($loginError) && $loginError != "") {
+            echo "<div id='loginError' class='error'>".$loginError."</div>";
+        } else {
+            echo "<div id='loginError'></div>";
+        }
+        if (isset($registerError) && $registerError != "") {
+            echo "<div id='registerError' class='error'>".$registerError."</div>";
+        } else {
+            echo "<div id='registerError'></div>";
+        }
+
     ?>
-    <div class='error' id="<?php if (isset($error)) echo $error ?>"><?php if (isset($error)) echo $error ?></div>
+    
     <div class="container">
         <div class="Main">
             <div class="Register-block">
@@ -30,7 +42,7 @@
                     <div class="right selection">Se connecter</div>
                 </div>
                 <form action="#" method="get" class="main-mid">
-                    <input hidden name="action" value="registerAndLogin">
+                    <input hidden id="action" name="action" value="login">
                     <input hidden name="controller" value="register">
                     <input type="text" placeholder="Nom d'utilisateur" class="input-text" name="username" value=<?php if (isset($username)) echo '"'.$username.'"'?>>
                     <input type="text" placeholder="Email" class="input-text shifter  display-none" name="email" value=<?php if (isset($email)) echo '"'.$email.'"'?>>
