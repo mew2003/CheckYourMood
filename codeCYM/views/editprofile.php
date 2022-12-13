@@ -31,12 +31,12 @@
                         } else {
                             echo '<input class="form-control input-text" type="text" name="username" placeholder="Pseudo" value='.$username.'></input>';
                         }
-                        echo '<input class="form-control input-text" type="date" name="dateOfBirth" placeholder="Pseudo" value='.$dateOfBirth.'></input>';
+                        echo '<input class="form-control input-text" type="date" name="birthDate" placeholder="Pseudo" value='.$birthDate.'></input>';
                     } else {
                         // affichage des infos de l'utilisateur courant dans les champs
                         echo '<input class="form-control input-text" type="email" name="email" placeholder="Email" value='.$defaultEmail.'></input>';
                         echo '<input class="form-control input-text" type="text" name="username" placeholder="Pseudo" value='.$defaultUsername.'></input>';
-                        echo '<input class="form-control input-text" type="date" name="dateOfBirth" placeholder="Pseudo" value='.$defaultDateOfBirth.'></input>';
+                        echo '<input class="form-control input-text" type="date" name="birthDate" placeholder="Pseudo" value='.$defaultBirthDate.'></input>';
                     }
                     echo "<select class='input-text' name='genderList'>";
                     foreach($genderList as $i) {

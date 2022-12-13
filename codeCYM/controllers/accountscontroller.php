@@ -14,6 +14,11 @@ class AccountsController {
         $this->accountsService = AccountsService::getDefaultAccountsService();
     }
 
+    /**
+     * Fonction de base du controlleur, récupère le profil de l'utilisateur courant
+     * @param $pdo \PDO the pdo object
+     * @return \PDOStatement the statement referencing the result set
+     */
     public function index($pdo) {
         session_start();
         $view = new View("CheckYourMood/codeCYM/views/Account");
@@ -23,12 +28,17 @@ class AccountsController {
             $view->setVar('mail', $row->User_Email);
             $view->setVar('username', $row->User_Name);
             $view->setVar('password', $row->User_Password);
-            $view->setVar('dateOfBirth', $row->User_BirthDate);
+            $view->setVar('birthDate', $row->User_BirthDate);
             $view->setVar('gender', $row->User_Gender);
         }
         return $view;
     }
 
+    /**
+     * Change les informations du profil de l'utilisateur
+     * @param $pdo \PDO the pdo object
+     * @return \PDOStatement the statement referencing the result set
+     */
     public function editProfile($pdo) {
         // lancement de la session
         session_start();
@@ -37,7 +47,7 @@ class AccountsController {
         // récupération de toutes les données du formulaire
         $email = HttpHelper::getParam("email");
         $username = HttpHelper::getParam("username");
-        $dateOfBirth = HttpHelper::getParam("dateOfBirth");
+        $birthDate = HttpHelper::getParam("birthDate");
         $gender = HttpHelper::getParam("genderList");
         $update = HttpHelper::getParam("envoyer");
         // récupération du profil de l'utilisateur courant
@@ -45,18 +55,18 @@ class AccountsController {
         while($row = $verif->fetch()) {
             $defaultEmail = $row->User_Email;
             $defaultUsername = $row->User_Name;
-            $defaultDateOfBirth = $row->User_BirthDate;
+            $defaultBirthDate = $row->User_BirthDate;
             $defaultGender = $row->User_Gender;
         }
         // initialisation des variables
         $view->setVar('message', null);
         $view->setVar('defaultEmail', $defaultEmail);
         $view->setVar('defaultUsername', $defaultUsername);
-        $view->setVar('defaultDateOfBirth', $defaultDateOfBirth);
+        $view->setVar('defaultBirthDate', $defaultBirthDate);
         $view->setVar('defaultGender', $defaultGender);
         $view->setVar('email', $email);
         $view->setVar('username', $username);
-        $view->setVar('dateOfBirth', $dateOfBirth);
+        $view->setVar('birthDate', $birthDate);
         $view->setVar('gender', $gender);
         $view->setVar('update', $update);
         $sameUsername = false;
@@ -75,9 +85,7 @@ class AccountsController {
             if(strcmp($row->User_Name, $username) == 0) {
                 $sameUsername = true;
             }
-        }
-        echo var_dump($sameUsername);
-        echo var_dump($sameEmail);        
+        }       
         // si l'email n'est pas vide et qu'il n'existe pas alors on l'email est modifié
         if(!empty($update) && !empty($email) && $email != $defaultEmail && $sameEmail == false) {
             $this->accountsService->editMail($pdo, $email);              
@@ -93,11 +101,11 @@ class AccountsController {
             $view->setVar('message', "Pseudonyme déjà existant !");
         }
         // si la date de naissance n'est pas la même que celle stocké dans la base de données pour l'utilisateur courant alors elle est modifiée
-        if(!empty($dateOfBirth) && $dateOfBirth != $defaultDateOfBirth && $dateOfBirth < date("Y-m-d")) {
-            $defaultDateOfBirth = $this->accountsService->editDateOfBirth($pdo, $dateOfBirth);
-            $view->setVar('defaultDateOfBirth', $defaultDateOfBirth);
+        if(!empty($birthDate) && $birthDate != $defaultBirthDate && $birthDate < date("Y-m-d")) {
+            $defaultBirthDate = $this->accountsService->editBirthDate($pdo, $birthDate);
+            $view->setVar('defaultBirthDate', $defaultBirthDate);
             $view->setVar('message', "Vos informations ont bien été changées !");
-        } else if($dateOfBirth != $defaultDateOfBirth && $dateOfBirth > date("Y-m-d")) {
+        } else if($birthDate != $defaultBirthDate && $birthDate > date("Y-m-d")) {
             $view->setVar('message', "Votre date de naissance ne peut pas être supérieur à la date d'aujourd'hui !");
         }
         // si le genre n'est pas le même que celui stocké dans la base de donnée alors il est modifié
@@ -108,6 +116,11 @@ class AccountsController {
         return $view;
     }
 
+    /**
+     * Change le mot de passe de l'utilisateur
+     * @param $pdo \PDO the pdo object
+     * @return \PDOStatement the statement referencing the result set
+     */
     public function editPassword($pdo) {
         session_start();
         $view = new View("CheckYourMood/codeCYM/views/editpassword");
@@ -134,6 +147,11 @@ class AccountsController {
         return $view;
     }
 
+    /**
+     * Supprime le compte de l'utilisateur courant
+     * @param $pdo \PDO the pdo object
+     * @return \PDOStatement the statement referencing the result set
+     */
     public function deleteAccount($pdo) {
         session_start();
         $view = new View("CheckYourMood/codeCYM/views/deleteaccount");
