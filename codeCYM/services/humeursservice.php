@@ -7,8 +7,8 @@ use PDOException;
 class HumeursService
 {
 
+    // Singleton d'instanciation
     private static $defaultHumeursService;
-
     public static function getDefaultHumeursService()
     {
         if (HumeursService::$defaultHumeursService == null) {
@@ -17,6 +17,10 @@ class HumeursService
         return HumeursService::$defaultHumeursService;
     }
 
+    /**
+     * Permet d'obtenir la liste des humeurs depuis un fichier externes
+     * @return liste contenant toutes les humeurs 
+     */
     public function getListeHumeurs() {
         try {
             $nomficTypes= $_SERVER['DOCUMENT_ROOT']."/CheckYourMood/codeCYM/views/humeurs.csv";
@@ -28,11 +32,18 @@ class HumeursService
         } catch ( Exception $e ) {}
     }
 
+    /**
+     * Permet l'insertion de l'humeur d'un utilisateur
+     * @param $pdo \PDO the pdo object
+     * @param $humeur libellé de l'humeur
+     * @param $smiley smiley associé à l'humeur
+     * @param $description commentaire que peut saisir un utilisateur (facultatif)
+     */
     public function setHumeur($pdo, $humeur, $smiley, $description) {
         if ($humeur != "") {
             $liste = self::getListeHumeurs();
             foreach ((array) $liste as $i) {
-                if ($i == $humeur) {
+                if (strcasecmp($i, $humeur) == 0) {
                     $libele = htmlspecialchars($humeur);
                     $id = $_SESSION['UserID'];
                     $requete = $pdo->prepare("INSERT INTO `humeur`(`CODE_User`, `Humeur_Libelle`, `Humeur_Emoji`, `Humeur_Time`, `Humeur_Description`) 

@@ -27,7 +27,7 @@
             <div class="row border-form">
                 <div class="col col-md-8 col-9">
                     <input class="humeurs-liste" list="humeurs-liste" name="humeur" oninput="getSmiley(this)" placeholder="Saisissez votre humeur (ex. Joie)">
-                    <datalist id="humeurs-liste" >
+                    <datalist id="humeurs-liste">
                         <?php
                             foreach ($listeHumeurs as $i) {
 								echo "<option value='".$i."'></option>";

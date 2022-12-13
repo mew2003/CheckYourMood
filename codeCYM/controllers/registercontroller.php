@@ -50,7 +50,7 @@ class RegisterController {
             $view = new View("CheckYourMood/codeCYM/views/Account");
         } else if ($username != null && $email != null && $birthDate != null && $gender != "Choisissez votre genre" && $password != null && $confirmPassword != null) {
             // Register
-            $error = $this->registerService->insertUserValues($pdo, $username, $email, $birthDate, $gender, $password);
+            $error = $this->registerService->insertUserValues($pdo, $username, $email, $birthDate, $gender, $password, $confirmPassword);
             if ($error == "") {
                 $email = null;
                 $birthDate = null;
@@ -69,6 +69,8 @@ class RegisterController {
             } else {
                 $view->setVar('error', $result);
             }
+        } else {
+            $view->setVar('error', "Manque des valeurs");
         }
         $view->setVar('username', $username);
         $view->setVar('email', $email);

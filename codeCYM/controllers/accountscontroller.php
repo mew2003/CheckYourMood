@@ -154,8 +154,6 @@ class AccountsController {
     public function disconnect($pdo) {
         session_start();
         session_destroy();
-        echo "<input type='hidden' name='action' value='index'>";
-        echo "<input type='hidden' name='controller' value='home'";
         $view = new View("CheckYourMood/codeCYM/views/index");
         return $view;
     }
