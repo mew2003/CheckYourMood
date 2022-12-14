@@ -1,22 +1,42 @@
 h1 {
     font-size: 1.75em;
     text-align: center;
+    padding-top: 7%;
 }
 
 body {
     background-image: url("../assets/images/background.png");
     margin: 0 auto;
+    align-items: center;
 }
-
 .texteInscription {
     text-align: center;
     font-size: 1.3em;
 }
 
+.test {
+    background-color: black;
+}
+
 .liensTravaux {
-    color:#95e9d5;
+    color: #1fad8c;
 }
 .show-nav .container-fluid {
     display: none;
     position: absolute;
+}
+
+.container {
+    padding-top: 7%;
+}
+
+.text-block {
+    width: 50%;
+    text-align: center;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    justify-items: center;
+    background-color: rgba(158, 162, 161, 0.653);
+    border-radius: 20px;
 }

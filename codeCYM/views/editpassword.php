@@ -22,9 +22,9 @@
                         if($testOldPasswords == false) {
                             echo '<input class="form-control enRouge" type=password id="oldPassword" name="oldPassword" placeholder="Vous devez mettre votre ancien mot de passe"></input>';
                         } else {
-                            echo '<input class="form-control" type=password id="oldPassword" name="oldPassword" placeholder="Ancien mot de passe"></input>';
+                            echo '<input class="form-control" type=password id="oldPassword" name="oldPassword" placeholder="Ancien mot de passe" value='.$oldPassword.'></input>';
                         }
-                        if($testNewPasswords == false && $testOldPasswordsNotSameAsNew == false) {
+                        if($testNewPasswords == false || $testOldPasswordsNotSameAsNew == false) {
                             echo '<input class="form-control enRouge" type=password id="newPassword" name="newPassword" placeholder="Mettez un nouveau mot de passe"></input>';
                             echo '<input class="form-control enRouge" type=password id="confirmPassword" name="confirmPassword" placeholder="Confirmez votre nouveau mot de passe"></input>';
                         } else {
@@ -36,6 +36,9 @@
                         echo '<input class="form-control" type=password id="newPassword" name="newPassword" placeholder="Nouveau mot de passe"></input>';
                         echo '<input class="form-control" type=password id="confirmPassword" name="confirmPassword" placeholder="Confirmez votre mot de passe"></input>';
                     }
+                    echo '<div class="checkbox">
+                            <input id="check" type="checkbox" name="check"> Afficher les Mots de passe
+                        </div>';
                     echo '<input class="button" name="envoyer" type="submit" value="Confirmer"></input>';
                     echo '<p class="enVert">'.$message.'</p>';
                 ?>

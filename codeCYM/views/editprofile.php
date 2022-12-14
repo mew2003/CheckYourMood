@@ -5,6 +5,7 @@
     <link href="/CheckYourMood/codeCYM/third-party/bootstrap/css/bootstrap.css" rel="stylesheet"/>
     <link href="/CheckYourMood/codeCYM/CSS/editprofile.css" rel="stylesheet"/>
     <script src="/CheckYourMood/codeCYM/JS/header-component.js" defer></script>
+    <script src="/CheckYourMood/codeCYM/JS/accounts.js" defer></script>
     <title>Modification du profil</title>
 </head>
 <body>

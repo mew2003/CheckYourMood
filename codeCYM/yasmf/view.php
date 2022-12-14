@@ -43,4 +43,9 @@ class View
         require_once $_SERVER['DOCUMENT_ROOT'] . "/$this->relativePath.php";
     }
 
+    public function getParams($key) {
+        // get the value of the key 
+        return $this->viewParams[$key];
+    }
+
 }
