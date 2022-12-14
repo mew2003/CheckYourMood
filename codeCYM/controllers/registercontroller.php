@@ -84,13 +84,13 @@ class User {
 
     public function __construct()
     {
-        User::$username = HttpHelper::getParam("username");
-        User::$email = HttpHelper::getParam("email");
-        User::$birthDate = HttpHelper::getParam("birth-date");
-        User::$gender = HttpHelper::getParam("gender");
-        User::$password = HttpHelper::getParam("password");
-        User::$confirmPassword = HttpHelper::getParam("confirm-password");
-        User::$login = HttpHelper::getParam("login"); 
+        User::$username = htmlentities(HttpHelper::getParam("username"), ENT_QUOTES);
+        User::$email = htmlentities(HttpHelper::getParam("email"), ENT_QUOTES);
+        User::$birthDate = htmlentities(HttpHelper::getParam("birth-date"), ENT_QUOTES);
+        User::$gender = htmlentities(HttpHelper::getParam("gender"), ENT_QUOTES);
+        User::$password = htmlentities(HttpHelper::getParam("password"), ENT_QUOTES);
+        User::$confirmPassword = htmlentities(HttpHelper::getParam("confirm-password"), ENT_QUOTES);
+        User::$login = htmlentities(HttpHelper::getParam("login"), ENT_QUOTES); 
     }
 
     public static function sendValues($view) {
