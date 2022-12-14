@@ -7,6 +7,7 @@
         <title>test php et database</title>
         <script src="/CheckYourMood/codeCYM/JS/header-component.js" defer></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="/JS/humeurs.js"></script>
     </head>
     <body>
     <!-- <?php
@@ -32,6 +33,7 @@
 
                     ?>
                 </select>
+                <input class="button" Type="Button" value="Valider">
             </td>
             <td class="top-const-part">
                 <h1>All Time</h1>
@@ -43,10 +45,12 @@
             </td>
             <td class="mid-const-part">
                 <?php
-                    $valueMostUseHumeurLib = $MaxHumeurLib->fetchColumn();
-                    $valueMostUseHumeurCount = $MaxHumeurCount->fetchColumn();
-                    echo $valueMostUseHumeurCount;//FAUX le count return le count de toute les humeurs pas seulement la plus présente
-                    echo $valueMostUseHumeurLib; 
+                $ligne = $MaxHumeur->fetch();
+                $stockerSmiley = $ligne->Humeur_Emoji;
+                $stocker = $ligne->compteur;
+                $stockerLib = $ligne->Humeur_Libelle;
+                echo "<div class='smiley'>$stockerSmiley</div>";
+                echo "<h1> Voici l'humeur prédomiante chez vous \"<span style='color:red'>".strtoupper($stockerLib)."</span>\".<br> Vous l'avez utiliser <span style='color:red'>$stocker</span> fois.</h1>";
                 ?>
             </td>
         </tr>

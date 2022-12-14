@@ -19,14 +19,12 @@ class StatsController {
         if (!isset($_SESSION['UserID'])) {
             $view = new View("CheckYourMood/codeCYM/views/Register");
         } else {
-            $MaxHumLib = $this->statsService->getMaxHumeurLib($pdo);
-            $MaxHumCount = $this->statsService->getMaxHumeurCount($pdo);
+            $MaxHum = $this->statsService->getMaxHumeur($pdo);
             $MaxValHum = $this->statsService->getNumberOfHumForMaxHumeur($pdo);
             $AllHumeur = $this->statsService->getAllHumeur($pdo);
             $AllHumeurTotal = $this->statsService->getNumberOfHumeurInTotal($pdo);
             $AllHumeurData = $this->statsService->getAllHumeurDate($pdo);
-            $view->setVar('MaxHumeurLib', $MaxHumLib);
-            $view->setVar('MaxHumeurCount', $MaxHumCount);
+            $view->setVar('MaxHumeur', $MaxHum);
             $view->setVar('MaxValHum', $MaxValHum);
             $view->setVar('AllHumeur', $AllHumeur);
             $view->setVar('TotalOfHumeur', $AllHumeurTotal);
