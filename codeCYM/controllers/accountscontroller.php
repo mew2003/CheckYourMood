@@ -45,6 +45,7 @@ class AccountsController {
         // Création d'un objet profil contenant tous les paramètres lié au profil de l'utilisateur (mdp, email...)
         new Profile();
         // récupération du profil de l'utilisateur courant
+        // $this->getDefaultProfile($pdo, $view);
         $verif = $this->accountsService->getProfile($pdo);
         while($row = $verif->fetch()) {
             $defaultEmail = $row->User_Email;
@@ -76,9 +77,9 @@ class AccountsController {
             }
         }       
         // si l'email n'est pas vide et qu'il n'existe pas alors on l'email est modifié
-        $this->updateEmail($pdo, $view, Profile::$email, $defaultEmail, $sameEmail);
+        $this->updateEmail($pdo, $view, Profile::$update, Profile::$email, $defaultEmail, $sameEmail);
         // si le pseudo n'est pas vide et qu'il n'existe pas alors le pseudo est changé
-        $this->updateUsername($pdo, $view, Profile::$username, $defaultUsername, $sameUsername);
+        $this->updateUsername($pdo, $view, Profile::$update, Profile::$username, $defaultUsername, $sameUsername);
         // si la date de naissance n'est pas la même que celle stocké dans la base de données pour l'utilisateur courant alors elle est modifiée
         $this->updateBirthDate($pdo, $view, Profile::$birthDate, $defaultBirthDate);
         // si le genre n'est pas le même que celui stocké dans la base de donnée alors il est modifié
@@ -86,13 +87,23 @@ class AccountsController {
         return $view;
     }
 
-    // /**
-    //  * Récupère toutes les informations du profil de l'utilisateur courant
-    //  * @param $pdo \PDO the pdo object
-    //  * @return \PDOStatement the statement referencing the result set
-    //  */
-    // public static function getDefaultProfile($view) {
-
+    /**
+     * Récupère toutes les informations du profil de l'utilisateur courant
+     * @param $pdo \PDO the pdo object
+     * @return \PDOStatement the statement referencing the result set
+     */
+    // public function getDefaultProfile($pdo, $view) {
+    //     $verif = $this->accountsService->getProfile($pdo);
+    //     while($row = $verif->fetch()) {
+    //         $defaultEmail = $row->User_Email;
+    //         $defaultUsername = $row->User_Name;
+    //         $defaultBirthDate = $row->User_BirthDate;
+    //         $defaultGender = $row->User_Gender;
+    //     }
+    //     $view->setVar('defaultEmail', $defaultEmail);
+    //     $view->setVar('defaultUsername', $defaultUsername);
+    //     $view->setVar('defaultBirthDate', $defaultBirthDate);
+    //     $view->setVar('defaultGender', $defaultGender);
     //     return $view;
     // }
 
@@ -101,12 +112,12 @@ class AccountsController {
      * @param $pdo \PDO the pdo object
      * @return \PDOStatement the statement referencing the result set
      */
-    public static function updateEmail($pdo, $view, $email, $defaultEmail, $sameEmail) {
+    public function updateEmail($pdo, $view, $update, $email, $defaultEmail, $sameEmail) {
         if(!empty($update) && !empty($email) && $email != $defaultEmail && $sameEmail == false) {
-            self::$accountsService->editMail($pdo, $email);              
-            $view->setVar('message', "Vos informations ont bien été changées !");
+            $this->accountsService->editMail($pdo, $email);             
+            $view->setVar('message', "Votre email a bien été changé !");
         } else if(!empty($update) && !empty($email) && $email != $defaultEmail && $sameEmail == true) {
-            $view->setVar('message', "Email déjà existante !");
+            $view->setVar('erreur', "Email déjà existant !");
         }
         return $view;
     }
@@ -116,12 +127,12 @@ class AccountsController {
      * @param $pdo \PDO the pdo object
      * @return \PDOStatement the statement referencing the result set
      */
-    public static function updateUsername($pdo, $view, $username, $defaultUsername, $sameUsername) {
+    public function updateUsername($pdo, $view, $update, $username, $defaultUsername, $sameUsername) {
         if(!empty($update) && !empty($username) && $username != $defaultUsername && $sameUsername == false) {
-            self::$accountsService->editUsername($pdo, $username);
-            $view->setVar('message', "Vos informations ont bien été changées !");
+            $this->accountsService->editUsername($pdo, $username);
+            $view->setVar('message', "Votre pseudo a bien été changé !");
         } else if(!empty($update) && !empty($username) && $username != $defaultUsername && $sameUsername == true) {
-            $view->setVar('message', "Pseudonyme déjà existant !");
+            $view->setVar('erreur', "Pseudonyme déjà existant !");
         }
         return $view;
     }
@@ -131,13 +142,12 @@ class AccountsController {
      * @param $pdo \PDO the pdo object
      * @return \PDOStatement the statement referencing the result set
      */
-    public static function updateBirthDate($pdo, $view, $birthDate, $defaultBirthDate) {
+    public function updateBirthDate($pdo, $view, $birthDate, $defaultBirthDate) {
         if(!empty($birthDate) && $birthDate != $defaultBirthDate && $birthDate < date("Y-m-d")) {
-            $defaultBirthDate = self::$accountsService->editBirthDate($pdo, $birthDate);
-            $view->setVar('defaultBirthDate', $defaultBirthDate);
-            $view->setVar('message', "Vos informations ont bien été changées !");
+            $this->accountsService->editBirthDate($pdo, $birthDate);
+            $view->setVar('message', "Votre date de naissance à bien été changée !");
         } else if($birthDate != $defaultBirthDate && $birthDate > date("Y-m-d")) {
-            $view->setVar('message', "Votre date de naissance ne peut pas être supérieur à la date d'aujourd'hui !");
+            $view->setVar('erreur', "Votre date de naissance ne peut pas être supérieur à la date d'aujourd'hui !");
         }
         return $view;
     }
@@ -147,10 +157,11 @@ class AccountsController {
      * @param $pdo \PDO the pdo object
      * @return \PDOStatement the statement referencing the result set
      */
-    public static function updateGender($pdo, $view, $gender, $defaultGender) {
+    public function updateGender($pdo, $view, $gender, $defaultGender) {
         if(!empty($gender) && $gender != $defaultGender) {
-            self::$accountsService->editGender($pdo, $gender);
-            $view->setVar('message', "Vos informations ont bien été changées !");
+            $this->accountsService->editGender($pdo, $gender);
+            $view->setVar('genderChanged', true);
+            $view->setVar('message', "Votre genre a bien été changé !");
         }
         return $view;
     }
@@ -223,6 +234,7 @@ class Profile {
     public static $gender;
     public static $update;
     public static $message;
+    public static $erreur;
 
     public function __construct() {
         // récupération de toutes les données du formulaire
@@ -232,11 +244,13 @@ class Profile {
         Profile::$gender = HttpHelper::getParam("genderList");
         Profile::$update = HttpHelper::getParam("envoyer");
         Profile::$message = null;
+        Profile::$erreur = null;
     }
 
     public static function initialisation($view) {
         // initialisation des variables
-        $view->setVar('message', null);
+        $view->setVar('message', Profile::$message);
+        $view->setVar('erreur', Profile::$erreur);
         $view->setVar('email', Profile::$email);
         $view->setVar('username', Profile::$username);
         $view->setVar('birthDate', Profile::$birthDate);
@@ -245,20 +259,4 @@ class Profile {
         return $view;
     }
 
-}
-
-class DefaultProfile {
-    public static $defaultEmail;
-    public static $defaultUsername;
-    public static $defaultBirthDate;
-    public static $defaultGender;
-
-
-    public function __construct() {
-
-    }
-
-    public function initialisation() {
-        
-    }
 }
