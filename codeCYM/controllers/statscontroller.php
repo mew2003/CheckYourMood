@@ -23,17 +23,9 @@ class StatsController {
             $view = new View("CheckYourMood/codeCYM/views/Register");
         } else {
             $MaxHum = $this->statsService->getMaxHumeur($pdo);
-            $MaxValHum = $this->statsService->getNumberOfHumForMaxHumeur($pdo);
-            $AllHumeur = $this->statsService->getAllHumeur($pdo);
-            $AllHumeurTotal = $this->statsService->getNumberOfHumeurInTotal($pdo);
-            $AllHumeurData = $this->statsService->getAllHumeurDate($pdo);
             $listeHumeurs = $this->humeursService->getListeHumeurs();
             $view->setVar('listeHumeurs',$listeHumeurs);
             $view->setVar('MaxHumeur', $MaxHum);
-            $view->setVar('MaxValHum', $MaxValHum);
-            $view->setVar('AllHumeur', $AllHumeur);
-            $view->setVar('TotalOfHumeur', $AllHumeurTotal);
-            $view->setVar('AllHumeurData', $AllHumeurData);
         }
         return $view;
     }
@@ -64,9 +56,9 @@ class StatsController {
         if ($emojiUsed == "") {
             $result = "<p>L'humeur n'a jamais été saisie entre le ".$startDate." et le ".$endDate."</p>";
         } else if (count($emojiUsed) == 2) {
-            $result = "<p>".$emojiUsed[0]."</p><p> Vous avez eu l'humeur ".$emojiUsed[1]." fois entre le ".$startDate." et le ".$endDate."</p>";
+            $result = "<p class='smiley'>".$emojiUsed[0]."</p><p> Vous avez eu l'humeur ".$emojiUsed[1]." fois entre le ".$startDate." et le ".$endDate."</p>";
         } else {
-            $result = "<p>♾️</p><p>Vous avez utilisé un total de ".$emojiUsed[0]." humeurs entre le ".$startDate." et le ".$endDate."</p>";
+            $result = "<p class='smiley'>♾️</p><p>Vous avez utilisé un total de ".$emojiUsed[0]." humeurs entre le ".$startDate." et le ".$endDate."</p>";
         }
         $view->setVar('emojiUsed', $result);
         $view->setVar('listeHumeurs',$listeHumeurs);

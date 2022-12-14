@@ -26,30 +26,6 @@ class StatsService
         return $req;
     }
 
-    public function getNumberOfHumForMaxHumeur($pdo) {
-        $req =$pdo->prepare ("SELECT COUNT(Humeur_Libelle) FROM humeur join user ON user.User_ID = humeur.CODE_USER WHERE CODE_User = :id GROUP BY Humeur_Libelle LIMIT 4");
-        $req->execute(['id'=>$_SESSION['UserID']]);
-        return $req;
-    }
-
-    public function getAllHumeur($pdo) {
-        $req =$pdo->prepare ("SELECT Humeur_Libelle FROM humeur join user On user.User_ID = humeur.CODE_User WHERE CODE_User = :id GROUP BY Humeur_Libelle");
-        $req->execute(['id'=>$_SESSION['UserID']]);
-        return $req;
-    }
-    
-    public function getAllHumeurDate($pdo) {
-        $req =$pdo->prepare ("SELECT COUNT(Humeur_Libelle) FROM humeur join user On user.User_ID = humeur.CODE_User WHERE CODE_User = :id GROUP BY Humeur_Libelle");
-        $req->execute(['id'=>$_SESSION['UserID']]);
-        return $req;
-    }
-
-    public function getNumberOfHumeurInTotal($pdo) {
-        $req =$pdo->prepare ("SELECT COUNT(DISTINCT Humeur_Libelle) FROM humeur join user on user.User_ID = humeur.CODE_User WHERE CODE_User = :id");
-        $req->execute(['id'=>$_SESSION['UserID']]);
-        return $req;
-    }
-
     public function getAllRow($pdo) {
         $req = $pdo->prepare ("SELECT COUNT(*) AS allRow FROM humeur WHERE CODE_User = :id");
         $req->execute(['id'=>$_SESSION['UserID']]);
