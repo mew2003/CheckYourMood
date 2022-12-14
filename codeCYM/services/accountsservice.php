@@ -94,10 +94,10 @@ class AccountsService
      * @param $pdo \PDO the pdo object
      * @return \PDOStatement the statement referencing the result set
      */
-    public function editDateOfBirth($pdo, $newDateOfBirth) {
+    public function editBirthDate($pdo, $newBirthDate) {
         $id = $_SESSION['UserID'];
-        $stmt = $pdo->prepare("UPDATE user SET User_BirthDate = :dateOfBirth WHERE User_ID = $id");
-        $stmt->bindParam('dateOfBirth', $newDateOfBirth);
+        $stmt = $pdo->prepare("UPDATE user SET User_BirthDate = :birthDate WHERE User_ID = $id");
+        $stmt->bindParam('birthDate', $newBirthDate);
         $stmt->execute();
     }
 

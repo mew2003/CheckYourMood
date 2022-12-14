@@ -30,12 +30,16 @@
     border: 1px solid red;
 }
 
+.enRouge-text {
+    color: red;
+}
+
 .enRouge::placeholder {
     color: red;
 }
 
 .enVert {
-    color: #96E9D5;
+    color: #147760;
 }
 
 .input-text {

@@ -56,7 +56,8 @@
                     }
                     echo "</select>";
                     echo '<input class="button" name="envoyer" type="submit" value="Confirmer"></input>';
-                    echo $message;
+                    echo "<p class='enVert'>$message</p>";
+                    echo "<p class='enRouge-text'>$erreur</p>";
                 ?>
             </form>
         </div>
