@@ -63,7 +63,7 @@
                         <input id="check" type="checkbox" name="check"> Afficher le Mot de passe
                     </div>
                     <input type="text" id="login" name="login" value="1" hidden>
-                    <input type="submit" class="input-button" name="send">
+                    <input type="submit" class="input-button" name="send"  value="Valider">
                 </form>
             </div>
         </div>

@@ -19,7 +19,7 @@ body {
 }
 
 .liensTravaux {
-    color: #1fad8c;
+    color: #008062;
 }
 .show-nav .container-fluid {
     display: none;
@@ -37,6 +37,6 @@ body {
     align-content: center;
     justify-content: center;
     justify-items: center;
-    background-color: rgba(158, 162, 161, 0.653);
+    background-color: #95e9d589;
     border-radius: 20px;
 }
