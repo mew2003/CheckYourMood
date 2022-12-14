@@ -24,6 +24,28 @@ td.mid-const-part, td.top-const-part, td.bot-const-part {
 }
 
 td.mid-float-part, td.top-float-part, td.bot-float-part {
-    border-right: solid 5px;
     border-bottom: solid 1px;
+}
+.top-float-part {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.top-float-part .date-selector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.top-float-part .date-selector input, select {
+    border-radius: 25px;
+    background-color: rgb(165, 164, 164);
+    border: solid 1px;
+    padding: 5px;
+}
+select {
+    margin-top: 24px;
 }
