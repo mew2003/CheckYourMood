@@ -12,9 +12,11 @@ class AccountsService
      * @return \PDOStatement the statement referencing the result set
      */
     public function getProfile($pdo) {
+
         $id = $_SESSION['UserID'];
         $requete = "SELECT * FROM User WHERE User_ID = $id";
         $resultats=$pdo->query($requete);
+
         return $resultats;
     }
 
@@ -24,8 +26,10 @@ class AccountsService
      * @return \PDOStatement the statement referencing the result set
      */
     public function getEmails($pdo) {
+
         $requete = "SELECT User_Email FROM User";
         $resultats=$pdo->query($requete);
+
         return $resultats;
     }
 
@@ -35,8 +39,10 @@ class AccountsService
      * @return \PDOStatement the statement referencing the result set
      */
     public function getUsernames($pdo) {
+
         $requete = "SELECT User_Name FROM User";
         $resultats=$pdo->query($requete);
+
         return $resultats;
     }
 
@@ -46,9 +52,11 @@ class AccountsService
      * @return \PDOStatement the statement referencing the result set
      */
     public function getPasswords($pdo) {
+
         $id = $_SESSION['UserID'];
         $requete = "SELECT User_Password FROM User WHERE User_ID = $id";
         $resultats=$pdo->query($requete);
+
         return $resultats;
     }
 
@@ -58,6 +66,7 @@ class AccountsService
      * @return \PDOStatement the statement referencing the result set
      */
     public function editPassword($pdo, $newPassword) {
+
         $id = $_SESSION['UserID'];
         $stmt = $pdo->prepare("UPDATE user SET User_Password = :lemdp WHERE User_ID = $id");
         $newPassword = md5($newPassword);
@@ -71,6 +80,7 @@ class AccountsService
      * @return \PDOStatement the statement referencing the result set
      */
     public function editMail($pdo, $newEmail) {
+
         $id = $_SESSION['UserID'];
         $stmt = $pdo->prepare("UPDATE user SET User_Email = :email WHERE User_ID = $id");
         $stmt->bindParam('email', $newEmail);
@@ -83,6 +93,7 @@ class AccountsService
      * @return \PDOStatement the statement referencing the result set
      */
     public function editUsername($pdo, $newUsername) {
+
         $id = $_SESSION['UserID'];
         $stmt = $pdo->prepare("UPDATE user SET User_Name = :username WHERE User_ID = $id");
         $stmt->bindParam('username', $newUsername);
@@ -95,6 +106,7 @@ class AccountsService
      * @return \PDOStatement the statement referencing the result set
      */
     public function editBirthDate($pdo, $newBirthDate) {
+
         $id = $_SESSION['UserID'];
         $stmt = $pdo->prepare("UPDATE user SET User_BirthDate = :birthDate WHERE User_ID = $id");
         $stmt->bindParam('birthDate', $newBirthDate);
@@ -107,6 +119,7 @@ class AccountsService
      * @return \PDOStatement the statement referencing the result set
      */
     public function editGender($pdo, $newGender) {
+
         $id = $_SESSION['UserID'];
         $stmt = $pdo->prepare("UPDATE user SET User_Gender = :gender WHERE User_ID = $id");
         $stmt->bindParam('gender', $newGender);
@@ -119,6 +132,7 @@ class AccountsService
      * @return \PDOStatement the statement referencing the result set
      */
     public function deleteProfile($pdo) {
+        
         $id = $_SESSION['UserID'];
         $stmt = $pdo->prepare("DELETE FROM humeur WHERE CODE_USER = $id");
         $stmt->execute();

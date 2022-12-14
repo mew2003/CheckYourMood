@@ -44,12 +44,12 @@ class HumeursService
             $liste = self::getListeHumeurs();
             foreach ((array) $liste as $i) {
                 if (strcasecmp($i, $humeur) == 0) {
-                    $libele = htmlspecialchars($humeur);
+                    $libelle = htmlspecialchars($humeur);
                     $id = $_SESSION['UserID'];
                     $requete = $pdo->prepare("INSERT INTO `humeur`(`CODE_User`, `Humeur_Libelle`, `Humeur_Emoji`, `Humeur_Time`, `Humeur_Description`) 
-                                                VALUES (:id,:libele,:smiley,CURRENT_TIMESTAMP,:description)");
+                                                VALUES (:id,:libelle,:smiley,CURRENT_TIMESTAMP,:description)");
                     $requete->bindParam("id", $id);
-                    $requete->bindParam("libele", $libele);
+                    $requete->bindParam("libelle", $libelle);
                     $requete->bindParam("smiley", $smiley);
                     $requete->bindParam("description", $description);
                     $requete->execute();
