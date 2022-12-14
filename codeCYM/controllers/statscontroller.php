@@ -29,8 +29,6 @@ class StatsController {
             $AllHumeurData = $this->statsService->getAllHumeurDate($pdo);
             $listeHumeurs = $this->humeursService->getListeHumeurs();
             $view->setVar('listeHumeurs',$listeHumeurs);
-            $view->setVar('MaxHumeurLib', $MaxHumLib);
-            $view->setVar('MaxHumeurCount', $MaxHumCount);
             $view->setVar('MaxHumeur', $MaxHum);
             $view->setVar('MaxValHum', $MaxValHum);
             $view->setVar('AllHumeur', $AllHumeur);
@@ -75,6 +73,8 @@ class StatsController {
         $view->setVar('startDate', $startDate);
         $view->setVar('endDate', $endDate);
         $view->setVar('humeurs', $humeurs);
+        $MaxHum = $this->statsService->getMaxHumeur($pdo);
+        $view->setVar('MaxHumeur', $MaxHum);
         return $view;
     }
 
