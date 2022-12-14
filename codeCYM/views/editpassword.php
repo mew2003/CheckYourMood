@@ -19,12 +19,14 @@
             <form class="main" method="post">
                 <?php
                     if($update) {
-                        if($testOldPasswords == false) {
+                        if($testOldPassword == false) {
                             echo '<input class="form-control enRouge" type=password id="oldPassword" name="oldPassword" placeholder="Vous devez mettre votre ancien mot de passe"></input>';
-                        } else {
+                        } else if($resetPwd != 1) {
                             echo '<input class="form-control" type=password id="oldPassword" name="oldPassword" placeholder="Ancien mot de passe" value='.$oldPassword.'></input>';
+                        } else {
+                            echo '<input class="form-control" type=password id="oldPassword" name="oldPassword" placeholder="Ancien mot de passe"></input>';
                         }
-                        if($testNewPasswords == false || $testOldPasswordsNotSameAsNew == false) {
+                        if($testNewPassword == false || $testOldPasswordNotSameAsNew == false) {
                             echo '<input class="form-control enRouge" type=password id="newPassword" name="newPassword" placeholder="Mettez un nouveau mot de passe"></input>';
                             echo '<input class="form-control enRouge" type=password id="confirmPassword" name="confirmPassword" placeholder="Confirmez votre nouveau mot de passe"></input>';
                         } else {
