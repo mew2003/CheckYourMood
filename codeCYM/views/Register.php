@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,7 +10,7 @@
     <script src="/CheckYourMood/codeCYM/JS/burger-menu.js" defer></script>
     <script src="/CheckYourMood/codeCYM/JS/register.js" defer></script>
     <script src="/CheckYourMood/codeCYM/JS/header-component.js" defer></script>
-    <title>Enregistrement</title>
+    <title>Inscription / Connexion</title>
 </head>
 <body>
     <?php
@@ -39,7 +39,7 @@
                     <input hidden id="action" name="action" value="login">
                     <input hidden name="controller" value="register">
                     <input type="text" placeholder="Nom d'utilisateur" class="input-text" name="username" value=<?php if (isset($username)) echo '"'.$username.'"'?>>
-                    <input type="text" placeholder="Email" class="input-text shifter  display-none" name="email" value=<?php if (isset($email)) echo '"'.$email.'"'?>>
+                    <input type="email" placeholder="Email" class="input-text shifter  display-none" name="email" value=<?php if (isset($email)) echo '"'.$email.'"'?>>
                     <input type="date" placeholder="Date de naissance (JJ/MM/AAAA)" class="input-text shifter display-none" name="birth-date" value=<?php if (isset($birthDate)) echo '"'.$birthDate.'"'?>>
                     <select class="select-size input-text shifter display-none" name="gender">
                         <option hidden>Choisissez votre genre</option>

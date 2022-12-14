@@ -244,6 +244,7 @@ class AccountsController {
      * @return \PDOStatement the statement referencing the result set
      */
     public function disconnect($pdo) {
+        $_SESSION['UserID'] = null;
         session_destroy();
         $view = new View("CheckYourMood/codeCYM/views/index");
         return $view;
