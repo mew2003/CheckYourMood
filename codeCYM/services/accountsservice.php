@@ -60,6 +60,7 @@ class AccountsService
     public function editPassword($pdo, $newPassword) {
         $id = $_SESSION['UserID'];
         $stmt = $pdo->prepare("UPDATE user SET User_Password = :lemdp WHERE User_ID = $id");
+        $newPassword = md5($newPassword);
         $stmt->bindParam('lemdp', $newPassword);
         $stmt->execute();
     }
