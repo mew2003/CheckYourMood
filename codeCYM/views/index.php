@@ -15,38 +15,30 @@
         spl_autoload_register();
         ?>
         <header-component></header-component>  
-        <div class="container-fluid">
-            <div class="row">
+        <div class="container d-flex justify-content-center">
+            <div class="row text-block">
                 <div class="col-sm-12">
-                    <br><br><br><br><br>
                     <h1>Check Your Mood</h1>
-                    <br>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4 col-sm-2">
+                <div class="col-sm-12">
+                    <p>
+                        Check Your Mood est une application vous permettant
+                        à tout moment indiquer vos émotions à différents
+                        moments de la journée, consulter ces dernières
+                        pour suivre l’évolution de votre humeur.
+                        Les émotions se basent sur <a class="liensTravaux" href="https://www.pnas.org/doi/10.1073/pnas.1702247114" target="_blank">
+                        l’étude de Alan S. Cowenet Dacher Keltner</a>
+                        , répertoriant un total de 27 émotions.
+                    </p>
                 </div>
-                <div class="col-md-4 col-sm-8">
-                    Check Your Mood est une application vous permettant
-                    à tout moment indiquer vos émotions à différents
-                    moments de la journée, consulter ces dernières
-                    pour suivre l’évolution de votre humeur.
-                    Les émotions se basent sur
-                    <a class="liensTravaux" href="https://www.pnas.org/doi/10.1073/pnas.1702247114" target="_blank">
-                        l’étude de Alan S. Cowenet Dacher Keltner</a>, répertoriant un total de 27 émotions.
-                </div>
-                <div class="col-md-4 col-sm-2">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-1 col-md-3">
-                </div>
-                <div class="col-sm-10 col-md-6 texteInscription">
-                    Pour commencer à enregistrer vos émotions 
-                    <a class="liensTravaux" href="../pages/Register.php">inscrivez-vous</a> ou 
-                    <a class="liensTravaux" href="../pages/Register.php">connectez-vous</a>
-                </div>
-                <div class="col-sm-1 col-md-3">
+                <div class="col-sm-12 texteInscription">
+                    <p>
+                        Pour commencer à enregistrer vos émotions 
+                        <?php 
+                            if(isset($_SESSION['UserID']) && $_SESSION['UserID'] != null) echo "Cliquez ici : <a class='liensTravaux' href='?action=index&controller=humeurs'>Ajouter une humeur</a>";
+                            else echo "<a class='liensTravaux' href='?action=index&controller=register'>inscrivez-vous ou connectez-vous</a>"; 
+                        ?>
+                    </p>
                 </div>
             </div>
         </div>
