@@ -64,6 +64,24 @@ class StatsService
         return $allRow;
     }
 
+    public function getMostUsed($pdo, $startDate, $endDate, $humeurs) {
+        $result = "";
+        if ($humeurs == "TOUS") {
+            $req = $pdo->prepare ("SELECT COUNT(*) AS 'NB_Humeur' FROM `humeur` WHERE `CODE_User` = :id AND `Humeur_Time` <= :endDate AND `Humeur_Time` >= :startDate");
+            $req->execute(['id'=>$_SESSION['UserID'], 'startDate'=>$startDate, 'endDate'=>$endDate]);
+            while ($row = $req->fetch()) {
+                $result = [$row->NB_Humeur];
+            }
+        } else {
+            $req = $pdo->prepare ("SELECT COUNT(`Humeur_Libelle`) AS 'NB_Humeur', `Humeur_Emoji` AS 'Emoji' FROM `humeur` WHERE `CODE_User` = :id AND `Humeur_Libelle` = :libelle AND `Humeur_Time` <= :endDate AND `Humeur_Time` >= :startDate GROUP BY `Humeur_Libelle`");
+            $req->execute(['id'=>$_SESSION['UserID'], 'libelle'=>$humeurs, 'startDate'=>$startDate, 'endDate'=>$endDate]);
+            while ($row = $req->fetch()) {
+                $result = [$row->Emoji, $row->NB_Humeur];
+            }
+        }
+        return $result;
+    }
+
     private static $defaultStatsService ;
     public static function getDefaultStatsService()
     {

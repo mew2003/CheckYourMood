@@ -18,20 +18,46 @@
     <table>
         <tr class="title">
             <td class="top-float-part">
-                <div class="date-selector">
-                    <label>Date début:</label>
-                    <input Type="date">
-                </div>
-                <div class="date-selector">
-                    <label>Date fin:</label>
-                    <input Type="date">
-                </div>
-                <select name="humeur">
-                    <option selected>humeur</option>
-                    <?php
-
-                    ?>
-                </select>
+                <form class="top-float-part" action="#" method="get">
+                    <input hidden id="action" name="action" value="optionSelected">
+                    <input hidden name="controller" value="stats">
+                    <div class="date-selector">
+                        <label>Date début:</label>
+                        <input Type="date" name="startDate" value="<?php 
+                            if (isset($startDate)) {
+                                echo $startDate;
+                            }
+                        ?>">
+                    </div>
+                    <div class="date-selector">
+                        <label>Date fin:</label>
+                        <input Type="date" name="endDate" value="<?php 
+                            if (isset($endDate)) {
+                                echo $endDate;
+                            }
+                        ?>">
+                    </div>
+                    <select name="humeurs">
+                        <label>Humeurs</label>
+                        <option>TOUS</option>
+                        <?php 
+                            foreach ($listeHumeurs as $row) {
+                                if (isset($humeurs)) {  
+                                    if ($humeurs == $row) {
+                                        echo "<option selected>".$row."</option>";
+                                    } else {
+                                        echo "<option>".$row."</option>";
+                                    }
+                                } else { 
+                                    echo "<option>".$row."</option>";
+                                }
+                            }
+                        ?>
+                    </select>
+                    <div class="date-selector">
+                        <input type="submit" class="btn bouton">
+                    </div>
+                </form>
             </td>
             <td class="top-const-part">
                 <h1>All Time</h1>
@@ -39,20 +65,26 @@
         </tr>
         <tr class="second-part">
             <td class="mid-float-part">
-
+                <p>t</p>
             </td>
             <td class="mid-const-part">
                 <?php
-                    $valueMostUseHumeurLib = $MaxHumeurLib->fetchColumn();
-                    $valueMostUseHumeurCount = $MaxHumeurCount->fetchColumn();
-                    echo $valueMostUseHumeurCount;//FAUX le count return le count de toute les humeurs pas seulement la plus présente
-                    echo $valueMostUseHumeurLib; 
+                    // $valueMostUseHumeurLib = $MaxHumeurLib->fetchColumn();
+                    // $valueMostUseHumeurCount = $MaxHumeurCount->fetchColumn();
+                    // echo $valueMostUseHumeurCount;//FAUX le count return le count de toute les humeurs pas seulement la plus présente
+                    // echo $valueMostUseHumeurLib; 
                 ?>
             </td>
         </tr>
         <tr class="third-part">
             <td class="bot-float-part">
-
+                <?php 
+                    if (!isset($emojiUsed)) {
+                        echo "<p>Sélectionner une date début/fin et une humeur</p>";
+                    } else {
+                        echo $emojiUsed;
+                    }
+                ?>
             </td>
             <td class="bot-const-part">
 
