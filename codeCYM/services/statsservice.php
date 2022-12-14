@@ -17,8 +17,17 @@ class StatsService
         return $resultats;
     }
     
-    public function getMaxHumeur($pdo) {
-        $req =$pdo->prepare("SELECT MAX(Humeur_Libelle) FROM humeur join user ON user.User_ID = humeur.CODE_USER WHERE CODE_User = :id GROUP BY Humeur_Libelle LIMIT 4");
+    /**
+     * Récupère l'humeur la plus présente dans la base de donnée
+     */
+    public function getMaxHumeurLib($pdo) {
+        $req =$pdo->prepare("SELECT MAX(Humeur_Libelle) FROM humeur join user ON user.User_ID = humeur.CODE_USER WHERE CODE_User = :id");
+        $req->execute(['id'=>$_SESSION['UserID']]);
+        return $req;
+    }
+
+    public function getMaxHumeurCount($pdo) {
+        $req =$pdo->prepare("SELECT COUNT(*) FROM humeur join user ON user.User_ID = humeur.CODE_USER WHERE CODE_User = :id");
         $req->execute(['id'=>$_SESSION['UserID']]);
         return $req;
     }
