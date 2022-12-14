@@ -5,7 +5,7 @@
         <link href="/CheckYourMood/codeCYM/third-party/bootstrap/css/bootstrap.css" rel="stylesheet"/>
         <link href="/CheckYourMood/codeCYM/CSS/history.css" rel="stylesheet"/>
         <link rel="stylesheet" href="/CheckYourMood/codeCYM/third-party/fontawesome-free-6.2.0-web/css/all.css">
-        <title>test php et database</title>
+        <title>Historique</title>
         <script src="/CheckYourMood/codeCYM/JS/header-component.js" defer></script>
     </head>
     <body>

@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="/CheckYourMood/codeCYM/CSS/menu.css">
         <link rel="stylesheet" href="/CheckYourMood/codeCYM/third-party/bootstrap/css/bootstrap.css">
         <script src="/CheckYourMood/codeCYM/JS/header-component.js" defer></script>
-        <title>Menu</title>
+        <title>Accueil</title>
     </head>
     <body>
         <?php
