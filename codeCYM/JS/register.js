@@ -40,14 +40,23 @@ checkbox.addEventListener('click', function() {
 });
 
 
-
+/**
+ * Permet de changer le mode de connexion à inscription
+ */
 function registerSelected() {
     registerTab.forEach((elementRegister) => {
+        /* Vérifie pour chaque div 'register' (celle pour la version pc, tablettes et celle pour la version téléphone)
+           si la div a la classe 'selection' si c'est le cas ne fait rien */
         if (!(elementRegister.className.match('selection'))) {
+            /* sinon ajoute la classe 'selection' à la div et la retire à la div 'connection' */
             $(".left").addClass('selection');
             $(".right").removeClass('selection');
+            /* change la valeur de 'action' pour que le bouton valider du formulaire appel la bonne fonction du controller */
             action.value = "register";
+            /* change la valeur de 'login' pour que l'utilisateur ne puisse pas se connecter depuis l'inscription */
             login.value = 0;
+            /* remet toutes les valeurs déjà saisie dans les champs et réaffiche les champs qui n'étaient pas affiché 
+               en leur enlevant la classe 'display-none' */
             console.log(registerTab[0].className.match('selection'));
             shifterElements.forEach((element) => {
                 if (valuesSE[0] != null) {
@@ -60,9 +69,13 @@ function registerSelected() {
     });
 }
 
-
+/**
+ * Permet de changer le mode de inscription à connexion
+ */
 function loginSelected() {
     connectionTab.forEach((elementConnection) => {
+        /* Vérifie pour chaque div 'register' (celle pour la version pc, tablettes et celle pour la version téléphone)
+           si la div a la classe 'selection' si c'est le cas ne fait rien */
         if (!(elementConnection.className.match('selection'))) {
             $(".left").removeClass('selection');
             $(".right").addClass('selection');

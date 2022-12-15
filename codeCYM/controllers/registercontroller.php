@@ -38,6 +38,7 @@ class RegisterController {
     public function register($pdo) {
         new User();
         $view = new View("CheckYourMood/codeCYM/views/Register");
+
         if (User::$username != null && User::$email != null && User::$birthDate != null && User::$gender != "Choisissez votre genre" && User::$password != null && User::$confirmPassword != null) {
             $error = $this->registerService->insertUserValues($pdo, User::$username, User::$email, User::$birthDate, User::$gender, User::$password, User::$confirmPassword);
             if ($error == "") {
@@ -50,6 +51,7 @@ class RegisterController {
         } else {
             $view->setVar('registerError', "Au moins un des champs n'est pas rempli");
         }
+
         return User::sendValues($view);
     }
 
@@ -84,6 +86,7 @@ class User {
 
     public function __construct()
     {
+        
         User::$username = htmlentities(HttpHelper::getParam("username"), ENT_QUOTES);
         User::$email = htmlentities(HttpHelper::getParam("email"), ENT_QUOTES);
         User::$birthDate = htmlentities(HttpHelper::getParam("birth-date"), ENT_QUOTES);
