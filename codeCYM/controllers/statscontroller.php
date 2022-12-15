@@ -39,7 +39,12 @@ class StatsController {
         if (!isset($_SESSION['UserID'])) {
             $view = new View("CheckYourMood/codeCYM/views/Register");
         } else {
-            $resultats = $this->statsService->getHistorique($pdo);
+            $sort = "";
+            if (!empty(HttpHelper::getParam("sortHumeur"))) $sort = HttpHelper::getParam("sortHumeur");
+            else if (!empty(HttpHelper::getParam("sortHumeurDesc"))) $sort = HttpHelper::getParam("sortHumeurDesc");
+            else if (!empty(HttpHelper::getParam("sortDate"))) $sort = HttpHelper::getParam("sortDate");
+            else if (!empty(HttpHelper::getParam("sortDateDesc"))) $sort = HttpHelper::getParam("sortDateDesc");
+            $resultats = $this->statsService->getHistorique($pdo, $sort);
             $allRow = $this->statsService->getAllRow($pdo);
             $view->setVar('resultats',$resultats);
             $view->setVar('allRow',$allRow);
