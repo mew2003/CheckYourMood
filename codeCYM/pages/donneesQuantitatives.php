@@ -1,7 +1,7 @@
 <?php
 	// Démarrage de la session
 	session_start() ;
-    $_SESSION['UserID'] = 5;
+    $_SESSION['UserID'] = 4;
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -17,7 +17,7 @@
     <header-component></header-component>
 
     <?php
-        var_dump($_POST);
+    $nombreHumeurs = 0;
         $host='localhost';	// Serveur de BD
         $db='cym';	// Nom de la BD
         $user='root';		// User 
@@ -55,15 +55,25 @@
         /**
          * la liste des humeurs
          */
-        $humeurs = $pdo->query("SELECT DISTINCT humeur_libelle FROM humeur");
+        $requete = "SELECT DISTINCT humeur_libelle FROM humeur WHERE code_user = :code_user";
+        $humeurs = $pdo->prepare($requete);
+        $humeurs -> bindParam("code_user", $_SESSION['UserID']);
+        $humeurs->execute();
+        $i = 0;
+        $tabHumeurs = "";
         while ($ligne = $humeurs->fetch()) {
+            $tabHumeurs[$i] = $ligne['humeur_libelle'];
+            $i++;
+        }
 
-            $humeur = str_replace(' ', '_', $ligne['humeur_libelle']);
+        foreach($tabHumeurs as $humeur) {
+
+            $humeur = str_replace(' ', '_', $humeur);
 
             /**
              * affichage sous forme d'un formulaire avec des cases à cocher
              */
-            echo '<input type = "checkbox" name = "' . $humeur . '" ';
+            echo '<input type = "checkbox" name = "' . $humeur . '" value = "' . $humeur . '"';
             if (isset($_POST["$humeur"])) {
                 echo 'checked' . '>';
             }
@@ -82,23 +92,57 @@
          * en fonction du nombre de saisie de toutes les humeurs
          * pour chaque humeur sélectionnée plus haut
          */
-        $humeurs = $pdo->query("SELECT DISTINCT humeur_libelle FROM humeur");
-        while ($ligne = $humeurs->fetch()) {
-            $humeur = str_replace(' ', '_', $ligne['humeur_libelle']);
-            if (isset($_POST["$humeur"])) { 
+
+        for ($i = 0 ; $i < count($_POST) ; $i++) {
+            $nombreHumeurs++;
+            if ($nombreHumeurs == 1) {
+                $requete .= " AND humeur_libelle = :humeur_libelle" . $i;
+            }
+            if ($nombreHumeurs > 1) {
+                $requete .= " OR humeur_libelle = :humeur_libelle" . $i;
+            }
+
+        }
+
+        /**
+         * préparation de la requête constituée de toutes les humeurs
+         */
+        $humeurs = $pdo->prepare($requete);
+
+        $i = 0;
+        foreach ($tabHumeurs as $humeur) {
+            $humeur = str_replace(' ', '_', $humeur);
+            if (isset($_POST["$humeur"])) {
+                $humeur = str_replace('_', ' ', $humeur);
+                $humeurs->bindParam("humeur_libelle" . $i, $humeur);
+                $i++;
+            }
+        }
+
+        foreach ($tabHumeurs as $humeur) {
+
+            $humeur = str_replace(' ', '_', $humeur);
+            if (isset($_POST["$humeur"])) {
+                $humeur = str_replace('_', ' ', $humeur);
                 /**
                  * le nombre de saisie d'humeur sélectionnée par l'utilisateur
                  * depuis la création de son compte
                  */
                 $nombreHumeurSaisie = $pdo->prepare("SELECT COUNT(*) AS nombreSaisie FROM humeur WHERE code_user = :code_user AND humeur_libelle = :humeur_libelle GROUP BY humeur_libelle");
                 $nombreHumeurSaisie->bindParam("code_user", $_SESSION['UserID']);
-                $humeur = str_replace('_', ' ', $humeur);
                 $nombreHumeurSaisie->bindParam("humeur_libelle", $humeur);
                 $nombreHumeurSaisie->execute();
                 while ($ligne = $nombreHumeurSaisie->fetch()) {
                     echo 'Votre humeur ' . $humeur . ' a été saisie ' . $ligne['nombreSaisie'];
-                    echo ' fois sur un nombre total de ' . $nbreTotHum . ' fois <br>';
-                }
+                    echo ' fois pour ' . $nbreTotHum;
+                    if ($nbreTotHum < 2) {
+                        echo ' saisie ';
+                    }  else {
+                        echo ' saisies ';
+                    }
+                    echo ' d\'humeur au total <br>';
+                    echo 'Son taux de saisie est de ' . round($ligne['nombreSaisie'] * 100 / $nbreTotHum, 2) . '%. <br> <br>';
+            }
             }
         }
 
