@@ -62,6 +62,8 @@ class StatsService
         return $result;
     }
 
+    //SELECT COUNT(`Humeur_Libelle`) AS 'NB_Humeur', `Humeur_Libelle` FROM `humeur` WHERE `CODE_User` = :id AND `Humeur_Libelle` = :libelle AND `Humeur_Time` <= :endDate AND `Humeur_Time` >= :startDate GROUP BY `Humeur_Libelle`
+    // il faut déterminer un écart de temps pour lequel on peut afficher le nombre d'humeur entre endDate et startDate
     private static $defaultStatsService ;
     public static function getDefaultStatsService()
     {

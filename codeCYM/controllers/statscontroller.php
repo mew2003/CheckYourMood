@@ -74,6 +74,13 @@ class StatsController {
         $view->setVar('startDate', $startDate);
         $view->setVar('endDate', $endDate);
         $view->setVar('humeurs', $humeurs);
+        
+        $MaxHum = $this->statsService->getMaxHumeur($pdo);
+        $view->setVar('MaxHumeur', $MaxHum);
+        $AllValue1 = $this->statsService->getAllValue($pdo);
+        $AllValue2 = $this->statsService->getAllValue($pdo);
+        $view->setVar('allValue1', $AllValue1);
+        $view->setVar('allValue2', $AllValue2);
         return $view;
     }
 

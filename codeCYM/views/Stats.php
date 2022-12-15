@@ -66,7 +66,59 @@
         </tr>
         <tr class="second-part">
             <td class="mid-float-part">
-                <p>t</p>
+                <div class="chart-container" style="position: relative; height:40vh;">
+                    <canvas id="myLineChart"></canvas>
+                </div>
+                <script>
+                    const ctx = document.getElementById('myLineChart');
+
+                    new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: <?php 
+                                        
+                                    ?>,
+                            datasets: [{
+                                data: <?php 
+                                        
+                                        ?>,
+                                borderWidth: 1,
+                                borderColor: 'rgb(0, 0, 0)',
+                                backgroundColor: [
+                                    '#00ff7f',
+                                    '#dc143c',
+                                    '#00bfff',
+                                    '#0000ff',
+                                    '#8b008b',
+                                    '#b03060',
+                                    '#ff0000',
+                                    '#ffd700',
+                                    '#ff00ff',
+                                    '#1e90ff',
+                                    '#eee8aa',
+                                    '#00ffff',
+                                    '#b0e0e6',
+                                    '#ff1493',
+                                    '#ee82ee',
+                                    '#ffb6c1',
+                                    '#00008b',
+                                    '#556b2f',
+                                    '#0000ff',
+                                    '#8b4513',
+                                    '#483d8b',
+                                    '#3cb371',
+                                    '#b8860b',
+                                    '#7fff00',
+                                    '#8a2be2',
+                                    '#ff7f50',
+                                    '#008b8b',
+                                    '#9acd32',
+                                    '#00bfff',
+                            ],
+                            }]
+                        },
+                    });
+                </script>
             </td>
             <td class="mid-const-part">
                 <?php
@@ -105,7 +157,7 @@
                     const ctx = document.getElementById('myChart');
 
                     new Chart(ctx, {
-                        type: 'pie',
+                        type: 'doughnut',
                         data: {
                             labels: <?php 
                                         $i = 0;
@@ -134,12 +186,40 @@
                                                 $i++;
                                             }
                                         ?>,
-                                borderWidth: 1
+                                borderWidth: 0.75,
+                                backgroundColor: [
+                                    '#00ff7f',
+                                    '#dc143c',
+                                    '#00bfff',
+                                    '#0000ff',
+                                    '#8b008b',
+                                    '#b03060',
+                                    '#ff0000',
+                                    '#ffd700',
+                                    '#ff00ff',
+                                    '#1e90ff',
+                                    '#eee8aa',
+                                    '#00ffff',
+                                    '#b0e0e6',
+                                    '#ff1493',
+                                    '#ee82ee',
+                                    '#ffb6c1',
+                                    '#00008b',
+                                    '#556b2f',
+                                    '#0000ff',
+                                    '#8b4513',
+                                    '#483d8b',
+                                    '#3cb371',
+                                    '#b8860b',
+                                    '#7fff00',
+                                    '#8a2be2',
+                                    '#ff7f50',
+                                    '#008b8b',
+                                    '#9acd32',
+                                    '#00bfff',
+                            ],
                             }]
                         },
-                        options: {
-                            
-                        }
                     });
                 </script>
             </td>
