@@ -70,12 +70,17 @@
             </td>
             <td class="mid-const-part">
                 <?php
-                $ligne = $MaxHumeur->fetch();
-                $stockerSmiley = $ligne->Humeur_Emoji;
-                $stocker = $ligne->compteur;
-                $stockerLib = $ligne->Humeur_Libelle;
-                echo "<div class='smiley'>$stockerSmiley</div>";
-                echo "<h1> Voici l'humeur prédomiante chez vous \"<span style='color:red'>".strtoupper($stockerLib)."</span>\".<br> Vous l'avez utiliser <span style='color:red'>$stocker</span> fois.</h1>";
+                    if ($MaxHumeur == "Vous n'avez saisie aucune humeur !!!") {
+                        echo "<h1>🤔</h1>";
+                        echo "<h1>$MaxHumeur</h1>";
+                    } else {
+                        $ligne = $MaxHumeur->fetch();
+                        $stockerSmiley = $ligne->Humeur_Emoji;
+                        $stocker = $ligne->compteur;
+                        $stockerLib = $ligne->Humeur_Libelle;
+                        echo "<div class='smiley'>$stockerSmiley</div>";
+                        echo "<h1> Voici l'humeur prédomiante chez vous \"<span style='color:red'>".strtoupper($stockerLib)."</span>\".<br> Vous l'avez utiliser <span style='color:red'>$stocker</span> fois.</h1>";
+                    }
                 ?>
             </td>
         </tr>
@@ -90,7 +95,53 @@
                 ?>
             </td>
             <td class="bot-const-part">
+                <div class="chart-container" style="position: relative; height:40vh;">
+                    <canvas id="myChart"></canvas>
+                </div>
+                <?php
+                    $countRow = $allValue1->rowCount();
+                ?>
+                <script>
+                    const ctx = document.getElementById('myChart');
 
+                    new Chart(ctx, {
+                        type: 'pie',
+                        data: {
+                            labels: <?php 
+                                        $i = 0;
+                                            while ($row = $allValue1->fetch()) {
+                                                if($i == 0) {
+                                                    echo "[";
+                                                }
+                                                echo "\"$row->Humeur_Libelle\",";
+                                                if ($i == $countRow - 1) {
+                                                    echo "]";
+                                                }
+                                                $i++;
+                                            }
+                                        ?>,
+                            datasets: [{
+                                data: <?php 
+                                        $i = 0;
+                                            while ($row = $allValue2->fetch()) {
+                                                if($i == 0) {
+                                                    echo "[";
+                                                }
+                                                echo "\"$row->compteur\",";
+                                                if ($i == $countRow - 1) {
+                                                    echo "]";
+                                                }
+                                                $i++;
+                                            }
+                                        ?>,
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            
+                        }
+                    });
+                </script>
             </td>
         </tr>
     </table>

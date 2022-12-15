@@ -30,7 +30,7 @@
                     $i = 1;                
                     while( $ligne = $resultats->fetch() ) { 
                         if($i <= $nombreLigneMax && $i > $min) {
-                            echo "<tr>";												
+                            echo "<tr>";
                                 echo "<td>".htmlspecialchars($ligne->Humeur_Libelle)."</td>";
                                 echo "<td>".htmlspecialchars($ligne->Humeur_Emoji)."</td>";
                                 echo "<td>".htmlspecialchars($ligne->Humeur_Time)."</td>";

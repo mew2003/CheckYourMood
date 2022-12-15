@@ -23,6 +23,15 @@ class StatsService
     public function getMaxHumeur($pdo) {
         $req =$pdo->prepare("SELECT Humeur_Libelle, COUNT(Humeur_Libelle) as compteur, Humeur_Emoji from humeur join user ON user.User_ID = humeur.CODE_USER WHERE CODE_User = :id GROUP BY Humeur_Libelle ORDER BY compteur DESC LIMIT 1");
         $req->execute(['id'=>$_SESSION['UserID']]);
+        if($req->rowCount() == 0) {
+            return "Vous n'avez saisie aucune humeur !!!";
+        }
+        return $req;
+    }
+
+    public function getAllValue($pdo) {
+        $req = $pdo->prepare("SELECT Humeur_Libelle, COUNT(Humeur_Libelle) as compteur from humeur join user ON user.User_ID = humeur.CODE_USER WHERE CODE_User = :id GROUP BY Humeur_Libelle");
+        $req->execute(['id'=>$_SESSION['UserID']]);
         return $req;
     }
 
