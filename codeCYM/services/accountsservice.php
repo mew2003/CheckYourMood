@@ -11,7 +11,7 @@ class AccountsService
      * @param $pdo \PDO the pdo object
      * @return \PDOStatement the statement referencing the result set
      */
-    public function getProfile($pdo) {
+    public static function getProfile($pdo) {
 
         $id = $_SESSION['UserID'];
         $requete = "SELECT * FROM User WHERE User_ID = $id";
@@ -25,10 +25,11 @@ class AccountsService
      * @param $pdo \PDO the pdo object
      * @return \PDOStatement the statement referencing the result set
      */
-    public function getEmails($pdo) {
+    public function getEmails($pdo, $aTester) {
 
-        $requete = "SELECT User_Email FROM User";
-        $resultats=$pdo->query($requete);
+        $requete = "SELECT * FROM User WHERE User_Email LIKE '$aTester'";
+        echo var_dump($requete);
+        $resultats= $pdo->query($requete);
 
         return $resultats;
     }
@@ -38,10 +39,10 @@ class AccountsService
      * @param $pdo \PDO the pdo object
      * @return \PDOStatement the statement referencing the result set
      */
-    public function getUsernames($pdo) {
+    public function getUsernames($pdo, $aTester) {
 
-        $requete = "SELECT User_Name FROM User";
-        $resultats=$pdo->query($requete);
+        $requete = "SELECT * FROM User WHERE User_Name LIKE '$aTester'";
+        $resultats= $pdo->query($requete);
 
         return $resultats;
     }

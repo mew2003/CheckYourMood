@@ -58,27 +58,28 @@ class AccountsController {
         $sameEmail = false; 
         $this->getDefaultProfile($pdo, $view); // récupère le profil de l'utilisateur courant dans la base de données
         Profile::initialisation($view); // Envoie les données stockées dans l'objet "Profile" dans la view
+        if(!empty(Profile::$update)) {
+            /* appel des fonctions pour vérifier que l'email et le pseudo n'existe pas déjà dans la base de données */
+            /* true si l'email existe déjà, false sinon */
+            $sameEmail = $this->checkSameEmail($pdo, Profile::$email); 
+            /* true si le pseudo existe déjà, false sinon */
+            $sameUsername = $this->checkSameUsername($pdo, Profile::$username); 
 
-        /* appel des fonctions pour vérifier que l'email et le pseudo n'existe pas déjà dans la base de données */
-        /* true si l'email existe déjà, false sinon */
-        $sameEmail = $this->checkSameEmail($pdo); 
-        /* true si le pseudo existe déjà, false sinon */
-        $sameUsername = $this->checkSameUsername($pdo); 
+            /* si l'email n'est pas vide et qu'il n'existe pas alors l'email est modifié */
+            $this->updateEmail($pdo, $view, Profile::$update, Profile::$email, 
+                            $view->getParams("defaultEmail"), $sameEmail);
 
-        /* si l'email n'est pas vide et qu'il n'existe pas alors l'email est modifié */
-        $this->updateEmail($pdo, $view, Profile::$update, Profile::$email, 
-                           $view->getParams("defaultEmail"), $sameEmail);
+            /* si le pseudo n'est pas vide et qu'il n'existe pas alors le pseudo est changé */
+            $this->updateUsername($pdo, $view, Profile::$update, Profile::$username, 
+                                $view->getParams("defaultUsername"), $sameUsername);
 
-        /* si le pseudo n'est pas vide et qu'il n'existe pas alors le pseudo est changé */
-        $this->updateUsername($pdo, $view, Profile::$update, Profile::$username, 
-                              $view->getParams("defaultUsername"), $sameUsername);
+            /* si la date de naissance n'est pas la même que celle stocké dans la base de données pour l'utilisateur courant */
+            /* alors elle est modifiée */
+            $this->updateBirthDate($pdo, $view, Profile::$birthDate, $view->getParams("defaultBirthDate"));
 
-        /* si la date de naissance n'est pas la même que celle stocké dans la base de données pour l'utilisateur courant */
-        /* alors elle est modifiée */
-        $this->updateBirthDate($pdo, $view, Profile::$birthDate, $view->getParams("defaultBirthDate"));
-
-        /* si le genre n'est pas le même que celui stocké dans la base de donnée alors il est modifié */
-        $this->updateGender($pdo, $view, Profile::$gender, $view->getParams("defaultGender"));
+            /* si le genre n'est pas le même que celui stocké dans la base de donnée alors il est modifié */
+            $this->updateGender($pdo, $view, Profile::$gender, $view->getParams("defaultGender"));
+        }
 
         return $view;
     }
@@ -113,10 +114,12 @@ class AccountsController {
      * @param $pdo \PDO the pdo object
      * @return \PDOStatement the statement referencing the result set
      */
-    public function checkSameEmail($pdo) {
+    public function checkSameEmail($pdo, $aTester) {
+        
+        $sameEmail = false;
 
         /* récupère dans la base données les emails de tous les utilisateurs */
-        $verifSameEmail = $this->accountsService->getEmails($pdo);
+        $verifSameEmail = $this->accountsService->getEmails($pdo, $aTester);
 
         /* Si la requête retourne au moins 1 ligne alors l'email existe déjà */
         if($verifSameEmail->rowCount() != 0) $sameEmail = true;
@@ -129,10 +132,12 @@ class AccountsController {
      * @param $pdo \PDO the pdo object
      * @return \PDOStatement the statement referencing the result set
      */
-    public function checkSameUsername($pdo) {
+    public function checkSameUsername($pdo, $aTester) {
+
+        $sameUsername = false;
 
         /* récupère dans la base données les pseudos de tous les utilisateurs */
-        $verifSameUsername = $this->accountsService->getUsernames($pdo);
+        $verifSameUsername = $this->accountsService->getUsernames($pdo, $aTester);
 
         /* Si la requête retourne au moins 1 ligne alors le pseudo existe déjà */
         if($verifSameUsername->rowCount() != 0) $sameUsername = true;
@@ -205,7 +210,8 @@ class AccountsController {
 
         /* Si les données du formulaire sont envoyée et que le genre sélectionné */
         /* n'est pas le même que celui sélectionné avant alors il change */
-        if($gender != $defaultGender) {
+        $view->setVar('genderChanged', false);
+        if(!empty($gender) && $gender != $defaultGender) {
             $this->accountsService->editGender($pdo, $gender);
             $view->setVar('genderChanged', true);
             $view->setVar('message', "Votre genre a bien été changé !");
