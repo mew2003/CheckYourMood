@@ -28,7 +28,6 @@ class AccountsService
     public function getEmails($pdo, $aTester) {
 
         $requete = "SELECT * FROM User WHERE User_Email LIKE '$aTester'";
-        echo var_dump($requete);
         $resultats= $pdo->query($requete);
 
         return $resultats;
@@ -120,11 +119,11 @@ class AccountsService
      * @return \PDOStatement the statement referencing the result set
      */
     public function editGender($pdo, $newGender) {
-
         $id = $_SESSION['UserID'];
         $stmt = $pdo->prepare("UPDATE user SET User_Gender = :gender WHERE User_ID = $id");
         $stmt->bindParam('gender', $newGender);
         $stmt->execute();
+    
     }
 
     /**

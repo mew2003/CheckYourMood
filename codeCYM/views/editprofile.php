@@ -39,7 +39,7 @@
                         echo '<input class="form-control input-text" type="text" name="username" placeholder="Pseudo" value='.$defaultUsername.'></input>';
                         echo '<input class="form-control input-text" type="date" name="birthDate" placeholder="Pseudo" value='.$defaultBirthDate.'></input>';
                     }
-                    echo "<select class='input-text' name='genderList'>";
+                    echo "<select class='input-text' name='genderSelect'>";
                     foreach($genderList as $i) {
                         if($genderChanged) {
                             if ($gender == $i) {

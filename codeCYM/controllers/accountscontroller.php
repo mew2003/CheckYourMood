@@ -312,7 +312,7 @@ class Profile {
         Profile::$email = HttpHelper::getParam("email");
         Profile::$username = HttpHelper::getParam("username");
         Profile::$birthDate = HttpHelper::getParam("birthDate");
-        Profile::$gender = HttpHelper::getParam("genderList");
+        Profile::$gender = HttpHelper::getParam("genderSelect");
         Profile::$update = HttpHelper::getParam("envoyer");
         Profile::$message = null;
         Profile::$erreur = null;
