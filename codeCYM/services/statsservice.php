@@ -62,8 +62,12 @@ class StatsService
         return $result;
     }
 
-    //SELECT COUNT(`Humeur_Libelle`) AS 'NB_Humeur', `Humeur_Libelle` FROM `humeur` WHERE `CODE_User` = :id AND `Humeur_Libelle` = :libelle AND `Humeur_Time` <= :endDate AND `Humeur_Time` >= :startDate GROUP BY `Humeur_Libelle`
-    // il faut déterminer un écart de temps pour lequel on peut afficher le nombre d'humeur entre endDate et startDate
+    public function getHumeurByTime($pdo, $startDate, $endDate, $humeurs) {
+        $req = $pdo->prepare("SELECT count(*) as nombreHumeur, DATE_FORMAT(Humeur_Time, '%d/%m/%y') as Date from humeur where code_User=:id AND humeur_libelle = :libelle and Humeur_Time BETWEEN :startDate AND :endDate and Humeur_time GROUP BY (SELECT DATE_FORMAT(Humeur_Time, '%d/%m/%y'))");
+        $req->execute(['id'=>$_SESSION['UserID'], 'libelle'=>$humeurs, 'startDate'=>$startDate, 'endDate'=>$endDate]);
+        return $req;
+    }
+    
     private static $defaultStatsService ;
     public static function getDefaultStatsService()
     {
