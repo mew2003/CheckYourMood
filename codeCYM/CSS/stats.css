@@ -48,9 +48,14 @@ select, .button {
 .smiley {
     width: 100%;
     height: 30vh;
-    font-size: 200px;
+    font-size: 20vh;
 }
 .mid-const-part {
     width: 50%;
     height: 25vh;
+}
+.chart-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

@@ -54,3 +54,26 @@ td {
 .show-nav .container{
     display: none;
 }
+
+.sort-button {
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+    border: black solid 1px;
+    border-radius: 10px;
+}
+
+.sort-button:hover {
+    background-color: #95e9d5;
+}
+
+.sort-button:active {
+    background-color: #67a093;
+}
+
+.center-emoji {
+    padding-top: 5%;
+}
+
+.center-description {
+    padding-top: 2%;
+}

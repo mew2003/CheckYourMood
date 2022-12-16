@@ -11,8 +11,9 @@ class StatsService
      * @param $pdo \PDO the pdo object
      * @return \PDOStatement the statement referencing the result set
      */
-    public function getHistorique($pdo) {
-        $resultats = $pdo->prepare('SELECT CODE_User, Humeur_Libelle, Humeur_Emoji, Humeur_Time, Humeur_Description FROM Humeur WHERE CODE_User = :id');
+    public function getHistorique($pdo, $sort) {
+        $requete = 'SELECT CODE_User, Humeur_Libelle, Humeur_Emoji, Humeur_Time, Humeur_Description FROM Humeur WHERE CODE_User = :id'.$sort;
+        $resultats = $pdo->prepare($requete);
         $resultats->execute(['id'=>$_SESSION['UserID']]);
         return $resultats;
     }
@@ -22,6 +23,15 @@ class StatsService
      */
     public function getMaxHumeur($pdo) {
         $req =$pdo->prepare("SELECT Humeur_Libelle, COUNT(Humeur_Libelle) as compteur, Humeur_Emoji from humeur join user ON user.User_ID = humeur.CODE_USER WHERE CODE_User = :id GROUP BY Humeur_Libelle ORDER BY compteur DESC LIMIT 1");
+        $req->execute(['id'=>$_SESSION['UserID']]);
+        if($req->rowCount() == 0) {
+            return "Vous n'avez saisie aucune humeur !!!";
+        }
+        return $req;
+    }
+
+    public function getAllValue($pdo) {
+        $req = $pdo->prepare("SELECT Humeur_Libelle, COUNT(Humeur_Libelle) as compteur from humeur join user ON user.User_ID = humeur.CODE_USER WHERE CODE_User = :id GROUP BY Humeur_Libelle");
         $req->execute(['id'=>$_SESSION['UserID']]);
         return $req;
     }
@@ -52,6 +62,8 @@ class StatsService
         return $result;
     }
 
+    //SELECT COUNT(`Humeur_Libelle`) AS 'NB_Humeur', `Humeur_Libelle` FROM `humeur` WHERE `CODE_User` = :id AND `Humeur_Libelle` = :libelle AND `Humeur_Time` <= :endDate AND `Humeur_Time` >= :startDate GROUP BY `Humeur_Libelle`
+    // il faut déterminer un écart de temps pour lequel on peut afficher le nombre d'humeur entre endDate et startDate
     private static $defaultStatsService ;
     public static function getDefaultStatsService()
     {

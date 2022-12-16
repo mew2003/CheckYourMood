@@ -26,6 +26,10 @@ class StatsController {
             $listeHumeurs = $this->humeursService->getListeHumeurs();
             $view->setVar('listeHumeurs',$listeHumeurs);
             $view->setVar('MaxHumeur', $MaxHum);
+            $AllValue1 = $this->statsService->getAllValue($pdo);
+            $AllValue2 = $this->statsService->getAllValue($pdo);
+            $view->setVar('allValue1', $AllValue1);
+            $view->setVar('allValue2', $AllValue2);
         }
         return $view;
     }
@@ -35,7 +39,12 @@ class StatsController {
         if (!isset($_SESSION['UserID'])) {
             $view = new View("CheckYourMood/codeCYM/views/Register");
         } else {
-            $resultats = $this->statsService->getHistorique($pdo);
+            $sort = "";
+            if (!empty(HttpHelper::getParam("sortHumeur"))) $sort = HttpHelper::getParam("sortHumeur");
+            else if (!empty(HttpHelper::getParam("sortHumeurDesc"))) $sort = HttpHelper::getParam("sortHumeurDesc");
+            else if (!empty(HttpHelper::getParam("sortDate"))) $sort = HttpHelper::getParam("sortDate");
+            else if (!empty(HttpHelper::getParam("sortDateDesc"))) $sort = HttpHelper::getParam("sortDateDesc");
+            $resultats = $this->statsService->getHistorique($pdo, $sort);
             $allRow = $this->statsService->getAllRow($pdo);
             $view->setVar('resultats',$resultats);
             $view->setVar('allRow',$allRow);
@@ -65,8 +74,13 @@ class StatsController {
         $view->setVar('startDate', $startDate);
         $view->setVar('endDate', $endDate);
         $view->setVar('humeurs', $humeurs);
+        
         $MaxHum = $this->statsService->getMaxHumeur($pdo);
         $view->setVar('MaxHumeur', $MaxHum);
+        $AllValue1 = $this->statsService->getAllValue($pdo);
+        $AllValue2 = $this->statsService->getAllValue($pdo);
+        $view->setVar('allValue1', $AllValue1);
+        $view->setVar('allValue2', $AllValue2);
         return $view;
     }
 
