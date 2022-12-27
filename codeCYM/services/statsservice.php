@@ -63,7 +63,7 @@ class StatsService
     }
 
     public function getHumeurByTime($pdo, $startDate, $endDate, $humeurs) {
-        $req = $pdo->prepare("SELECT count(*) as nombreHumeur, DATE_FORMAT(Humeur_Time, '%d/%m/%y') as Date from humeur where code_User=:id AND humeur_libelle = :libelle and Humeur_Time BETWEEN :startDate AND :endDate and Humeur_time GROUP BY (SELECT DATE_FORMAT(Humeur_Time, '%d/%m/%y'))");
+        $req = $pdo->prepare("SELECT count(*) as nombreHumeur, Humeur_Libelle, DATE_FORMAT(Humeur_Time, '%d/%m/%y') as Date from humeur where code_User=:id AND Humeur_Libelle = :libelle and Humeur_Time BETWEEN :startDate AND :endDate and Humeur_time GROUP BY (SELECT DATE_FORMAT(Humeur_Time, '%d/%m/%y'))");
         $req->execute(['id'=>$_SESSION['UserID'], 'libelle'=>$humeurs, 'startDate'=>$startDate, 'endDate'=>$endDate]);
         return $req;
     }

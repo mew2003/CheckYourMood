@@ -10,10 +10,10 @@
         <script src="/JS/humeurs.js"></script>
     </head>
     <body>
-    <!-- <?php
+    <?php
         spl_autoload_extensions(".php");
         spl_autoload_register();
-    ?> -->
+    ?>
     <header-component></header-component>
    
     <table>
@@ -69,18 +69,41 @@
                 <div class="chart-container" style="position: relative; height:40vh;">
                     <canvas id="myLineChart"></canvas>
                 </div>
+                <?php
+                    $countRow = $valueByDate1->rowCount();
+                ?>
                 <script>
-                    const ctx = document.getElementById('myLineChart');
-
-                    new Chart(ctx, {
+                    const ctx1 = document.getElementById('myLineChart');
+                    new Chart(ctx1, {
                         type: 'line',
                         data: {
                             labels: <?php 
-                                        
+                                        $i = 0;
+                                        while ($row = $valueByDate1->fetch()) {
+                                            if($i == 0) {
+                                                echo "[";
+                                            }
+                                            echo "\"$row->Date\",";
+                                            if ($i == $countRow - 1) {
+                                                echo "]";
+                                            }
+                                            $i++;
+                                        }
                                     ?>,
                             datasets: [{
+                                label: <?php echo "'$humeurSelected'" ?>,
                                 data: <?php 
-                                        
+                                            $i = 0;
+                                            while ($row2 = $valueByDate2->fetch()) {
+                                                if($i == 0) {
+                                                    echo "[";
+                                                }
+                                                echo "\"$row2->nombreHumeur\",";
+                                                if ($i == $countRow - 1) {
+                                                    echo "]";
+                                                }
+                                                $i++;
+                                            }
                                         ?>,
                                 borderWidth: 1,
                                 borderColor: 'rgb(0, 0, 0)',
@@ -115,7 +138,19 @@
                                     '#9acd32',
                                     '#00bfff',
                             ],
+                            tension: 0.1
                             }]
+                        },
+                        options: {
+                            indexAxis: 'x',
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    ticks: {
+                                        precision: 0
+                                    }
+                                }
+                            }
                         },
                     });
                 </script>
@@ -154,27 +189,27 @@
                     $countRow = $allValue1->rowCount();
                 ?>
                 <script>
-                    const ctx = document.getElementById('myChart');
+                    const ctx2 = document.getElementById('myChart');
 
-                    new Chart(ctx, {
+                    new Chart(ctx2, {
                         type: 'doughnut',
                         data: {
                             labels: <?php 
                                         $i = 0;
-                                            while ($row = $allValue1->fetch()) {
-                                                if($i == 0) {
-                                                    echo "[";
-                                                }
-                                                echo "\"$row->Humeur_Libelle\",";
-                                                if ($i == $countRow - 1) {
-                                                    echo "]";
-                                                }
-                                                $i++;
+                                        while ($row = $allValue1->fetch()) {
+                                            if($i == 0) {
+                                                echo "[";
                                             }
-                                        ?>,
+                                            echo "\"$row->Humeur_Libelle\",";
+                                            if ($i == $countRow - 1) {
+                                                echo "]";
+                                            }
+                                            $i++;
+                                        }
+                                    ?>,
                             datasets: [{
                                 data: <?php 
-                                        $i = 0;
+                                            $i = 0;
                                             while ($row = $allValue2->fetch()) {
                                                 if($i == 0) {
                                                     echo "[";
@@ -217,7 +252,7 @@
                                     '#008b8b',
                                     '#9acd32',
                                     '#00bfff',
-                            ],
+                                ],
                             }]
                         },
                     });

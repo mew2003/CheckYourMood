@@ -19,6 +19,9 @@ class StatsController {
 
     public function index($pdo) {
         $view = new View("CheckYourMood/codeCYM/views/Stats");
+        $startDate = HttpHelper::getParam("startDate");
+        $endDate = HttpHelper::getParam("endDate");
+        $humeurs = HttpHelper::getParam("humeurs");
         if (!isset($_SESSION['UserID'])) {
             $view = new View("CheckYourMood/codeCYM/views/Register");
         } else {
@@ -30,6 +33,11 @@ class StatsController {
             $AllValue2 = $this->statsService->getAllValue($pdo);
             $view->setVar('allValue1', $AllValue1);
             $view->setVar('allValue2', $AllValue2);
+            $valueByDate1 = $this->statsService->getHumeurByTime($pdo, $startDate, $endDate, $humeurs);
+            $valueByDate2 = $this->statsService->getHumeurByTime($pdo, $startDate, $endDate, $humeurs);
+            $view->setVar('valueByDate1', $valueByDate1);
+            $view->setVar('valueByDate2', $valueByDate2);
+            $view->setVar('humeurSelected', $humeurs);
         }
         return $view;
     }
@@ -81,6 +89,11 @@ class StatsController {
         $AllValue2 = $this->statsService->getAllValue($pdo);
         $view->setVar('allValue1', $AllValue1);
         $view->setVar('allValue2', $AllValue2);
+        $valueByDate1 = $this->statsService->getHumeurByTime($pdo, $startDate, $endDate, $humeurs);
+        $valueByDate2 = $this->statsService->getHumeurByTime($pdo, $startDate, $endDate, $humeurs);
+        $view->setVar('valueByDate1', $valueByDate1);
+        $view->setVar('valueByDate2', $valueByDate2);
+        $view->setVar('humeurSelected', $humeurs);
         return $view;
     }
 
