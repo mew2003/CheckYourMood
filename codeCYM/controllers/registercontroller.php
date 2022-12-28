@@ -89,10 +89,10 @@ class User {
         
         User::$username = htmlentities(HttpHelper::getParam("username"), ENT_QUOTES);
         User::$email = htmlentities(HttpHelper::getParam("email"), ENT_QUOTES);
-        User::$birthDate = htmlentities(HttpHelper::getParam("birth-date"), ENT_QUOTES);
+        User::$birthDate = htmlentities(HttpHelper::getParam("birthDate"), ENT_QUOTES);
         User::$gender = htmlentities(HttpHelper::getParam("gender"), ENT_QUOTES);
         User::$password = htmlentities(HttpHelper::getParam("password"), ENT_QUOTES);
-        User::$confirmPassword = htmlentities(HttpHelper::getParam("confirm-password"), ENT_QUOTES);
+        User::$confirmPassword = htmlentities(HttpHelper::getParam("confirmPassword"), ENT_QUOTES);
         User::$login = htmlentities(HttpHelper::getParam("login"), ENT_QUOTES); 
     }
 
