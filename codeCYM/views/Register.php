@@ -38,14 +38,10 @@
                 <form action="#" method="post" class="main-mid" id="form">
                     <input hidden id="action" name="action" value="login">
                     <input hidden name="controller" value="register">
-                    <!-- <label class="input-label">Nom d'utilisateur :</label> -->
                     <input type="text" placeholder="Nom d'utilisateur" class="input-text" name="username" id="username" required value=<?php if (isset($username)) echo '"'.$username.'"'?>>
-                    <!-- <label class="input-label shifterLabel display-none">Adresse mail :</label> -->
                     <input type="email" placeholder="Email" class="input-text shifter display-none" name="email" id="email" value=<?php if (isset($email)) echo '"'.$email.'"'?>>
-                    <!-- <label class="input-label shifterLabel display-none">Date de naissance :</label> -->
                     <input type="date" class="input-text shifter display-none" hidden name="birthDate" id="birthDate" value=<?php if (isset($birthDate)) echo '"'.$birthDate.'"'?>>
                     <input type="text" placeholder="Date de naissance (JJ/MM/AAAA)" class="input-text shifter display-none" name="falseBirthDate" id="falseBirthDate" value=<?php if (isset($birthDate)) echo '"'.$birthDate.'"'?>>
-                    <!-- <label class="input-label shifterLabel display-none">Genre :</label> -->
                     <select class="select-size input-text shifter display-none" name="gender" id="gender">
                         <option hidden>Choisissez votre genre</option>
                         <?php 
@@ -62,9 +58,7 @@
                             }
 					    ?>
                     </select>
-                    <!-- <label class="input-label">Mot de passe :</label> -->
                     <input type="password" placeholder="Mot de passe" class="input-text" name="password" id="password" required value=<?php if (isset($password)) echo '"'.$password.'"'?>>
-                    <!-- <label class="input-label shifterLabel display-none">Confirmez le mot de passe :</label> -->
                     <input type="password" placeholder="Confirmez le mot de passe" class="input-text shifter display-none" name="confirmPassword" id="confirmPassword" value=<?php if (isset($confirmPassword)) echo '"'.$confirmPassword.'"'?>>
                     <div class="checkbox">
                         <input id="check" type="checkbox" name="check"> Afficher le Mot de passe
