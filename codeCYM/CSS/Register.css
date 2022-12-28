@@ -10,7 +10,13 @@ body{
     padding-top: 2%;
 }
 
+.left:hover {
+    cursor: pointer;
+}
 
+.right:hover {
+    cursor: pointer;
+}
 
 .Main {
     width: 100%;

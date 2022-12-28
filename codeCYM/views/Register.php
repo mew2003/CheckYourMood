@@ -40,8 +40,7 @@
                     <input hidden name="controller" value="register">
                     <input type="text" placeholder="Nom d'utilisateur" class="input-text" name="username" id="username" required value=<?php if (isset($username)) echo '"'.$username.'"'?>>
                     <input type="email" placeholder="Email" class="input-text shifter display-none" name="email" id="email" value=<?php if (isset($email)) echo '"'.$email.'"'?>>
-                    <input type="date" class="input-text shifter display-none" hidden name="birthDate" id="birthDate" value=<?php if (isset($birthDate)) echo '"'.$birthDate.'"'?>>
-                    <input type="text" placeholder="Date de naissance (JJ/MM/AAAA)" class="input-text shifter display-none" name="falseBirthDate" id="falseBirthDate" value=<?php if (isset($birthDate)) echo '"'.$birthDate.'"'?>>
+                    <input type="text" placeholder="Date de naissance (JJ/MM/AAAA)" class="input-text shifter display-none" name="birthDate" id="birthDate" value=<?php if (isset($birthDate)) echo '"'.$birthDate.'"'?>>
                     <select class="select-size input-text shifter display-none" name="gender" id="gender">
                         <option hidden>Choisissez votre genre</option>
                         <?php 
