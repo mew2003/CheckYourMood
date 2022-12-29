@@ -5,9 +5,11 @@
         <link href="/CheckYourMood/codeCYM/third-party/bootstrap/css/bootstrap.css" rel="stylesheet"/>
         <link href="/CheckYourMood/codeCYM/CSS/stats.css" rel="stylesheet"/>
         <title>test php et database</title>
+        <script src="/CheckYourMood/codeCYM/third-party/JQuery/jquery-3.6.1.js"></script>
         <script src="/CheckYourMood/codeCYM/JS/header-component.js" defer></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="/JS/humeurs.js"></script>
+        <script src="/CheckYourMood/codeCYM/JS/stats.js" defer></script>
     </head>
     <body>
     <?php
@@ -23,14 +25,14 @@
                     <input hidden id="action" name="action" value="optionSelected">
                     <input hidden name="controller" value="stats">
                     <div class="date-selector">
-                        <input Type="date" name="startDate" value="<?php 
+                        <input Type="text" placeholder="Date de début" name="startDate" id="startDate" value="<?php 
                             if (isset($startDate)) {
                                 echo $startDate;
                             }
                         ?>">
                     </div>
                     <div class="date-selector">
-                        <input Type="date" name="endDate" value="<?php 
+                        <input Type="text" placeholder="Date de fin" name="endDate" id="endDate" value="<?php 
                             if (isset($endDate)) {
                                 echo $endDate;
                             }
