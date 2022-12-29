@@ -70,7 +70,9 @@ class StatsController {
         $humeurs = HttpHelper::getParam("humeurs");
         $listeHumeurs = $this->humeursService->getListeHumeurs();
         $emojiUsed = $this->statsService->getMostUsed($pdo, $startDate, $endDate, $humeurs);
-        if ($emojiUsed == "") {
+        if ($endDate == "" || $startDate == "") {
+            $result = "<p class='smiley'>🚫</p><p>Veuillez selectionner la date de début ainsi que la date de fin.</p>";
+        } else if ($emojiUsed == "") {
             $result = "<p>L'humeur n'a jamais été saisie entre le ".$startDate." et le ".$endDate."</p>";
         } else if (count($emojiUsed) == 2) {
             $result = "<p class='smiley'>".$emojiUsed[0]."</p><p> Vous avez eu l'humeur ".$emojiUsed[1]." fois entre le ".$startDate." et le ".$endDate."</p>";

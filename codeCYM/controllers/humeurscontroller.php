@@ -33,6 +33,8 @@ class HumeursController {
         $smiley = HttpHelper::getParam("smiley");
         $test = $this->humeursService->setHumeur($pdo, $humeur, $smiley, $description);
         $view->setVar('test',$test);
+        header('Location: ?action=index&controller=stats#');
+        header('Location: ?action=index&controller=humeurs#');
         return $view;
     }
 

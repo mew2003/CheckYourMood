@@ -23,7 +23,6 @@
                     <input hidden id="action" name="action" value="optionSelected">
                     <input hidden name="controller" value="stats">
                     <div class="date-selector">
-                        <label>Date début:</label>
                         <input Type="date" name="startDate" value="<?php 
                             if (isset($startDate)) {
                                 echo $startDate;
@@ -31,7 +30,6 @@
                         ?>">
                     </div>
                     <div class="date-selector">
-                        <label>Date fin:</label>
                         <input Type="date" name="endDate" value="<?php 
                             if (isset($endDate)) {
                                 echo $endDate;
@@ -166,7 +164,7 @@
                         $stocker = $ligne->compteur;
                         $stockerLib = $ligne->Humeur_Libelle;
                         echo "<div class='smiley'>$stockerSmiley</div>";
-                        echo "<h1> Voici l'humeur prédomiante chez vous \"<span style='color:red'>".strtoupper($stockerLib)."</span>\".<br> Vous l'avez utiliser <span style='color:red'>$stocker</span> fois.</h1>";
+                        echo "<h1> Voici l'humeur prédominante chez vous \"<span style='color:red'>".$stockerLib."</span>\".<br> Vous l'avez utiliser <span style='color:red'>$stocker</span> fois.</h1>";
                     }
                 ?>
             </td>

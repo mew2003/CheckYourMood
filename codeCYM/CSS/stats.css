@@ -34,16 +34,20 @@ td.mid-float-part, td.top-float-part, td.bot-float-part {
 }
 
 .top-float-part .date-selector input, select {
-    border-radius: 25px;
-    background-color: rgb(165, 164, 164);
-    border: solid 1px;
+    background-color: #64c0aa;
     padding: 5px;
+    border: none;
+    height: 8vh;
+    width: 9vw;
 }
-select, .button {
-    margin-top: 24px;
+.top-float-part .date-selector input:hover ,select:hover {
+    background-color: #147760;
 }
-.bouton {
-    margin-top: 24px;
+.top-float-part {
+    background-color: #64c0aa;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
 .smiley {
     width: 100%;

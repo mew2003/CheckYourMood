@@ -23,7 +23,7 @@
                 <div class="col-sm-12">
                     <p>
                         Check Your Mood est une application vous permettant
-                        à tout moment indiquer vos émotions à différents
+                        à tout moment d'indiquer vos émotions à différents
                         moments de la journée, consulter ces dernières
                         pour suivre l’évolution de votre humeur.
                         Les émotions se basent sur <a class="liensTravaux" href="https://www.pnas.org/doi/10.1073/pnas.1702247114" target="_blank">
