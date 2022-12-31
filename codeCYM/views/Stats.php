@@ -60,13 +60,13 @@
                     </div>
                 </form>
             </td>
-            <td class="top-const-part">
+            <td class="top-const-part const">
                 <h1>All Time</h1>
             </td>
         </tr>
         <tr class="second-part">
             <td class="mid-float-part">
-                <div class="chart-container" style="position: relative; height:40vh;">
+                <div class="chart-container" style="position: relative;">
                     <canvas id="myLineChart"></canvas>
                 </div>
                 <?php
@@ -155,7 +155,7 @@
                     });
                 </script>
             </td>
-            <td class="mid-const-part">
+            <td class="mid-const-part const">
                 <?php
                     if ($MaxHumeur == "Vous n'avez saisie aucune humeur !!!") {
                         echo "<h1>🤔</h1>";
@@ -181,8 +181,8 @@
                     }
                 ?>
             </td>
-            <td class="bot-const-part">
-                <div class="chart-container" style="position: relative; height:40vh;">
+            <td class="bot-const-part const">
+                <div class="chart-container" style="position: relative;">
                     <canvas id="myChart"></canvas>
                 </div>
                 <?php
@@ -211,6 +211,107 @@
                                 data: <?php 
                                             $i = 0;
                                             while ($row = $allValue2->fetch()) {
+                                                if($i == 0) {
+                                                    echo "[";
+                                                }
+                                                echo "\"$row->compteur\",";
+                                                if ($i == $countRow - 1) {
+                                                    echo "]";
+                                                }
+                                                $i++;
+                                            }
+                                        ?>,
+                                borderWidth: 0.75,
+                                backgroundColor: [
+                                    '#00ff7f',
+                                    '#dc143c',
+                                    '#00bfff',
+                                    '#0000ff',
+                                    '#8b008b',
+                                    '#b03060',
+                                    '#ff0000',
+                                    '#ffd700',
+                                    '#ff00ff',
+                                    '#1e90ff',
+                                    '#eee8aa',
+                                    '#00ffff',
+                                    '#b0e0e6',
+                                    '#ff1493',
+                                    '#ee82ee',
+                                    '#ffb6c1',
+                                    '#00008b',
+                                    '#556b2f',
+                                    '#0000ff',
+                                    '#8b4513',
+                                    '#483d8b',
+                                    '#3cb371',
+                                    '#b8860b',
+                                    '#7fff00',
+                                    '#8a2be2',
+                                    '#ff7f50',
+                                    '#008b8b',
+                                    '#9acd32',
+                                    '#00bfff',
+                                ],
+                            }]
+                        },
+                    });
+                </script>
+            </td>
+        </tr>
+        <tr class="low">
+            <td class="top-const-part low-part">
+                <h1>All Time</h1>
+            </td>
+        </tr>
+        <tr class="low">
+            <td class="mid-const-part low-part">
+                <?php
+                    if ($MaxHumeur2 == "Vous n'avez saisie aucune humeur !!!") {
+                        echo "<h1>🤔</h1>";
+                        echo "<h1>$MaxHumeur2</h1>";
+                    } else {
+                        $line = $MaxHumeur2->fetch();
+                        $stockerSmiley = $line->Humeur_Emoji;
+                        $stocker = $line->compteur;
+                        $stockerLib = $line->Humeur_Libelle;
+                        echo "<div class='smiley'>$stockerSmiley</div>";
+                        echo "<h1> Voici l'humeur prédominante chez vous \"<span style='color:red'>".$stockerLib."</span>\".<br> Vous l'avez utiliser <span style='color:red'>$stocker</span> fois.</h1>";
+                    }
+                ?>
+            </td>
+        </tr>
+        <tr class="low">
+            <td class="bot-const-part low-part">
+                <div class="chart-container" style="position: relative;">
+                    <canvas id="myChart2"></canvas>
+                </div>
+                <?php
+                    $countRow = $allValue3->rowCount();
+                ?>
+                <script>
+                    const ctx3 = document.getElementById('myChart2');
+
+                    new Chart(ctx3, {
+                        type: 'doughnut',
+                        data: {
+                            labels: <?php 
+                                        $i = 0;
+                                        while ($row = $allValue3->fetch()) {
+                                            if($i == 0) {
+                                                echo "[";
+                                            }
+                                            echo "\"$row->Humeur_Libelle\",";
+                                            if ($i == $countRow - 1) {
+                                                echo "]";
+                                            }
+                                            $i++;
+                                        }
+                                    ?>,
+                            datasets: [{
+                                data: <?php 
+                                            $i = 0;
+                                            while ($row = $allValue4->fetch()) {
                                                 if($i == 0) {
                                                     echo "[";
                                                 }

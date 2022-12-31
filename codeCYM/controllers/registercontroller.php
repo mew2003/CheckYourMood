@@ -65,6 +65,7 @@ class RegisterController {
             if (is_integer($result)) {
                 $_SESSION['UserID'] = $result;
                 $view = new View("CheckYourMood/codeCYM/views/index");
+                header('Location: ?action=index&controller=home#');
                 return $view;
             }
             $view->setVar('loginError', $result);

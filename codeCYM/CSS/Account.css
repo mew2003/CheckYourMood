@@ -49,3 +49,6 @@
 .buttonD:hover {
     background-color:#B3001B;
 }
+.show-nav .main-container {
+    display: none;
+}

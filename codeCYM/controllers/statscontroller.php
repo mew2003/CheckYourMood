@@ -26,13 +26,19 @@ class StatsController {
             $view = new View("CheckYourMood/codeCYM/views/Register");
         } else {
             $MaxHum = $this->statsService->getMaxHumeur($pdo);
+            $MaxHum2 = $this->statsService->getMaxHumeur($pdo);
             $listeHumeurs = $this->humeursService->getListeHumeurs();
             $view->setVar('listeHumeurs',$listeHumeurs);
             $view->setVar('MaxHumeur', $MaxHum);
+            $view->setVar('MaxHumeur2', $MaxHum2);
             $AllValue1 = $this->statsService->getAllValue($pdo);
             $AllValue2 = $this->statsService->getAllValue($pdo);
+            $AllValue3 = $this->statsService->getAllValue($pdo);
+            $AllValue4 = $this->statsService->getAllValue($pdo);
             $view->setVar('allValue1', $AllValue1);
             $view->setVar('allValue2', $AllValue2);
+            $view->setVar('allValue3', $AllValue3);
+            $view->setVar('allValue4', $AllValue4);
             $valueByDate1 = $this->statsService->getHumeurByTime($pdo, $startDate, $endDate, $humeurs);
             $valueByDate2 = $this->statsService->getHumeurByTime($pdo, $startDate, $endDate, $humeurs);
             $view->setVar('valueByDate1', $valueByDate1);
@@ -87,10 +93,16 @@ class StatsController {
         
         $MaxHum = $this->statsService->getMaxHumeur($pdo);
         $view->setVar('MaxHumeur', $MaxHum);
+        $MaxHum2 = $this->statsService->getMaxHumeur($pdo);
+        $view->setVar('MaxHumeur2', $MaxHum2);
         $AllValue1 = $this->statsService->getAllValue($pdo);
         $AllValue2 = $this->statsService->getAllValue($pdo);
+        $AllValue3 = $this->statsService->getAllValue($pdo);
+        $AllValue4 = $this->statsService->getAllValue($pdo);
         $view->setVar('allValue1', $AllValue1);
         $view->setVar('allValue2', $AllValue2);
+        $view->setVar('allValue3', $AllValue3);
+        $view->setVar('allValue4', $AllValue4);
         $valueByDate1 = $this->statsService->getHumeurByTime($pdo, $startDate, $endDate, $humeurs);
         $valueByDate2 = $this->statsService->getHumeurByTime($pdo, $startDate, $endDate, $humeurs);
         $view->setVar('valueByDate1', $valueByDate1);
