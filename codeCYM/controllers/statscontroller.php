@@ -113,4 +113,9 @@ class StatsController {
         return $view;
     }
 
+    public function donneesQuantitatives($pdo) {
+        $nbreTotHumeursSaisies = $this->statsService->getDonneesQuantitatives($pdo, $startDate, $endDate, $humeurs);
+        $view = new View("CheckYourMood/codeCYM/views/Stats");
+    }
+
 }

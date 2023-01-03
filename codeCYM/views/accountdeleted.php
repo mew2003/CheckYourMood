@@ -15,7 +15,7 @@
     <header-component></header-component>
     <div class="container">
         <div class="row main">
-            <h1 class="enRouge" style="text-align: center">Suppresion du compte terminé</h1>
+            <h1 class="enRouge" style="text-align: center">Suppression du compte terminée</h1>
             <div class="d-flex flex-row align-items-center justify-content-center">
                 <form method="get" action="#">
                     <input type="submit" class="button" value="Retour à l'accueil">
