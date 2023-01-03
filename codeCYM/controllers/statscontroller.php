@@ -77,7 +77,9 @@ class StatsController {
         $listeHumeurs = $this->humeursService->getListeHumeurs();
         $emojiUsed = $this->statsService->getMostUsed($pdo, $startDate, $endDate, $humeurs);
         if ($endDate == "" || $startDate == "") {
-            $result = "<p class='smiley'>🚫</p><p>Veuillez selectionner la date de début ainsi que la date de fin.</p>";
+            $result = "<p>Veuillez selectionner la date de début ainsi que la date de fin.</p><p class='smiley'>🚫</p>";
+        } else if ($endDate < $startDate) {
+            $result = "<p>La date de début doit être antérieure à la date de fin.</p><p class='smiley'>🚫</p> ";
         } else if ($emojiUsed == "") {
             $result = "<p>L'humeur n'a jamais été saisie entre le ".$startDate." et le ".$endDate."</p>";
         } else if (count($emojiUsed) == 2) {

@@ -21,9 +21,15 @@ body {
 .liensTravaux {
     color: #008062;
 }
-.show-nav .container-fluid {
-    display: none;
-    position: absolute;
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+@media (max-width:767px) {
+    .show-nav .container {
+        display: none;
+    }
 }
 
 .container {

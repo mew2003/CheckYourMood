@@ -53,7 +53,7 @@ class HumeursService
                     $requete->bindParam("smiley", $smiley);
                     $requete->bindParam("description", $description);
                     $requete->execute();
-                }
+                } 
             }
         }
     }

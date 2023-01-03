@@ -31,10 +31,9 @@ class HumeursController {
         $description = HttpHelper::getParam("description");
         $humeur = HttpHelper::getParam("humeur");
         $smiley = HttpHelper::getParam("smiley");
-        $test = $this->humeursService->setHumeur($pdo, $humeur, $smiley, $description);
-        $view->setVar('test',$test);
-        header('Location: ?action=index&controller=stats#');
+        $msgHumeur = $this->humeursService->setHumeur($pdo, $humeur, $smiley, $description);
         header('Location: ?action=index&controller=humeurs#');
+        $view->setVar('msgHumeur', $msgHumeur);
         return $view;
     }
 

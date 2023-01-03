@@ -15,7 +15,7 @@
         spl_autoload_register();
         ?>
         <header-component></header-component>  
-        <div class="container d-flex justify-content-center">
+        <div class="container ">
             <div class="row text-block">
                 <div class="col-sm-12">
                     <h1>Check Your Mood</h1>
