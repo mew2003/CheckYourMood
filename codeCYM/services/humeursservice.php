@@ -40,6 +40,7 @@ class HumeursService
      * @param $description commentaire que peut saisir un utilisateur (facultatif)
      */
     public function setHumeur($pdo, $humeur, $smiley, $description) {
+        $isOk = false;
         if ($humeur != "") {
             $liste = self::getListeHumeurs();
             foreach ((array) $liste as $i) {
@@ -53,8 +54,10 @@ class HumeursService
                     $requete->bindParam("smiley", $smiley);
                     $requete->bindParam("description", $description);
                     $requete->execute();
+                    $isOk = true;
                 } 
             }
         }
+        return $isOk;
     }
 }

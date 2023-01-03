@@ -23,6 +23,9 @@ class HumeursController {
         if (!isset($_SESSION['UserID'])) {
             $view = new View("CheckYourMood/codeCYM/views/Register");
         }
+        if(isset($_SESSION['msgHumeur'])) {
+            $view->setVar('msgHumeur', $_SESSION['msgHumeur']);
+        }
         return $view;
     }
 
@@ -31,10 +34,14 @@ class HumeursController {
         $description = HttpHelper::getParam("description");
         $humeur = HttpHelper::getParam("humeur");
         $smiley = HttpHelper::getParam("smiley");
-        $msgHumeur = $this->humeursService->setHumeur($pdo, $humeur, $smiley, $description);
+        $isOK = $this->humeursService->setHumeur($pdo, $humeur, $smiley, $description);
+        if ($isOK) {
+            $msgHumeur = "Votre humeur a bien été ajouté.";
+        } else {
+            $msgHumeur ="L'humeur saisie n'existe pas !!!";
+        }
+        $_SESSION['msgHumeur'] = $msgHumeur;
         header('Location: ?action=index&controller=humeurs#');
-        $view->setVar('msgHumeur', $msgHumeur);
-        return $view;
     }
 
 }

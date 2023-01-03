@@ -21,6 +21,18 @@
         <div class="d-flex d-row justify-content-center">
             <span id="time"></span>
         </div>
+        <div class="msgHumeur-block">
+        <?php
+            if(isset($msgHumeur)) {
+                if($msgHumeur == "Votre humeur a bien été ajouté.") {
+                    echo "<p class='enVert'>".$msgHumeur."</p>";
+                } else {
+                    echo "<p class='enRouge'>".$msgHumeur."</p>";
+                }
+                $_SESSION['msgHumeur'] = null;
+            }
+        ?>
+        </div>
         <form class="humeurs-container" action="#" method="get">
             <input hidden name="action" value="setHumeur">
             <input hidden name="controller" value="humeurs">

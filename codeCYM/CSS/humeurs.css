@@ -97,3 +97,17 @@ textarea {
     resize: none;
     padding: 8px;
 }
+.enRouge {
+    color: red;
+}
+.enVert {
+    color: #147760;
+}
+.msgHumeur-block {
+    font-size: 40px;
+    width: 100%;
+    height: 5vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
