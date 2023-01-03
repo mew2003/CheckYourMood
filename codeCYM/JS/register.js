@@ -95,7 +95,7 @@ function loginSelected() {
                 valuesSE.push(element.value);
                 element.value = '';
                 element.classList.add('display-none');
-                element.setAttribute('required', false);
+                element.removeAttribute('required');
             });
         }
     });
