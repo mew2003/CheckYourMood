@@ -166,7 +166,7 @@
                         $stocker = $ligne->compteur;
                         $stockerLib = $ligne->Humeur_Libelle;
                         echo "<div class='smiley'>$stockerSmiley</div>";
-                        echo "<h1> Voici l'humeur prédominante chez vous \"<span style='color:red'>".$stockerLib."</span>\".<br> Vous l'avez utiliser <span style='color:red'>$stocker</span> fois.</h1>";
+                        echo "<h1> Voici l'humeur prédominante chez vous \"<span style='color:red'>".$stockerLib."</span>\".<br> Vous l'avez utilisée <span style='color:red'>$stocker</span> fois.</h1>";
                     }
                 ?>
             </td>
@@ -276,7 +276,7 @@
                         $stocker = $line->compteur;
                         $stockerLib = $line->Humeur_Libelle;
                         echo "<div class='smiley'>$stockerSmiley</div>";
-                        echo "<h1> Voici l'humeur prédominante chez vous \"<span style='color:red'>".$stockerLib."</span>\".<br> Vous l'avez utiliser <span style='color:red'>$stocker</span> fois.</h1>";
+                        echo "<h1> Voici l'humeur prédominante chez vous \"<span style='color:red'>".$stockerLib."</span>\".<br> Vous l'avez utilisée <span style='color:red'>$stocker</span> fois.</h1>";
                     }
                 ?>
             </td>
