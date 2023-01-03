@@ -67,6 +67,13 @@ class StatsService
         $req->execute(['id'=>$_SESSION['UserID'], 'libelle'=>$humeurs, 'startDate'=>$startDate, 'endDate'=>$endDate]);
         return $req;
     }
+
+    public function getDonneesQuantitatives($pdo, $startDate, $endDate, $humeurs) {
+        $nbreTotalHumeurSaisies = $pdo->prepare("SELECT COUNT(*) as nombreSaisie FROM humeur WHERE code_user = :code_user GROUP BY code_user");
+        $nbreTotalHumeurSaisies->bindParam("code_user", $_SESSION['UserID']);
+        $nbreTotalHumeurSaisies->execute();
+        return $nbreTotalHumeurSaisies;
+    }
     
     private static $defaultStatsService ;
     public static function getDefaultStatsService()
