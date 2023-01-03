@@ -3,21 +3,42 @@
 	session_start() ;
     $_SESSION['UserID'] = 4;
 ?>
+
+<!-- définit la langue du site afin -->
 <!DOCTYPE html>
 <html lang="fr">
     <head>
+
+        <!-- encodage -->
         <meta charset="UTF-8">
+
+        <!-- lien vers le bootstrap -->
         <link href="/CheckYourMood/codeCYM/third-party/bootstrap/css/bootstrap.css" rel="stylesheet"/>
+
+        <!-- lien vers notre feuille de style -->
         <link href="/CheckYourMood/codeCYM/CSS/stats.css" rel="stylesheet"/>
+
+        <!-- titre du site affiché dans l'onglet -->
         <title>Données quantitatives</title>
+
+        <!-- lien vers le script JavaScript et s'exécute au fur et à mesure -->
         <script src="/CheckYourMood/codeCYM/JS/header-component.js" defer></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     </head>
     <body>
-    <header-component></header-component>
+
+    <!-- inclusion du bandeau du haut -->
+        <header-component></header-component>
 
     <?php
+
+    /**
+     * compte le nombre d'humeurs sélectionnées afin de constituer la requête
+     * qui affiche les données quantitatives des humeurs sélectionnées
+     * par l'utilisateur
+     */
     $nombreHumeurs = 0;
+
         $host='localhost';	// Serveur de BD
         $db='cym';	// Nom de la BD
         $user='root';		// User 
@@ -36,7 +57,7 @@
 
         /**
          * début du formulaire permettant de renvoyer les cases 
-         * cochées
+         * à cocher
          */
         echo '<form method = "post" action = "donneesQuantitatives.php">';
 
@@ -49,6 +70,11 @@
         $nbreTotalHumeurSaisies->bindParam("code_user", $_SESSION['UserID']);
         $nbreTotalHumeurSaisies->execute();
         while ($ligne = $nbreTotalHumeurSaisies -> fetch()) {
+
+            /**
+             * récupère le résultat de la requête
+             * (résultat unique)
+             */
             $nbreTotHum = $ligne['nombreSaisie'];
         }
 
@@ -60,6 +86,11 @@
         $humeurs -> bindParam("code_user", $_SESSION['UserID']);
         $humeurs->execute();
         $i = 0;
+
+        /**
+         * stockage de la liste des humeurs dans un tableau pour 
+         * limiter les accès à la base de données
+         */
         $tabHumeurs = "";
         while ($ligne = $humeurs->fetch()) {
             $tabHumeurs[$i] = $ligne['humeur_libelle'];
