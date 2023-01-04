@@ -108,12 +108,18 @@ class StatsController {
         return $view;
     }
 
+    /**
+     * permet de récupérer les données quantitatives sur une ou plusieurs humeurs
+     * affiche le nombre de saisies d'une humeur par rapport au nombre total
+     * de saisies de toutes les humeurs, ainsi qu'un pourcentage de saisie
+     * de cette humeur
+     */
     public function donneesQuantitatives($pdo) {
-        $nbreTotHumeursSaisies = $this->statsService->getNombreTotalHumeursSaisies($pdo);
-        $listeHumeurs = $this->statsService->getListeHumeurs();
-        $view->setVar('listeHumeurs',$listeHumeurs);
         $view = new View("CheckYourMood/codeCYM/views/Stats");
-
+        $nombreTotHumeursSaisies = $this->statsService->getNombreTotalHumeursSaisies($pdo);
+        $tabHumeurs = $this->statsService->getListeHumeurs($pdo);
+        $view->setVar('tabHumeurs',$tabHumeurs);
+        return $view;
     }
 
 }

@@ -364,7 +364,30 @@
     <table>
         <tr>
             <td>
-                
+            <form action="#" method="get">  
+            <input hidden id="action" name="action" value="donneesQuantitatives">
+            <input hidden name="controller" value="stats">
+                <?php
+                    foreach($tabHumeurs as $humeur) {
+
+                        $humeur = str_replace(' ', '_', $humeur);
+            
+                        /**
+                         * affichage sous forme d'un formulaire avec des cases à cocher
+                         */
+                        echo '<input type = "checkbox" name = "' . $humeur . '" value = "' . $humeur . '"';
+                        if (isset($_POST["$humeur"])) {
+                            echo 'checked' . '>';
+                        }
+                        echo '<label for = "' . $humeur . '">' . str_replace('_', ' ', $humeur);
+                        echo '</label> &nbsp; &nbsp;';
+                    }
+                    /**
+                     * affichage d'un bouton pour valider le formulaire
+                     */
+                    echo '<input type="submit">';
+                ?>
+            </form>
             </td>
         </tr>
     </table>

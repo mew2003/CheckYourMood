@@ -69,18 +69,29 @@ class StatsService
     }
 
     public function getNombreTotalHumeursSaisies($pdo) {
-        $nbreTotalHumeurSaisies = $pdo->prepare("SELECT COUNT(*) as nombreSaisie FROM humeur WHERE code_user = :code_user GROUP BY code_user");
-        $nbreTotalHumeurSaisies->bindParam("code_user", $_SESSION['UserID']);
-        $nbreTotalHumeurSaisies->execute();
-        return $nbreTotalHumeurSaisies;
+        $nombreTotalHumeurSaisies = $pdo->prepare("SELECT COUNT(*) as nombreSaisie FROM humeur WHERE code_user = :code_user GROUP BY code_user");
+        $nombreTotalHumeurSaisies->bindParam("code_user", $_SESSION['UserID']);
+        $nombreTotalHumeurSaisies->execute();
+        return $nombreTotalHumeurSaisies;
     }
 
     public function getListeHumeurs($pdo) {
-        $requete = "SELECT DISTINCT humeur_libelle FROM humeur WHERE code_user = :code_user";
+        $humeurs = "SELECT DISTINCT humeur_libelle FROM humeur WHERE code_user = :code_user";
         $humeurs = $pdo->prepare($requete);
         $humeurs -> bindParam("code_user", $_SESSION['UserID']);
         $humeurs->execute();
-        return $humeurs;
+        $i = 0;
+        /**
+         * stockage de la liste des humeurs dans un tableau pour 
+         * limiter les accès à la base de données
+         */
+        $tabHumeurs = "";
+
+        while ($ligne = $humeurs->fetch()) {
+            $tabHumeurs[$i] = $ligne['humeur_libelle'];
+            $i++;
+        }
+        return $tabHumeurs;
     }
     
     private static $defaultStatsService ;
