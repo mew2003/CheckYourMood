@@ -6,6 +6,7 @@
         <link href="/CheckYourMood/codeCYM/CSS/history.css" rel="stylesheet"/>
         <link rel="stylesheet" href="/CheckYourMood/codeCYM/third-party/fontawesome-free-6.2.0-web/css/all.css">
         <script src="/CheckYourMood/codeCYM/JS/history.js"></script>
+        <script src="/CheckYourMood/codeCYM/third-party/JQuery/jquery-3.6.1.js"></script>
         <title>Historique</title>
         <script src="/CheckYourMood/codeCYM/JS/header-component.js" defer></script>
     </head>
@@ -63,12 +64,12 @@
             if(isset($_POST['pop']) && $_POST['pop'] != "") {
                 if ($_POST['pop'] == 0) {
                     $val = $_POST['pop'];
-                    echo "<script>myFunctionRemove($val);</script>";
+                    echo "<script>removePopup($val);</script>";
                     $_POST['pop'] = "";
                 } else {
                     var_dump($_POST['pop']);
                     $val = $_POST['pop'];
-                    echo "<script>myFunction($val);</script>";
+                    echo "<script>showPopup($val);</script>";
                 }
             }
             $pages = $allRow / 15;

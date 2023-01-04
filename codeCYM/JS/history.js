@@ -1,12 +1,20 @@
-function myFunction(i) {  
-    let myPopup = "myPopup" + i;
-    var popup = document.getElementById(myPopup);
-    popup.classList.toggle("show");
+/**
+ * met la classe 'show' à la div numéro 'i' pour afficher la popup et 
+ * modifie la valeur du bouton associé
+ * @param {*} i  le numéro de la div et du bouton
+ */
+function showPopup(i) {  
+    var popup = $("#myPopup"+i);
+    popup.addClass("show");
     var input = document.getElementById(i);
-    input.value = "0";
+    input.value = 0;
 }
-function myFunctionRemove(i) {  
-    let myPopup = "myPopup" + i;
-    var popup = document.getElementById(myPopup);
-    popup.classList.remove("show");
+
+/**
+ * enlève la classe 'show' à la div numéro 'i' pour enlever la popup
+ * @param {*} i  le numéro de la div
+ */
+function removePopup(i) {  
+    var popup = $("#myPopup"+i);
+    popup.removeClass("show");
 }
