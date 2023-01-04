@@ -1,12 +1,15 @@
-let checkbox = document.getElementById('check');
-checkbox.addEventListener('click', function() {
-    if (checkbox.checked) {
-        document.getElementById('oldPassword').type='text';
-        document.getElementById('newPassword').type='text';
-        document.getElementById('confirmPassword').type='text';
+
+/* Change le type des champs 'password' en champs de type 'text' 
+   quand la case 'Afficher le mot de passe' est coché et 
+   les remet en champ de type password quand il est décoché */
+$("#check").on('click', function() {
+    if ($("#check").checked) {
+        $('#oldPassword').attr('type', 'text');
+        $('#newPassword').attr('type', 'text');
+        $('#confirmPassword').attr('type', 'text');
     } else {
-        document.getElementById('oldPassword').type='password';
-        document.getElementById('newPassword').type='password';
-        document.getElementById('confirmPassword').type='password';
+        $('#oldPassword').attr('type', 'password');
+        $('#newPassword').attr('type', 'password');
+        $('#confirmPassword').attr('type', 'password');
     }
 });

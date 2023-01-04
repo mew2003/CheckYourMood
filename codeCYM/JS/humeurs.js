@@ -1,13 +1,18 @@
 /**
- * 
+ * Récupère l'heure locale
  */
 function refreshTime() {
     const timeDisplay = $("#time");
     const dateString = new Date().toLocaleTimeString();
     timeDisplay.textContent = dateString;
 }
+/* Lance la récupèration de l'heure toute les 100 millisecondes pour l'actualiser */
 setInterval(refreshTime, 100);
 
+/**
+ * Récupère le smiley qui correspond à l'humeur saisie par l'utilisateur
+ * @param {*} element  l'humeur saisie
+ */
 function getSmiley(element) {
     var saisie = (element.value || element.options[element.selectedIndex].value); 
     switch ((""+saisie).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")) {
@@ -41,7 +46,5 @@ function getSmiley(element) {
         default:
             smiley = "🚫";
     }
-    var test = document.getElementById('smiley')
-
-    test.value = smiley;
+    $("#smiley").val() = smiley;
 }

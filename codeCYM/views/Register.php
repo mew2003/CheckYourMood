@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="/CheckYourMood/codeCYM/CSS/Register.css">
     <link href="/CheckYourMood/codeCYM/third-party/bootstrap/css/bootstrap.css" rel="stylesheet"/>
     <script src="/CheckYourMood/codeCYM/third-party/JQuery/jquery-3.6.1.js"></script>
-    <script src="/CheckYourMood/codeCYM/JS/burger-menu.js" defer></script>
     <script src="/CheckYourMood/codeCYM/JS/register.js" defer></script>
     <script src="/CheckYourMood/codeCYM/JS/header-component.js" defer></script>
     <title>Inscription / Connexion</title>

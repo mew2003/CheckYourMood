@@ -24,7 +24,7 @@ $(".left").on('click', function() { (registerSelected()) });
 // quand on clique sur le "bouton" 'se connecter', appel la fonction 'loginSelected()'
 $(".right").on('click', function() { (loginSelected()) });
 
-// choisit quel formulaire afficher en fonction de l'erreur de l'utilisateur
+// choisit quel formulaire réafficher en fonction de l'erreur de l'utilisateur
 if (loginError.className.match('error')) {
     loginSelected();
 } else if (registerError.className.match('error')) {
@@ -32,15 +32,15 @@ if (loginError.className.match('error')) {
 }
 
 /* Change le type des champs 'password' en champs de type 'text' 
-   quand la case 'Afficher le mot de passe' est cocher */
-let checkbox = document.getElementById('check');
-checkbox.addEventListener('click', function() {
-    if (checkbox.checked) {
-        document.getElementById('password').type='text';
-        document.getElementById('confirmPassword').type='text';
+   quand la case 'Afficher le mot de passe' est coché et 
+   les remet en champ de type password quand elle est décoché */
+$("#check").on('click', function() {
+    if ($("#check").prop('checked')) {
+        $('#password').attr('type', 'text');
+        $('#confirmPassword').attr('type', 'text');
     } else {
-        document.getElementById('password').type='password';
-        document.getElementById('confirmPassword').type='password';
+        $('#password').attr('type', 'password');
+        $('#confirmPassword').attr('type', 'password');
     }
 });
 
@@ -101,7 +101,7 @@ function loginSelected() {
     });
 }
 
-// vérifie si les différents champs sont remplis ou non
+// vérifie si les différents champs sont remplis ou non quand l'utilisateur déselectionne le champ
 $("#username").on('blur', function() { (champValide($("#username"), "")) });
 $("#email").on('blur', function() { (champValide($("#email"), "")) });
 $("#birthDate").on('blur', function() { 

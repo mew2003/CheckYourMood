@@ -1,3 +1,6 @@
+/**
+ * Le header qui sera sur chaque page
+ */
 class headerComponent extends HTMLElement {
     constructor() {
         super()
@@ -80,8 +83,12 @@ class headerComponent extends HTMLElement {
     }
 }
 
+/* Crée un nouvel élément qui pourra être utilisé sur chaque page pour créer un header */
 customElements.define('header-component', headerComponent)
 
+/**
+ * Change l'état de la classe 'show-nav' quand on clique sur le burger menu, en version mobile, pour l'afficher ou non
+ */
 function toggleMenu() {
     const navbar = document.querySelector('body');
     const burger = document.querySelector('.burger-menu');

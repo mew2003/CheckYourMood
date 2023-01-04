@@ -1,7 +1,8 @@
+/* appel la fonction 'toDate' quand un utilisateur sélectionne le champ */
 $("#startDate").on('focus', function() { toDate($("#startDate")) });
 $("#endDate").on('focus', function() { toDate($("#endDate")) });
 
-
+/* vérifie si les différents champs sont remplis ou non quand l'utilisateur déselectionne le champ */
 $("#startDate").on('blur', function() { 
     if (!champValide($("#startDate"), "")) {
         // si le champ est vide le remet en type 'text'
@@ -16,7 +17,8 @@ $("#endDate").on('blur', function() {
 });
 
 /**
- * Transforme le champ 'Date de naissance' en champ de type date
+ * Transforme le champ spécifié en champ de type 'date'
+ * @param {*} date  le champ spécifié
  */
 function toDate(date) {
     date.attr('type', 'date');
