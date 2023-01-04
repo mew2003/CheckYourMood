@@ -5,7 +5,7 @@
         <link href="/CheckYourMood/codeCYM/third-party/bootstrap/css/bootstrap.css" rel="stylesheet"/>
         <link href="/CheckYourMood/codeCYM/CSS/history.css" rel="stylesheet"/>
         <link rel="stylesheet" href="/CheckYourMood/codeCYM/third-party/fontawesome-free-6.2.0-web/css/all.css">
-        <script src="/JS/history.js" defer></script>
+        <script src="/CheckYourMood/codeCYM/JS/history.js"></script>
         <title>Historique</title>
         <script src="/CheckYourMood/codeCYM/JS/header-component.js" defer></script>
     </head>
@@ -16,12 +16,7 @@
     ?>
     <header-component></header-component>
     <div class="container">
-        <?php
-            if(isset($_POST['pop']) && $_POST['pop'] != "") {
-                var_dump($_POST['pop']);
-                echo "<script>myFunction(1)</script>"; 
-                $_POST['pop'] = "";
-            }   
+        <?php  
             if(isset($_GET['page']) && !empty($_GET['page'])){
                 $currentPage = (int) strip_tags($_GET['page']);
             } else {
@@ -53,7 +48,7 @@
                                 echo "<td>".htmlspecialchars($ligne->Humeur_Libelle)."</td>";
                                 echo "<td>".htmlspecialchars($ligne->Humeur_Emoji)."</td>";
                                 echo "<td>".htmlspecialchars($ligne->Humeur_Time)."</td>";
-                                echo "<td><form action='#' method='post'><button name='pop' value='$i' type='submit' class='param' onclick='myFunction()'><i class='fa-solid fa-gear'></i></button></form></<td>";
+                                echo "<td><form action='#' method='post'><button name='pop' value='$i' id='$i' type='submit' class='param'><i class='fa-solid fa-gear'></i></button></form></<td>";
                                 echo "<div class='popuptext' id='myPopup$i'>
                                          <div class='description'>
                                             ".htmlspecialchars($ligne->Humeur_Description)."
@@ -65,6 +60,17 @@
                     }
                 echo "</table>" ;
             echo "</div>";	
+            if(isset($_POST['pop']) && $_POST['pop'] != "") {
+                if ($_POST['pop'] == 0) {
+                    $val = $_POST['pop'];
+                    echo "<script>myFunctionRemove($val);</script>";
+                    $_POST['pop'] = "";
+                } else {
+                    var_dump($_POST['pop']);
+                    $val = $_POST['pop'];
+                    echo "<script>myFunction($val);</script>";
+                }
+            }
             $pages = $allRow / 15;
             $valAcomparer = $pages % 15;
             if ($pages > $valAcomparer && $pages >= 1) {
