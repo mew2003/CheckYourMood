@@ -17,6 +17,13 @@ class StatsController {
         $this->humeursService = HumeursService::getDefaultHumeursService();
     }
 
+    /**
+     * Fonction de base du controlleur, si l'utilisateur n'est pas connecté 
+     * le renvoi sur la page du connexion/inscription,
+     * sinon affiche la page des statistiques de l'utilisateur
+     * @param $pdo  la connexion à la base de données
+     * @return $view  la vue de la page
+     */
     public function index($pdo) {
         $view = new View("CheckYourMood/codeCYM/views/Stats");
         $startDate = HttpHelper::getParam("startDate");
@@ -52,6 +59,12 @@ class StatsController {
         return $view;
     }
 
+    /**
+     * affiche la page de l'historique des valeurs de l'utilisateur
+     * si l'utilisateur n'est pas connecté, le renvoi sur la page de connexion/inscription
+     * @param $pdo  la connexion à la base de données
+     * @return $view  la vue de la page
+     */
     public function historyVal($pdo) {
         $view = new View("CheckYourMood/codeCYM/views/history");
         if (!isset($_SESSION['UserID'])) {
@@ -66,7 +79,10 @@ class StatsController {
     }
 
     /**
-     * Option that the user choose for floating graphics and text in stats
+     * Affiche différentes informations et graphes sur l'humeur 
+     * qui a été sélectionnée entre les dates sélectionnée
+     * @param $pdo  la connexion à la base de données
+     * @return $view  la vue de la page avec l'option sélectionnée
      */
     public function optionSelected($pdo) {
         $view = new View("CheckYourMood/codeCYM/views/Stats");

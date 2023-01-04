@@ -7,7 +7,7 @@ use PDOException;
 class HumeursService
 {
 
-    // Singleton d'instanciation
+    /* Singleton d'instanciation */
     private static $defaultHumeursService;
     public static function getDefaultHumeursService()
     {
@@ -33,11 +33,12 @@ class HumeursService
     }
 
     /**
-     * Permet l'insertion de l'humeur d'un utilisateur
-     * @param $pdo \PDO the pdo object
+     * Permet l'insertion de l'humeur d'un utilisateur si elle est dans la liste des humeurs disponibles
+     * @param $pdo  la connexion à la base de données
      * @param $humeur libellé de l'humeur
      * @param $smiley smiley associé à l'humeur
      * @param $description commentaire que peut saisir un utilisateur (facultatif)
+     * @return $isOk  true si l'humeur a bien été inséré, sinon false
      */
     public function setHumeur($pdo, $humeur, $smiley, $description) {
         $isOk = false;

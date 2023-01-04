@@ -18,6 +18,12 @@ class RegisterController {
         $this->accountService = AccountsService::getDefaultAccountsService();
     }
 
+    /**
+     * Fonction de base du controlleur, si l'utilisateur est connecté le renvoi sur la page du compte,
+     * sinon affiche la page de connexion/inscription
+     * @param $pdo  la connexion à la base de données
+     * @return $view  la vue de la page
+     */
     public function index($pdo) {
         if (isset($_SESSION['UserID'])) {
             $view = new View("CheckYourMood/codeCYM/views/Account");
@@ -35,6 +41,12 @@ class RegisterController {
         return $view;
     }
 
+    /**
+     * vérifie que les champs soit tous remplis pour l'inscription de 
+     * l'utilisateur et crée un utilisateur si tout est correct, sinon renvoi un message d'erreur
+     * @param $pdo  la connexion à la base de données
+     * @return $view  la vue de la page
+     */
     public function register($pdo) {
         new User();
         $view = new View("CheckYourMood/codeCYM/views/Register");
@@ -55,6 +67,12 @@ class RegisterController {
         return User::sendValues($view);
     }
 
+    /**
+     * vérifie que les champs soit tous remplis pour la connexion de 
+     * l'utilisateur et connecte l'utilisateur si tout est correct, sinon renvoi un message d'erreur
+     * @param $pdo  la connexion à la base de données
+     * @return $view  la vue de la page
+     */
     public function login($pdo) {
         new User();
         $view = new View("CheckYourMood/codeCYM/views/Register");
@@ -76,6 +94,9 @@ class RegisterController {
     }
 }
 
+/**
+ * Crée un profile avec toutes les données d'un utilisateur
+ */
 class User {
     public static $username;
     public static $email;
@@ -98,6 +119,7 @@ class User {
     }
 
     public static function sendValues($view) {
+        /* Ajout des valeurs dans la vue */
         $view->setVar('username', User::$username);
         $view->setVar('email', User::$email);
         $view->setVar('birthDate', User::$birthDate);
