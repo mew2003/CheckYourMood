@@ -27,7 +27,7 @@
             $nombreLigneMax = 15 * $currentPage;
             echo "<h1 class='title'>Historique des humeurs</h1>";
             echo "<div class='container'>";
-                echo "<table class='table table-striped '>";
+                echo "<table class='table table-striped'>";
                     echo "<tr>
                             <form>
                                 <input hidden name='action' value='historyVal'>
@@ -43,22 +43,44 @@
                             </form>
                           <tr>";		
                     $min = 0 + (15 * ($currentPage - 1));
-                    $i = 1;                
+                    $i = 1;
                     while( $ligne = $resultats->fetch() ) { 
                         if($i <= $nombreLigneMax && $i > $min) {
-                            echo "<tr>";
-                                echo "<td>".htmlspecialchars($ligne->Humeur_Libelle)."</td>";
-                                echo "<td>".htmlspecialchars($ligne->Humeur_Emoji)."</td>";
-                                echo "<td>".htmlspecialchars($ligne->Humeur_Time)."</td>";
-                                echo "<td><form action='#' method='post'><button name='pop' value='$i' id='$i' type='submit' class='param'><i class='fa-solid fa-gear'></i></button></form></<td>";
-                                // <div><form action='#' method='post'><button name='closePop' type='submit' class='param>boutton</button></form></div>
-                                echo "<div class='popuptext' id='myPopup$i'>
-                                        
-                                        <div class='desc-title'>Description :</div>
-                                        <div class='description'>
-                                            ".htmlspecialchars($ligne->Humeur_Description)."
-                                        </div>
-                                    </div>";	
+                            echo "<tr>
+                                    <td>".htmlspecialchars($ligne->Humeur_Libelle)."</td>
+                                    <td>".htmlspecialchars($ligne->Humeur_Emoji)."</td>
+                                    <td>".htmlspecialchars($ligne->Humeur_Time)."</td>
+                                    <td><form action='#' method='post'><button name='pop' value='$i' id='$i' type='submit' class='param'><i class='fa-solid fa-gear'></i></button></form></<td>
+                                    <div class='popuptext' id='myPopup$i'>
+                                    <div class='cross-button'><form action='#' method='post'><button type='submit' class='xMark'><i class='fa-solid fa-xmark'></i></button></form></div>
+                                    <div class='desc-title'>Description :</div>
+                                    <div class='description'>
+                                        ".htmlspecialchars($ligne->Humeur_Description)."
+                                    </div>
+                                    <div class='delimiter-Row'></div>
+                                    <div>Nouvelle Description :<br></div>
+                                    <div class='buttons'>
+                                        <form action='#' method='post' class='form-desc'>
+                                            <input hidden name='action' value='updateDesc'>
+                                            <input hidden name='controller' value='stats'>
+                                            <input hidden name='time' value='$ligne->Humeur_Time'>
+                                            <input hidden name='libelle' value='$ligne->Humeur_Libelle'>
+                                            <textarea name='desc' value='$ligne->Humeur_Description'>$ligne->Humeur_Description</textarea>
+                                            <button type='submit' name='del-humeur' val='$i' class='update'>
+                                                <i class='fa-solid fa-pen-to-square'></i>
+                                            </button>
+                                        </form>
+                                        <form action='#' method='get' class='form-del'>
+                                            <input hidden name='action' value='deleteHumeur'>
+                                            <input hidden name='controller' value='stats'>
+                                            <input hidden name='time' value='$ligne->Humeur_Time'>
+                                            <input hidden name='libelle' value='$ligne->Humeur_Libelle'>
+                                            <button type='submit' name='del-humeur' val='$i' class='trash'>
+                                                <i class='fa-solid fa-trash-can'></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>";
                             echo "</tr>";
                         }
                         $i++;										
@@ -71,7 +93,6 @@
                     echo "<script>removePopup($val);</script>";
                     $_POST['pop'] = "";
                 } else {
-                    var_dump($_POST['pop']);
                     $val = $_POST['pop'];
                     echo "<script>showPopup($val);</script>";
                 }

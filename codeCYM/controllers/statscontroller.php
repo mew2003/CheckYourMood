@@ -82,26 +82,25 @@ class StatsController {
         } else {
             $result = "<p class='smiley'>♾️</p><p>Vous avez utilisé un total de ".$emojiUsed[0]." humeurs entre le ".$startDate." et le ".$endDate."</p>";
         }
+        $MaxHum = $this->statsService->getMaxHumeur($pdo);
+        $MaxHum2 = $this->statsService->getMaxHumeur($pdo);
+        $valueByDate1 = $this->statsService->getHumeurByTime($pdo, $startDate, $endDate, $humeurs);
+        $valueByDate2 = $this->statsService->getHumeurByTime($pdo, $startDate, $endDate, $humeurs);
+        $AllValue1 = $this->statsService->getAllValue($pdo);
+        $AllValue2 = $this->statsService->getAllValue($pdo);
+        $AllValue3 = $this->statsService->getAllValue($pdo);
+        $AllValue4 = $this->statsService->getAllValue($pdo);
         $view->setVar('emojiUsed', $result);
         $view->setVar('listeHumeurs',$listeHumeurs);
         $view->setVar('startDate', $startDate);
         $view->setVar('endDate', $endDate);
         $view->setVar('humeurs', $humeurs);
-        
-        $MaxHum = $this->statsService->getMaxHumeur($pdo);
         $view->setVar('MaxHumeur', $MaxHum);
-        $MaxHum2 = $this->statsService->getMaxHumeur($pdo);
         $view->setVar('MaxHumeur2', $MaxHum2);
-        $AllValue1 = $this->statsService->getAllValue($pdo);
-        $AllValue2 = $this->statsService->getAllValue($pdo);
-        $AllValue3 = $this->statsService->getAllValue($pdo);
-        $AllValue4 = $this->statsService->getAllValue($pdo);
         $view->setVar('allValue1', $AllValue1);
         $view->setVar('allValue2', $AllValue2);
         $view->setVar('allValue3', $AllValue3);
         $view->setVar('allValue4', $AllValue4);
-        $valueByDate1 = $this->statsService->getHumeurByTime($pdo, $startDate, $endDate, $humeurs);
-        $valueByDate2 = $this->statsService->getHumeurByTime($pdo, $startDate, $endDate, $humeurs);
         $view->setVar('valueByDate1', $valueByDate1);
         $view->setVar('valueByDate2', $valueByDate2);
         $view->setVar('humeurSelected', $humeurs);
@@ -113,4 +112,28 @@ class StatsController {
         $view = new View("CheckYourMood/codeCYM/views/Stats");
     }
 
+    public function deleteHumeur($pdo) {
+        $view = new View("CheckYourMood/codeCYM/views/history");
+        $time = HttpHelper::getParam("time");
+        $libelle = HttpHelper::getParam("libelle");
+        $this->statsService->delHumeur($pdo, $time, $libelle);
+        $resultats = $this->statsService->getHistorique($pdo);
+        $allRow = $this->statsService->getAllRow($pdo);
+        $view->setVar('resultats',$resultats);
+        $view->setVar('allRow',$allRow);
+        return $view;
+    }
+
+    public function updateDesc($pdo) {
+        $view = new View("CheckYourMood/codeCYM/views/history");
+        $time = HttpHelper::getParam("time");
+        $libelle = HttpHelper::getParam("libelle");
+        $desc = HttpHelper::getParam("desc");
+        $this->statsService->updateDesc($pdo, $time, $libelle, $desc);
+        $resultats = $this->statsService->getHistorique($pdo);
+        $allRow = $this->statsService->getAllRow($pdo);
+        $view->setVar('resultats',$resultats);
+        $view->setVar('allRow',$allRow);
+        return $view;
+    }
 }

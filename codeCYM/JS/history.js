@@ -20,3 +20,13 @@ function removePopup(i) {
     var popup = $("#myPopup"+i);
     popup.removeClass("show");
 }
+
+function msgDeleteClassAdd() {
+    var msg = $("#popDelete");
+    msg.addClass('disActive');
+}
+
+function msgDeleteClassDel() {
+    var msg = $("#popDelete");
+    msg.removeClass('disActive');
+}

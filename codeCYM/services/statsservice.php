@@ -74,7 +74,24 @@ class StatsService
         $nbreTotalHumeurSaisies->execute();
         return $nbreTotalHumeurSaisies;
     }
+
+    public function delHumeur($pdo, $time, $libelle) {
+        $req = $pdo->prepare('DELETE FROM humeur WHERE Humeur_Time = :time AND Humeur_Libelle = :libelle AND CODE_User = :id');
+        $req->bindParam('time', $time);
+        $req->bindParam('libelle', $libelle);
+        $req->bindParam('id', $_SESSION['UserID']);
+        $req->execute();
+    }
     
+    public function updateDesc($pdo, $time, $libelle, $desc) {
+        $req = $pdo->prepare('UPDATE humeur SET Humeur_Description = :desc WHERE CODE_User = :id AND Humeur_Time = :time AND Humeur_Libelle = :libelle');
+        $req->bindParam('time', $time);
+        $req->bindParam('libelle', $libelle);
+        $req->bindParam('desc', $desc);
+        $req->bindParam('id', $_SESSION['UserID']);
+        $req->execute();
+    }
+
     private static $defaultStatsService ;
     public static function getDefaultStatsService()
     {
