@@ -5,6 +5,7 @@
         <link href="/CheckYourMood/codeCYM/third-party/bootstrap/css/bootstrap.css" rel="stylesheet"/>
         <link href="/CheckYourMood/codeCYM/CSS/history.css" rel="stylesheet"/>
         <link rel="stylesheet" href="/CheckYourMood/codeCYM/third-party/fontawesome-free-6.2.0-web/css/all.css">
+        <script src="/JS/history.js" defer></script>
         <title>Historique</title>
         <script src="/CheckYourMood/codeCYM/JS/header-component.js" defer></script>
     </head>
@@ -16,27 +17,32 @@
     <header-component></header-component>
     <div class="container">
         <?php
+            if(isset($_POST['pop']) && $_POST['pop'] != "") {
+                var_dump($_POST['pop']);
+                echo "<script>myFunction(1)</script>"; 
+                $_POST['pop'] = "";
+            }   
             if(isset($_GET['page']) && !empty($_GET['page'])){
                 $currentPage = (int) strip_tags($_GET['page']);
             } else {
                 $currentPage = 1;
             }
             $nombreLigneMax = 15 * $currentPage;
-            echo "<h1>Historique des humeurs</h1>";
+            echo "<h1 class='title'>Historique des humeurs</h1>";
             echo "<div class='container'>";
                 echo "<table class='table table-striped '>";
                     echo "<tr>
                             <form>
                                 <input hidden name='action' value='historyVal'>
                                 <input hidden name='controller' value='stats'>
-                                <td>
+                                <th>
                                     Humeur
-                                </td>
-                                <td>Emoji associé</td>
-                                <td>
+                                </th>
+                                <th>Emoji associé</th>
+                                <th>
                                     Date/Heure
-                                </td>
-                                <td>Description</td>
+                                </th>
+                                <th>Propriétés</th>
                             </form>
                           <tr>";		
                     $min = 0 + (15 * ($currentPage - 1));
@@ -47,7 +53,12 @@
                                 echo "<td>".htmlspecialchars($ligne->Humeur_Libelle)."</td>";
                                 echo "<td>".htmlspecialchars($ligne->Humeur_Emoji)."</td>";
                                 echo "<td>".htmlspecialchars($ligne->Humeur_Time)."</td>";
-                                echo "<td>".htmlspecialchars($ligne->Humeur_Description)."</td>";	
+                                echo "<td><form action='#' method='post'><button name='pop' value='$i' type='submit' class='param' onclick='myFunction()'><i class='fa-solid fa-gear'></i></button></form></<td>";
+                                echo "<div class='popuptext' id='myPopup$i'>
+                                         <div class='description'>
+                                            ".htmlspecialchars($ligne->Humeur_Description)."
+                                        </div>
+                                    </div>";	
                             echo "</tr>";
                         }
                         $i++;										
