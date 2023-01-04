@@ -6,6 +6,8 @@
 function showPopup(i) {  
     var popup = $("#myPopup"+i);
     popup.addClass("show");
+    var back = $('#background');
+    back.addClass("show");
     var input = $("#"+i);
     input.val(0);
 }

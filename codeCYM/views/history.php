@@ -11,6 +11,7 @@
         <script src="/CheckYourMood/codeCYM/JS/header-component.js" defer></script>
     </head>
     <body>
+    <div class='background' id='background'></div>
     <?php
         spl_autoload_extensions(".php");
         spl_autoload_register();
@@ -50,8 +51,11 @@
                                 echo "<td>".htmlspecialchars($ligne->Humeur_Emoji)."</td>";
                                 echo "<td>".htmlspecialchars($ligne->Humeur_Time)."</td>";
                                 echo "<td><form action='#' method='post'><button name='pop' value='$i' id='$i' type='submit' class='param'><i class='fa-solid fa-gear'></i></button></form></<td>";
+                                // <div><form action='#' method='post'><button name='closePop' type='submit' class='param>boutton</button></form></div>
                                 echo "<div class='popuptext' id='myPopup$i'>
-                                         <div class='description'>
+                                        
+                                        <div class='desc-title'>Description :</div>
+                                        <div class='description'>
                                             ".htmlspecialchars($ligne->Humeur_Description)."
                                         </div>
                                     </div>";	
