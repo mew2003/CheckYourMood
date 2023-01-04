@@ -1,5 +1,8 @@
+/**
+ * 
+ */
 function refreshTime() {
-    const timeDisplay = document.getElementById("time");
+    const timeDisplay = $("#time");
     const dateString = new Date().toLocaleTimeString();
     timeDisplay.textContent = dateString;
 }

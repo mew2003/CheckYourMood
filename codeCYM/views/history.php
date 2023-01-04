@@ -31,16 +31,12 @@
                                 <input hidden name='controller' value='stats'>
                                 <td>
                                     Humeur
-                                    <button type='submit' name='sortHumeur' value=' ORDER BY Humeur_Libelle' class='sort-button'><span class='fas fa-sort-alpha-down'></button>
-                                    <button type='submit' name='sortHumeurDesc' value=' ORDER BY Humeur_Libelle DESC' class='sort-button'><span class='fas fa-sort-alpha-up-alt'></button>
                                 </td>
-                                <td><p class='center-emoji'>Emoji associé</p></td>
+                                <td>Emoji associé</td>
                                 <td>
                                     Date/Heure
-                                    <button type='submit' name='sortDate' value=' ORDER BY Humeur_Time' class='sort-button'><span class='fa-regular fa-clock'> <span class='fa-solid fa-arrow-down'></button>
-                                    <button type='submit' name='sortDateDesc' value=' ORDER BY Humeur_Time DESC' class='sort-button'><span class='fa-regular fa-clock'> <span class='fa-solid fa-arrow-up'></button>
                                 </td>
-                                <td><p class='center-description'>Description</p></td>
+                                <td>Description</td>
                             </form>
                           <tr>";		
                     $min = 0 + (15 * ($currentPage - 1));
