@@ -68,11 +68,19 @@ class StatsService
         return $req;
     }
 
-    public function getDonneesQuantitatives($pdo, $startDate, $endDate, $humeurs) {
+    public function getNombreTotalHumeursSaisies($pdo) {
         $nbreTotalHumeurSaisies = $pdo->prepare("SELECT COUNT(*) as nombreSaisie FROM humeur WHERE code_user = :code_user GROUP BY code_user");
         $nbreTotalHumeurSaisies->bindParam("code_user", $_SESSION['UserID']);
         $nbreTotalHumeurSaisies->execute();
         return $nbreTotalHumeurSaisies;
+    }
+
+    public function getListeHumeurs($pdo) {
+        $requete = "SELECT DISTINCT humeur_libelle FROM humeur WHERE code_user = :code_user";
+        $humeurs = $pdo->prepare($requete);
+        $humeurs -> bindParam("code_user", $_SESSION['UserID']);
+        $humeurs->execute();
+        return $humeurs;
     }
     
     private static $defaultStatsService ;
