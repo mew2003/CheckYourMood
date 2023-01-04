@@ -91,7 +91,7 @@
                                         }
                                     ?>,
                             datasets: [{
-                                label: <?php echo "'$humeurSelected'" ?>,
+                                label: <?php echo "'$humeurs'" ?>,
                                 data: <?php 
                                             $i = 0;
                                             while ($row2 = $valueByDate2->fetch()) {
@@ -180,6 +180,18 @@
                         echo $emojiUsed;
                     }
                 ?>
+                <div class="separateur"></div>
+                <div>
+                    <?php
+                        if (isset($humeurs) && $humeurs != "TOUS") {
+                            echo "L'humeur $humeurs a été saisie $nombreSaisiesHumeurSelectionnee fois sur un total de $nombreTotalHumeursSaisies saisie";
+                            if ($nombreTotalHumeursSaisies > 1 ) echo 's'; 
+                            echo " d'humeur toutes confondues ce qui représente " . round($nombreSaisiesHumeurSelectionnee * 100 / $nombreTotalHumeursSaisies, 2) . "% des humeurs saisies";
+                        } else {
+                            echo 'Merci de sélectionner une humeur';
+                        }
+                    ?>
+                </div>
             </td>
             <td class="bot-const-part const">
                 <div class="chart-container" style="position: relative;">

@@ -109,3 +109,7 @@ td.mid-float-part, td.top-float-part, td.bot-float-part {
 .bouton {
     font-weight: 700;
 }
+.separateur {
+    width: 100%;
+    border: solid 1px;
+}
