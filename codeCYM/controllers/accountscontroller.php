@@ -17,8 +17,8 @@ class AccountsController {
 
     /**
      * Fonction de base du controlleur, récupère le profil de l'utilisateur courant et l'affiche
-     * @param $pdo \PDO the pdo object
-     * @return \PDOStatement the statement referencing the result set
+     * @param $pdo  la connexion à la base de données
+     * @return $view  la vue de la page pour pouvoir afficher les informations de l'utilisateur
      */
     public function index($pdo) {
         $view = new View("CheckYourMood/codeCYM/views/Account");
@@ -38,9 +38,9 @@ class AccountsController {
     }
 
     /**
-     * Change les informations du profil de l'utilisateur
-     * @param $pdo \PDO the pdo object
-     * @return \PDOStatement the statement referencing the result set
+     * permet de changer les informations du profil de l'utilisateur
+     * @param $pdo  la connexion à la base de données
+     * @return $view  la vue de la page d'édition du profile avec toutes les informations modifiable par l'utilisateur
      */
     public function editProfile($pdo) {
 
@@ -54,23 +54,23 @@ class AccountsController {
         /* récupération du profil de l'utilisateur courant */
         /* variable qui test si l'email existe déjà */
         $sameUsername = false;
-        /* variable qui test si le pseudo existe déjà */
+        /* variable qui test si le nom d'utilisateur existe déjà */
         $sameEmail = false; 
         $this->getDefaultProfile($pdo, $view); // récupère le profil de l'utilisateur courant dans la base de données
         Profile::initialisation($view); // Envoie les données stockées dans l'objet "Profile" dans la view
         if(!empty(Profile::$update)) {
-            /* appel des fonctions pour vérifier que l'email et le pseudo n'existe pas déjà dans la base de données */
+            /* appel des fonctions pour vérifier que l'email et le nom d'utilisateur n'existe pas déjà dans la base de données */
             /* true si l'email existe déjà, false sinon */
             $sameEmail = $this->checkSameEmail($pdo, Profile::$email); 
-            /* true si le pseudo existe déjà, false sinon */
+            /* true si le nom d'utilisateur existe déjà, false sinon */
             $sameUsername = $this->checkSameUsername($pdo, Profile::$username); 
 
             /* si l'email n'est pas vide et qu'il n'existe pas alors l'email est modifié */
-            $this->updateEmail($pdo, $view, Profile::$update, Profile::$email, 
+            $this->updateEmail($pdo, $view, Profile::$email, 
                             $view->getParams("defaultEmail"), $sameEmail);
 
-            /* si le pseudo n'est pas vide et qu'il n'existe pas alors le pseudo est changé */
-            $this->updateUsername($pdo, $view, Profile::$update, Profile::$username, 
+            /* si le nom d'utilisateur n'est pas vide et qu'il n'existe pas alors le nom d'utilisateur est changé */
+            $this->updateUsername($pdo, $view, Profile::$username, 
                                 $view->getParams("defaultUsername"), $sameUsername);
 
             /* si la date de naissance n'est pas la même que celle stocké dans la base de données pour l'utilisateur courant */
@@ -85,9 +85,10 @@ class AccountsController {
     }
 
     /**
-     * Récupère toutes les informations du profil de l'utilisateur courant
-     * @param $pdo \PDO the pdo object
-     * @return \PDOStatement the statement referencing the result set
+     * Récupère toutes les informations modifiable du profil de l'utilisateur 
+     * pour la page de modification des informations
+     * @param $pdo  la connexion à la base de données
+     * @return $view  les informations de l'utilisateur à afficher
      */
     public function getDefaultProfile($pdo, $view) {
 
@@ -111,14 +112,15 @@ class AccountsController {
 
     /**
      * Vérifie dans la base de données si l'email existe déjà
-     * @param $pdo \PDO the pdo object
-     * @return \PDOStatement the statement referencing the result set
+     * @param $pdo  la connexion à la base de données
+     * @param $aTester  le mail à vérifier
+     * @return $sameEmail  true si l'email existe déjà dans la base de données, sinon false
      */
     public function checkSameEmail($pdo, $aTester) {
         
         $sameEmail = false;
 
-        /* récupère dans la base données les emails de tous les utilisateurs */
+        /* récupère dans la base données les emails qui sont les même que 'aTester' */
         $verifSameEmail = $this->accountsService->getEmails($pdo, $aTester);
 
         /* Si la requête retourne au moins 1 ligne alors l'email existe déjà */
@@ -128,18 +130,19 @@ class AccountsController {
     }
 
     /**
-     * Vérifie dans la base de données si le pseudo existe déjà
-     * @param $pdo \PDO the pdo object
-     * @return \PDOStatement the statement referencing the result set
+     * Vérifie dans la base de données si le nom d'utilisateur existe déjà
+     * @param $pdo  la connexion à la base de données
+     * @param $aTester  le nom d'utilisateur à vérifier
+     * @return $sameUsername  true si le nom d'utilisateur existe déjà dans la base de données, sinon false
      */
     public function checkSameUsername($pdo, $aTester) {
 
         $sameUsername = false;
 
-        /* récupère dans la base données les pseudos de tous les utilisateurs */
+        /* récupère dans la base données tous les noms d'utilisateurs qui sont les même que 'aTester' */
         $verifSameUsername = $this->accountsService->getUsernames($pdo, $aTester);
 
-        /* Si la requête retourne au moins 1 ligne alors le pseudo existe déjà */
+        /* Si la requête retourne au moins 1 ligne alors le nom d'utilisateur existe déjà */
         if($verifSameUsername->rowCount() != 0) $sameUsername = true;
 
         return $sameUsername;
@@ -147,16 +150,20 @@ class AccountsController {
 
     /**
      * Modifie l'email de l'utilisateur courant
-     * @param $pdo \PDO the pdo object
-     * @return \PDOStatement the statement referencing the result set
+     * @param $pdo  la connexion à la base de données
+     * @param $view  la view à modifier
+     * @param $email  la nouvelle adresse mail
+     * @param $defaultEmail  l'ancienne adresse mail
+     * @param $sameEmail  true si l'email est déjà existant, sinon false
+     * @return $view  le message à afficher si il y a une erreur de modification ou non
      */
-    public function updateEmail($pdo, $view, $update, $email, $defaultEmail, $sameEmail) {
+    public function updateEmail($pdo, $view, $email, $defaultEmail, $sameEmail) {
 
         /* Si les données du formulaire sont envoyées et que l'email n'est pas vide et qu'il n'existe pas */
-        if(!empty($update) && !empty($email) && $email != $defaultEmail && $sameEmail == false) {
+        if(!empty($email) && $email != $defaultEmail && $sameEmail == false) {
             $this->accountsService->editMail($pdo, $email);             
             $view->setVar('message', "Votre email a bien été changé !");
-        } else if(!empty($update) && !empty($email) && $email != $defaultEmail && $sameEmail == true) {
+        } else if(!empty($email) && $email != $defaultEmail && $sameEmail == true) {
             $view->setVar('erreur', "Email déjà existant !");
         }
         
@@ -164,19 +171,23 @@ class AccountsController {
     }
 
     /**
-     * Modifie le pseudo de l'utilisateur courant
-     * @param $pdo \PDO the pdo object
-     * @return \PDOStatement the statement referencing the result set
+     * Modifie le nom d'utilisateur de l'utilisateur courant
+     * @param $pdo  la connexion à la base de données
+     * @param $view  la view à modifier
+     * @param $username  le nouveau nom d'utilisateur
+     * @param $defaultUsername  l'ancien nom d'utilisateur
+     * @param $sameUsername  true si le nom d'utilisateur est déjà existant, sinon false
+     * @return $view  le message à afficher si il y a une erreur de modification ou non
      */
-    public function updateUsername($pdo, $view, $update, $username, $defaultUsername, $sameUsername) {
+    public function updateUsername($pdo, $view, $username, $defaultUsername, $sameUsername) {
 
-        /* Si les données du formulaire sont envoyées et que le pseudo n'est pas vide et qu'il n'existe pas */
-        /* le pseudo est modifié sinon affiche une erreur */
-        if(!empty($update) && !empty($username) && $username != $defaultUsername && $sameUsername == false) {
+        /* Si les données du formulaire sont envoyées et que le nom d'utilisateur n'est pas vide et qu'il n'existe pas */
+        /* le nom d'utilisateur est modifié sinon affiche une erreur */
+        if(!empty($username) && $username != $defaultUsername && $sameUsername == false) {
             $this->accountsService->editUsername($pdo, $username);
-            $view->setVar('message', "Votre pseudo a bien été changé !");
-        } else if(!empty($update) && !empty($username) && $username != $defaultUsername && $sameUsername == true) {
-            $view->setVar('erreur', "Pseudonyme déjà existant !");
+            $view->setVar('message', "Votre nom d'utilisateur a bien été changé !");
+        } else if(!empty($username) && $username != $defaultUsername && $sameUsername == true) {
+            $view->setVar('erreur', "nom d'utilisateur déjà existant !");
         }
 
         return $view;
@@ -184,8 +195,11 @@ class AccountsController {
 
     /**
      * Modifie la date de naissance de l'utilisateur courant
-     * @param $pdo \PDO the pdo object
-     * @return \PDOStatement the statement referencing the result set
+     * @param $pdo  la connexion à la base de données
+     * @param $view  la view à modifier
+     * @param $birthDate  la nouvelle date de naissance
+     * @param $defaultBirthDate  l'ancienne date de naissance
+     * @return $view  le message à afficher si il y a une erreur de modification ou non
      */
     public function updateBirthDate($pdo, $view, $birthDate, $defaultBirthDate) {
 
@@ -203,8 +217,11 @@ class AccountsController {
 
     /**
      * Modifie le genre de l'utilisateur courant
-     * @param $pdo \PDO the pdo object
-     * @return \PDOStatement the statement referencing the result set
+     * @param $pdo  la connexion à la base de données
+     * @param $view  la view à modifier
+     * @param $username  le nouveau genre
+     * @param $defaultUsername  l'ancien genre
+     * @return $view  le message à afficher si il y a une modification du genre
      */
     public function updateGender($pdo, $view, $gender, $defaultGender) {
 
@@ -223,8 +240,8 @@ class AccountsController {
 
     /**
      * Change le mot de passe de l'utilisateur
-     * @param $pdo \PDO the pdo object
-     * @return \PDOStatement the statement referencing the result set
+     * @param $pdo  la connexion à la base de données
+     * @return $view  le message à afficher si il y a une modification du mot de passe
      */
     public function editPassword($pdo) {
         /* Création d'une nouvele vue */
@@ -259,8 +276,8 @@ class AccountsController {
 
     /**
      * Supprime le compte de l'utilisateur courant
-     * @param $pdo \PDO the pdo object
-     * @return \PDOStatement the statement referencing the result set
+     * @param $pdo  la connexion à la base de données
+     * @return $view  la page de la confirmation de la suppression du compte
      */
     public function deleteAccount($pdo) {
 
@@ -280,8 +297,8 @@ class AccountsController {
 
     /**
      * Déconnecte l'utilisateur courant
-     * @param $pdo \PDO the pdo object
-     * @return \PDOStatement the statement referencing the result set
+     * @param $pdo  la connexion à la base de données
+     * @return $view  la page d'accueil du site
      */
     public function disconnect($pdo) {
 
@@ -297,6 +314,10 @@ class AccountsController {
 
 }
 
+/**
+ * crée un profile avec toutes les données modifiable d'un utilisateur
+ * sauf le mot de passe qui est géré par la classe 'Password'
+ */
 class Profile {
 
     public static $email;
@@ -333,6 +354,10 @@ class Profile {
 
 }
 
+/**
+ * Crée un profile avec toutes les données nécessaires à la 
+ * modifiaction du mot de passe de l'utilisateur
+ */
 class Passwords {
 
     public static $oldPassword;
@@ -356,7 +381,6 @@ class Passwords {
     }
 
     public static function initialisation($view) {
-
         /* Ajout des valeurs dans la vue */
         $view->setVar('message', Passwords::$message);
         $view->setVar('update', Passwords::$update);

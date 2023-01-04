@@ -16,6 +16,12 @@ class HumeursController {
         $this->humeursService = HumeursService::getDefaultHumeursService();
     }
 
+    /**
+     * Fonction de base du controlleur, récupère la liste des humeurs qui seront proposées,
+     * si l'utilisateur n'est pas connecté renvoi sur la page de connexion/inscription
+     * @param $pdo  la connexion à la base de données
+     * @return $view  la vue de la page
+     */
     public function index($pdo) {
         $view = new View("CheckYourMood/codeCYM/views/Humeurs");
         $listeHumeurs = $this->humeursService->getListeHumeurs();
@@ -29,6 +35,10 @@ class HumeursController {
         return $view;
     }
 
+    /**
+     * insère l'humeur saisie par l'utilisateur si elle est correcte, 
+     * sinon ne l'insère pas et indique à l'utilisateur que l'humeur est incorrecte
+     */
     public function setHumeur($pdo) {
         $view = new View("CheckYourMood/codeCYM/views/Humeurs");
         $description = HttpHelper::getParam("description");

@@ -7,9 +7,9 @@ use PDOException;
 class StatsService
 {
     /**
-     * Renvoie l'historique de toutes les humeurs de l'utilisateur
-     * @param $pdo \PDO the pdo object
-     * @return \PDOStatement the statement referencing the result set
+     * Récupère l'historique de toutes les humeurs de l'utilisateur
+     * @param $pdo  la connexion à la base de données
+     * @return $resultats  le résultat de la requête (toutes les humeurs entrées par un utilisateur)
      */
     public function getHistorique($pdo) {
         $requete = 'SELECT CODE_User, Humeur_Libelle, Humeur_Emoji, Humeur_Time, Humeur_Description FROM Humeur WHERE CODE_User = :id ORDER BY Humeur_Time DESC';
@@ -19,7 +19,10 @@ class StatsService
     }
     
     /**
-     * Récupère le nombre de fois où toutes les humeurs apparaissent dans la base de donné ainsi que les humeurs associer à ce nombre 
+     * Récupère le nombre de fois où toutes les humeurs apparaissent dans 
+     * la base de donné ainsi que les humeurs associer à ce nombre 
+     * @param $pdo  la connexion à la base de données
+     * @return $req  le résultat de la requête
      */
     public function getMaxHumeur($pdo) {
         $req =$pdo->prepare("SELECT Humeur_Libelle, COUNT(Humeur_Libelle) as compteur, Humeur_Emoji from humeur join user ON user.User_ID = humeur.CODE_USER WHERE CODE_User = :id GROUP BY Humeur_Libelle ORDER BY compteur DESC LIMIT 1");
@@ -30,12 +33,22 @@ class StatsService
         return $req;
     }
 
+    /**
+     * Récupère le nombre de fois qu'un utilisateur à saisi chaque humeur
+     * @param $pdo  la connexion à la base de données
+     * @return $req  le résultat de la requête
+     */
     public function getAllValue($pdo) {
         $req = $pdo->prepare("SELECT Humeur_Libelle, COUNT(Humeur_Libelle) as compteur from humeur join user ON user.User_ID = humeur.CODE_USER WHERE CODE_User = :id GROUP BY Humeur_Libelle");
         $req->execute(['id'=>$_SESSION['UserID']]);
         return $req;
     }
 
+    /**
+     * Récupère le nombre d'humeurs qu'un utilisateur a
+     * @param $pdo  la connexion à la base de données
+     * @return $allRow  le résultat de la requête converti en int
+     */
     public function getAllRow($pdo) {
         $req = $pdo->prepare ("SELECT COUNT(*) AS allRow FROM humeur WHERE CODE_User = :id");
         $req->execute(['id'=>$_SESSION['UserID']]);
@@ -44,6 +57,14 @@ class StatsService
         return $allRow;
     }
 
+    /**
+     * Récupère le nombre de fois qu'un utilisateur a eu une humeur entre 2 dates
+     * @param $pdo  la connexion à la base de données
+     * @param $startDate  la date de début choisit par l'utilisateur
+     * @param $endDate  la date de fin choisit par l'utilisateur
+     * @param $humeurs  l'humeur choisit par l'utilisateur
+     * @return $result  le résultat de la requête
+     */
     public function getMostUsed($pdo, $startDate, $endDate, $humeurs) {
         $result = "";
         if ($humeurs == "TOUS") {
@@ -62,6 +83,14 @@ class StatsService
         return $result;
     }
 
+    /**
+     * Récupère le nombre de fois qu'un utilisateur a eu une humeur entre 2 dates regroupé par jour
+     * @param $pdo  la connexion à la base de données
+     * @param $startDate  la date de début choisit par l'utilisateur
+     * @param $endDate  la date de fin choisit par l'utilisateur
+     * @param $humeurs  l'humeur choisit par l'utilisateur
+     * @return $req  le résultat de la requête
+     */
     public function getHumeurByTime($pdo, $startDate, $endDate, $humeurs) {
         $req = $pdo->prepare("SELECT count(*) as nombreHumeur, Humeur_Libelle, DATE_FORMAT(Humeur_Time, '%d/%m/%y') as Date from humeur where code_User=:id AND Humeur_Libelle = :libelle and Humeur_Time BETWEEN :startDate AND :endDate and Humeur_time GROUP BY (SELECT DATE_FORMAT(Humeur_Time, '%d/%m/%y'))");
         $req->execute(['id'=>$_SESSION['UserID'], 'libelle'=>$humeurs, 'startDate'=>$startDate, 'endDate'=>$endDate]);
@@ -98,6 +127,7 @@ class StatsService
         return $nombreSaisiesHumeurSelectionnee;
     }
     
+    /* Singleton d'instanciation */
     private static $defaultStatsService ;
     public static function getDefaultStatsService()
     {
