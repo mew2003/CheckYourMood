@@ -68,7 +68,11 @@ class StatsService
         return $req;
     }
 
+    /**
+     * récupère le nombre total d'humeurs saisies, toutes humeurs confondues
+     */
     public function getNombreTotalHumeursSaisies($pdo) {
+        
         /**
          * toutes les humeurs saisies
          */
