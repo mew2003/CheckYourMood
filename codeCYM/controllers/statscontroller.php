@@ -51,6 +51,10 @@ class StatsController {
             $view->setVar('valueByDate1', $valueByDate1);
             $view->setVar('valueByDate2', $valueByDate2);
             $view->setVar('humeurSelected', $humeurs);
+            $nombreTotalHumeursSaisies = $this->statsService->getNombreTotalHumeursSaisies($pdo);
+            $view->setVar('nombreTotalHumeursSaisies', $nombreTotalHumeursSaisies);
+            $nombreSaisiesHumeurSelectionnee = $this -> statsService -> getNombreSaisiesHumeurSelectionnee($pdo, $humeurs);
+            $view->setVar('nombreSaisiesHumeurSelectionnee', $nombreSaisiesHumeurSelectionnee);
         }
         return $view;
     }
@@ -120,13 +124,18 @@ class StatsController {
         $valueByDate2 = $this->statsService->getHumeurByTime($pdo, $startDate, $endDate, $humeurs);
         $view->setVar('valueByDate1', $valueByDate1);
         $view->setVar('valueByDate2', $valueByDate2);
-        $view->setVar('humeurSelected', $humeurs);
+        $nombreTotalHumeursSaisies = $this->statsService->getNombreTotalHumeursSaisies($pdo);
+        $view->setVar('nombreTotalHumeursSaisies', $nombreTotalHumeursSaisies);
+        $nombreSaisiesHumeurSelectionnee = $this -> statsService -> getNombreSaisiesHumeurSelectionnee($pdo, $humeurs);
+        $view->setVar('nombreSaisiesHumeurSelectionnee', $nombreSaisiesHumeurSelectionnee);
         return $view;
     }
 
-    public function donneesQuantitatives($pdo) {
-        $nbreTotHumeursSaisies = $this->statsService->getDonneesQuantitatives($pdo, $startDate, $endDate, $humeurs);
-        $view = new View("CheckYourMood/codeCYM/views/Stats");
-    }
+    /**
+     * permet de récupérer les données quantitatives sur une ou plusieurs humeurs
+     * affiche le nombre de saisies d'une humeur par rapport au nombre total
+     * de saisies de toutes les humeurs, ainsi qu'un pourcentage de saisie
+     * de cette humeur
+     */
 
 }
