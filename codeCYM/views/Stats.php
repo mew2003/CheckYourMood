@@ -91,7 +91,7 @@
                                         }
                                     ?>,
                             datasets: [{
-                                label: <?php echo "'$humeurSelected'" ?>,
+                                label: <?php echo "'$humeurs'" ?>,
                                 data: <?php 
                                             $i = 0;
                                             while ($row2 = $valueByDate2->fetch()) {
@@ -180,6 +180,18 @@
                         echo $emojiUsed;
                     }
                 ?>
+                <div class="separateur"></div>
+                <div>
+                    <?php
+                        if (isset($humeurs) && $humeurs != "TOUS") {
+                            echo "L'humeur $humeurs a été saisie $nombreSaisiesHumeurSelectionnee fois sur un total de $nombreTotalHumeursSaisies saisie";
+                            if ($nombreTotalHumeursSaisies > 1 ) echo 's'; 
+                            echo " d'humeur toutes confondues ce qui représente " . round($nombreSaisiesHumeurSelectionnee * 100 / $nombreTotalHumeursSaisies, 2) . "% des humeurs saisies";
+                        } else {
+                            echo 'Merci de sélectionner une humeur';
+                        }
+                    ?>
+                </div>
             </td>
             <td class="bot-const-part const">
                 <div class="chart-container" style="position: relative;">
@@ -358,36 +370,6 @@
                         },
                     });
                 </script>
-            </td>
-        </tr>
-    </table>
-    <table>
-        <tr>
-            <td>
-            <form action="#" method="get">  
-            <input hidden id="action" name="action" value="donneesQuantitatives">
-            <input hidden name="controller" value="stats">
-                <?php
-                    foreach($tabHumeurs as $humeur) {
-
-                        $humeur = str_replace(' ', '_', $humeur);
-            
-                        /**
-                         * affichage sous forme d'un formulaire avec des cases à cocher
-                         */
-                        echo '<input type = "checkbox" name = "' . $humeur . '" value = "' . $humeur . '"';
-                        if (isset($_POST["$humeur"])) {
-                            echo 'checked' . '>';
-                        }
-                        echo '<label for = "' . $humeur . '">' . str_replace('_', ' ', $humeur);
-                        echo '</label> &nbsp; &nbsp;';
-                    }
-                    /**
-                     * affichage d'un bouton pour valider le formulaire
-                     */
-                    echo '<input type="submit">';
-                ?>
-            </form>
             </td>
         </tr>
     </table>

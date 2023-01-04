@@ -69,29 +69,33 @@ class StatsService
     }
 
     public function getNombreTotalHumeursSaisies($pdo) {
-        $nombreTotalHumeurSaisies = $pdo->prepare("SELECT COUNT(*) as nombreSaisie FROM humeur WHERE code_user = :code_user GROUP BY code_user");
-        $nombreTotalHumeurSaisies->bindParam("code_user", $_SESSION['UserID']);
-        $nombreTotalHumeurSaisies->execute();
-        return $nombreTotalHumeurSaisies;
+        /**
+         * toutes les humeurs saisies
+         */
+        $toutesLesHumeursSaisies = "SELECT humeur_libelle FROM humeur WHERE code_user = :code_user";
+        $toutesLesHumeursSaisies = $pdo->prepare($toutesLesHumeursSaisies);
+        $toutesLesHumeursSaisies->bindParam("code_user", $_SESSION['UserID']);
+        $toutesLesHumeursSaisies->execute();
+
+        /**
+         * récupère le résultat de la requête
+         * (résultat unique)
+         */
+        $nombreTotalHumeursSaisies = $toutesLesHumeursSaisies -> rowCount();
+        return $nombreTotalHumeursSaisies;
     }
 
-    public function getListeHumeurs($pdo) {
-        $humeurs = "SELECT DISTINCT humeur_libelle FROM humeur WHERE code_user = :code_user";
-        $humeurs = $pdo->prepare($requete);
-        $humeurs -> bindParam("code_user", $_SESSION['UserID']);
-        $humeurs->execute();
-        $i = 0;
-        /**
-         * stockage de la liste des humeurs dans un tableau pour 
-         * limiter les accès à la base de données
-         */
-        $tabHumeurs = "";
-
-        while ($ligne = $humeurs->fetch()) {
-            $tabHumeurs[$i] = $ligne['humeur_libelle'];
-            $i++;
-        }
-        return $tabHumeurs;
+    /**
+     * récupère le nombre de saisies de l'humeur saisie par l'utilisateur
+     */
+    public function getNombreSaisiesHumeurSelectionnee($pdo, $humeurSelectionnee) {
+        $nombreSaisiesHumeurSelectionnee = "SELECT humeur_libelle FROM humeur WHERE code_user = :code_user AND humeur_libelle = :humeur_libelle";
+        $nombreSaisiesHumeurSelectionnee = $pdo -> prepare($nombreSaisiesHumeurSelectionnee);
+        $nombreSaisiesHumeurSelectionnee -> bindParam('humeur_libelle', $humeurSelectionnee);
+        $nombreSaisiesHumeurSelectionnee -> bindParam('code_user', $_SESSION['UserID']);
+        $nombreSaisiesHumeurSelectionnee -> execute();
+        $nombreSaisiesHumeurSelectionnee = $nombreSaisiesHumeurSelectionnee -> rowCount();
+        return $nombreSaisiesHumeurSelectionnee;
     }
     
     private static $defaultStatsService ;
