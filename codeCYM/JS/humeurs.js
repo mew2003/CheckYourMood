@@ -2,9 +2,8 @@
  * Récupère l'heure locale
  */
 function refreshTime() {
-    const timeDisplay = $("#time");
     const dateString = new Date().toLocaleTimeString();
-    timeDisplay.textContent = dateString;
+    $("#time").text(dateString);
 }
 /* Lance la récupèration de l'heure toute les 100 millisecondes pour l'actualiser */
 setInterval(refreshTime, 100);
@@ -46,5 +45,5 @@ function getSmiley(element) {
         default:
             smiley = "🚫";
     }
-    $("#smiley").val() = smiley;
+    $("#smiley").val(smiley);
 }
