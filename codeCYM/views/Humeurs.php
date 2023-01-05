@@ -26,9 +26,9 @@
         <?php
             if(isset($msgHumeur)) {
                 if($msgHumeur == "Votre humeur a bien été ajouté.") {
-                    echo "<p class='enVert'>".$msgHumeur."</p>";
+                    echo "<p class='enVert'><br>".$msgHumeur."</p>";
                 } else {
-                    echo "<p class='enRouge'>".$msgHumeur."</p>";
+                    echo "<p class='enRouge'><br>".$msgHumeur."</p>";
                 }
                 $_SESSION['msgHumeur'] = null;
             }

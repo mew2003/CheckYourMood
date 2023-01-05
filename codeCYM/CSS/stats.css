@@ -71,7 +71,7 @@ td.mid-float-part, td.top-float-part, td.bot-float-part {
 .low-part {
     display: none;
 }
-@media (max-width:750px) {
+@media (max-width:767px) {
     td.low-part .chart-container {
         margin-left: auto;
         margin-right: auto;
@@ -104,6 +104,9 @@ td.mid-float-part, td.top-float-part, td.bot-float-part {
     }
     .top-float-part {
         width: 100%;
+    }
+    .show-nav table {
+        display: none;
     }
 }
 .bouton {

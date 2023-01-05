@@ -144,20 +144,22 @@ class StatsController {
         $this->statsService->delHumeur($pdo, $time, $libelle);
         $resultats = $this->statsService->getHistorique($pdo);
         $allRow = $this->statsService->getAllRow($pdo);
-        $view->setVar('resultats',$resultats);
+        $view->setVar('historyValue',$resultats);
         $view->setVar('allRow',$allRow);
         return $view;
     }
 
-    public function updateDesc($pdo) {
+    public function update($pdo) {
         $view = new View("CheckYourMood/codeCYM/views/history");
         $time = HttpHelper::getParam("time");
         $libelle = HttpHelper::getParam("libelle");
         $desc = HttpHelper::getParam("desc");
+        $changeTime = HttpHelper::getParam("change-time");
         $this->statsService->updateDesc($pdo, $time, $libelle, $desc);
+        $this->statsService->updateTime($pdo, $time, $libelle, $changeTime);
         $resultats = $this->statsService->getHistorique($pdo);
         $allRow = $this->statsService->getAllRow($pdo);
-        $view->setVar('resultats',$resultats);
+        $view->setVar('historyValue',$resultats);
         $view->setVar('allRow',$allRow);
         return $view;
     }

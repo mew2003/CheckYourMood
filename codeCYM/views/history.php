@@ -48,9 +48,16 @@
                         if($i <= $nombreLigneMax && $i > $min) {
                             $date1 = $ligne->Humeur_TimeConst;
                             $timeStamp1 = strtotime($date1);
-                            $finalDate = $timeStamp1 - 86400;
-                            $finalDate1 = date("Y-m-d H:i:s", $finalDate);
+                            $finalDate = $timeStamp1 + 86400;
+                            $finalDate1 = date('Y-m-d H:i:s', $finalDate);
 
+                            $actualDate = date_default_timezone_get(); 
+                            $actual = date('Y-m-d H:i:s', time());
+                            $actualTimeStamp = strtotime($actual);
+                            $actualFinalTimeStanp = date('Y-m-d H:i:s', $actualTimeStamp);
+
+                            $dayBefore = $timeStamp1 - 86400;
+                            $min = date('Y-m-d H:i:s', $dayBefore);
                             echo "<tr>
                                     <td>".htmlspecialchars($ligne->Humeur_Libelle)."</td>
                                     <td>".htmlspecialchars($ligne->Humeur_Emoji)."</td>
@@ -66,16 +73,20 @@
                                     <div>Nouvelle Description :<br></div>
                                     <div class='buttons'>
                                         <form action='#' method='post' class='form-desc'>
-                                            <input hidden name='action' value='updateDesc'>
+                                            <input hidden name='action' value='update'>
                                             <input hidden name='controller' value='stats'>
                                             <input hidden name='time' value='$ligne->Humeur_Time'>
                                             <input hidden name='libelle' value='$ligne->Humeur_Libelle'>
-                                            <textarea name='desc' value='$ligne->Humeur_Description'>$ligne->Humeur_Description</textarea>
-                                            <label>Nouvelle Date : (Max -24H) </label>
-                                            ".if (time() > $ligne->Humeur_TimeConst) {."
-                                                <input class='time' type='datetime-local' name='time' value='$ligne->Humeur_Time' min='$finalDate' max='$ligne->Humeur_TimeConst'>
-                                            ".}."
-                                            <button type='submit' name='del-humeur' val='$i' class='update'>
+                                            <textarea name='desc' class='textarea' value='$ligne->Humeur_Description'>$ligne->Humeur_Description</textarea>";
+                                            if ($actualFinalTimeStanp <= $finalDate1) {
+                                                echo "<label>Nouvelle Date : (Max -24H) </label>
+                                                    <input class='time' type='datetime-local' name='change-time' value='$ligne->Humeur_Time'  min='$min' max='$ligne->Humeur_TimeConst'>";
+                                            } else {
+                                                echo "<label>Date non modifiable <br>(humeur créé il y a trop logntemps):</label>
+                                                    <input hidden name='change-time' value='$ligne->Humeur_Time'>
+                                                    <input type='text' value='$ligne->Humeur_Time' disabled>";
+                                            }
+                                            echo "<button type='submit' name='del-humeur' val='$i' class='update'>
                                                 Valider
                                             </button>
                                         </form>

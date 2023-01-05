@@ -144,6 +144,15 @@ class StatsService
         $req->execute();
     }
 
+    public function updateTime($pdo, $time, $libelle, $changeTime) {
+        $req = $pdo->prepare('UPDATE humeur SET Humeur_Time = :changeTime WHERE CODE_User = :id AND Humeur_Time = :time AND Humeur_Libelle = :libelle');
+        $req->bindparam('changeTime', $changeTime);
+        $req->bindparam('id', $_SESSION['UserID']);
+        $req->bindparam('time', $time);
+        $req->bindparam('libelle', $libelle);
+        $req->execute();
+    }
+
     /* Singleton d'instanciation */
     private static $defaultStatsService ;
     public static function getDefaultStatsService()

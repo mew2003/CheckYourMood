@@ -106,12 +106,12 @@ th {
 }
 .popuptext {
     width: 40vw;
-    height: 90vh;
+    height: 95vh;
     background-color: antiquewhite;
     position: absolute;
-    top: 8vh;
+    top: 3vh;
     display: none;
-    left: 26%;
+    left: 30%;
     border: solid 2px;
     border-radius: 10px;
     overflow-y: hidden;
@@ -121,7 +121,9 @@ th {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
     gap: 2vh;
+    padding-bottom: 2vh;
 }
 .description {
     display: flex;
@@ -135,12 +137,13 @@ th {
     word-break: break-all;
     border: solid 1px;
     border-radius: 5px;
+    background-color: aliceblue;
 }
 .background {
     display: none;
     position: absolute;
     width: 100%;
-    height: 154%;
+    height: 185%;
     background-color: black;
     opacity: 0.5;
     overflow-y: hidden;
@@ -168,7 +171,6 @@ th {
     justify-content: center;
     background-color: rgb(255, 49, 49);
     font-size: 30px;
-    top: 20vh;
     left: 25vw;
 }
 .xMark {
@@ -193,27 +195,36 @@ th {
 .delimiter-Row {
     width: 80%;
     border: solid 1px;
+    background-color: black;
 }
 .buttons {
-    width: 100%;
-    height: 30vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-.buttons form {
     width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 20px;
+}
+.buttons .form-del {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.buttons .form-desc {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
 }
 .buttons form textarea {
     width: 90%;
-    height: 50vh;
+    height: 160%;
 }
 .trash, .update {
     width: 40%;
@@ -234,5 +245,5 @@ th {
 }
 .time {
     width: 50%;
-    height: 35vh;
+    height: 50%;
 }

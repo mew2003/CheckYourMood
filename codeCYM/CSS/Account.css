@@ -12,7 +12,9 @@
 
 /* Ajoute un padding sur l'ensemble du contenu du profil et le contour est verts */
 .main {
-    padding: 10px;
+    width: 100%;
+    padding-bottom: 10px;
+    padding-left: 10px;
     border: solid 1px #96E9D5;
 }
 
@@ -27,22 +29,16 @@
     text-align: center;
 }
 
-.col-sm .button {
-    background: red;
-}
-
 .button:hover {
     background-color: #147760;
 }
 
 /* Modifie le bouton pour se désinscrire */
 .buttonD {
-    margin-left : 10px;
-    margin-right : 10px;
     border-radius: 25px;
     background-color: #E84855;
     border: none;
-    width: 405px;
+    width: 30vw;
     height: 54px;
 }
 

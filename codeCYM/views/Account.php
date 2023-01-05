@@ -39,7 +39,7 @@
                     echo "<h2>Genre :</h2>";
                     echo "<h2>$gender</h2>";
                 echo "</div>";
-                echo "</div>"; 
+            echo "</div>"; 
             ?>
                 <div class="col-md-6 col-sm-4 d-flex justify-content-md-end justify-content-sm-end justify-content-center align-items-start">
                     <div class="row col-xs-hidden flex-md-row flex-sm-column justify-content-between justify-content-sm-center justify-content-between" style="padding: 10px;">
@@ -56,13 +56,13 @@
                     </div>
                 </div>
             </div>
-            <div class="d-flex d-row justify-content-between">
-                <form method="get" action="#">
+            <div class="d-flex d-row row justify-content-evenly gap-2">
+                <form method="get" action="#" class='col-md-3 col-sm-3 col-xs-4'>
                     <input hidden name="action" value="deleteAccount">
                     <input hidden name="controller" value="accounts">
                     <input class="buttonD" type="submit" value="Supprimer le compte"/>
                 </form>
-                <form method="get" action="#">
+                <form method="get" action="#" class='col-md-3 col-sm-3 col-xs-4'>
                     <input hidden name="action" value="disconnect">
                     <input hidden name="controller" value="accounts">
                     <input class="buttonD" type="submit" value="Déconnexion"/>

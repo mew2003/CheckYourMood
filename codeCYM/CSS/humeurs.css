@@ -99,9 +99,11 @@ textarea {
 }
 .enRouge {
     color: red;
+    text-align: center;
 }
 .enVert {
     color: #147760;
+    text-align: center;
 }
 .msgHumeur-block {
     font-size: 40px;
