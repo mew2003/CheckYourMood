@@ -44,8 +44,13 @@
                           <tr>";		
                     $min = 0 + (15 * ($currentPage - 1));
                     $i = 1;
-                    while( $ligne = $resultats->fetch() ) { 
+                    while( $ligne = $historyValue->fetch() ) { 
                         if($i <= $nombreLigneMax && $i > $min) {
+                            $date1 = $ligne->Humeur_TimeConst;
+                            $timeStamp1 = strtotime($date1);
+                            $finalDate = $timeStamp1 - 86400;
+                            $finalDate1 = date("Y-m-d H:i:s", $finalDate);
+
                             echo "<tr>
                                     <td>".htmlspecialchars($ligne->Humeur_Libelle)."</td>
                                     <td>".htmlspecialchars($ligne->Humeur_Emoji)."</td>
@@ -66,8 +71,12 @@
                                             <input hidden name='time' value='$ligne->Humeur_Time'>
                                             <input hidden name='libelle' value='$ligne->Humeur_Libelle'>
                                             <textarea name='desc' value='$ligne->Humeur_Description'>$ligne->Humeur_Description</textarea>
+                                            <label>Nouvelle Date : (Max -24H) </label>
+                                            ".if (time() > $ligne->Humeur_TimeConst) {."
+                                                <input class='time' type='datetime-local' name='time' value='$ligne->Humeur_Time' min='$finalDate' max='$ligne->Humeur_TimeConst'>
+                                            ".}."
                                             <button type='submit' name='del-humeur' val='$i' class='update'>
-                                                <i class='fa-solid fa-pen-to-square'></i>
+                                                Valider
                                             </button>
                                         </form>
                                         <form action='#' method='get' class='form-del'>
@@ -76,7 +85,7 @@
                                             <input hidden name='time' value='$ligne->Humeur_Time'>
                                             <input hidden name='libelle' value='$ligne->Humeur_Libelle'>
                                             <button type='submit' name='del-humeur' val='$i' class='trash'>
-                                                <i class='fa-solid fa-trash-can'></i>
+                                                Suprimer
                                             </button>
                                         </form>
                                     </div>

@@ -225,10 +225,14 @@ th {
     border-radius: 15px;
 }
 .trash {
-    background-color: red;
+    background-color: rgb(255, 49, 49);
     
 }
 .update {
-    background-color: rgb(238, 238, 238);
+    background-color: #95e9d5;
     margin-bottom: 5vh;
+}
+.time {
+    width: 50%;
+    height: 35vh;
 }

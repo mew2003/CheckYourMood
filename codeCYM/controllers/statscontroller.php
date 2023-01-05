@@ -72,7 +72,7 @@ class StatsController {
         } else {
             $resultats = $this->statsService->getHistorique($pdo);
             $allRow = $this->statsService->getAllRow($pdo);
-            $view->setVar('resultats',$resultats);
+            $view->setVar('historyValue',$resultats);
             $view->setVar('allRow',$allRow);
         }
         return $view;

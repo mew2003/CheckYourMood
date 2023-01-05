@@ -48,8 +48,8 @@ class HumeursService
                 if (strcasecmp($i, $humeur) == 0) {
                     $libelle = htmlspecialchars($humeur);
                     $id = $_SESSION['UserID'];
-                    $requete = $pdo->prepare("INSERT INTO `humeur`(`CODE_User`, `Humeur_Libelle`, `Humeur_Emoji`, `Humeur_Time`, `Humeur_Description`) 
-                                                VALUES (:id,:libelle,:smiley,CURRENT_TIMESTAMP,:description)");
+                    $requete = $pdo->prepare("INSERT INTO `humeur`(`CODE_User`, `Humeur_Libelle`, `Humeur_Emoji`, `Humeur_Time`, `Humeur_Description`, `Humeur_TimeConst`) 
+                                                VALUES (:id,:libelle,:smiley,CURRENT_TIMESTAMP,:description,CURRENT_TIMESTAMP)");
                     $requete->bindParam("id", $id);
                     $requete->bindParam("libelle", $libelle);
                     $requete->bindParam("smiley", $smiley);

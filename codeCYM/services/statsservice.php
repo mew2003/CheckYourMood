@@ -12,7 +12,7 @@ class StatsService
      * @return $resultats  le résultat de la requête (toutes les humeurs entrées par un utilisateur)
      */
     public function getHistorique($pdo) {
-        $requete = 'SELECT CODE_User, Humeur_Libelle, Humeur_Emoji, Humeur_Time, Humeur_Description FROM Humeur WHERE CODE_User = :id ORDER BY Humeur_Time DESC';
+        $requete = 'SELECT Humeur_TimeConst, CODE_User, Humeur_Libelle, Humeur_Emoji, Humeur_Time, Humeur_Description FROM Humeur WHERE CODE_User = :id ORDER BY Humeur_Time DESC';
         $resultats = $pdo->prepare($requete);
         $resultats->execute(['id'=>$_SESSION['UserID']]);
         return $resultats;
