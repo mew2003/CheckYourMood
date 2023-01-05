@@ -15,58 +15,70 @@
         ?>
         <header-component></header-component>
         <div class="main-container">
-            <div class="row main">  
+            <div class='title'>
+                <h1>Profil</h1>
+            </div>
+            <div class="main">  
+                <img class='one' src='assets/images/logoCYM.png'>
             <?php
-                echo '<div class="col-md-6 col-sm-8 col-xs-12 d-grid gap-3">';
-                    echo "<h1>Profil</h1>";
-                    echo '<div class="form-control d-flex flex-row align-items-center gap-2 centrer">';
-                            echo "<h2>Email :</h2>";
-                            echo "<h2>".$mail."</h2>";
-                    echo "</div>";
-                    echo '<div class="form-control d-flex flex-row align-items-center gap-2">';
-                        echo "<h2>Nom d'utilisateur :</h2>";
-                        echo "<h2>".$username."</h2>";
-                    echo "</div>";
-                    echo '<div class="form-control d-flex flex-row align-items-center gap-2">';
-                        echo "<h2>Mot de passe : </h2>";
-                        echo "<h2>***********</h2>";
-                    echo "</div>";
-                    echo '<div class="form-control d-flex flex-row align-items-center gap-2">';
-                        echo "<h2>Date de naissance :</h2>";
-                        echo "<h2>".$birthDate."</h2>";
-                    echo "</div>";
-                    echo '<div class="form-control d-flex flex-row align-items-center gap-2">';
-                    echo "<h2>Genre :</h2>";
-                    echo "<h2>$gender</h2>";
+                echo "<div class='Profil-Main'>";
+                    echo '<div class="Profil1">';
+                        echo '<div class="Email">';
+                                echo "<h2>Email :</h2>";
+                                echo "<div></div>";
+                                echo "<h2>".$mail."</h2>";
+                        echo "</div>";
+                        echo '<div class="UserName">';
+                            echo "<h2>Nom d'utilisateur :</h2>";
+                            echo "<div></div>";
+                            echo "<h2>".$username."</h2>";
+                        echo "</div>";
+                    echo "</div> <div class='Profil2'>";
+                        echo '<div class="BirthDate">';
+                            echo "<h2>Date de naissance :</h2>";
+                            echo "<div></div>";
+                            echo "<h2>".$birthDate."</h2>";
+                        echo "</div>";
+                        echo '<div class="Gender">';
+                            echo "<h2>Genre :</h2>";
+                            echo "<h2>$gender</h2>";
+                        echo "</div>";
+                    echo "</div>"; 
                 echo "</div>";
-            echo "</div>"; 
             ?>
-                <div class="col-md-6 col-sm-4 d-flex justify-content-md-end justify-content-sm-end justify-content-center align-items-start">
-                    <div class="row col-xs-hidden flex-md-row flex-sm-column justify-content-between justify-content-sm-center justify-content-between" style="padding: 10px;">
+                <img class='two' src='assets/images/logoCYM.png'>
+            </div>
+            <div class='mid-Buttons'>
+                <div class='button-Del'>
                     <form method="get" action="#">
                         <input hidden name="action" value="editPassword">
                         <input hidden name="controller" value="accounts">
                         <input class="form-control button" type="submit" value="Modifier le mot de passe"/></input>
                     </form>
+                </div> 
+                <div class='button-Dec'>
                     <form method="get" action="#">
                         <input hidden name="action" value="editProfile">
                         <input hidden name="controller" value="accounts">
                         <input class="form-control button" type="submit" value="Modifier le profil"/>
                     </form>
-                    </div>
                 </div>
             </div>
-            <div class="d-flex d-row row justify-content-evenly gap-2">
-                <form method="get" action="#" class='col-md-3 col-sm-3 col-xs-4'>
-                    <input hidden name="action" value="deleteAccount">
-                    <input hidden name="controller" value="accounts">
-                    <input class="buttonD" type="submit" value="Supprimer le compte"/>
-                </form>
-                <form method="get" action="#" class='col-md-3 col-sm-3 col-xs-4'>
-                    <input hidden name="action" value="disconnect">
-                    <input hidden name="controller" value="accounts">
-                    <input class="buttonD" type="submit" value="Déconnexion"/>
-            </form>
+            <div class="bot-Buttons-Container">
+                <div class="bot-button-one">
+                    <form method="get" action="#">
+                        <input hidden name="action" value="deleteAccount">
+                        <input hidden name="controller" value="accounts">
+                        <input class="buttonD" type="submit" value="Supprimer le compte"/>
+                    </form>
+                </div>
+                <div class="bot-button-two">
+                    <form method="get" action="#">
+                        <input hidden name="action" value="disconnect">
+                        <input hidden name="controller" value="accounts">
+                        <input class="buttonD" type="submit" value="Déconnexion"/>
+                    </form>
+                </div>
             </div>
         </div>
     </body>

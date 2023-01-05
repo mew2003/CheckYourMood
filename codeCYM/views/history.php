@@ -82,7 +82,7 @@
                                                 echo "<label>Nouvelle Date : (Max -24H) </label>
                                                     <input class='time' type='datetime-local' name='change-time' value='$ligne->Humeur_Time'  min='$min' max='$ligne->Humeur_TimeConst'>";
                                             } else {
-                                                echo "<label>Date non modifiable <br>(humeur créé il y a trop logntemps):</label>
+                                                echo "<label>Date non modifiable <br>(humeur créé il y a trop longtemps):</label>
                                                     <input hidden name='change-time' value='$ligne->Humeur_Time'>
                                                     <input type='text' value='$ligne->Humeur_Time' disabled>";
                                             }

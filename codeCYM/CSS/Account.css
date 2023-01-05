@@ -1,50 +1,109 @@
-/* Pour laisser de la place au header */
-.main-container {
-    padding-top: 5vh;
-    display: flex;
-    flex-direction: column;
-    gap: 5vh;
+.title {
+    width: 100%;
+    text-align: center;
+    text-decoration: underline;
 }
-/* Les contours des informations sur le profil de l'utilisateur sont verts */
-.form-control {
-    border: solid 1px #96E9D5;    
-}
-
 /* Ajoute un padding sur l'ensemble du contenu du profil et le contour est verts */
 .main {
     width: 100%;
-    padding-bottom: 10px;
-    padding-left: 10px;
-    border: solid 1px #96E9D5;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.main .one {
+    transform: rotate(-35deg);
+    height: 35vh;
+}
+.main .two {
+    transform: rotate(35deg);
+    height: 35vh;
+}
+.Profil-Main {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.Email, .UserName, .Gender, .BirthDate {
+    width: 100%;
+    border-bottom: solid 2px #96E9D5;
+}
+.BirthDate, .Gender {
+    margin-left: 10px;
+}
+.Email, .UserName {
+    margin-right: 10px;
 }
 
+.Email div, .UserName div, .Gender div, .BirthDate div {
+    
+}
+.mid-Buttons {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.button-Del, .button-Dec {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.button-Del form, .button-Dec form {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 /* Modifie les boutons verts */
 .button {
-    margin: 10px;
+    width: 50%;
     height: 54px;
     border-radius: 25px;
     background-color: #96E9D5;
-    border: none;
     align-items: center;
     text-align: center;
+    border: solid 1px; 
+    box-shadow: 3px 3px;
+    font-size: 20px;
+    margin-top: 10vh;
 }
-
 .button:hover {
     background-color: #147760;
 }
+.button:active, .buttonD:active {
+    box-shadow: 0px 0px;
+}
 
+.bot-Buttons-Container, .bot-button-one form, .bot-button-two form {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.bot-button-one, .bot-button-two {
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 /* Modifie le bouton pour se désinscrire */
 .buttonD {
     border-radius: 25px;
     background-color: #E84855;
-    border: none;
-    width: 30vw;
+    border: solid 1px;
+    width: 70%;
     height: 54px;
+    box-shadow: 3px 3px;
+    font-size: 20px;
 }
 
 .buttonD:hover {
     background-color:#B3001B;
 }
+
 .show-nav .main-container {
     display: none;
 }
