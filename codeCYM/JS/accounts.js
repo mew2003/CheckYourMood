@@ -4,12 +4,10 @@
    les remet en champ de type password quand il est décoché */
 $("#check").on('click', function() {
     if ($("#check").prop('checked')) {
-        console.log("test");
         $('#oldPassword').attr('type', 'text');
         $('#newPassword').attr('type', 'text');
         $('#confirmPassword').attr('type', 'text');
     } else {
-        console.log("test non check");
         $('#oldPassword').attr('type', 'password');
         $('#newPassword').attr('type', 'password');
         $('#confirmPassword').attr('type', 'password');
