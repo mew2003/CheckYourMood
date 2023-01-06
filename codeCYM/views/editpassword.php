@@ -5,6 +5,7 @@
     <link href="/CheckYourMood/codeCYM/third-party/bootstrap/css/bootstrap.css" rel="stylesheet"/>
     <link href="/CheckYourMood/codeCYM/CSS/editpassword.css" rel="stylesheet"/>
     <script src="/CheckYourMood/codeCYM/JS/header-component.js" defer></script>
+    <script src="/CheckYourMood/codeCYM/third-party/JQuery/jquery-3.6.1.js"></script>
     <script src="/CheckYourMood/codeCYM/JS/accounts.js" defer></script>
     <title>Modification du mot de passe</title>
 </head>
