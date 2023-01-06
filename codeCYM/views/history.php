@@ -57,7 +57,7 @@
                             $actualFinalTimeStanp = date('Y-m-d H:i:s', $actualTimeStamp);
 
                             $dayBefore = $timeStamp1 - 86400;
-                            $min = date('Y-m-d H:i:s', $dayBefore);
+                            $minDate = date('Y-m-d H:i:s', $dayBefore);
                             echo "<tr>
                                     <td>".htmlspecialchars($ligne->Humeur_Libelle)."</td>
                                     <td>".htmlspecialchars($ligne->Humeur_Emoji)."</td>
@@ -80,7 +80,7 @@
                                             <textarea name='desc' class='textarea' value='$ligne->Humeur_Description'>$ligne->Humeur_Description</textarea>";
                                             if ($actualFinalTimeStanp <= $finalDate1) {
                                                 echo "<label>Nouvelle Date : (Max -24H) </label>
-                                                    <input class='time' type='datetime-local' name='change-time' value='$ligne->Humeur_Time'  min='$min' max='$ligne->Humeur_TimeConst'>";
+                                                    <input class='time' type='datetime-local' name='change-time' value='$ligne->Humeur_Time'  min='$minDate' max='$ligne->Humeur_TimeConst'>";
                                             } else {
                                                 echo "<label>Date non modifiable <br>(humeur créé il y a trop longtemps):</label>
                                                     <input hidden name='change-time' value='$ligne->Humeur_Time'>
