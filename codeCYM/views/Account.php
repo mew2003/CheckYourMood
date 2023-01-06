@@ -19,7 +19,6 @@
                 <h1>Profil</h1>
             </div>
             <div class="main">  
-                <img class='one' src='assets/images/logoCYM.png'>
             <?php
                 echo "<div class='Profil-Main'>";
                     echo '<div class="Profil1">';
@@ -46,7 +45,6 @@
                     echo "</div>"; 
                 echo "</div>";
             ?>
-                <img class='two' src='assets/images/logoCYM.png'>
             </div>
             <div class='mid-Buttons'>
                 <div class='button-Del'>

@@ -1,3 +1,8 @@
+body {
+    width: 100%;
+    height: 100%;
+    background-image: url("../assets/images/background.png");
+}
 .title {
     width: 100%;
     text-align: center;
@@ -10,14 +15,6 @@
     align-items: center;
     justify-content: space-evenly;
 }
-.main .one {
-    transform: rotate(-35deg);
-    height: 35vh;
-}
-.main .two {
-    transform: rotate(35deg);
-    height: 35vh;
-}
 .Profil-Main {
     background-color: hwb(0 97% 3%);
     box-shadow: 3px 3px;
@@ -29,6 +26,7 @@
     border-radius: 20px;
     padding-top: 5vh;
     padding-bottom: 5vh;
+    margin-top: 10vh;
 }
 .Email, .UserName, .Gender, .BirthDate {
     width: 100%;
@@ -76,7 +74,7 @@
     margin-top: 10vh;
 }
 .button:hover {
-    background-color: #147760;
+    background-color: #1ead8c;
 }
 .button:active, .buttonD:active {
     box-shadow: 0px 0px;
@@ -89,7 +87,7 @@
     justify-content: space-around;
 }
 .bot-button-one, .bot-button-two {
-    margin-top: 10px;
+    margin-top: 5vh;
     width: 100%;
     display: flex;
     align-items: center;
@@ -107,7 +105,7 @@
 }
 
 .buttonD:hover {
-    background-color:#B3001B;
+    background-color:#df0d2c;
 }
 
 .show-nav .main-container {
