@@ -15,23 +15,20 @@ body {
     align-items: center;
     justify-content: space-evenly;
 }
-@media (max-width:767px) {
-    .Profil-Main {
-        display: flex;
-        align-items: center;
-        justify-content: space-evenly;
-        flex-direction: column;
-        width: 90vw;
-    }
-    .Email, .UserName {
-        width: 100%;
-    }
+.buttonD {
+    width: 55%;
+    border-radius: 25px;
+    background-color: #E84855;
+    border: solid 1px;
+    height: 54px;
+    box-shadow: 3px 3px;
+    font-size: 20px;
 }
 .Profil-Main {
     background-color: rgb(247, 247, 247);
     box-shadow: 3px 3px;
     border: solid 1px;
-    width: 50%;
+    width: 60%;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -74,7 +71,8 @@ body {
 }
 /* Modifie les boutons verts */
 .button {
-    width: 50%;
+    min-width: fit-content;
+    width: 40%;
     height: 54px;
     border-radius: 25px;
     background-color: #96E9D5;
@@ -105,16 +103,6 @@ body {
     align-items: center;
     justify-content: center;
 }
-/* Modifie le bouton pour se désinscrire */
-.buttonD {
-    border-radius: 25px;
-    background-color: #E84855;
-    border: solid 1px;
-    width: 70%;
-    height: 54px;
-    box-shadow: 3px 3px;
-    font-size: 20px;
-}
 
 .buttonD:hover {
     background-color:#df0d2c;
@@ -122,4 +110,35 @@ body {
 
 .show-nav .main-container {
     display: none;
+}
+
+@media (max-width:767px) {
+    .BirthDate, .Gender {
+        margin-left: 0;
+    }
+    .Email, .UserName {
+        margin-right: 0;
+    }
+    .Profil-Main {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        flex-direction: column;
+        padding-top: 2.5vh;
+        padding-bottom: 2.5vh;
+    }
+    .buttonD {
+        border-radius: 0;
+        min-width: fit-content;
+        width: 100%;
+        box-shadow: 0px 0px;
+    }
+    .button {
+        border-radius: 0;
+        width: 100%;
+        box-shadow: 0px 0px;
+    }
+    .bot-button-one, .bot-button-two {
+        margin-top: 0;
+    }
 }

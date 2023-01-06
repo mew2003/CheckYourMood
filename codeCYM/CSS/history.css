@@ -51,7 +51,7 @@ td {
     color: #78a79c;
     box-shadow: 0px 0px;
 }
-.show-nav .container{
+.show-nav .first-container{
     display: none;
 }
 
@@ -125,30 +125,6 @@ th {
     gap: 2vh;
     padding-bottom: 2vh;
 }
-@media (max-width:767px) {
-    .popuptext {
-        width: 90%;
-        left: 5%;
-    }
-    .description {
-        width: 35vw;
-        height: 30%;
-        font-size: 20px;
-        text-align: center;
-    }
-    .time {
-        width: 95%;
-    }
-}
-@media (min-width:768px) and (max-width:970px) {
-    .popuptext {
-        width: 90%;
-        left: 5%;
-    }
-    input.time {
-        width: 40%;
-    }
-}
 .description {
     width: 80%;
     height: 30%;
@@ -161,7 +137,7 @@ th {
     width: 100%;
     height: 185%;
     background-color: black;
-    opacity: 0.5;
+    opacity: 0.7;
     overflow-y: hidden;
 }
 .background.show {
@@ -209,7 +185,7 @@ th {
     box-shadow: 0px 0px;
 }
 .delimiter-Row {
-    width: 80%;
+    width: 85%;
     border: solid 1px;
     background-color: black;
 }
@@ -260,6 +236,53 @@ th {
     margin-bottom: 5vh;
 }
 .time {
-    width: 50%;
+    width: 55%;
     height: 50%;
+    text-align: center;
+}
+.Property-Sscreen {
+    display: none;
+}
+@media (max-width:767px) {
+    .background {
+        height: 295%;
+        width: 110%;
+    }
+    .first-container{
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        flex-direction: column;
+    }
+    .Property-Sscreen {
+        display: block;
+        
+    }
+    .Property-Bscreen {
+        display: none;
+    }
+    .popuptext {
+        width: 90%;
+        left: 5%;
+    }
+    .description {
+        height: 30%;
+        font-size: 20px;
+        text-align: center;
+    }
+    .time {
+        width: 70%;
+    }
+    .Sscreen-Libelle .popuptext.show{
+
+    }
+}
+@media (min-width:768px) and (max-width:970px) {
+    .popuptext {
+        width: 90%;
+        left: 5%;
+    }
+    .time {
+        width: 45%;
+    }
 }
