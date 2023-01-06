@@ -15,8 +15,20 @@ body {
     align-items: center;
     justify-content: space-evenly;
 }
+@media (max-width:767px) {
+    .Profil-Main {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        flex-direction: column;
+        width: 90vw;
+    }
+    .Email, .UserName {
+        width: 100%;
+    }
+}
 .Profil-Main {
-    background-color: hwb(0 97% 3%);
+    background-color: rgb(247, 247, 247);
     box-shadow: 3px 3px;
     border: solid 1px;
     width: 50%;

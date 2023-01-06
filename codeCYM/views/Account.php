@@ -32,7 +32,8 @@
                             echo "<div></div>";
                             echo "<h2>".$username."</h2>";
                         echo "</div>";
-                    echo "</div> <div class='Profil2'>";
+                    echo "</div>";
+                    echo "<div class='Profil2'>";
                         echo '<div class="BirthDate">';
                             echo "<h2><b>Date de naissance :</b></h2>";
                             echo "<div></div>";

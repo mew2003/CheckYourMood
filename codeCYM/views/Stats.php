@@ -67,7 +67,7 @@
         <tr class="second-part">
             <td class="mid-float-part">
                 <div class="chart-container" style="position: relative;">
-                    <canvas id="myLineChart"></canvas>
+                    <canvas id="myLineChart" class='line-Chart'></canvas>
                 </div>
                 <?php
                     $countRow = $valueByDate1->rowCount();

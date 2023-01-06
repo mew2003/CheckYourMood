@@ -66,9 +66,7 @@
                                     <div class='popuptext' id='myPopup$i'>
                                     <div class='cross-button'><form action='#' method='post'><button type='submit' class='xMark'><i class='fa-solid fa-xmark'></i></button></form></div>
                                     <div class='desc-title'>Description :</div>
-                                    <div class='description'>
-                                        ".htmlspecialchars($ligne->Humeur_Description)."
-                                    </div>
+                                    <textarea class='description' disabled>".htmlspecialchars($ligne->Humeur_Description)."</textarea>
                                     <div class='delimiter-Row'></div>
                                     <div>Nouvelle Description :<br></div>
                                     <div class='buttons'>

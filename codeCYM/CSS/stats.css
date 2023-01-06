@@ -72,6 +72,24 @@ td.mid-float-part, td.top-float-part, td.bot-float-part {
     display: none;
 }
 @media (max-width:767px) {
+    .line-Chart {
+        height: 80%;
+        width: 70%;
+    }
+    .chart-container {
+        margin-left: auto;
+        margin-right: auto;
+        width: 70vw;
+        height: 20vh;
+    }
+    .mid-float-part {
+        height: 20vh;
+    }
+    .smiley {
+        width: 100%;
+        height: 15vh;
+        font-size: 10vh;
+    }
     td.low-part .chart-container {
         margin-left: auto;
         margin-right: auto;
@@ -107,6 +125,14 @@ td.mid-float-part, td.top-float-part, td.bot-float-part {
     }
     .show-nav table {
         display: none;
+    }
+    td.bot-const-part {
+        height: 40vh;
+        width: 100%;
+    }
+    .low-part .chart-container {
+        width: 100%;
+        height: 100%;
     }
 }
 .bouton {
