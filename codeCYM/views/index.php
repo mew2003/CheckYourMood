@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/CheckYourMood/codeCYM/CSS/menu.css">
         <link rel="stylesheet" href="/CheckYourMood/codeCYM/third-party/bootstrap/css/bootstrap.css">
+        <link rel="icon" href="/CheckYourMood/codeCYM/assets/images/logoCYM.png">
         <script src="/CheckYourMood/codeCYM/JS/header-component.js" defer></script>
         <title>Accueil</title>
     </head>

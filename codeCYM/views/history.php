@@ -5,6 +5,7 @@
         <link href="/CheckYourMood/codeCYM/third-party/bootstrap/css/bootstrap.css" rel="stylesheet"/>
         <link href="/CheckYourMood/codeCYM/CSS/history.css" rel="stylesheet"/>
         <link rel="stylesheet" href="/CheckYourMood/codeCYM/third-party/fontawesome-free-6.2.0-web/css/all.css">
+        <link rel="icon" href="/CheckYourMood/codeCYM/assets/images/logoCYM.png">
         <script src="/CheckYourMood/codeCYM/JS/history.js"></script>
         <script src="/CheckYourMood/codeCYM/third-party/JQuery/jquery-3.6.1.js"></script>
         <title>Historique</title>

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/CheckYourMood/codeCYM/third-party/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="/CheckYourMood/codeCYM/CSS/humeurs.css">
     <link rel="stylesheet" href="/CheckYourMood/codeCYM/third-party/fontawesome-free-6.2.0-web/css/all.css">
+    <link rel="icon" href="/CheckYourMood/codeCYM/assets/images/logoCYM.png">
     <script src="/CheckYourMood/codeCYM/third-party/JQuery/jquery-3.6.1.js"></script>
     <script src="/CheckYourMood/codeCYM/JS/header-component.js" defer></script>
     <script src="/CheckYourMood/codeCYM/JS/humeurs.js"></script>
