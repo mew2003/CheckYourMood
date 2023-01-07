@@ -12,7 +12,6 @@
         <script src="/CheckYourMood/codeCYM/JS/header-component.js" defer></script>
     </head>
     <body>
-    <div class='background' id='background'></div>
     <?php
         spl_autoload_extensions(".php");
         spl_autoload_register();
@@ -40,7 +39,6 @@
                                 <th>
                                     Date/Heure
                                 </th>
-                                <th class='Property-Bscreen'>Propriétés</th>
                             </form>
                           <tr>";		
                     $min = 0 + (15 * ($currentPage - 1));
@@ -99,44 +97,8 @@
                                         </div>
                                     </td>
                                     <td class='Sscreen-Emoji'>".htmlspecialchars($ligne->Humeur_Emoji)."</td>
-                                    <td class='Sscreen-Time'>".htmlspecialchars($ligne->Humeur_Time)."</td>
-                                    <td class='Property-Bscreen'><form action='#' method='post'><button name='pop' value='$i' id='$i' type='submit' class='param'><i class='fa-solid fa-gear'></i></button></form></<td>
-                                    <div class='popuptext' id='myPopup$i'>
-                                        <div class='cross-button'><form action='#' method='post'><button type='submit' class='xMark'><i class='fa-solid fa-xmark'></i></button></form></div>
-                                        <div class='desc-title'>Description :</div>
-                                        <textarea class='description' disabled>".htmlspecialchars($ligne->Humeur_Description)."</textarea>
-                                        <div class='delimiter-Row'></div>
-                                        <div>Nouvelle Description :<br></div>
-                                        <div class='buttons'>
-                                            <form action='#' method='post' class='form-desc'>
-                                                <input hidden name='action' value='update'>
-                                                <input hidden name='controller' value='stats'>
-                                                <input hidden name='time' value='$ligne->Humeur_Time'>
-                                                <input hidden name='libelle' value='$ligne->Humeur_Libelle'>
-                                                <textarea name='desc' class='textarea' value='$ligne->Humeur_Description'>$ligne->Humeur_Description</textarea>";
-                                                if ($actualFinalTimeStanp <= $finalDate1) {
-                                                    echo "<label>Nouvelle Date : (Max -24H) </label>
-                                                        <input class='time' type='datetime-local' name='change-time' value='$ligne->Humeur_Time'  min='$minDate' max='$ligne->Humeur_TimeConst'>";
-                                                } else {
-                                                    echo "<label>Date non modifiable <br>(humeur créé il y a trop longtemps):</label>
-                                                        <input hidden name='change-time' value='$ligne->Humeur_Time'>
-                                                        <input type='text' value='$ligne->Humeur_Time' disabled>";
-                                                }
-                                                echo "<button type='submit' name='del-humeur' val='$i' class='update'>
-                                                    Valider
-                                                </button>
-                                            </form>
-                                            <form action='#' method='get' class='form-del'>
-                                                <input hidden name='action' value='deleteHumeur'>
-                                                <input hidden name='controller' value='stats'>
-                                                <input hidden name='time' value='$ligne->Humeur_Time'>
-                                                <input hidden name='libelle' value='$ligne->Humeur_Libelle'>
-                                                <button type='submit' name='del-humeur' val='$i' class='trash'>
-                                                    Suprimer
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </div>";
+                                    <td class='Sscreen-Time'>".htmlspecialchars($ligne->Humeur_Time)."</td>";
+                                    
                             echo "</tr>";
                         }
                         $i++;										
