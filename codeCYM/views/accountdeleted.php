@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <link href="/CheckYourMood/codeCYM/third-party/bootstrap/css/bootstrap.css" rel="stylesheet"/>
     <link href="/CheckYourMood/codeCYM/CSS/deleteaccount.css" rel="stylesheet"/>
-    <link rel="icon" href="/CheckYourMood/codeCYM/assets/images/logoCYM.png">
     <script src="/CheckYourMood/codeCYM/JS/header-component.js" defer></script>
     <title>Modification du profil</title>
 </head>
