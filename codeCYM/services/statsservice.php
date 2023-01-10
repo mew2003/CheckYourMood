@@ -34,6 +34,57 @@ class StatsService
     }
 
     /**
+     * Récupère le nombre total d'humeur saisie entre 2 intervales de temps
+     * @param $pdo  la connexion à la base de données
+     * @return $req  le résultat de la requête
+     */
+    public function getAllValueBetweenDates($pdo, $startDate, $endDate) {
+        $req = $pdo->prepare("SELECT Humeur_Libelle, COUNT(Humeur_Libelle) as compteur from humeur join user ON user.User_ID = humeur.CODE_USER WHERE CODE_User = :id AND Humeur_Time BETWEEN :startDate AND :endDate GROUP BY Humeur_Libelle");
+        $req->bindParam('id', $_SESSION['UserID']);
+        $req->bindParam('startDate', $startDate);
+        $req->bindParam('endDate', $endDate);
+        $req->execute();
+        return $req;
+    }
+
+    /**
+     * @param $pdo  la connexion à la base de données
+     * @return True si l'humeur à été saisie entre 2 intervales de temps
+     * @return False sinon
+     */
+    public function verifHumeurEstPresente($pdo, $startDate, $endDate, $humeur) {
+        $req =$pdo->prepare("SELECT * from humeur join user ON user.User_ID = humeur.CODE_USER WHERE CODE_User = :id AND Humeur_Libelle = :humeur AND Humeur_Time BETWEEN :startDate AND :endDate GROUP BY Humeur_Libelle");
+        $req->bindParam('id', $_SESSION['UserID']);
+        $req->bindParam('startDate', $startDate);
+        $req->bindParam('endDate', $endDate);
+        $req->bindParam('humeur', $humeur);
+        $req->execute();
+        $count = $req->rowCount();
+        if ($count == 0) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * @param $pdo  la connexion à la base de données
+     * @return True si l'humeur à déja été saisie 
+     * @return False sinon
+     */
+    public function verifIsThere($pdo, $startDate, $endDate) {
+        $req =$pdo->prepare("SELECT * from humeur join user ON user.User_ID = humeur.CODE_USER WHERE CODE_User = :id AND Humeur_Time BETWEEN :startDate AND :endDate GROUP BY Humeur_Libelle");
+        $req->bindParam('id', $_SESSION['UserID']);
+        $req->bindParam('startDate', $startDate);
+        $req->bindParam('endDate', $endDate);
+        $req->execute();
+        $count = $req->rowCount();
+        if ($count == 0) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
      * Récupère le nombre de fois qu'un utilisateur à saisi chaque humeur
      * @param $pdo  la connexion à la base de données
      * @return $req  le résultat de la requête

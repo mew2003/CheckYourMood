@@ -72,28 +72,33 @@ td.mid-float-part, td.top-float-part, td.bot-float-part {
     display: none;
 }
 @media (max-width:767px) {
-    .line-Chart {
-        height: 80%;
-        width: 70%;
-    }
-    .chart-container {
+    .donu-line-Chart {
         margin-left: auto;
         margin-right: auto;
-        width: 70vw;
-        height: 20vh;
+        height: 100%;
+        width: 80vw;
+    }
+    .chart-container {
+        width: 100%;
+        height: 60%;
     }
     .mid-float-part {
-        height: 20vh;
+        height: 50vh;
     }
     .smiley {
         width: 100%;
         height: 15vh;
         font-size: 10vh;
     }
-    td.low-part .chart-container {
+    .low-part .chart-container {
+        width: 100%;
+        height: 100%;
+    }
+    .low-part-don {
         margin-left: auto;
         margin-right: auto;
-        width: 60vw;
+        width: 100%;
+        height: 100%;
     }
     .const {
         display: none;
@@ -130,15 +135,7 @@ td.mid-float-part, td.top-float-part, td.bot-float-part {
         height: 40vh;
         width: 100%;
     }
-    .low-part .chart-container {
-        width: 100%;
-        height: 100%;
-    }
 }
 .bouton {
     font-weight: 700;
-}
-.separateur {
-    width: 100%;
-    border: solid 1px;
 }

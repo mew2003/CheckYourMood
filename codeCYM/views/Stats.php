@@ -46,7 +46,6 @@
                         ?>">
                     </div>
                     <select name="humeurs">
-                        <label>Humeurs</label>
                         <option>TOUS</option>
                         <?php 
                             foreach ($listeHumeurs as $row) {
@@ -73,9 +72,39 @@
         </tr>
         <tr class="second-part">
             <td class="mid-float-part">
-                <div class="chart-container" style="position: relative;">
-                    <canvas id="myLineChart" class='line-Chart'></canvas>
-                </div>
+          <?php  
+          if ($humeurs != "TOUS" && $Exist) { 
+                    if ($endDate == "" || $startDate == "") {
+                        echo "<h2>Veuillez saisir une date de début et une date de fin.</h2>";
+                    } else if (!($startDate < $endDate)) {
+                        echo "<h2>Veuillez saisir une date de début antèrieur à la date de fin.</h2>";
+                    } else { ?>
+                        <div class="chart-container" style="position: relative;">
+                            <canvas id="myLineChart" class='donu-line-Chart'></canvas>
+                        </div>
+            <?php   } 
+                } else if (!$isThere) { 
+                    echo "<h2>Aucune humeurs n'a été saisie entre le $startDate et le $endDate</h2>";
+                } else { 
+                    echo "<h3>Humeurs saisie entre le $startDate et le $endDate </h3>";
+                    ?>
+                    <div class="chart-container" style="position: relative;">
+                        <canvas id="myChart3" class='donu-line-Chart'></canvas>
+                    </div>
+          <?php } ?>
+                    <div>
+                        <?php
+                        echo "<h3>";
+                            if (isset($humeurs) && $humeurs != "TOUS") {
+                                echo "<br>L'humeur $humeurs a été saisie $nombreSaisiesHumeurSelectionnee fois sur un total de $nombreTotalHumeursSaisies saisie";
+                                if ($nombreTotalHumeursSaisies > 1 ) echo 's'; 
+                                echo " d'humeur toutes confondues ce qui représente " . round($nombreSaisiesHumeurSelectionnee * 100 / $nombreTotalHumeursSaisies, 2) . "% des humeurs saisies";
+                            } else {
+                                echo 'Merci de sélectionner une humeur';
+                            }
+                        echo "</h3>";
+                        ?>
+                    </div>
                 <?php
                     $countRow = $valueByDate1->rowCount();
                 ?>
@@ -186,29 +215,18 @@
                     } else {
                         echo $emojiUsed;
                     }
-                ?>
-                <div class="separateur"></div>
-                <div>
-                    <?php
-                        if (isset($humeurs) && $humeurs != "TOUS") {
-                            echo "L'humeur $humeurs a été saisie $nombreSaisiesHumeurSelectionnee fois sur un total de $nombreTotalHumeursSaisies saisie";
-                            if ($nombreTotalHumeursSaisies > 1 ) echo 's'; 
-                            echo " d'humeur toutes confondues ce qui représente " . round($nombreSaisiesHumeurSelectionnee * 100 / $nombreTotalHumeursSaisies, 2) . "% des humeurs saisies";
-                        } else {
-                            echo 'Merci de sélectionner une humeur';
-                        }
-                    ?>
-                </div>
+                ?>                
             </td>
             <td class="bot-const-part const">
+                <h2>Toutes les humeurs saisie :</h2>
                 <div class="chart-container" style="position: relative;">
-                    <canvas id="myChart"></canvas>
+                    <canvas id="myChart4"></canvas>
                 </div>
                 <?php
                     $countRow = $allValue1->rowCount();
                 ?>
                 <script>
-                    const ctx2 = document.getElementById('myChart');
+                    const ctx2 = document.getElementById('myChart4');
 
                     new Chart(ctx2, {
                         type: 'doughnut',
@@ -278,6 +296,78 @@
                 </script>
             </td>
         </tr>
+        <?php
+            $countRow = $AllValueBetweenTwoDate1->rowCount();
+        ?>
+        <script>
+            const ctx3 = document.getElementById('myChart3');
+
+            new Chart(ctx3, {
+                type: 'doughnut',
+                data: {
+                    labels: <?php 
+                                $i = 0;
+                                while ($row = $AllValueBetweenTwoDate1->fetch()) {
+                                    if($i == 0) {
+                                        echo "[";
+                                    }
+                                    echo "\"$row->Humeur_Libelle\",";
+                                    if ($i == $countRow - 1) {
+                                        echo "]";
+                                    }
+                                    $i++;
+                                }
+                            ?>,
+                    datasets: [{
+                        data: <?php 
+                                    $i = 0;
+                                    while ($row = $AllValueBetweenTwoDate2->fetch()) {
+                                        if($i == 0) {
+                                            echo "[";
+                                        }
+                                        echo "\"$row->compteur\",";
+                                        if ($i == $countRow - 1) {
+                                            echo "]";
+                                        }
+                                        $i++;
+                                    }
+                                ?>,
+                        borderWidth: 0.75,
+                        backgroundColor: [
+                            '#00ff7f',
+                            '#dc143c',
+                            '#00bfff',
+                            '#0000ff',
+                            '#8b008b',
+                            '#b03060',
+                            '#ff0000',
+                            '#ffd700',
+                            '#ff00ff',
+                            '#1e90ff',
+                            '#eee8aa',
+                            '#00ffff',
+                            '#b0e0e6',
+                            '#ff1493',
+                            '#ee82ee',
+                            '#ffb6c1',
+                            '#00008b',
+                            '#556b2f',
+                            '#0000ff',
+                            '#8b4513',
+                            '#483d8b',
+                            '#3cb371',
+                            '#b8860b',
+                            '#7fff00',
+                            '#8a2be2',
+                            '#ff7f50',
+                            '#008b8b',
+                            '#9acd32',
+                            '#00bfff',
+                        ],
+                    }]
+                },
+            });
+        </script>
         <tr class="low">
             <td class="top-const-part low-part">
                 <h1>All Time</h1>
@@ -300,18 +390,18 @@
                 ?>
             </td>
         </tr>
-        <tr class="low">
+        <tr>
             <td class="bot-const-part low-part">
                 <div class="chart-container" style="position: relative;">
-                    <canvas id="myChart2"></canvas>
+                    <canvas id="myChart2" class='low-part-don'></canvas>
                 </div>
                 <?php
                     $countRow = $allValue3->rowCount();
                 ?>
                 <script>
-                    const ctx3 = document.getElementById('myChart2');
+                    const ctx4 = document.getElementById('myChart2');
 
-                    new Chart(ctx3, {
+                    new Chart(ctx4, {
                         type: 'doughnut',
                         data: {
                             labels: <?php 

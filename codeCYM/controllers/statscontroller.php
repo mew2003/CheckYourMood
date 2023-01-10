@@ -35,26 +35,36 @@ class StatsController {
             $MaxHum = $this->statsService->getMaxHumeur($pdo);
             $MaxHum2 = $this->statsService->getMaxHumeur($pdo);
             $listeHumeurs = $this->humeursService->getListeHumeurs();
-            $view->setVar('listeHumeurs',$listeHumeurs);
-            $view->setVar('MaxHumeur', $MaxHum);
-            $view->setVar('MaxHumeur2', $MaxHum2);
+            $valueByDate1 = $this->statsService->getHumeurByTime($pdo, $startDate, $endDate, $humeurs);
+            $valueByDate2 = $this->statsService->getHumeurByTime($pdo, $startDate, $endDate, $humeurs);
+            $nombreTotalHumeursSaisies = $this->statsService->getNombreTotalHumeursSaisies($pdo);
+            $nombreSaisiesHumeurSelectionnee = $this->statsService->getNombreSaisiesHumeurSelectionnee($pdo, $humeurs);
             $AllValue1 = $this->statsService->getAllValue($pdo);
             $AllValue2 = $this->statsService->getAllValue($pdo);
             $AllValue3 = $this->statsService->getAllValue($pdo);
             $AllValue4 = $this->statsService->getAllValue($pdo);
+            $AllValueBetweenTwoDate1 = $this->statsService->getAllValueBetweenDates($pdo, $startDate, $endDate);
+            $AllValueBetweenTwoDate2 = $this->statsService->getAllValueBetweenDates($pdo, $startDate, $endDate);
+            $valueExist = $this->statsService->verifHumeurEstPresente($pdo, $startDate, $endDate, $humeurs);
+            $isThere = $this->statsService->verifIsThere($pdo, $startDate, $endDate);
             $view->setVar('allValue1', $AllValue1);
             $view->setVar('allValue2', $AllValue2);
             $view->setVar('allValue3', $AllValue3);
             $view->setVar('allValue4', $AllValue4);
-            $valueByDate1 = $this->statsService->getHumeurByTime($pdo, $startDate, $endDate, $humeurs);
-            $valueByDate2 = $this->statsService->getHumeurByTime($pdo, $startDate, $endDate, $humeurs);
+            $view->setVar('listeHumeurs',$listeHumeurs);
+            $view->setVar('MaxHumeur', $MaxHum);
+            $view->setVar('MaxHumeur2', $MaxHum2);
             $view->setVar('valueByDate1', $valueByDate1);
             $view->setVar('valueByDate2', $valueByDate2);
-            $view->setVar('humeurSelected', $humeurs);
-            $nombreTotalHumeursSaisies = $this->statsService->getNombreTotalHumeursSaisies($pdo);
+            $view->setVar('humeurs', $humeurs);
+            $view->setVar('startDate', $startDate);
+            $view->setVar('endDate', $endDate);
             $view->setVar('nombreTotalHumeursSaisies', $nombreTotalHumeursSaisies);
-            $nombreSaisiesHumeurSelectionnee = $this -> statsService -> getNombreSaisiesHumeurSelectionnee($pdo, $humeurs);
             $view->setVar('nombreSaisiesHumeurSelectionnee', $nombreSaisiesHumeurSelectionnee);
+            $view->setVar('AllValueBetweenTwoDate1', $AllValueBetweenTwoDate1);
+            $view->setVar('AllValueBetweenTwoDate2', $AllValueBetweenTwoDate2);
+            $view->setVar('Exist', $valueExist);
+            $view->setVar('isThere' , $isThere);
         }
         return $view;
     }
@@ -110,6 +120,12 @@ class StatsController {
         $AllValue2 = $this->statsService->getAllValue($pdo);
         $AllValue3 = $this->statsService->getAllValue($pdo);
         $AllValue4 = $this->statsService->getAllValue($pdo);
+        $nombreSaisiesHumeurSelectionnee = $this -> statsService -> getNombreSaisiesHumeurSelectionnee($pdo, $humeurs);
+        $nombreTotalHumeursSaisies = $this->statsService->getNombreTotalHumeursSaisies($pdo);
+        $AllValueBetweenTwoDate1 = $this->statsService->getAllValueBetweenDates($pdo, $startDate, $endDate);
+        $AllValueBetweenTwoDate2 = $this->statsService->getAllValueBetweenDates($pdo, $startDate, $endDate);
+        $valueExist = $this->statsService->verifHumeurEstPresente($pdo, $startDate, $endDate, $humeurs);
+        $isThere = $this->statsService->verifIsThere($pdo, $startDate, $endDate);
         $view->setVar('emojiUsed', $result);
         $view->setVar('listeHumeurs',$listeHumeurs);
         $view->setVar('startDate', $startDate);
@@ -123,10 +139,12 @@ class StatsController {
         $view->setVar('allValue4', $AllValue4);
         $view->setVar('valueByDate1', $valueByDate1);
         $view->setVar('valueByDate2', $valueByDate2);
-        $nombreTotalHumeursSaisies = $this->statsService->getNombreTotalHumeursSaisies($pdo);
         $view->setVar('nombreTotalHumeursSaisies', $nombreTotalHumeursSaisies);
-        $nombreSaisiesHumeurSelectionnee = $this -> statsService -> getNombreSaisiesHumeurSelectionnee($pdo, $humeurs);
         $view->setVar('nombreSaisiesHumeurSelectionnee', $nombreSaisiesHumeurSelectionnee);
+        $view->setVar('AllValueBetweenTwoDate1', $AllValueBetweenTwoDate1);
+        $view->setVar('AllValueBetweenTwoDate2', $AllValueBetweenTwoDate2);
+        $view->setVar('Exist', $valueExist);
+        $view->setVar('isThere' , $isThere);
         return $view;
     }
 
