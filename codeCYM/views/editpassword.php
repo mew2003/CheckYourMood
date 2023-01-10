@@ -52,7 +52,7 @@
                                 echo $_POST["confirmPassword"];
                             }
                             echo '"></input>';
-                            if ($testNewPassword == false && isset($_POST["newPassword"]) && $_POST["newPassword"] != "" && isset($_POST["confirmPassword"]) && $_POST["confirmPassword"] != "" && isset($_POST["oldPassword"]) && $_POST["oldPassword"] != "") echo '<span class = "texteRouge">Les mots de passe ne sont pas identiques</span>';
+                            if ($testNewPassword == false && $testOldPassword == true && isset($_POST["newPassword"]) && $_POST["newPassword"] != "" && isset($_POST["confirmPassword"]) && $_POST["confirmPassword"] != "" && isset($_POST["oldPassword"]) && $_POST["oldPassword"] != "") echo '<span class = "texteRouge">Les mots de passe ne sont pas identiques</span>';
                             if ($testOldPasswordNotSameAsNew == false && $testNewPassword == true && $testOldPassword == true) echo '<span class = "texteRouge">Votre nouveau mot de passe doit être différent de l\'actuel</span>';
                         } else {
                             echo '<input class="form-control" type=password id="newPassword" name="newPassword" placeholder="Nouveau mot de passe" value ="';
