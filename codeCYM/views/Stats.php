@@ -96,12 +96,17 @@
                         <?php
                         echo "<h3>";
                             if (isset($humeurs) && $humeurs != "TOUS") {
-                                echo "<br>L'humeur $humeurs a été saisie $nombreSaisiesHumeurSelectionnee fois sur un total de $nombreTotalHumeursSaisies saisie";
-                                if ($nombreTotalHumeursSaisies > 1 ) echo 's'; 
-                                echo " d'humeur toutes confondues ce qui représente " . round($nombreSaisiesHumeurSelectionnee * 100 / $nombreTotalHumeursSaisies, 2) . "% des humeurs saisies";
+                                echo "L'humeur $humeurs a été saisie $nombreSaisiesHumeurSelectionnee fois sur un total de $nombreTotalHumeursSaisies saisie";
+                            if ($nombreTotalHumeursSaisies > 1 ) echo 's'; 
+                            if ($nombreTotalHumeursSaisies == 0) {
+                                $nombreTotalHumeursSaisies = 0; 
                             } else {
-                                echo 'Merci de sélectionner une humeur';
+                                $nombreTotalHumeursSaisies = round($nombreSaisiesHumeurSelectionnee * 100 / $nombreTotalHumeursSaisies, 2);
                             }
+                            echo " d'humeur toutes confondues ce qui représente " . $nombreTotalHumeursSaisies . "% des humeurs saisies";
+                        } else {
+                            echo 'Merci de sélectionner une humeur';
+                        }
                         echo "</h3>";
                         ?>
                     </div>
@@ -215,7 +220,7 @@
                     } else {
                         echo $emojiUsed;
                     }
-                ?>                
+                ?>   
             </td>
             <td class="bot-const-part const">
                 <h2>Toutes les humeurs saisie :</h2>

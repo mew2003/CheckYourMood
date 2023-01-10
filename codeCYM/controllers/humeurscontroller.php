@@ -46,7 +46,7 @@ class HumeursController {
         $smiley = HttpHelper::getParam("smiley");
         $isOK = $this->humeursService->setHumeur($pdo, $humeur, $smiley, $description);
         if ($isOK) {
-            $msgHumeur = "Votre humeur a bien été ajouté.";
+            $msgHumeur = "Votre humeur a bien été ajoutée.";
         } else {
             $msgHumeur ="L'humeur saisie n'existe pas !!!";
         }
