@@ -193,7 +193,12 @@
                         if (isset($humeurs) && $humeurs != "TOUS") {
                             echo "L'humeur $humeurs a été saisie $nombreSaisiesHumeurSelectionnee fois sur un total de $nombreTotalHumeursSaisies saisie";
                             if ($nombreTotalHumeursSaisies > 1 ) echo 's'; 
-                            echo " d'humeur toutes confondues ce qui représente " . round($nombreSaisiesHumeurSelectionnee * 100 / $nombreTotalHumeursSaisies, 2) . "% des humeurs saisies";
+                            if ($nombreTotalHumeursSaisies == 0) {
+                                $nombreTotalHumeursSaisies = 0; 
+                            } else {
+                                $nombreTotalHumeursSaisies = round($nombreSaisiesHumeurSelectionnee * 100 / $nombreTotalHumeursSaisies, 2);
+                            }
+                            echo " d'humeur toutes confondues ce qui représente " . $nombreTotalHumeursSaisies . "% des humeurs saisies";
                         } else {
                             echo 'Merci de sélectionner une humeur';
                         }

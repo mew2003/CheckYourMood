@@ -28,18 +28,43 @@
                 <?php
                     if($update) {
                         if($testOldPassword == false) {
-                            echo '<input class="form-control enRouge" type=password id="oldPassword" name="oldPassword" placeholder="Vous devez mettre votre ancien mot de passe"></input>';
-                        } else if($resetPwd != 1) {
-                            echo '<input class="form-control" type=password id="oldPassword" name="oldPassword" placeholder="Ancien mot de passe" value='.$oldPassword.'></input>';
+                            echo '<input class="form-control enRouge" type=password id="oldPassword" name="oldPassword" placeholder="Vous devez mettre votre ancien mot de passe" value = "';
+                            if (isset($_POST["oldPassword"]) && $_POST["oldPassword"] != "") {
+                                echo $_POST["oldPassword"];
+                            }
+                            echo '"></input>';
+                            if (isset($_POST["oldPassword"]) && $_POST["oldPassword"] != "") echo '<span class = "texteRouge">Renseignez votre mot de passe actuel</span>';
                         } else {
-                            echo '<input class="form-control" type=password id="oldPassword" name="oldPassword" placeholder="Ancien mot de passe"></input>';
+                            echo '<input class="form-control" type=password id="oldPassword" name="oldPassword" placeholder="Ancien mot de passe" value="';
+                            if($resetPwd != 1) {
+                                echo $oldPassword;
+                            }
+                            echo '"></input>';
                         }
                         if($testNewPassword == false || $testOldPasswordNotSameAsNew == false) {
-                            echo '<input class="form-control enRouge" type=password id="newPassword" name="newPassword" placeholder="Mettez un nouveau mot de passe"></input>';
-                            echo '<input class="form-control enRouge" type=password id="confirmPassword" name="confirmPassword" placeholder="Confirmez votre nouveau mot de passe"></input>';
+                            echo '<input class="form-control enRouge" type=password id="newPassword" name="newPassword" placeholder="Mettez un nouveau mot de passe" value = "';
+                            if (isset($_POST["newPassword"]) && $_POST["newPassword"] != "") {
+                                echo $_POST["newPassword"];
+                            }
+                            echo '"></input>';
+                            echo '<input class="form-control enRouge" type=password id="confirmPassword" name="confirmPassword" placeholder="Confirmez votre nouveau mot de passe" value = "';
+                            if (isset($_POST["confirmPassword"]) && $_POST["confirmPassword"] != "") {
+                                echo $_POST["confirmPassword"];
+                            }
+                            echo '"></input>';
+                            if ($testNewPassword == false && isset($_POST["newPassword"]) && $_POST["newPassword"] != "" && isset($_POST["confirmPassword"]) && $_POST["confirmPassword"] != "" && isset($_POST["oldPassword"]) && $_POST["oldPassword"] != "") echo '<span class = "texteRouge">Les mots de passe ne sont pas identiques</span>';
+                            if ($testOldPasswordNotSameAsNew == false && $testNewPassword == true && $testOldPassword == true) echo '<span class = "texteRouge">Votre nouveau mot de passe doit être différent de l\'actuel</span>';
                         } else {
-                            echo '<input class="form-control" type=password id="newPassword" name="newPassword" placeholder="Nouveau mot de passe"></input>';
-                            echo '<input class="form-control" type=password id="confirmPassword" name="confirmPassword" placeholder="Confirmez votre mot de passe"></input>';
+                            echo '<input class="form-control" type=password id="newPassword" name="newPassword" placeholder="Nouveau mot de passe" value ="';
+                            if ($resetPwd != 1 && isset($_POST["newPassword"]) && $_POST["newPassword"] != "") {
+                                echo $_POST["newPassword"];
+                            }
+                            echo '"></input>';
+                            echo '<input class="form-control" type=password id="confirmPassword" name="confirmPassword" placeholder="Confirmez votre mot de passe" value ="';
+                            if ($resetPwd != 1 && isset($_POST["confirmPassword"]) && $_POST["confirmPassword"] != "") {
+                                echo $_POST["confirmPassword"];
+                            }
+                            echo '"></input>';
                         }
                     } else {
                         echo '<input class="form-control" type=password id="oldPassword" name="oldPassword" placeholder="Ancien mot de passe"></input>';

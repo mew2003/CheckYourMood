@@ -41,7 +41,7 @@ class RegisterService
             $insert->execute(array('username'=>$username,'email'=>$email,'birthDate'=>$birthDate,'gender'=>$gender,'pswd'=>$password));
             return "";
         } catch (PDOException $e) {
-            $errorMessage = "création du compte impossible, données incorrectes ou base de données innaccessible";
+            $errorMessage = "création du compte impossible (le nom d'utilisateur est indisponible ou l'email est déjà utilisé) ou la base de données est inaccessible";
             return $errorMessage;
         }
     }

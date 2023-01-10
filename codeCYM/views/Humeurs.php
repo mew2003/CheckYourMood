@@ -32,7 +32,7 @@
         <div class="msgHumeur-block">
         <?php
             if(isset($msgHumeur)) {
-                if($msgHumeur == "Votre humeur a bien été ajouté.") {
+                if($msgHumeur == "Votre humeur a bien été ajoutée.") {
                     echo "<p class='enVert'><br>".$msgHumeur."</p>";
                 } else {
                     echo "<p class='enRouge'><br>".$msgHumeur."</p>";
