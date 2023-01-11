@@ -80,7 +80,8 @@ class StatsController {
         if (!isset($_SESSION['UserID'])) {
             $view = new View("CheckYourMood/codeCYM/views/Register");
         } else {
-            $resultats = $this->statsService->getHistorique($pdo);
+            $pagination = HttpHelper::getParam('page');
+            $resultats = $this->statsService->getHistorique($pdo, $pagination);
             $allRow = $this->statsService->getAllRow($pdo);
             $view->setVar('historyValue',$resultats);
             $view->setVar('allRow',$allRow);
@@ -106,7 +107,7 @@ class StatsController {
         } else if ($endDate < $startDate) {
             $result = "<p>La date de début doit être antérieure à la date de fin.</p><p class='smiley'>🚫</p> ";
         } else if ($emojiUsed == "") {
-            $result = "<p>L'humeur n'a jamais été saisie entre le ".$startDate." et le ".$endDate."</p>";
+            $result = "<p>L'humeur " . $humeurs . " n'a jamais été saisie entre le ".$startDate." et le ".$endDate."</p>";
         } else if (count($emojiUsed) == 2) {
             $result = "<p class='smiley'>".$emojiUsed[0]."</p><p> Vous avez eu l'humeur ".$emojiUsed[1]." fois entre le ".$startDate." et le ".$endDate."</p>";
         } else {
@@ -160,7 +161,7 @@ class StatsController {
         $time = HttpHelper::getParam("time");
         $libelle = HttpHelper::getParam("libelle");
         $this->statsService->delHumeur($pdo, $time, $libelle);
-        $resultats = $this->statsService->getHistorique($pdo);
+        $resultats = $this->statsService->getHistorique($pdo,$pagination);
         $allRow = $this->statsService->getAllRow($pdo);
         $view->setVar('historyValue',$resultats);
         $view->setVar('allRow',$allRow);
@@ -175,7 +176,7 @@ class StatsController {
         $changeTime = HttpHelper::getParam("change-time");
         $this->statsService->updateDesc($pdo, $time, $libelle, $desc);
         $this->statsService->updateTime($pdo, $time, $libelle, $changeTime);
-        $resultats = $this->statsService->getHistorique($pdo);
+        $resultats = $this->statsService->getHistorique($pdo, $pagination);
         $allRow = $this->statsService->getAllRow($pdo);
         $view->setVar('historyValue',$resultats);
         $view->setVar('allRow',$allRow);

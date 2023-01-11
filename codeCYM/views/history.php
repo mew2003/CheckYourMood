@@ -28,9 +28,8 @@
             if(isset($_GET['page']) && !empty($_GET['page'])){
                 $currentPage = (int) strip_tags($_GET['page']);
             } else {
-                $currentPage = 1;
+                $currentPage = 0;
             }
-            $nombreLigneMax = 15 * $currentPage;
             echo "<h1 class='title'>Historique des humeurs</h1>";
             echo "<div class='first-container'>";
                 echo "<table class='table table-striped'>";
@@ -47,10 +46,8 @@
                                 </th>
                             </form>
                           <tr>";		
-                    $min = 0 + (15 * ($currentPage - 1));
                     $i = 1;
                     while( $ligne = $historyValue->fetch() ) { 
-                        if($i <= $nombreLigneMax && $i > $min) {
                             $date1 = $ligne->Humeur_TimeConst;
                             $timeStamp1 = strtotime($date1);
                             $finalDate = $timeStamp1 + 86400;
@@ -80,9 +77,9 @@
                                                     <textarea name='desc' class='textarea' value='$ligne->Humeur_Description'>$ligne->Humeur_Description</textarea>";
                                                     if ($actualFinalTimeStanp <= $finalDate1) {
                                                         echo "<label>Nouvelle Date : (Max -24H) </label>
-                                                            <input class='time' type='datetime-local' name='change-time' value='$ligne->Humeur_Time'  min='$minDate' max='$ligne->Humeur_TimeConst'>";
+                                                            <input class='time' type='datetime-local' name='change-time' value='$ligne->Humeur_Time'>";
                                                     } else {
-                                                        echo "<label>Date non modifiable <br>(humeur créé il y a trop longtemps):</label>
+                                                        echo "<label>Date non modifiable <br>(humeur créée il y a trop longtemps):</label>
                                                             <input hidden name='change-time' value='$ligne->Humeur_Time'>
                                                             <input type='text' value='$ligne->Humeur_Time' disabled>";
                                                     }
@@ -106,7 +103,7 @@
                                     <td class='Sscreen-Time'>".htmlspecialchars($ligne->Humeur_Time)."</td>";
                                     
                             echo "</tr>";
-                        }
+                        /*}*/
                         $i++;										
                     }
                 echo "</table>" ;
@@ -123,27 +120,25 @@
             }
             $pages = $allRow / 15;
             $valAcomparer = $pages % 15;
-            if ($pages > $valAcomparer && $pages >= 1) {
-                $pages = $pages + 1;
+            if ($pages > $valAcomparer && $pages >= 0) {
+                $pages++;
             }
             echo "<nav>";
                 echo "<ul class='pagination'>";
-                    if ($currentPage > 1) {
+                    if ($currentPage > 0) {
                         echo "<li class='page-item'>"; 
                             ?>
-                            <a class="page-button" href="./?action=historyVal&controller=stats&page=0"><i class="fa-solid fa-angles-left"></i></a>
+                            <a class="page-button" href="./?action=historyVal&controller=stats&page=1"><i class="fa-solid fa-angles-left"></i></a>
+                            <?php
+                        echo "</li>";
+                        echo "<li class='page-item'>"; 
+                            ?>
+                            <a class="page-button" href="./?action=historyVal&controller=stats&page=<?php echo $currentPage?>"><i class="fa-solid fa-chevron-left"></i></a>
                             <?php
                         echo "</li>";
                     }
-                    if ($currentPage > 1) {
-                        echo "<li class='page-item'>"; 
-                            ?>
-                            <a class="page-button" href="./?action=historyVal&controller=stats&page=<?php echo $currentPage - 1?>"><i class="fa-solid fa-chevron-left"></i></a>
-                            <?php
-                        echo "</li>";
-                    }
-                    for ($compteur = 1; $compteur <= $pages; $compteur++) { 
-                        if ($compteur == $currentPage - 2 || $compteur == $currentPage -1 || $compteur == $currentPage || $compteur == $currentPage + 1 || $compteur == $currentPage + 2) {
+                    for ($compteur = 1; $compteur < $pages; $compteur++) { 
+                        if ($compteur >= $currentPage - 2 && $compteur <= $currentPage + 2) {
                             ?>
                             <li class="page-item <?= ($currentPage == $compteur) ? "active" : "" ?>">
                                 <a class="page-button" href="./?action=historyVal&controller=stats&page=<?php echo $compteur?>"><?php echo $compteur ?></a>
@@ -151,17 +146,15 @@
                             <?php 
                         }
                     } 
-                    if ($compteur - 1 != $currentPage && $pages > 1) {
+                    if ($compteur - 1 != $currentPage && $pages > 0) {
                         echo "<li class='page-item'>"; 
                             ?>
-                            <a class="page-button" href="./?action=historyVal&controller=stats&page=<?php echo $currentPage + 1?>"><i class="fa-solid fa-chevron-right"></i></a>
+                            <a class="page-button" href="./?action=historyVal&controller=stats&page=<?php echo $currentPage ?>"><i class="fa-solid fa-chevron-right"></i></a>
                             <?php
                         echo "</li>";
-                    }
-                    if ($compteur - 1 != $currentPage && $pages > 1) {
                         echo "<li class='page-item'>"; 
                             ?>
-                            <a class="page-button" href="./?action=historyVal&controller=stats&page=<?php echo $pages ?>"><i class="fa-solid fa-angles-right"></i></a>
+                            <a class="page-button" href="./?action=historyVal&controller=stats&page=<?php echo (int) $pages ?>"><i class="fa-solid fa-angles-right"></i></a>
                             <?php
                         echo "</li>";
                     }

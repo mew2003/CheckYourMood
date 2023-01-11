@@ -11,10 +11,10 @@ class StatsService
      * @param $pdo  la connexion à la base de données
      * @return $resultats  le résultat de la requête (toutes les humeurs entrées par un utilisateur)
      */
-    public function getHistorique($pdo) {
-        $requete = 'SELECT Humeur_TimeConst, CODE_User, Humeur_Libelle, Humeur_Emoji, Humeur_Time, Humeur_Description FROM Humeur WHERE CODE_User = :id ORDER BY Humeur_Time DESC';
+    public function getHistorique($pdo, $pagination) {
+        $requete = 'SELECT Humeur_TimeConst, CODE_User, Humeur_Libelle, Humeur_Emoji, Humeur_Time, Humeur_Description FROM Humeur WHERE CODE_User = :id ORDER BY Humeur_Time DESC LIMIT 15 OFFSET :pagination';
         $resultats = $pdo->prepare($requete);
-        $resultats->execute(['id'=>$_SESSION['UserID']]);
+        $resultats->execute(['id'=>$_SESSION['UserID'],'pagination'=>($pagination - 1) * 15]);
         return $resultats;
     }
     
@@ -28,7 +28,7 @@ class StatsService
         $req =$pdo->prepare("SELECT Humeur_Libelle, COUNT(Humeur_Libelle) as compteur, Humeur_Emoji from humeur join user ON user.User_ID = humeur.CODE_USER WHERE CODE_User = :id GROUP BY Humeur_Libelle ORDER BY compteur DESC LIMIT 1");
         $req->execute(['id'=>$_SESSION['UserID']]);
         if($req->rowCount() == 0) {
-            return "Vous n'avez saisie aucune humeur !!!";
+            return "Vous n'avez saisi aucune humeur";
         }
         return $req;
     }

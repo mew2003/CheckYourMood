@@ -11,7 +11,7 @@
         <link rel="mask-icon" href="/CheckYourMood/codeCYM/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
         <meta name="msapplication-TileColor" content="#da532c">
         <meta name="theme-color" content="#ffffff">
-        <title>test php et database</title>
+        <title>Statistiques</title>
         <script src="/CheckYourMood/codeCYM/third-party/JQuery/jquery-3.6.1.js"></script>
         <script src="/CheckYourMood/codeCYM/JS/header-component.js" defer></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -84,9 +84,13 @@
                         </div>
             <?php   } 
                 } else if (!$isThere) { 
-                    echo "<h2>Aucune humeurs n'a été saisie entre le $startDate et le $endDate</h2>";
+                    if ($startDate != "" && $endDate != "") {
+                        echo "<h2>Aucune humeur n'a été saisie entre le $startDate et le $endDate</h2>";
+                    } else {
+                        echo '<h2>Veuillez sélectionner une date de début et de fin';
+                    }
                 } else { 
-                    echo "<h3>Humeurs saisie entre le $startDate et le $endDate </h3>";
+                    echo "<h3>Humeurs saisies entre le $startDate et le $endDate </h3>";
                     ?>
                     <div class="chart-container" style="position: relative;">
                         <canvas id="myChart3" class='donu-line-Chart'></canvas>
@@ -198,7 +202,7 @@
             </td>
             <td class="mid-const-part const">
                 <?php
-                    if ($MaxHumeur == "Vous n'avez saisie aucune humeur !!!") {
+                    if ($MaxHumeur == "Vous n'avez saisi aucune humeur") {
                         echo "<h1>🤔</h1>";
                         echo "<h1>$MaxHumeur</h1>";
                     } else {
@@ -223,7 +227,7 @@
                 ?>   
             </td>
             <td class="bot-const-part const">
-                <h2>Toutes les humeurs saisie :</h2>
+                <h2>Toutes les humeurs saisies :</h2>
                 <div class="chart-container" style="position: relative;">
                     <canvas id="myChart4"></canvas>
                 </div>
@@ -381,7 +385,7 @@
         <tr class="low">
             <td class="mid-const-part low-part">
                 <?php
-                    if ($MaxHumeur2 == "Vous n'avez saisie aucune humeur !!!") {
+                    if ($MaxHumeur2 == "Vous n'avez saisi aucune humeur") {
                         echo "<h1>🤔</h1>";
                         echo "<h1>$MaxHumeur2</h1>";
                     } else {
