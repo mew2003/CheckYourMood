@@ -11,10 +11,10 @@ class StatsService
      * @param $pdo  la connexion à la base de données
      * @return $resultats  le résultat de la requête (toutes les humeurs entrées par un utilisateur)
      */
-    public function getHistorique($pdo) {
-        $requete = 'SELECT Humeur_TimeConst, CODE_User, Humeur_Libelle, Humeur_Emoji, Humeur_Time, Humeur_Description FROM Humeur WHERE CODE_User = :id ORDER BY Humeur_Time DESC';
+    public function getHistorique($pdo, $pagination) {
+        $requete = 'SELECT Humeur_TimeConst, CODE_User, Humeur_Libelle, Humeur_Emoji, Humeur_Time, Humeur_Description FROM Humeur WHERE CODE_User = :id ORDER BY Humeur_Time DESC LIMIT 15 OFFSET :pagination';
         $resultats = $pdo->prepare($requete);
-        $resultats->execute(['id'=>$_SESSION['UserID']]);
+        $resultats->execute(['id'=>$_SESSION['UserID'],'pagination'=>($pagination - 1) * 15]);
         return $resultats;
     }
     
@@ -28,9 +28,60 @@ class StatsService
         $req =$pdo->prepare("SELECT Humeur_Libelle, COUNT(Humeur_Libelle) as compteur, Humeur_Emoji from humeur join user ON user.User_ID = humeur.CODE_USER WHERE CODE_User = :id GROUP BY Humeur_Libelle ORDER BY compteur DESC LIMIT 1");
         $req->execute(['id'=>$_SESSION['UserID']]);
         if($req->rowCount() == 0) {
-            return "Vous n'avez saisie aucune humeur !!!";
+            return "Vous n'avez saisi aucune humeur";
         }
         return $req;
+    }
+
+    /**
+     * Récupère le nombre total d'humeur saisie entre 2 intervales de temps
+     * @param $pdo  la connexion à la base de données
+     * @return $req  le résultat de la requête
+     */
+    public function getAllValueBetweenDates($pdo, $startDate, $endDate) {
+        $req = $pdo->prepare("SELECT Humeur_Libelle, COUNT(Humeur_Libelle) as compteur from humeur join user ON user.User_ID = humeur.CODE_USER WHERE CODE_User = :id AND Humeur_Time BETWEEN :startDate AND :endDate GROUP BY Humeur_Libelle");
+        $req->bindParam('id', $_SESSION['UserID']);
+        $req->bindParam('startDate', $startDate);
+        $req->bindParam('endDate', $endDate);
+        $req->execute();
+        return $req;
+    }
+
+    /**
+     * @param $pdo  la connexion à la base de données
+     * @return True si l'humeur à été saisie entre 2 intervales de temps
+     * @return False sinon
+     */
+    public function verifHumeurEstPresente($pdo, $startDate, $endDate, $humeur) {
+        $req =$pdo->prepare("SELECT * from humeur join user ON user.User_ID = humeur.CODE_USER WHERE CODE_User = :id AND Humeur_Libelle = :humeur AND Humeur_Time BETWEEN :startDate AND :endDate GROUP BY Humeur_Libelle");
+        $req->bindParam('id', $_SESSION['UserID']);
+        $req->bindParam('startDate', $startDate);
+        $req->bindParam('endDate', $endDate);
+        $req->bindParam('humeur', $humeur);
+        $req->execute();
+        $count = $req->rowCount();
+        if ($count == 0) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * @param $pdo  la connexion à la base de données
+     * @return True si l'humeur à déja été saisie 
+     * @return False sinon
+     */
+    public function verifIsThere($pdo, $startDate, $endDate) {
+        $req =$pdo->prepare("SELECT * from humeur join user ON user.User_ID = humeur.CODE_USER WHERE CODE_User = :id AND Humeur_Time BETWEEN :startDate AND :endDate GROUP BY Humeur_Libelle");
+        $req->bindParam('id', $_SESSION['UserID']);
+        $req->bindParam('startDate', $startDate);
+        $req->bindParam('endDate', $endDate);
+        $req->execute();
+        $count = $req->rowCount();
+        if ($count == 0) {
+            return false;
+        }
+        return true;
     }
 
     /**

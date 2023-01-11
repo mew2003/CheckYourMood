@@ -4,8 +4,14 @@
         <meta charset="UTF-8">
         <link href="/CheckYourMood/codeCYM/third-party/bootstrap/css/bootstrap.css" rel="stylesheet"/>
         <link href="/CheckYourMood/codeCYM/CSS/stats.css" rel="stylesheet"/>
-        <link rel="icon" href="/CheckYourMood/codeCYM/assets/images/logoCYM.png">
-        <title>Stats</title>
+        <link rel="apple-touch-icon" sizes="180x180" href="/CheckYourMood/codeCYM/assets/favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/CheckYourMood/codeCYM/assets/favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/CheckYourMood/codeCYM/assets/favicon/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
+        <link rel="mask-icon" href="/CheckYourMood/codeCYM/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="theme-color" content="#ffffff">
+        <title>Statistiques</title>
         <script src="/CheckYourMood/codeCYM/third-party/JQuery/jquery-3.6.1.js"></script>
         <script src="/CheckYourMood/codeCYM/JS/header-component.js" defer></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -40,7 +46,6 @@
                         ?>">
                     </div>
                     <select name="humeurs">
-                        <label>Humeurs</label>
                         <option>TOUS</option>
                         <?php 
                             foreach ($listeHumeurs as $row) {
@@ -67,9 +72,48 @@
         </tr>
         <tr class="second-part">
             <td class="mid-float-part">
-                <div class="chart-container" style="position: relative;">
-                    <canvas id="myLineChart" class='line-Chart'></canvas>
-                </div>
+          <?php  
+          if ($humeurs != "TOUS" && $Exist) { 
+                    if ($endDate == "" || $startDate == "") {
+                        echo "<h2>Veuillez saisir une date de début et une date de fin.</h2>";
+                    } else if (!($startDate < $endDate)) {
+                        echo "<h2>Veuillez saisir une date de début antèrieur à la date de fin.</h2>";
+                    } else { ?>
+                        <div class="chart-container" style="position: relative;">
+                            <canvas id="myLineChart" class='donu-line-Chart'></canvas>
+                        </div>
+            <?php   } 
+                } else if (!$isThere) { 
+                    if ($startDate != "" && $endDate != "") {
+                        echo "<h2>Aucune humeur n'a été saisie entre le $startDate et le $endDate</h2>";
+                    } else {
+                        echo '<h2>Veuillez sélectionner une date de début et de fin';
+                    }
+                } else { 
+                    echo "<h3>Humeurs saisies entre le $startDate et le $endDate </h3>";
+                    ?>
+                    <div class="chart-container" style="position: relative;">
+                        <canvas id="myChart3" class='donu-line-Chart'></canvas>
+                    </div>
+          <?php } ?>
+                    <div>
+                        <?php
+                        echo "<h3>";
+                            if (isset($humeurs) && $humeurs != "TOUS") {
+                                echo "L'humeur $humeurs a été saisie $nombreSaisiesHumeurSelectionnee fois sur un total de $nombreTotalHumeursSaisies saisie";
+                            if ($nombreTotalHumeursSaisies > 1 ) echo 's'; 
+                            if ($nombreTotalHumeursSaisies == 0) {
+                                $nombreTotalHumeursSaisies = 0; 
+                            } else {
+                                $nombreTotalHumeursSaisies = round($nombreSaisiesHumeurSelectionnee * 100 / $nombreTotalHumeursSaisies, 2);
+                            }
+                            echo " d'humeur toutes confondues ce qui représente " . $nombreTotalHumeursSaisies . "% des humeurs saisies";
+                        } else {
+                            echo 'Merci de sélectionner une humeur';
+                        }
+                        echo "</h3>";
+                        ?>
+                    </div>
                 <?php
                     $countRow = $valueByDate1->rowCount();
                 ?>
@@ -158,7 +202,7 @@
             </td>
             <td class="mid-const-part const">
                 <?php
-                    if ($MaxHumeur == "Vous n'avez saisie aucune humeur !!!") {
+                    if ($MaxHumeur == "Vous n'avez saisi aucune humeur") {
                         echo "<h1>🤔</h1>";
                         echo "<h1>$MaxHumeur</h1>";
                     } else {
@@ -180,29 +224,18 @@
                     } else {
                         echo $emojiUsed;
                     }
-                ?>
-                <div class="separateur"></div>
-                <div>
-                    <?php
-                        if (isset($humeurs) && $humeurs != "TOUS") {
-                            echo "L'humeur $humeurs a été saisie $nombreSaisiesHumeurSelectionnee fois sur un total de $nombreTotalHumeursSaisies saisie";
-                            if ($nombreTotalHumeursSaisies > 1 ) echo 's'; 
-                            echo " d'humeur toutes confondues ce qui représente " . round($nombreSaisiesHumeurSelectionnee * 100 / $nombreTotalHumeursSaisies, 2) . "% des humeurs saisies";
-                        } else {
-                            echo 'Merci de sélectionner une humeur';
-                        }
-                    ?>
-                </div>
+                ?>   
             </td>
             <td class="bot-const-part const">
+                <h2>Toutes les humeurs saisies :</h2>
                 <div class="chart-container" style="position: relative;">
-                    <canvas id="myChart"></canvas>
+                    <canvas id="myChart4"></canvas>
                 </div>
                 <?php
                     $countRow = $allValue1->rowCount();
                 ?>
                 <script>
-                    const ctx2 = document.getElementById('myChart');
+                    const ctx2 = document.getElementById('myChart4');
 
                     new Chart(ctx2, {
                         type: 'doughnut',
@@ -272,6 +305,78 @@
                 </script>
             </td>
         </tr>
+        <?php
+            $countRow = $AllValueBetweenTwoDate1->rowCount();
+        ?>
+        <script>
+            const ctx3 = document.getElementById('myChart3');
+
+            new Chart(ctx3, {
+                type: 'doughnut',
+                data: {
+                    labels: <?php 
+                                $i = 0;
+                                while ($row = $AllValueBetweenTwoDate1->fetch()) {
+                                    if($i == 0) {
+                                        echo "[";
+                                    }
+                                    echo "\"$row->Humeur_Libelle\",";
+                                    if ($i == $countRow - 1) {
+                                        echo "]";
+                                    }
+                                    $i++;
+                                }
+                            ?>,
+                    datasets: [{
+                        data: <?php 
+                                    $i = 0;
+                                    while ($row = $AllValueBetweenTwoDate2->fetch()) {
+                                        if($i == 0) {
+                                            echo "[";
+                                        }
+                                        echo "\"$row->compteur\",";
+                                        if ($i == $countRow - 1) {
+                                            echo "]";
+                                        }
+                                        $i++;
+                                    }
+                                ?>,
+                        borderWidth: 0.75,
+                        backgroundColor: [
+                            '#00ff7f',
+                            '#dc143c',
+                            '#00bfff',
+                            '#0000ff',
+                            '#8b008b',
+                            '#b03060',
+                            '#ff0000',
+                            '#ffd700',
+                            '#ff00ff',
+                            '#1e90ff',
+                            '#eee8aa',
+                            '#00ffff',
+                            '#b0e0e6',
+                            '#ff1493',
+                            '#ee82ee',
+                            '#ffb6c1',
+                            '#00008b',
+                            '#556b2f',
+                            '#0000ff',
+                            '#8b4513',
+                            '#483d8b',
+                            '#3cb371',
+                            '#b8860b',
+                            '#7fff00',
+                            '#8a2be2',
+                            '#ff7f50',
+                            '#008b8b',
+                            '#9acd32',
+                            '#00bfff',
+                        ],
+                    }]
+                },
+            });
+        </script>
         <tr class="low">
             <td class="top-const-part low-part">
                 <h1>All Time</h1>
@@ -280,7 +385,7 @@
         <tr class="low">
             <td class="mid-const-part low-part">
                 <?php
-                    if ($MaxHumeur2 == "Vous n'avez saisie aucune humeur !!!") {
+                    if ($MaxHumeur2 == "Vous n'avez saisi aucune humeur") {
                         echo "<h1>🤔</h1>";
                         echo "<h1>$MaxHumeur2</h1>";
                     } else {
@@ -294,18 +399,18 @@
                 ?>
             </td>
         </tr>
-        <tr class="low">
+        <tr>
             <td class="bot-const-part low-part">
                 <div class="chart-container" style="position: relative;">
-                    <canvas id="myChart2"></canvas>
+                    <canvas id="myChart2" class='low-part-don'></canvas>
                 </div>
                 <?php
                     $countRow = $allValue3->rowCount();
                 ?>
                 <script>
-                    const ctx3 = document.getElementById('myChart2');
+                    const ctx4 = document.getElementById('myChart2');
 
-                    new Chart(ctx3, {
+                    new Chart(ctx4, {
                         type: 'doughnut',
                         data: {
                             labels: <?php 

@@ -376,8 +376,8 @@ class Passwords {
         Passwords::$oldPassword = HttpHelper::getParam("oldPassword");
         Passwords::$message = null;
         Passwords::$testNewPassword = !empty(Passwords::$newPassword) && !empty(Passwords::$confirmPassword) 
-                                      && strcmp(Passwords::$newPassword, Passwords::$confirmPassword) == 0;;
-        Passwords::$testOldPasswordNotSameAsNew = strcmp(Passwords::$oldPassword, Passwords::$newPassword) != 0;;
+                                      && strcmp(Passwords::$newPassword, Passwords::$confirmPassword) == 0;
+        Passwords::$testOldPasswordNotSameAsNew = strcmp(Passwords::$oldPassword, Passwords::$newPassword) != 0;
     }
 
     public static function initialisation($view) {
