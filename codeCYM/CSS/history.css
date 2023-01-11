@@ -233,6 +233,9 @@ th {
     height: 50%;
     text-align: center;
 }
+.Sscreen-Emoji {
+    font-size: 10vh;
+}
 @media (max-width:767px) {
     .first-container{
         scale: 0.92;

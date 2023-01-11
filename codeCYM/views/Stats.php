@@ -5,7 +5,7 @@
         <link href="/CheckYourMood/codeCYM/third-party/bootstrap/css/bootstrap.css" rel="stylesheet"/>
         <link href="/CheckYourMood/codeCYM/CSS/stats.css" rel="stylesheet"/>
         <link rel="icon" href="/CheckYourMood/codeCYM/assets/images/logoCYM.png">
-        <title>test php et database</title>
+        <title>Stats</title>
         <script src="/CheckYourMood/codeCYM/third-party/JQuery/jquery-3.6.1.js"></script>
         <script src="/CheckYourMood/codeCYM/JS/header-component.js" defer></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
