@@ -20,7 +20,7 @@ class headerComponent extends HTMLElement {
             <form action="" method="get" class="h">
                 <input hidden name="action" value="index">
                 <input hidden name="controller" value="stats">
-                <button type="submit" class="link mobile">Stats</button>
+                <button type="submit" class="link mobile">Statistiques</button>
             </form>
             <form action="" method="get" class="h">
                 <input hidden name="action" value="historyVal">
@@ -59,13 +59,14 @@ class headerComponent extends HTMLElement {
                     <input hidden name="action" value="index">
                     <input hidden name="controller" value="stats">
                     <input hidden name="page" value="1">
-                    <button type="submit" class="link Phone">Stats</button>
+                    <button type="submit" class="link Phone">Statistiques</button>
                 </form>
             </li>
             <li>
                 <form action="" method="get" class="hBurger">
                     <input hidden name="action" value="historyVal">
                     <input hidden name="controller" value="stats">
+                    <input type = "hidden" name = "page" value = "1">
                     <button type="submit" class="link Phone">Historique</button>
                 </form>
             </li>

@@ -125,7 +125,7 @@
             }
             echo "<nav>";
                 echo "<ul class='pagination'>";
-                    if ($currentPage > 0) {
+                    if ($currentPage > 1) {
                         echo "<li class='page-item'>"; 
                             ?>
                             <a class="page-button" href="./?action=historyVal&controller=stats&page=1"><i class="fa-solid fa-angles-left"></i></a>
