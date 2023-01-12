@@ -21,9 +21,10 @@ class AccountsController {
      * @return $view  la vue de la page pour pouvoir afficher les informations de l'utilisateur
      */
     public function index($pdo) {
+        $id = $_SESSION['UserID'];
         $view = new View("CheckYourMood/codeCYM/views/Account");
         /* récupère dans la base de données les infos de l'utilisateur */
-        $resultats = $this->accountsService->getProfile($pdo); 
+        $resultats = $this->accountsService->getProfile($pdo, $id); 
 
         /* met dans la view les données récupérées */
         while($row = $resultats->fetch()) {
@@ -91,9 +92,10 @@ class AccountsController {
      * @return $view  les informations de l'utilisateur à afficher
      */
     public function getDefaultProfile($pdo, $view) {
+        $id = $_SESSION['UserID'];
 
         /* récupère dans la base données les infos de l'utilisateur */
-        $verif = $this->accountsService->getProfile($pdo); 
+        $verif = $this->accountsService->getProfile($pdo, $id); 
 
         /* met dans la view les données récupérées */
         while($row = $verif->fetch()) {
@@ -158,10 +160,10 @@ class AccountsController {
      * @return $view  le message à afficher si il y a une erreur de modification ou non
      */
     public function updateEmail($pdo, $view, $email, $defaultEmail, $sameEmail) {
-
+        $id = $_SESSION['UserID'];
         /* Si les données du formulaire sont envoyées et que l'email n'est pas vide et qu'il n'existe pas */
         if(!empty($email) && $email != $defaultEmail && $sameEmail == false) {
-            $this->accountsService->editMail($pdo, $email);             
+            $this->accountsService->editMail($pdo, $email, $id);             
             $view->setVar('message', "Votre email a bien été changé !");
         } else if(!empty($email) && $email != $defaultEmail && $sameEmail == true) {
             $view->setVar('erreur', "Email déjà existant !");
@@ -180,11 +182,11 @@ class AccountsController {
      * @return $view  le message à afficher si il y a une erreur de modification ou non
      */
     public function updateUsername($pdo, $view, $username, $defaultUsername, $sameUsername) {
-
+        $id = $_SESSION['UserID'];
         /* Si les données du formulaire sont envoyées et que le nom d'utilisateur n'est pas vide et qu'il n'existe pas */
         /* le nom d'utilisateur est modifié sinon affiche une erreur */
         if(!empty($username) && $username != $defaultUsername && $sameUsername == false) {
-            $this->accountsService->editUsername($pdo, $username);
+            $this->accountsService->editUsername($pdo, $username, $id);
             $view->setVar('message', "Votre nom d'utilisateur a bien été changé !");
         } else if(!empty($username) && $username != $defaultUsername && $sameUsername == true) {
             $view->setVar('erreur', "nom d'utilisateur déjà existant !");
@@ -202,11 +204,11 @@ class AccountsController {
      * @return $view  le message à afficher si il y a une erreur de modification ou non
      */
     public function updateBirthDate($pdo, $view, $birthDate, $defaultBirthDate) {
-
+        $id = $_SESSION['UserID'];
         /* Si les données du formulaire sont envoyées et que la date de naissance est inférieur à la date d'aujourd'hui */
         /* alors elle est modifié sinon affiche une erreur */
         if(!empty($birthDate) && $birthDate != $defaultBirthDate && $birthDate < date("Y-m-d")) {
-            $this->accountsService->editBirthDate($pdo, $birthDate);
+            $this->accountsService->editBirthDate($pdo, $birthDate, $id);
             $view->setVar('message', "Votre date de naissance à bien été changée !");
         } else if($birthDate != $defaultBirthDate && $birthDate > date("Y-m-d")) {
             $view->setVar('erreur', "Votre date de naissance ne peut pas être supérieur à la date d'aujourd'hui !");
@@ -224,12 +226,12 @@ class AccountsController {
      * @return $view  le message à afficher si il y a une modification du genre
      */
     public function updateGender($pdo, $view, $gender, $defaultGender) {
-
+        $id = $_SESSION['UserID'];
         /* Si les données du formulaire sont envoyée et que le genre sélectionné */
         /* n'est pas le même que celui sélectionné avant alors il change */
         $view->setVar('genderChanged', false);
         if(!empty($gender) && $gender != $defaultGender) {
-            $this->accountsService->editGender($pdo, $gender);
+            $this->accountsService->editGender($pdo, $gender, $id);
             $view->setVar('genderChanged', true);
             $view->setVar('message', "Votre genre a bien été changé !");
         }
@@ -244,6 +246,7 @@ class AccountsController {
      * @return $view  le message à afficher si il y a une modification du mot de passe
      */
     public function editPassword($pdo) {
+        $id = $_SESSION['UserID'];
         /* Création d'une nouvele vue */
         $view = new View("CheckYourMood/codeCYM/views/editpassword");
 
@@ -254,7 +257,7 @@ class AccountsController {
         new Passwords();
 
         /* Mot de passe actuel de l'utilisateur */
-        $stmt = $this->accountsService->getPasswords($pdo);
+        $stmt = $this->accountsService->getPasswords($pdo, $id);
         while($row = $stmt->fetch()) {
             $defaultPassword = $row->User_Password;
         }
@@ -267,7 +270,7 @@ class AccountsController {
         /* Si le nouveau mot de passe n'est pas le même que l'ancien et que le nouveau mot de passe */
         /* et le même que celui de la confirmation du nouveau mot de passe alors le mot de passe est modifié */
         if($testOldPassword && Passwords::$testNewPassword && Passwords::$testOldPasswordNotSameAsNew) {
-            $this->accountsService->editPassword($pdo, Passwords::$newPassword); 
+            $this->accountsService->editPassword($pdo, Passwords::$newPassword, $id); 
             $view->setVar('resetPwd', 1);      
             $view->setVar('message', "Votre mot de passe a bien été modifié !");
         } 
@@ -280,14 +283,14 @@ class AccountsController {
      * @return $view  la page de la confirmation de la suppression du compte
      */
     public function deleteAccount($pdo) {
-
+        $id = $_SESSION['UserID'];
         /* Chargement de la vue de la page pour supprimer son compte */
         $view = new View("CheckYourMood/codeCYM/views/deleteaccount");
         $delete = HttpHelper::getParam("delete");
 
         /* Si le bouton du formulaire à été cliqué alors on supprime le compte */
         if(!empty($delete)) {
-            $this->accountsService->deleteProfile($pdo);
+            $this->accountsService->deleteProfile($pdo, $id);
             $view = new View("CheckYourMood/codeCYM/views/accountdeleted");
             session_destroy();
         } 

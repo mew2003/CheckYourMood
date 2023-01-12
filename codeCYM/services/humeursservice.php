@@ -23,13 +23,15 @@ class HumeursService
      */
     public function getListeHumeurs() {
         try {
-            $nomficTypes= $_SERVER['DOCUMENT_ROOT']."/CheckYourMood/codeCYM/views/humeurs.csv";
+            $nomficTypes= dirname(__FILE__)."\humeurs.csv";
             if ( !file_exists($nomficTypes) ) {
                 throw new Exception('Fichier '.$nomficTypes.' non trouvé.');
             }
             $liste = file($nomficTypes, FILE_IGNORE_NEW_LINES);
             return $liste;
-        } catch ( Exception $e ) {}
+        } catch ( Exception $e ) {
+            return null;
+        }
     }
 
     /**
@@ -40,14 +42,13 @@ class HumeursService
      * @param $description commentaire que peut saisir un utilisateur (facultatif)
      * @return $isOk  true si l'humeur a bien été inséré, sinon false
      */
-    public function setHumeur($pdo, $humeur, $smiley, $description) {
+    public function setHumeur($pdo, $humeur, $smiley, $description, $id) {
         $isOk = false;
         if ($humeur != "") {
             $liste = self::getListeHumeurs();
             foreach ((array) $liste as $i) {
                 if (strcasecmp($i, $humeur) == 0) {
                     $libelle = htmlspecialchars($humeur);
-                    $id = $_SESSION['UserID'];
                     $requete = $pdo->prepare("INSERT INTO `humeur`(`CODE_User`, `Humeur_Libelle`, `Humeur_Emoji`, `Humeur_Time`, `Humeur_Description`, `Humeur_TimeConst`) 
                                                 VALUES (:id,:libelle,:smiley,CURRENT_TIMESTAMP,:description,CURRENT_TIMESTAMP)");
                     $requete->bindParam("id", $id);

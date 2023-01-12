@@ -11,9 +11,8 @@ class AccountsService
      * @param $pdo  la connexion à la base de données
      * @return $resultats  le résulat de la requête (toutes les données d'un utilisateur)
      */
-    public static function getProfile($pdo) {
+    public static function getProfile($pdo, $id) {
 
-        $id = $_SESSION['UserID'];
         $requete = "SELECT * FROM User WHERE User_ID = $id";
         $resultats=$pdo->query($requete);
 
@@ -29,7 +28,7 @@ class AccountsService
      */
     public function getEmails($pdo, $aTester) {
 
-        $requete = "SELECT * FROM User WHERE User_Email LIKE '$aTester'";
+        $requete = "SELECT User_Email FROM User WHERE User_Email LIKE '$aTester'";
         $resultats= $pdo->query($requete);
 
         return $resultats;
@@ -44,7 +43,7 @@ class AccountsService
      */
     public function getUsernames($pdo, $aTester) {
 
-        $requete = "SELECT * FROM User WHERE User_Name LIKE '$aTester'";
+        $requete = "SELECT User_Name FROM User WHERE User_Name LIKE '$aTester'";
         $resultats= $pdo->query($requete);
 
         return $resultats;
@@ -55,9 +54,7 @@ class AccountsService
      * @param $pdo  la connexion à la base de données
      * @return $resultats  le résulat de la requête (le mot de passe de l'utilisateur, stocké dans la base de données)
      */
-    public function getPasswords($pdo) {
-
-        $id = $_SESSION['UserID'];
+    public function getPasswords($pdo, $id) {
         $requete = "SELECT User_Password FROM User WHERE User_ID = $id";
         $resultats=$pdo->query($requete);
 
@@ -69,9 +66,8 @@ class AccountsService
      * @param $pdo  la connexion à la base de données
      * @param $newPassword  le nouveau mot de passe
      */
-    public function editPassword($pdo, $newPassword) {
+    public function editPassword($pdo, $newPassword, $id) {
 
-        $id = $_SESSION['UserID'];
         $stmt = $pdo->prepare("UPDATE user SET User_Password = :pwd WHERE User_ID = $id");
         $newPassword = md5($newPassword);
         $stmt->bindParam('pwd', $newPassword);
@@ -83,9 +79,8 @@ class AccountsService
      * @param $pdo  la connexion à la base de données
      * @param $newEmail  la nouvelle adresse mail
      */
-    public function editMail($pdo, $newEmail) {
+    public function editMail($pdo, $newEmail, $id) {
 
-        $id = $_SESSION['UserID'];
         $stmt = $pdo->prepare("UPDATE user SET User_Email = :email WHERE User_ID = $id");
         $stmt->bindParam('email', $newEmail);
         $stmt->execute();
@@ -96,9 +91,8 @@ class AccountsService
      * @param $pdo  la connexion à la base de données
      * @param $newUsername  le nouveau nom d'utilisateur
      */
-    public function editUsername($pdo, $newUsername) {
+    public function editUsername($pdo, $newUsername, $id) {
 
-        $id = $_SESSION['UserID'];
         $stmt = $pdo->prepare("UPDATE user SET User_Name = :username WHERE User_ID = $id");
         $stmt->bindParam('username', $newUsername);
         $stmt->execute();
@@ -109,9 +103,8 @@ class AccountsService
      * @param $pdo  la connexion à la base de données
      * @param $newBirthDate  la nouvelle date de naissance
      */
-    public function editBirthDate($pdo, $newBirthDate) {
+    public function editBirthDate($pdo, $newBirthDate, $id) {
 
-        $id = $_SESSION['UserID'];
         $stmt = $pdo->prepare("UPDATE user SET User_BirthDate = :birthDate WHERE User_ID = $id");
         $stmt->bindParam('birthDate', $newBirthDate);
         $stmt->execute();
@@ -122,8 +115,8 @@ class AccountsService
      * @param $pdo  la connexion à la base de données
      * @param $newGender  le nouveau genre
      */
-    public function editGender($pdo, $newGender) {
-        $id = $_SESSION['UserID'];
+    public function editGender($pdo, $newGender, $id) {
+        
         $stmt = $pdo->prepare("UPDATE user SET User_Gender = :gender WHERE User_ID = $id");
         $stmt->bindParam('gender', $newGender);
         $stmt->execute();
@@ -134,9 +127,8 @@ class AccountsService
      * Supprime le profil de l'utilisateur courant
      * @param $pdo  la connexion à la base de données
      */
-    public function deleteProfile($pdo) {
+    public function deleteProfile($pdo, $id) {
         
-        $id = $_SESSION['UserID'];
         $stmt = $pdo->prepare("DELETE FROM humeur WHERE CODE_USER = $id");
         $stmt->execute();
         $stmt = $pdo->prepare("DELETE FROM user WHERE User_ID = $id");
