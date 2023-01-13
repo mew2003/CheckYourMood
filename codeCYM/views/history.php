@@ -88,13 +88,13 @@
                                                         Valider
                                                     </button>
                                                 </form>
-                                                <form action='#' method='get' class='form-del'>
+                                                <form action='#' method='post' class='form-del'>
                                                     <input hidden name='action' value='deleteHumeur'>
                                                     <input hidden name='controller' value='stats'>
                                                     <input hidden name='time' value='$ligne->Humeur_Time'>
                                                     <input hidden name='libelle' value='$ligne->Humeur_Libelle'>
                                                     <button type='submit' name='del-humeur' value='$i' class='trash'>
-                                                        Suprimer
+                                                        Supprimer
                                                     </button>
                                                 </form>
                                             </div>
@@ -134,11 +134,11 @@
                         echo "</li>";
                         echo "<li class='page-item'>"; 
                             ?>
-                            <a class="page-button" href="./?action=historyVal&controller=stats&page=<?php echo $currentPage?>"><i class="fa-solid fa-chevron-left"></i></a>
+                            <a class="page-button" href="./?action=historyVal&controller=stats&page=<?php echo $currentPage - 1?>"><i class="fa-solid fa-chevron-left"></i></a>
                             <?php
                         echo "</li>";
                     }
-                    for ($compteur = 1; $compteur < $pages; $compteur++) { 
+                    for ($compteur = 1; $compteur <= $pages; $compteur++) { 
                         if ($compteur >= $currentPage - 2 && $compteur <= $currentPage + 2) {
                             ?>
                             <li class="page-item <?= ($currentPage == $compteur) ? "active" : "" ?>">
@@ -147,10 +147,10 @@
                             <?php 
                         }
                     } 
-                    if ($compteur - 1 != $currentPage && $pages > 0) {
+                    if ($compteur - 1 > $currentPage && $pages > 0) {
                         echo "<li class='page-item'>"; 
                             ?>
-                            <a class="page-button" href="./?action=historyVal&controller=stats&page=<?php echo $currentPage ?>"><i class="fa-solid fa-chevron-right"></i></a>
+                            <a class="page-button" href="./?action=historyVal&controller=stats&page=<?php echo $currentPage + 1?>"><i class="fa-solid fa-chevron-right"></i></a>
                             <?php
                         echo "</li>";
                         echo "<li class='page-item'>"; 

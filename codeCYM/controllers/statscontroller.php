@@ -158,6 +158,7 @@ class StatsController {
 
     public function deleteHumeur($pdo) {
         $view = new View("CheckYourMood/codeCYM/views/history");
+        $pagination = HttpHelper::getParam('page');
         $time = HttpHelper::getParam("time");
         $libelle = HttpHelper::getParam("libelle");
         $this->statsService->delHumeur($pdo, $time, $libelle,$_SESSION['UserID']);
@@ -168,8 +169,12 @@ class StatsController {
         return $view;
     }
 
+    /**
+     * Est utiliser pour la modification des données d'une humeur
+     */
     public function update($pdo) {
         $view = new View("CheckYourMood/codeCYM/views/history");
+        $pagination = HttpHelper::getParam('page');
         $time = HttpHelper::getParam("time");
         $libelle = HttpHelper::getParam("libelle");
         $desc = HttpHelper::getParam("desc");

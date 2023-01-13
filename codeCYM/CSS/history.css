@@ -16,6 +16,8 @@ tr {
 td {
     border: 1px solid black;
 }
+
+/* Div contenant les boutons de la pagination */
 .pagination {
     width: 100%;
     height: 5vh;
@@ -24,6 +26,8 @@ td {
     justify-content: center;
     gap: 5px;
 }
+
+/* Boutons permettant de changer de page */
 .page-button {
     font-size: 25px;
     border: solid #95e9d5;
@@ -36,10 +40,6 @@ td {
     color: #78a79c;
     box-shadow: 2px 2px #95e9d5;
 }
-.page-button i {
-    font-size: 28px;
-    padding: 5px;
-}
 .active .page-button {
     background-color: #95e9d552;
     color: #78a79c;
@@ -51,6 +51,14 @@ td {
     color: #78a79c;
     box-shadow: 0px 0px;
 }
+
+/* Logo et Numéro des pages sur les boutons */
+.page-button i {
+    font-size: 28px;
+    padding: 5px;
+}
+
+/* Fait disparaitre toute la page quand on clique sur le bouton du burger Menu pour la version téléphone */
 .show-nav .first-container{
     display: none;
 }
@@ -145,19 +153,7 @@ th {
 .popDelete {
     display: none;
 }
-.popDelete.disActive {
-    position: absolute;
-    width: 50vw;
-    height: 10vh;
-    border: solid 2px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgb(255, 49, 49);
-    font-size: 30px;
-    left: 25vw;
-}
+
 .xMark {
     border: solid 1px;
     border-radius: 10px;
