@@ -32,21 +32,21 @@ class StatsController {
         if (!isset($_SESSION['UserID'])) {
             $view = new View("CheckYourMood/codeCYM/views/Register");
         } else {
-            $MaxHum = $this->statsService->getMaxHumeur($pdo);
-            $MaxHum2 = $this->statsService->getMaxHumeur($pdo);
+            $MaxHum = $this->statsService->getMaxHumeur($pdo, $_SESSION['UserID']);
+            $MaxHum2 = $this->statsService->getMaxHumeur($pdo, $_SESSION['UserID']);
             $listeHumeurs = $this->humeursService->getListeHumeurs();
-            $valueByDate1 = $this->statsService->getHumeurByTime($pdo, $startDate, $endDate, $humeurs);
-            $valueByDate2 = $this->statsService->getHumeurByTime($pdo, $startDate, $endDate, $humeurs);
-            $nombreTotalHumeursSaisies = $this->statsService->getNombreTotalHumeursSaisies($pdo);
-            $nombreSaisiesHumeurSelectionnee = $this->statsService->getNombreSaisiesHumeurSelectionnee($pdo, $humeurs);
-            $AllValue1 = $this->statsService->getAllValue($pdo);
-            $AllValue2 = $this->statsService->getAllValue($pdo);
-            $AllValue3 = $this->statsService->getAllValue($pdo);
-            $AllValue4 = $this->statsService->getAllValue($pdo);
-            $AllValueBetweenTwoDate1 = $this->statsService->getAllValueBetweenDates($pdo, $startDate, $endDate);
-            $AllValueBetweenTwoDate2 = $this->statsService->getAllValueBetweenDates($pdo, $startDate, $endDate);
-            $valueExist = $this->statsService->verifHumeurEstPresente($pdo, $startDate, $endDate, $humeurs);
-            $isThere = $this->statsService->verifIsThere($pdo, $startDate, $endDate);
+            $valueByDate1 = $this->statsService->getHumeurByTime($pdo, $startDate, $endDate, $humeurs,$_SESSION['UserID']);
+            $valueByDate2 = $this->statsService->getHumeurByTime($pdo, $startDate, $endDate, $humeurs,$_SESSION['UserID']);
+            $allRow = $this->statsService->getAllRow($pdo,$_SESSION['UserID']);
+            $nombreSaisiesHumeurSelectionnee = $this->statsService->getNombreSaisiesHumeurSelectionnee($pdo, $humeurs,$_SESSION['UserID']);
+            $AllValue1 = $this->statsService->getAllValue($pdo,$_SESSION['UserID']);
+            $AllValue2 = $this->statsService->getAllValue($pdo,$_SESSION['UserID']);
+            $AllValue3 = $this->statsService->getAllValue($pdo,$_SESSION['UserID']);
+            $AllValue4 = $this->statsService->getAllValue($pdo,$_SESSION['UserID']);
+            $AllValueBetweenTwoDate1 = $this->statsService->getAllValueBetweenDates($pdo, $startDate, $endDate,$_SESSION['UserID']);
+            $AllValueBetweenTwoDate2 = $this->statsService->getAllValueBetweenDates($pdo, $startDate, $endDate,$_SESSION['UserID']);
+            $valueExist = $this->statsService->verifHumeurEstPresente($pdo, $startDate, $endDate, $humeurs, $_SESSION['UserID']);
+            $isThere = $this->statsService->verifIsThere($pdo, $startDate, $endDate,$_SESSION['UserID']);
             $view->setVar('allValue1', $AllValue1);
             $view->setVar('allValue2', $AllValue2);
             $view->setVar('allValue3', $AllValue3);
@@ -59,7 +59,7 @@ class StatsController {
             $view->setVar('humeurs', $humeurs);
             $view->setVar('startDate', $startDate);
             $view->setVar('endDate', $endDate);
-            $view->setVar('nombreTotalHumeursSaisies', $nombreTotalHumeursSaisies);
+            $view->setVar('allRow',$allRow);
             $view->setVar('nombreSaisiesHumeurSelectionnee', $nombreSaisiesHumeurSelectionnee);
             $view->setVar('AllValueBetweenTwoDate1', $AllValueBetweenTwoDate1);
             $view->setVar('AllValueBetweenTwoDate2', $AllValueBetweenTwoDate2);
@@ -81,8 +81,8 @@ class StatsController {
             $view = new View("CheckYourMood/codeCYM/views/Register");
         } else {
             $pagination = HttpHelper::getParam('page');
-            $resultats = $this->statsService->getHistorique($pdo, $pagination);
-            $allRow = $this->statsService->getAllRow($pdo);
+            $resultats = $this->statsService->getHistorique($pdo, $pagination,  $_SESSION['UserID']);
+            $allRow = $this->statsService->getAllRow($pdo,$_SESSION['UserID']);
             $view->setVar('historyValue',$resultats);
             $view->setVar('allRow',$allRow);
         }
@@ -101,7 +101,7 @@ class StatsController {
         $endDate = HttpHelper::getParam("endDate");
         $humeurs = HttpHelper::getParam("humeurs");
         $listeHumeurs = $this->humeursService->getListeHumeurs();
-        $emojiUsed = $this->statsService->getMostUsed($pdo, $startDate, $endDate, $humeurs);
+        $emojiUsed = $this->statsService->getMostUsed($pdo, $startDate, $endDate, $humeurs, $_SESSION['UserID']);
         if ($endDate == "" || $startDate == "") {
             $result = "<p>Veuillez selectionner la date de début ainsi que la date de fin.</p><p class='smiley'>🚫</p>";
         } else if ($endDate < $startDate) {
@@ -113,20 +113,20 @@ class StatsController {
         } else {
             $result = "<p class='smiley'>♾️</p><p>Vous avez utilisé un total de ".$emojiUsed[0]." humeurs entre le ".$startDate." et le ".$endDate."</p>";
         }
-        $MaxHum = $this->statsService->getMaxHumeur($pdo);
-        $MaxHum2 = $this->statsService->getMaxHumeur($pdo);
-        $valueByDate1 = $this->statsService->getHumeurByTime($pdo, $startDate, $endDate, $humeurs);
-        $valueByDate2 = $this->statsService->getHumeurByTime($pdo, $startDate, $endDate, $humeurs);
-        $AllValue1 = $this->statsService->getAllValue($pdo);
-        $AllValue2 = $this->statsService->getAllValue($pdo);
-        $AllValue3 = $this->statsService->getAllValue($pdo);
-        $AllValue4 = $this->statsService->getAllValue($pdo);
-        $nombreSaisiesHumeurSelectionnee = $this -> statsService -> getNombreSaisiesHumeurSelectionnee($pdo, $humeurs);
-        $nombreTotalHumeursSaisies = $this->statsService->getNombreTotalHumeursSaisies($pdo);
-        $AllValueBetweenTwoDate1 = $this->statsService->getAllValueBetweenDates($pdo, $startDate, $endDate);
-        $AllValueBetweenTwoDate2 = $this->statsService->getAllValueBetweenDates($pdo, $startDate, $endDate);
-        $valueExist = $this->statsService->verifHumeurEstPresente($pdo, $startDate, $endDate, $humeurs);
-        $isThere = $this->statsService->verifIsThere($pdo, $startDate, $endDate);
+        $MaxHum = $this->statsService->getMaxHumeur($pdo,$_SESSION['UserID']);
+        $MaxHum2 = $this->statsService->getMaxHumeur($pdo,$_SESSION['UserID']);
+        $valueByDate1 = $this->statsService->getHumeurByTime($pdo, $startDate, $endDate, $humeurs,$_SESSION['UserID']);
+        $valueByDate2 = $this->statsService->getHumeurByTime($pdo, $startDate, $endDate, $humeurs,$_SESSION['UserID']);
+        $AllValue1 = $this->statsService->getAllValue($pdo,$_SESSION['UserID']);
+        $AllValue2 = $this->statsService->getAllValue($pdo,$_SESSION['UserID']);
+        $AllValue3 = $this->statsService->getAllValue($pdo,$_SESSION['UserID']);
+        $AllValue4 = $this->statsService->getAllValue($pdo,$_SESSION['UserID']);
+        $nombreSaisiesHumeurSelectionnee = $this -> statsService -> getNombreSaisiesHumeurSelectionnee($pdo, $humeurs,$_SESSION['UserID']);
+        $allRow = $this->statsService->getAllRow($pdo,$_SESSION['UserID']);
+        $AllValueBetweenTwoDate1 = $this->statsService->getAllValueBetweenDates($pdo, $startDate, $endDate,$_SESSION['UserID']);
+        $AllValueBetweenTwoDate2 = $this->statsService->getAllValueBetweenDates($pdo, $startDate, $endDate,$_SESSION['UserID']);
+        $valueExist = $this->statsService->verifHumeurEstPresente($pdo, $startDate, $endDate, $humeurs,$_SESSION['UserID']);
+        $isThere = $this->statsService->verifIsThere($pdo, $startDate, $endDate,$_SESSION['UserID']);
         $view->setVar('emojiUsed', $result);
         $view->setVar('listeHumeurs',$listeHumeurs);
         $view->setVar('startDate', $startDate);
@@ -140,7 +140,7 @@ class StatsController {
         $view->setVar('allValue4', $AllValue4);
         $view->setVar('valueByDate1', $valueByDate1);
         $view->setVar('valueByDate2', $valueByDate2);
-        $view->setVar('nombreTotalHumeursSaisies', $nombreTotalHumeursSaisies);
+        $view->setVar('allRow',$allRow);
         $view->setVar('nombreSaisiesHumeurSelectionnee', $nombreSaisiesHumeurSelectionnee);
         $view->setVar('AllValueBetweenTwoDate1', $AllValueBetweenTwoDate1);
         $view->setVar('AllValueBetweenTwoDate2', $AllValueBetweenTwoDate2);
@@ -160,9 +160,9 @@ class StatsController {
         $view = new View("CheckYourMood/codeCYM/views/history");
         $time = HttpHelper::getParam("time");
         $libelle = HttpHelper::getParam("libelle");
-        $this->statsService->delHumeur($pdo, $time, $libelle);
-        $resultats = $this->statsService->getHistorique($pdo,$pagination);
-        $allRow = $this->statsService->getAllRow($pdo);
+        $this->statsService->delHumeur($pdo, $time, $libelle,$_SESSION['UserID']);
+        $resultats = $this->statsService->getHistorique($pdo,$pagination, $_SESSION['UserID']);
+        $allRow = $this->statsService->getAllRow($pdo,$_SESSION['UserID']);
         $view->setVar('historyValue',$resultats);
         $view->setVar('allRow',$allRow);
         return $view;
@@ -174,10 +174,10 @@ class StatsController {
         $libelle = HttpHelper::getParam("libelle");
         $desc = HttpHelper::getParam("desc");
         $changeTime = HttpHelper::getParam("change-time");
-        $this->statsService->updateDesc($pdo, $time, $libelle, $desc);
-        $this->statsService->updateTime($pdo, $time, $libelle, $changeTime);
-        $resultats = $this->statsService->getHistorique($pdo, $pagination);
-        $allRow = $this->statsService->getAllRow($pdo);
+        $this->statsService->updateDesc($pdo, $time, $libelle, $desc,$_SESSION['UserID']);
+        $this->statsService->updateTime($pdo, $time, $libelle, $changeTime,$_SESSION['UserID']);
+        $resultats = $this->statsService->getHistorique($pdo, $pagination, $_SESSION['UserID']);
+        $allRow = $this->statsService->getAllRow($pdo,$_SESSION['UserID']);
         $view->setVar('historyValue',$resultats);
         $view->setVar('allRow',$allRow);
         return $view;

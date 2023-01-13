@@ -101,14 +101,14 @@
                         <?php
                         echo "<h3>";
                             if (isset($humeurs) && $humeurs != "TOUS") {
-                                echo "L'humeur $humeurs a été saisie $nombreSaisiesHumeurSelectionnee fois sur un total de $nombreTotalHumeursSaisies saisie";
-                            if ($nombreTotalHumeursSaisies > 1 ) echo 's'; 
-                            if ($nombreTotalHumeursSaisies == 0) {
-                                $nombreTotalHumeursSaisies = 0; 
+                                echo "L'humeur $humeurs a été saisie $nombreSaisiesHumeurSelectionnee fois sur un total de $allRow saisie";
+                            if ($allRow > 1 ) echo 's'; 
+                            if ($allRow == 0) {
+                                $allRow = 0; 
                             } else {
-                                $nombreTotalHumeursSaisies = round($nombreSaisiesHumeurSelectionnee * 100 / $nombreTotalHumeursSaisies, 2);
+                                $allRow = round($nombreSaisiesHumeurSelectionnee * 100 / $allRow, 2);
                             }
-                            echo " d'humeur toutes confondues ce qui représente " . $nombreTotalHumeursSaisies . "% des humeurs saisies";
+                            echo " d'humeur toutes confondues ce qui représente " . $allRow . "% des humeurs saisies";
                         } else {
                             echo 'Merci de sélectionner une humeur';
                         }
