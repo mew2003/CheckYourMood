@@ -3,6 +3,7 @@ body {
     height: 100%;
     background-image: url("../assets/images/background.png");
 }
+/* Div conrtenant le titre "Profil" */
 .title {
     width: 100%;
     text-align: center;
@@ -15,6 +16,7 @@ body {
     align-items: center;
     justify-content: space-evenly;
 }
+/* Style des boutons de déconnexion et suppression du compte */
 .buttonD {
     width: 55%;
     border-radius: 25px;
@@ -24,6 +26,7 @@ body {
     box-shadow: 3px 3px;
     font-size: 20px;
 }
+/* Div au centre de la page contenant les informationsde l'utilisateur */
 .Profil-Main {
     background-color: rgb(247, 247, 247);
     box-shadow: 3px 3px;
@@ -37,6 +40,7 @@ body {
     padding-bottom: 5vh;
     margin-top: 10vh;
 }
+/* Champs contenant les infos de l'utilisateur */
 .Email, .UserName, .Gender, .BirthDate {
     width: 100%;
     border-bottom: solid 2px #96E9D5;
@@ -50,26 +54,28 @@ body {
     width: 100%;
 }
 
-
+/* Div contenant les 2 boutons du haut */
 .mid-Buttons {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
+/* Modifications apporté au boutons du bas  */
 .button-Del, .button-Dec {
     width: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
+/* Modification apporté au form des Boutons */
 .button-Del form, .button-Dec form {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-/* Modifie les boutons verts */
+/* Modifie les boutons du haut */
 .button {
     min-width: fit-content;
     width: 40%;
@@ -90,6 +96,7 @@ body {
     box-shadow: 0px 0px;
 }
 
+/* Modifie le placement des boutons du bas */
 .bot-Buttons-Container, .bot-button-one form, .bot-button-two form {
     width: 100%;
     display: flex;
@@ -104,10 +111,12 @@ body {
     justify-content: center;
 }
 
+/* Modification de la couleur des boutons rouge au passage de la souris */
 .buttonD:hover {
     background-color:#df0d2c;
 }
 
+/* Fait disparaitre toute la page quand on clique sur le bouton du burger Menu pour la version téléphone */
 .show-nav .main-container {
     display: none;
 }
@@ -119,6 +128,8 @@ body {
     .Email, .UserName {
         margin-right: 0;
     }
+
+    /* Modif apporté à la div central contenant les informations pour la version téléphone */
     .Profil-Main {
         display: flex;
         align-items: center;
@@ -127,6 +138,8 @@ body {
         padding-top: 2.5vh;
         padding-bottom: 2.5vh;
     }
+
+    /* Modif approté au boutons pour la version téléphone */
     .buttonD {
         border-radius: 0;
         min-width: fit-content;
