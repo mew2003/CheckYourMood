@@ -78,7 +78,7 @@
                                                     <textarea name='desc' class='textarea' value='$ligne->Humeur_Description'>$ligne->Humeur_Description</textarea>";
                                                     if ($actualFinalTimeStanp <= $finalDate1) {
                                                         echo "<label>Nouvelle Date : (Max -24H) </label>
-                                                            <input class='time' type='datetime-local' name='change-time' value='$ligne->Humeur_Time'>";
+                                                            <input class='time' type='datetime-local' name='change-time' min='$minDate' max='$ligne->Humeur_TimeConst' value='$ligne->Humeur_Time'>";
                                                     } else {
                                                         echo "<label>Date non modifiable <br>(humeur créée il y a trop longtemps):</label>
                                                             <input hidden name='change-time' value='$ligne->Humeur_Time'>
